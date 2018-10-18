@@ -22,4 +22,7 @@ class Constants {
     static let vMaxWidth: UInt = 1 * bit
     static let rMaxWidth: UInt = 32 * bit
     static let sMaxWidth: UInt = 32 * bit
+    static let numberOfTxInBlockMaxWidth: UInt = 4 * bit
+    static let parentHashMaxWidth: UInt = 32 * bit
+    static let merkleRootOfTheTxTreeMaxWidth: UInt = 32 * bit
 }
