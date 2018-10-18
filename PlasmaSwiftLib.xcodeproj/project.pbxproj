@@ -22,6 +22,8 @@
 		E2E94C992178B27E005F54A0 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C982178B27E005F54A0 /* ArrayExtension.swift */; };
 		E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C9A2178B402005F54A0 /* NSRegularExpressionExtension.swift */; };
 		E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */; };
+		E2E94CA12178D87F005F54A0 /* BlockHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA02178D87F005F54A0 /* BlockHeader.swift */; };
+		E2E94CA32178DA0D005F54A0 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA22178DA0D005F54A0 /* Block.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		E2E94C982178B27E005F54A0 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		E2E94C9A2178B402005F54A0 /* NSRegularExpressionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtension.swift; sourceTree = "<group>"; };
 		E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedTransaction.swift; sourceTree = "<group>"; };
+		E2E94CA02178D87F005F54A0 /* BlockHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockHeader.swift; sourceTree = "<group>"; };
+		E2E94CA22178DA0D005F54A0 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E94C8D2178A12D005F54A0 /* Helpers */,
+				E2E94C9F2178D868005F54A0 /* Block */,
 				E2E94C8721789BD0005F54A0 /* Transaction */,
 				E2E94C702178919D005F54A0 /* PlasmaSwiftLib.h */,
 				E2E94C712178919D005F54A0 /* Info.plist */,
@@ -162,6 +167,15 @@
 				E2E94C902178A1D5005F54A0 /* Constants.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E2E94C9F2178D868005F54A0 /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				E2E94CA02178D87F005F54A0 /* BlockHeader.swift */,
+				E2E94CA22178DA0D005F54A0 /* Block.swift */,
+			);
+			path = Block;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,9 +341,11 @@
 				E2E94C952178B20F005F54A0 /* DataExtension.swift in Sources */,
 				E2E94C992178B27E005F54A0 /* ArrayExtension.swift in Sources */,
 				E2E94C8C2178A0CD005F54A0 /* Output.swift in Sources */,
+				E2E94CA12178D87F005F54A0 /* BlockHeader.swift in Sources */,
 				E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */,
 				E2E94C8A21789BEA005F54A0 /* Input.swift in Sources */,
 				E2E94C912178A1D5005F54A0 /* Constants.swift in Sources */,
+				E2E94CA32178DA0D005F54A0 /* Block.swift in Sources */,
 				E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */,
 				E2E94C932178A332005F54A0 /* Transaction.swift in Sources */,
 			);
