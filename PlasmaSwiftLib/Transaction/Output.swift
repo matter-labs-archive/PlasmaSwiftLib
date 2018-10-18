@@ -12,12 +12,13 @@ import BigInt
 
 class TransactionOutput {
     
-    public var outputNumberInTx: UInt8
+    public var outputNumberInTx: BigUInt
     public var receiverEthereumAddress: EthereumAddress
     public var amount: BigUInt
     public var data: Data
     
-    public init?(outputNumberInTx: UInt8, receiverEthereumAddress: EthereumAddress, amount: BigUInt){
+    public init?(outputNumberInTx: BigUInt, receiverEthereumAddress: EthereumAddress, amount: BigUInt){
+        guard outputNumberInTx.bitWidth <= Constants.outputNumberInTxMaxWidth else {return nil}
         let receiverEthereumAddressInData: Data = receiverEthereumAddress.addressData
         guard amount.bitWidth <= Constants.amountMaxWidth else {return nil}
     

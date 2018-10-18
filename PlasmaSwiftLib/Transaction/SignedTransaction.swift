@@ -13,15 +13,17 @@ import BigInt
 class SignedTransaction {
     
     public var transaction: Transaction
-    public var v: UInt8
+    public var v: BigUInt
     public var r: BigUInt
     public var s: BigUInt
     public var data: Data
     
-    public init?(transaction: Transaction, v: UInt8, r: BigUInt, s: BigUInt){
-        guard v == 27 || v == 28 else {return nil}
+    public init?(transaction: Transaction, v: BigUInt, r: BigUInt, s: BigUInt){
+        guard v.bitWidth <= Constants.vMaxWidth else {return nil}
         guard r.bitWidth <= Constants.rMaxWidth else {return nil}
         guard s.bitWidth <= Constants.sMaxWidth else {return nil}
+        
+        guard v == 27 || v == 28 else {return nil}
         
         self.transaction = transaction
         self.v = v

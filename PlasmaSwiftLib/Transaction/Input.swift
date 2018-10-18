@@ -12,13 +12,16 @@ import BigInt
 
 class TransactionInput {
     
-    public var blockNumber: UInt32
-    public var txNumberInBlock: UInt32
-    public var outputNumberInTx: UInt8
+    public var blockNumber: BigUInt
+    public var txNumberInBlock: BigUInt
+    public var outputNumberInTx: BigUInt
     public var amount: BigUInt
     public var data: Data
     
-    public init?(blockNumber: UInt32, txNumberInBlock: UInt32, outputNumberInTx: UInt8, amount: BigUInt) {
+    public init?(blockNumber: BigUInt, txNumberInBlock: BigUInt, outputNumberInTx: BigUInt, amount: BigUInt) {
+        guard blockNumber.bitWidth <= Constants.blockNumberMaxWidth else {return nil}
+        guard txNumberInBlock.bitWidth <= Constants.txNumberInBlockMaxWidth else {return nil}
+        guard outputNumberInTx.bitWidth <= Constants.outputNumberInTxMaxWidth else {return nil}
         guard amount.bitWidth <= Constants.amountMaxWidth else {return nil}
         
         self.blockNumber = blockNumber

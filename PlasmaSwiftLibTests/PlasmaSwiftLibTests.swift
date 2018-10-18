@@ -13,8 +13,11 @@ import BigInt
 
 class PlasmaSwiftLibTests: XCTestCase {
 
-    func testBitFunctions () {
-        let input = TransactionInput(blockNumber: BigUInt("10")!, txNumberInBlock: BigUInt("2")!, outputNumberInTx: BigUInt("3")!, amount: BigUInt("500000000000000")!)
+    func testInput () {
+//        let input = TransactionInput(blockNumber: 10, txNumberInBlock: 1, outputNumberInTx: 1, amount: 500000000000000)
+//        let data = input?.data
+//        print(String(data: data!, encoding: .ascii))
+//        print("adf")
     }
 
 }

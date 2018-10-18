@@ -12,12 +12,13 @@ import BigInt
 
 class Transaction {
     
-    public var txType: UInt8
+    public var txType: BigUInt
     public var inputs: Array<TransactionInput>
     public var outputs: Array<TransactionOutput>
     public var data: Data
     
-    public init?(txType: UInt8, inputs: Array<TransactionInput>, outputs: Array<TransactionOutput>){
+    public init?(txType: BigUInt, inputs: Array<TransactionInput>, outputs: Array<TransactionOutput>){
+        guard txType.bitWidth <= Constants.txTypeMaxWidth else {return nil}
         guard inputs.count <= Constants.inputsArrayMax else {return nil}
         guard outputs.count <= Constants.outputsArrayMax else {return nil}
         
