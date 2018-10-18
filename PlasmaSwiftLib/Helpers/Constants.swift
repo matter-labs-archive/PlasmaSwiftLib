@@ -17,4 +17,7 @@ class Constants {
     static let txTypeLength: Int = 1
     static let inputsArrayLength: Int = 2
     static let outputsArrayLength: Int = 3
+    static let vLength: Int = 1
+    static let rLength: Int = 32
+    static let sLength: Int = 32
 }

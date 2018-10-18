@@ -21,6 +21,7 @@
 		E2E94C972178B24B005F54A0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C962178B24A005F54A0 /* StringExtension.swift */; };
 		E2E94C992178B27E005F54A0 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C982178B27E005F54A0 /* ArrayExtension.swift */; };
 		E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C9A2178B402005F54A0 /* NSRegularExpressionExtension.swift */; };
+		E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		E2E94C962178B24A005F54A0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E2E94C982178B27E005F54A0 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		E2E94C9A2178B402005F54A0 /* NSRegularExpressionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtension.swift; sourceTree = "<group>"; };
+		E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedTransaction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E94C922178A332005F54A0 /* Transaction.swift */,
+				E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */,
 				E2E94C8921789BEA005F54A0 /* Input.swift */,
 				E2E94C8B2178A0CD005F54A0 /* Output.swift */,
 			);
@@ -327,6 +330,7 @@
 				E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */,
 				E2E94C8A21789BEA005F54A0 /* Input.swift in Sources */,
 				E2E94C912178A1D5005F54A0 /* Constants.swift in Sources */,
+				E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */,
 				E2E94C932178A332005F54A0 /* Transaction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
