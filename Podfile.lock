@@ -1,0 +1,29 @@
+PODS:
+  - BigInt (3.1.0):
+    - SipHash (~> 1.2)
+  - secp256k1_swift (1.0.3)
+  - SipHash (1.2.2)
+  - SwiftRLP (1.0.1):
+    - BigInt (~> 3.1)
+
+DEPENDENCIES:
+  - BigInt (~> 3.1)
+  - secp256k1_swift (~> 1.0.3)
+  - SwiftRLP (~> 1.0.1)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - BigInt
+    - secp256k1_swift
+    - SipHash
+    - SwiftRLP
+
+SPEC CHECKSUMS:
+  BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
+  secp256k1_swift: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
+  SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
+  SwiftRLP: 9de2c9512a9a6bf0909cd84cc143a7ff1aff7820
+
+PODFILE CHECKSUM: 65954951e42a5e4639283ce57a557b2361ff1be6
+
+COCOAPODS: 1.6.0.beta.1
