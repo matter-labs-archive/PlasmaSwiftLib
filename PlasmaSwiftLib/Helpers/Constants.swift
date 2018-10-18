@@ -7,17 +7,14 @@
 //
 
 import Foundation
+import BigInt
 
 class Constants {
-    static let blockNumberLength: Int = 4
-    static let txNumberInBlockLength: Int = 4
-    static let outputNumberInTxLength: Int = 1
-    static let amountLegth: Int = 32
-    static let receiverEthereumAddressLength: Int = 20
-    static let txTypeLength: Int = 1
-    static let inputsArrayLength: Int = 2
-    static let outputsArrayLength: Int = 3
-    static let vLength: Int = 1
-    static let rLength: Int = 32
-    static let sLength: Int = 32
+    static let bit: UInt = 8
+    static let amountMaxWidth: UInt = 32 * bit
+    static let receiverEthereumAddressMaxWidth: UInt = 20 * bit
+    static let inputsArrayMax: UInt = 2
+    static let outputsArrayMax: UInt = 3
+    static let rMaxWidth: UInt = 32 * bit
+    static let sMaxWidth: UInt = 32 * bit
 }

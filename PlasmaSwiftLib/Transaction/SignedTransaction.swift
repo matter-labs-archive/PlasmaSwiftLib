@@ -8,21 +8,20 @@
 
 import Foundation
 import SwiftRLP
+import BigInt
 
 class SignedTransaction {
     
     public var transaction: Transaction
-    public var v: Array<UInt8>
-    public var r: Array<UInt8>
-    public var s: Array<UInt8>
+    public var v: UInt8
+    public var r: BigUInt
+    public var s: BigUInt
     public var data: Data
     
-    public init?(transaction: Transaction, v: Array<UInt8>, r: Array<UInt8>, s: Array<UInt8>){
-        guard v.count == Constants.vLength else {return nil}
-        guard r.count == Constants.rLength else {return nil}
-        guard s.count == Constants.sLength else {return nil}
-        
-        guard v[0] == 27 || v[0] == 28 else {return nil}
+    public init?(transaction: Transaction, v: UInt8, r: BigUInt, s: BigUInt){
+        guard v == 27 || v == 28 else {return nil}
+        guard r.bitWidth <= Constants.rMaxWidth else {return nil}
+        guard s.bitWidth <= Constants.sMaxWidth else {return nil}
         
         self.transaction = transaction
         self.v = v

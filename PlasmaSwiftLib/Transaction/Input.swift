@@ -8,20 +8,18 @@
 
 import Foundation
 import SwiftRLP
+import BigInt
 
 class TransactionInput {
     
-    public var blockNumber: Array<UInt8>
-    public var txNumberInBlock: Array<UInt8>
-    public var outputNumberInTx: Array<UInt8>
-    public var amount: Array<UInt8>
+    public var blockNumber: UInt32
+    public var txNumberInBlock: UInt32
+    public var outputNumberInTx: UInt8
+    public var amount: BigUInt
     public var data: Data
     
-    public init?(blockNumber: Array<UInt8>, txNumberInBlock: Array<UInt8>, outputNumberInTx: Array<UInt8>, amount: Array<UInt8>) {
-        guard blockNumber.count == Constants.blockNumberLength else {return nil}
-        guard txNumberInBlock.count == Constants.txNumberInBlockLength else {return nil}
-        guard outputNumberInTx.count == Constants.outputNumberInTxLength else {return nil}
-        guard amount.count == Constants.amountLegth else {return nil}
+    public init?(blockNumber: UInt32, txNumberInBlock: UInt32, outputNumberInTx: UInt8, amount: BigUInt) {
+        guard amount.bitWidth <= Constants.amountMaxWidth else {return nil}
         
         self.blockNumber = blockNumber
         self.txNumberInBlock = txNumberInBlock

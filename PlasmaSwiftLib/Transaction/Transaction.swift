@@ -8,18 +8,18 @@
 
 import Foundation
 import SwiftRLP
+import BigInt
 
 class Transaction {
     
-    public var txType: Array<UInt8>
+    public var txType: UInt8
     public var inputs: Array<TransactionInput>
     public var outputs: Array<TransactionOutput>
     public var data: Data
     
-    public init?(txType: Array<UInt8>, inputs: Array<TransactionInput>, outputs: Array<TransactionOutput>){
-        guard txType.count == Constants.txTypeLength else {return nil}
-        guard inputs.count == Constants.inputsArrayLength else {return nil}
-        guard outputs.count == Constants.outputsArrayLength else {return nil}
+    public init?(txType: UInt8, inputs: Array<TransactionInput>, outputs: Array<TransactionOutput>){
+        guard inputs.count <= Constants.inputsArrayMax else {return nil}
+        guard outputs.count <= Constants.outputsArrayMax else {return nil}
         
         self.txType = txType
         self.inputs = inputs
