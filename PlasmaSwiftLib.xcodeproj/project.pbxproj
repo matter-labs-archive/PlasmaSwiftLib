@@ -17,6 +17,10 @@
 		E2E94C8F2178A14A005F54A0 /* EthereumAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C8E2178A14A005F54A0 /* EthereumAddress.swift */; };
 		E2E94C912178A1D5005F54A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C902178A1D5005F54A0 /* Constants.swift */; };
 		E2E94C932178A332005F54A0 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C922178A332005F54A0 /* Transaction.swift */; };
+		E2E94C952178B20F005F54A0 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C942178B20F005F54A0 /* DataExtension.swift */; };
+		E2E94C972178B24B005F54A0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C962178B24A005F54A0 /* StringExtension.swift */; };
+		E2E94C992178B27E005F54A0 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C982178B27E005F54A0 /* ArrayExtension.swift */; };
+		E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C9A2178B402005F54A0 /* NSRegularExpressionExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		E2E94C8E2178A14A005F54A0 /* EthereumAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumAddress.swift; sourceTree = "<group>"; };
 		E2E94C902178A1D5005F54A0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E2E94C922178A332005F54A0 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		E2E94C942178B20F005F54A0 /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
+		E2E94C962178B24A005F54A0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		E2E94C982178B27E005F54A0 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		E2E94C9A2178B402005F54A0 /* NSRegularExpressionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +152,10 @@
 			isa = PBXGroup;
 			children = (
 				E2E94C8E2178A14A005F54A0 /* EthereumAddress.swift */,
+				E2E94C942178B20F005F54A0 /* DataExtension.swift */,
+				E2E94C982178B27E005F54A0 /* ArrayExtension.swift */,
+				E2E94C9A2178B402005F54A0 /* NSRegularExpressionExtension.swift */,
+				E2E94C962178B24A005F54A0 /* StringExtension.swift */,
 				E2E94C902178A1D5005F54A0 /* Constants.swift */,
 			);
 			path = Helpers;
@@ -308,7 +320,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E94C8F2178A14A005F54A0 /* EthereumAddress.swift in Sources */,
+				E2E94C972178B24B005F54A0 /* StringExtension.swift in Sources */,
+				E2E94C952178B20F005F54A0 /* DataExtension.swift in Sources */,
+				E2E94C992178B27E005F54A0 /* ArrayExtension.swift in Sources */,
 				E2E94C8C2178A0CD005F54A0 /* Output.swift in Sources */,
+				E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */,
 				E2E94C8A21789BEA005F54A0 /* Input.swift in Sources */,
 				E2E94C912178A1D5005F54A0 /* Constants.swift in Sources */,
 				E2E94C932178A332005F54A0 /* Transaction.swift in Sources */,
