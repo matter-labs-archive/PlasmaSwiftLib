@@ -12,6 +12,11 @@
 		E2E94C772178919E005F54A0 /* PlasmaSwiftLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E94C6D2178919D005F54A0 /* PlasmaSwiftLib.framework */; };
 		E2E94C7C2178919E005F54A0 /* PlasmaSwiftLibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C7B2178919E005F54A0 /* PlasmaSwiftLibTests.swift */; };
 		E2E94C7E2178919E005F54A0 /* PlasmaSwiftLib.h in Headers */ = {isa = PBXBuildFile; fileRef = E2E94C702178919D005F54A0 /* PlasmaSwiftLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2E94C8A21789BEA005F54A0 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C8921789BEA005F54A0 /* Input.swift */; };
+		E2E94C8C2178A0CD005F54A0 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C8B2178A0CD005F54A0 /* Output.swift */; };
+		E2E94C8F2178A14A005F54A0 /* EthereumAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C8E2178A14A005F54A0 /* EthereumAddress.swift */; };
+		E2E94C912178A1D5005F54A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C902178A1D5005F54A0 /* Constants.swift */; };
+		E2E94C932178A332005F54A0 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C922178A332005F54A0 /* Transaction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +42,11 @@
 		E2E94C762178919E005F54A0 /* PlasmaSwiftLibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlasmaSwiftLibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E94C7B2178919E005F54A0 /* PlasmaSwiftLibTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaSwiftLibTests.swift; sourceTree = "<group>"; };
 		E2E94C7D2178919E005F54A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2E94C8921789BEA005F54A0 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		E2E94C8B2178A0CD005F54A0 /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
+		E2E94C8E2178A14A005F54A0 /* EthereumAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumAddress.swift; sourceTree = "<group>"; };
+		E2E94C902178A1D5005F54A0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E2E94C922178A332005F54A0 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +87,6 @@
 				A02DAD61DBD0B071890993EB /* Pods-PlasmaSwiftLibTests.debug.xcconfig */,
 				5F7FBBAFE9AB216EA7F84156 /* Pods-PlasmaSwiftLibTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -104,6 +113,8 @@
 		E2E94C6F2178919D005F54A0 /* PlasmaSwiftLib */ = {
 			isa = PBXGroup;
 			children = (
+				E2E94C8D2178A12D005F54A0 /* Helpers */,
+				E2E94C8721789BD0005F54A0 /* Transaction */,
 				E2E94C702178919D005F54A0 /* PlasmaSwiftLib.h */,
 				E2E94C712178919D005F54A0 /* Info.plist */,
 			);
@@ -117,6 +128,25 @@
 				E2E94C7D2178919E005F54A0 /* Info.plist */,
 			);
 			path = PlasmaSwiftLibTests;
+			sourceTree = "<group>";
+		};
+		E2E94C8721789BD0005F54A0 /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				E2E94C922178A332005F54A0 /* Transaction.swift */,
+				E2E94C8921789BEA005F54A0 /* Input.swift */,
+				E2E94C8B2178A0CD005F54A0 /* Output.swift */,
+			);
+			path = Transaction;
+			sourceTree = "<group>";
+		};
+		E2E94C8D2178A12D005F54A0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E2E94C8E2178A14A005F54A0 /* EthereumAddress.swift */,
+				E2E94C902178A1D5005F54A0 /* Constants.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +213,7 @@
 				TargetAttributes = {
 					E2E94C6C2178919D005F54A0 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 					E2E94C752178919E005F54A0 = {
 						CreatedOnToolsVersion = 10.0;
@@ -276,6 +307,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2E94C8F2178A14A005F54A0 /* EthereumAddress.swift in Sources */,
+				E2E94C8C2178A0CD005F54A0 /* Output.swift in Sources */,
+				E2E94C8A21789BEA005F54A0 /* Input.swift in Sources */,
+				E2E94C912178A1D5005F54A0 /* Constants.swift in Sources */,
+				E2E94C932178A332005F54A0 /* Transaction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +460,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CB9D9CE7F16AEB65FA839158 /* Pods-PlasmaSwiftLib.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -440,6 +477,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.thematter.PlasmaSwiftLib;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -449,6 +487,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 777BD6B602B0FD7417F92D9E /* Pods-PlasmaSwiftLib.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -474,6 +513,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A02DAD61DBD0B071890993EB /* Pods-PlasmaSwiftLibTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PlasmaSwiftLibTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -492,6 +532,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F7FBBAFE9AB216EA7F84156 /* Pods-PlasmaSwiftLibTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PlasmaSwiftLibTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
