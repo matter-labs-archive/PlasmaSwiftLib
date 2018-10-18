@@ -17,8 +17,10 @@ class TransactionInput {
     public var outputNumberInTx: BigUInt
     public var amount: BigUInt
     public var data: Data
+    public var transactionInput: [AnyObject]
     
     public init?(blockNumber: BigUInt, txNumberInBlock: BigUInt, outputNumberInTx: BigUInt, amount: BigUInt) {
+        
         guard blockNumber.bitWidth <= Constants.blockNumberMaxWidth else {return nil}
         guard txNumberInBlock.bitWidth <= Constants.txNumberInBlockMaxWidth else {return nil}
         guard outputNumberInTx.bitWidth <= Constants.outputNumberInTxMaxWidth else {return nil}
@@ -29,8 +31,9 @@ class TransactionInput {
         self.outputNumberInTx = outputNumberInTx
         self.amount = amount
         
-        let dataArray = [blockNumber, txNumberInBlock, outputNumberInTx, amount] as [AnyObject]
-        guard let data = RLP.encode(dataArray) else {return nil}
+        let transactionInput = [blockNumber, txNumberInBlock, outputNumberInTx, amount] as [AnyObject]
+        self.transactionInput = transactionInput
+        guard let data = RLP.encode(transactionInput) else {return nil}
         self.data = data
     }
     
@@ -54,5 +57,6 @@ class TransactionInput {
         self.txNumberInBlock = txNumberInBlock
         self.outputNumberInTx = outputNumberInTx
         self.amount = amount
+        self.transactionInput = [blockNumber, txNumberInBlock, outputNumberInTx, amount] as [AnyObject]
     }
 }

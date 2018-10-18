@@ -16,6 +16,7 @@ class Transaction {
     public var inputs: Array<TransactionInput>
     public var outputs: Array<TransactionOutput>
     public var data: Data
+    public var transaction: [AnyObject]
     
     public init?(txType: BigUInt, inputs: Array<TransactionInput>, outputs: Array<TransactionOutput>){
         guard txType.bitWidth <= Constants.txTypeMaxWidth else {return nil}
@@ -26,8 +27,21 @@ class Transaction {
         self.inputs = inputs
         self.outputs = outputs
         
-        let dataArray = [txType, inputs, outputs] as [AnyObject]
-        guard let data = RLP.encode(dataArray) else {return nil}
+        var inputsData: [AnyObject] = []
+        for input in inputs {
+            let inputData = [input.blockNumber, input.txNumberInBlock, input.outputNumberInTx, input.amount] as [AnyObject]
+            inputsData.append(inputData as AnyObject)
+        }
+        
+        var outputsData: [AnyObject] = []
+        for output in outputs {
+            let outputData = [output.outputNumberInTx, output.receiverEthereumAddressInData, output.amount] as [AnyObject]
+            outputsData.append(outputData as AnyObject)
+        }
+        
+        let transaction = [txType, inputsData, outputsData] as [AnyObject]
+        self.transaction = transaction
+        guard let data = RLP.encode(transaction) else {return nil}
         self.data = data
     }
 }

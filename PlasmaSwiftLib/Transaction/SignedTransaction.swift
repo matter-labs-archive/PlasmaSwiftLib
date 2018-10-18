@@ -17,6 +17,7 @@ class SignedTransaction {
     public var r: BigUInt
     public var s: BigUInt
     public var data: Data
+    public var signedTransaction: [AnyObject]
     
     public init?(transaction: Transaction, v: BigUInt, r: BigUInt, s: BigUInt){
         guard v.bitWidth <= Constants.vMaxWidth else {return nil}
@@ -30,8 +31,9 @@ class SignedTransaction {
         self.r = r
         self.s = s
         
-        let dataArray = [transaction, v, r, s] as [AnyObject]
-        guard let data = RLP.encode(dataArray) else {return nil}
+        let signedTransaction = [transaction, v, r, s] as [AnyObject]
+        self.signedTransaction = signedTransaction
+        guard let data = RLP.encode(signedTransaction) else {return nil}
         self.data = data
     }
 }

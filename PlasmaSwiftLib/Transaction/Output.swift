@@ -14,8 +14,10 @@ class TransactionOutput {
     
     public var outputNumberInTx: BigUInt
     public var receiverEthereumAddress: EthereumAddress
+    public var receiverEthereumAddressInData: Data
     public var amount: BigUInt
     public var data: Data
+    public var transactionOutput: [AnyObject]
     
     public init?(outputNumberInTx: BigUInt, receiverEthereumAddress: EthereumAddress, amount: BigUInt){
         guard outputNumberInTx.bitWidth <= Constants.outputNumberInTxMaxWidth else {return nil}
@@ -25,9 +27,34 @@ class TransactionOutput {
         self.outputNumberInTx = outputNumberInTx
         self.receiverEthereumAddress = receiverEthereumAddress
         self.amount = amount
+        self.receiverEthereumAddressInData = receiverEthereumAddressInData
         
-        let dataArray = [outputNumberInTx, receiverEthereumAddressInData, amount] as [AnyObject]
-        guard let data = RLP.encode(dataArray) else {return nil}
+        let transactionOutput = [outputNumberInTx, receiverEthereumAddressInData, amount] as [AnyObject]
+        self.transactionOutput = transactionOutput
+        guard let data = RLP.encode(transactionOutput) else {return nil}
         self.data = data
+    }
+    
+    public init?(data: Data) {
+        
+        guard let item = RLP.decode(data) else {return nil}
+        guard let dataArray = item[0] else {return nil}
+        
+        guard let outputNumberInTxData = dataArray[0]?.data else {return nil}
+        guard let receiverEthereumAddressData = dataArray[1]?.data else {return nil}
+        guard let amountData = dataArray[2]?.data else {return nil}
+        
+        let outputNumberInTx = BigUInt(outputNumberInTxData)
+        let receiverEthereumAddress = EthereumAddress(receiverEthereumAddressData)
+        let receiverEthereumAddressInData = receiverEthereumAddressData
+        let amount = BigUInt(amountData)
+        
+        self.data = data
+        self.outputNumberInTx = outputNumberInTx
+        self.receiverEthereumAddress = receiverEthereumAddress!
+        self.amount = amount
+        self.receiverEthereumAddressInData = receiverEthereumAddressInData
+        self.transactionOutput = [outputNumberInTx, receiverEthereumAddressInData, amount] as [AnyObject]
+        
     }
 }

@@ -26,5 +26,17 @@ class PlasmaSwiftLibTests: XCTestCase {
         XCTAssert(outputNumberInTx == input2?.outputNumberInTx)
         XCTAssert(amount == input2?.amount)
     }
+    
+    func testOutput() {
+        let outputNumberInTx: BigUInt = 10
+        let receiverEthereumAddress: EthereumAddress = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!
+        let amount: BigUInt = 500000000000000
+        let output1 = TransactionOutput(outputNumberInTx: outputNumberInTx, receiverEthereumAddress: receiverEthereumAddress, amount: amount)
+        guard let data = output1?.data else {return}
+        let output2 = TransactionOutput(data: data)
+        XCTAssert(outputNumberInTx == output2?.outputNumberInTx)
+        XCTAssert(receiverEthereumAddress == output2?.receiverEthereumAddress)
+        XCTAssert(amount == output2?.amount)
+    }
 
 }
