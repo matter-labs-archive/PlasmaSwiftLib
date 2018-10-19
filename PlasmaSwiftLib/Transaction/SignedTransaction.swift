@@ -9,6 +9,7 @@
 import Foundation
 import SwiftRLP
 import BigInt
+import secp256k1_swift
 
 class SignedTransaction {
     

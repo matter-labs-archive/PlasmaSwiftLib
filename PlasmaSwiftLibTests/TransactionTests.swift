@@ -50,7 +50,7 @@ class TransactionTests: XCTestCase {
         XCTAssert(transaction1 == transaction2)
     }
     
-    func testSignTransaction() {
+    func testSignedTransaction() {
         let txType: BigUInt = 1
         guard let inputs = testHelpers.formInputsForTransaction() else {return}
         guard let outputs = testHelpers.formOutputsForTransaction() else {return}
@@ -63,5 +63,15 @@ class TransactionTests: XCTestCase {
         guard let signedTransaction2 = SignedTransaction(data: data) else {return}
         print("signed transaction passed")
         XCTAssert(signedTransaction1 == signedTransaction2)
+    }
+    
+    func testSignature() {
+        let txType: BigUInt = 1
+        guard let inputs = testHelpers.formInputsForTransaction() else {return}
+        guard let outputs = testHelpers.formOutputsForTransaction() else {return}
+        
+        guard let transaction = Transaction(txType: txType, inputs: inputs, outputs: outputs) else {return}
+        let signedTransaction = transaction.sign(privateKey: Data(hex: "1d9d18fc759fb16bd1541d6689e9cefe02917664c56eec83326d18d66e5f7cfd"))
+        XCTAssertNotNil(signedTransaction)
     }
 }

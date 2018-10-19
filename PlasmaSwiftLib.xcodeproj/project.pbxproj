@@ -28,6 +28,7 @@
 		E2E94CA7217A316A005F54A0 /* BlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA6217A316A005F54A0 /* BlockTests.swift */; };
 		E2E94CA9217A3DB9005F54A0 /* BlockHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA8217A3DB9005F54A0 /* BlockHelpers.swift */; };
 		E2E94CAB217A48E5005F54A0 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAA217A48E5005F54A0 /* TestHelpers.swift */; };
+		E2E94CAD217A5791005F54A0 /* BigIntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAC217A5791005F54A0 /* BigIntExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		E2E94CA6217A316A005F54A0 /* BlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTests.swift; sourceTree = "<group>"; };
 		E2E94CA8217A3DB9005F54A0 /* BlockHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockHelpers.swift; sourceTree = "<group>"; };
 		E2E94CAA217A48E5005F54A0 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		E2E94CAC217A5791005F54A0 /* BigIntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigIntExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			children = (
 				E2E94C8E2178A14A005F54A0 /* EthereumAddress.swift */,
 				E2E94C942178B20F005F54A0 /* DataExtension.swift */,
+				E2E94CAC217A5791005F54A0 /* BigIntExtension.swift */,
 				E2E94C982178B27E005F54A0 /* ArrayExtension.swift */,
 				E2E94C9A2178B402005F54A0 /* NSRegularExpressionExtension.swift */,
 				E2E94C962178B24A005F54A0 /* StringExtension.swift */,
@@ -360,6 +363,7 @@
 				E2E94CA9217A3DB9005F54A0 /* BlockHelpers.swift in Sources */,
 				E2E94C912178A1D5005F54A0 /* Constants.swift in Sources */,
 				E2E94CA32178DA0D005F54A0 /* Block.swift in Sources */,
+				E2E94CAD217A5791005F54A0 /* BigIntExtension.swift in Sources */,
 				E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */,
 				E2E94C932178A332005F54A0 /* Transaction.swift in Sources */,
 			);

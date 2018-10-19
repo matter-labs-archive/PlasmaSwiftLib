@@ -9,6 +9,7 @@
 import Foundation
 import SwiftRLP
 import BigInt
+import secp256k1_swift
 
 class Transaction {
     
@@ -58,6 +59,34 @@ class Transaction {
         self.transaction = [transaction.txType,
                             inputsData,
                             outputsData] as [AnyObject]
+    }
+    
+    public func sign(privateKey: Data, useExtraEntropy: Bool = false) -> SignedTransaction? {
+        for _ in 0..<1024 {
+            if let signature = signature(privateKey: privateKey, useExtraEntropy: useExtraEntropy) {
+                let v = BigUInt(signature.v) + BigUInt(26)
+                print(v)
+                let r = BigUInt(Data(signature.r))
+                print(r)
+                let s = BigUInt(Data(signature.s))
+                print(s)
+                if let signedTransaction = SignedTransaction(transaction: self,
+                                                          v: v,
+                                                          r: r,
+                                                          s: s) {return signedTransaction}
+            }
+        }
+        return nil
+    }
+    
+    private func signature(privateKey: Data, useExtraEntropy: Bool = false) -> SECP256K1.UnmarshaledSignature? {
+        guard let hash = helpers.hashForSignature(data: self.data) else {return nil}
+        let signature = SECP256K1.signForRecovery(hash: hash, privateKey: privateKey, useExtraEntropy: useExtraEntropy)
+        guard let serializedSignature = signature.serializedSignature else {return nil}
+        guard let unmarshalledSignature = SECP256K1.unmarshalSignature(signatureData: serializedSignature) else {
+            return nil
+        }
+        return unmarshalledSignature
     }
 }
 

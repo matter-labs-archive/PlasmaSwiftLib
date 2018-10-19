@@ -147,4 +147,9 @@ class TransactionHelpers {
     func transactionToAnyObject(transaction: Transaction) -> [AnyObject] {
         return transaction.transaction
     }
+    
+    func hashForSignature(data: Data) -> Data? {
+        let hash = data.sha3(.keccak256)
+        return hash
+    }
 }
