@@ -50,7 +50,7 @@ class SignedTransaction {
         guard let rData = dataArray[2]?.data else {return nil}
         guard let sData = dataArray[3]?.data else {return nil}
         
-        guard let transaction = helpers.serialize(tranactionData) else {return nil}
+        guard let transaction = helpers.serializeTransaction(tranactionData) else {return nil}
         let v = BigUInt(vData)
         let r = BigUInt(rData)
         let s = BigUInt(sData)
@@ -67,6 +67,9 @@ class SignedTransaction {
 
 extension SignedTransaction: Equatable {
     public static func ==(lhs: SignedTransaction, rhs: SignedTransaction) -> Bool {
-        return lhs.transaction == rhs.transaction && lhs.v == rhs.v && lhs.r == rhs.r && lhs.s == rhs.s
+        return lhs.transaction == rhs.transaction &&
+            lhs.v == rhs.v &&
+            lhs.r == rhs.r &&
+            lhs.s == rhs.s
     }
 }

@@ -12,6 +12,8 @@ import BigInt
 
 class TransactionInput {
     
+    private let helpers = TransactionHelpers()
+    
     public var blockNumber: BigUInt
     public var txNumberInBlock: BigUInt
     public var outputNumberInTx: BigUInt
@@ -31,7 +33,10 @@ class TransactionInput {
         self.outputNumberInTx = outputNumberInTx
         self.amount = amount
         
-        let transactionInput = [blockNumber, txNumberInBlock, outputNumberInTx, amount] as [AnyObject]
+        let transactionInput = [blockNumber,
+                                txNumberInBlock,
+                                outputNumberInTx,
+                                amount] as [AnyObject]
         self.transactionInput = transactionInput
         guard let data = RLP.encode(transactionInput) else {return nil}
         self.data = data
@@ -42,27 +47,26 @@ class TransactionInput {
         guard let item = RLP.decode(data) else {return nil}
         guard let dataArray = item[0] else {return nil}
         
-        guard let blockNumberData = dataArray[0]?.data else {return nil}
-        guard let txNumberInBlockData = dataArray[1]?.data else {return nil}
-        guard let outputNumberInTxData = dataArray[2]?.data else {return nil}
-        guard let amountData = dataArray[3]?.data else {return nil}
+        guard let input = helpers.serializeInput(dataArray: dataArray) else {return nil}
         
-        let blockNumber = BigUInt(blockNumberData)
-        let txNumberInBlock = BigUInt(txNumberInBlockData)
-        let outputNumberInTx = BigUInt(outputNumberInTxData)
-        let amount = BigUInt(amountData)
-        
-        self.data = data
-        self.blockNumber = blockNumber
-        self.txNumberInBlock = txNumberInBlock
-        self.outputNumberInTx = outputNumberInTx
-        self.amount = amount
-        self.transactionInput = [blockNumber, txNumberInBlock, outputNumberInTx, amount] as [AnyObject]
+        self.data = input.data
+        self.blockNumber = input.blockNumber
+        self.txNumberInBlock = input.txNumberInBlock
+        self.outputNumberInTx = input.outputNumberInTx
+        self.amount = input.amount
+        self.transactionInput = [input.blockNumber,
+                                 input.txNumberInBlock,
+                                 input.outputNumberInTx,
+                                 input.amount] as [AnyObject]
     }
 }
 
 extension TransactionInput: Equatable {
     public static func ==(lhs: TransactionInput, rhs: TransactionInput) -> Bool {
-        return lhs.blockNumber == rhs.blockNumber && lhs.txNumberInBlock == rhs.txNumberInBlock && lhs.outputNumberInTx == rhs.outputNumberInTx && lhs.amount == rhs.amount && lhs.data == rhs.data
+        return lhs.blockNumber == rhs.blockNumber &&
+            lhs.txNumberInBlock == rhs.txNumberInBlock &&
+            lhs.outputNumberInTx == rhs.outputNumberInTx &&
+            lhs.amount == rhs.amount &&
+            lhs.data == rhs.data
     }
 }

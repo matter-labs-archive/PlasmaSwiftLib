@@ -41,7 +41,11 @@ class BlockHeader {
         self.r = r
         self.s = s
         
-        let blockHeader = [blockNumber, numberOfTxInBlock, parentHash, merkleRootOfTheTxTree, v, r, s] as [AnyObject]
+        let blockHeader = [blockNumber,
+                           numberOfTxInBlock,
+                           parentHash,
+                           merkleRootOfTheTxTree,
+                           v, r, s] as [AnyObject]
         self.blockHeader = blockHeader
         guard let data = RLP.encode(blockHeader) else {return nil}
         self.data = data
@@ -75,12 +79,22 @@ class BlockHeader {
         self.v = v
         self.r = r
         self.s = s
-        self.blockHeader = [blockNumber, numberOfTxInBlock, parentHash, merkleRootOfTheTxTree, v, r, s] as [AnyObject]
+        self.blockHeader = [blockNumber,
+                            numberOfTxInBlock,
+                            parentHash,
+                            merkleRootOfTheTxTree,
+                            v, r, s] as [AnyObject]
     }
 }
 
 extension BlockHeader: Equatable {
     public static func ==(lhs: BlockHeader, rhs: BlockHeader) -> Bool {
-        return lhs.blockNumber == rhs.blockNumber && lhs.numberOfTxInBlock == rhs.numberOfTxInBlock && lhs.parentHash == rhs.parentHash && lhs.merkleRootOfTheTxTree == rhs.merkleRootOfTheTxTree && lhs.v == rhs.v && lhs.r == rhs.r && lhs.s == rhs.s
+        return lhs.blockNumber == rhs.blockNumber &&
+            lhs.numberOfTxInBlock == rhs.numberOfTxInBlock &&
+            lhs.parentHash == rhs.parentHash &&
+            lhs.merkleRootOfTheTxTree == rhs.merkleRootOfTheTxTree &&
+            lhs.v == rhs.v &&
+            lhs.r == rhs.r &&
+            lhs.s == rhs.s
     }
 }

@@ -32,7 +32,9 @@ class Transaction {
         let inputsData: [AnyObject] = helpers.inputsToAnyObjectArray(inputs: inputs)
         let outputsData: [AnyObject] = helpers.outputsToAnyObjectArray(outputs: outputs)
         
-        let transaction = [txType, inputsData, outputsData] as [AnyObject]
+        let transaction = [txType,
+                           inputsData,
+                           outputsData] as [AnyObject]
         self.transaction = transaction
         guard let data = RLP.encode(transaction) else {return nil}
         self.data = data
@@ -43,7 +45,7 @@ class Transaction {
         guard let item = RLP.decode(data) else {return nil}
         guard let dataArray = item[0] else {return nil}
         
-        guard let transaction = helpers.serialize(dataArray) else {return nil}
+        guard let transaction = helpers.serializeTransaction(dataArray) else {return nil}
 
         self.data = transaction.data
         self.txType = transaction.txType
@@ -53,12 +55,17 @@ class Transaction {
         let inputsData = helpers.inputsToAnyObjectArray(inputs: transaction.inputs)
         let outputsData = helpers.outputsToAnyObjectArray(outputs: transaction.outputs)
         
-        self.transaction = [transaction.txType, inputsData, outputsData] as [AnyObject]
+        self.transaction = [transaction.txType,
+                            inputsData,
+                            outputsData] as [AnyObject]
     }
 }
 
 extension Transaction: Equatable {
     public static func ==(lhs: Transaction, rhs: Transaction) -> Bool {
-        return lhs.txType == rhs.txType && lhs.inputs == rhs.inputs && lhs.outputs == rhs.outputs && lhs.data == rhs.data
+        return lhs.txType == rhs.txType &&
+            lhs.inputs == rhs.inputs &&
+            lhs.outputs == rhs.outputs &&
+            lhs.data == rhs.data
     }
 }
