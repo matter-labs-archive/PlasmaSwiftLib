@@ -36,4 +36,19 @@ class SignedTransaction {
         guard let data = RLP.encode(signedTransaction) else {return nil}
         self.data = data
     }
+    
+//    public init?(data: Data) {
+//        
+//        guard let item = RLP.decode(data) else {return nil}
+//        guard let dataArray = item[0] else {return nil}
+//        
+//        //signed tx
+//        guard let tranactionData = dataArray[0] else {return nil}
+//        guard let v = dataArray[1]?.data else {return nil}
+//        guard let r = dataArray[2]?.data else {return nil}
+//        guard let s = dataArray[3]?.data else {return nil}
+//        
+//        //tx
+//        guard let txTypeData = tranactionData[0]?.data else {return nil}
+//    }
 }

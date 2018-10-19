@@ -24,6 +24,7 @@
 		E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */; };
 		E2E94CA12178D87F005F54A0 /* BlockHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA02178D87F005F54A0 /* BlockHeader.swift */; };
 		E2E94CA32178DA0D005F54A0 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA22178DA0D005F54A0 /* Block.swift */; };
+		E2E94CA5217A1B60005F54A0 /* TransactionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA4217A1B60005F54A0 /* TransactionHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedTransaction.swift; sourceTree = "<group>"; };
 		E2E94CA02178D87F005F54A0 /* BlockHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockHeader.swift; sourceTree = "<group>"; };
 		E2E94CA22178DA0D005F54A0 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		E2E94CA4217A1B60005F54A0 /* TransactionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E94C922178A332005F54A0 /* Transaction.swift */,
+				E2E94CA4217A1B60005F54A0 /* TransactionHelpers.swift */,
 				E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */,
 				E2E94C8921789BEA005F54A0 /* Input.swift */,
 				E2E94C8B2178A0CD005F54A0 /* Output.swift */,
@@ -341,6 +344,7 @@
 				E2E94C952178B20F005F54A0 /* DataExtension.swift in Sources */,
 				E2E94C992178B27E005F54A0 /* ArrayExtension.swift in Sources */,
 				E2E94C8C2178A0CD005F54A0 /* Output.swift in Sources */,
+				E2E94CA5217A1B60005F54A0 /* TransactionHelpers.swift in Sources */,
 				E2E94CA12178D87F005F54A0 /* BlockHeader.swift in Sources */,
 				E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */,
 				E2E94C8A21789BEA005F54A0 /* Input.swift in Sources */,
