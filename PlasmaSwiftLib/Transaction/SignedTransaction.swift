@@ -33,7 +33,9 @@ class SignedTransaction {
         self.r = r
         self.s = s
         
-        let signedTransaction = [transaction, v, r, s] as [AnyObject]
+        let transactionData: [AnyObject] = helpers.transactionToAnyObject(transaction: transaction)
+        
+        let signedTransaction = [transactionData, v, r, s] as [AnyObject]
         self.signedTransaction = signedTransaction
         guard let data = RLP.encode(signedTransaction) else {return nil}
         self.data = data
@@ -44,24 +46,18 @@ class SignedTransaction {
         guard let item = RLP.decode(data) else {return nil}
         guard let dataArray = item[0] else {return nil}
         
-        //signed tx
-        guard let tranactionData = dataArray[0] else {return nil}
-        guard let vData = dataArray[1]?.data else {return nil}
-        guard let rData = dataArray[2]?.data else {return nil}
-        guard let sData = dataArray[3]?.data else {return nil}
-        
-        guard let transaction = helpers.serializeTransaction(tranactionData) else {return nil}
-        let v = BigUInt(vData)
-        let r = BigUInt(rData)
-        let s = BigUInt(sData)
-        let signedTransaction = [transaction, v, r, s] as [AnyObject]
+        guard let signedTransaction = helpers.serializeSignedTransaction(dataArray) else {return nil}
+        let signedTransactionArray = [signedTransaction.transaction,
+                                      signedTransaction.v,
+                                      signedTransaction.r,
+                                      signedTransaction.s] as [AnyObject]
         
         self.data = data
-        self.transaction = transaction
-        self.v = v
-        self.r = r
-        self.s = s
-        self.signedTransaction = signedTransaction
+        self.transaction = signedTransaction.transaction
+        self.v = signedTransaction.v
+        self.r = signedTransaction.r
+        self.s = signedTransaction.s
+        self.signedTransaction = signedTransactionArray
     }
 }
 

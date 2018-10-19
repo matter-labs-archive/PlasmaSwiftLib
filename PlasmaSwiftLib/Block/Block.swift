@@ -12,6 +12,9 @@ import BigInt
 
 class Block {
     
+    private let blockHelpers = BlockHelpers()
+    private let transactionHelpers = TransactionHelpers()
+    
     public var blockHeader: BlockHeader
     public var signedTransactions: [SignedTransaction]
     public var data: Data
@@ -25,16 +28,24 @@ class Block {
         guard let data = RLP.encode(dataArray) else {return nil}
         self.data = data
     }
-//    
+    
 //    public init?(data: Data) {
 //        
 //        guard let item = RLP.decode(data) else {return nil}
 //        guard let dataArray = item[0] else {return nil}
 //        
-//        guard let blockNumberData = dataArray[0]?.data else {return nil}
-//        guard let txNumberInBlockData = dataArray[1]?.data else {return nil}
-//        guard let outputNumberInTxData = dataArray[2]?.data else {return nil}
-//        guard let amountData = dataArray[3]?.data else {return nil}
+//        guard let blockHeaderData = dataArray[0] else {return nil}
+//        guard let signedTransactionsData = dataArray[1] else {return nil}
+//        
+//        guard let blockHeader = blockHelpers.serializeBlockHeader(dataArray: blockHeaderData) else {return}
+//        let transactionsCount = blockHeader.numberOfTxInBlock
+//        let convenienceCount = Int(transactionsCount/2)
+//        for i in -convenienceCount ..< convenienceCount {
+//            if let signedTransactionData = signedTransactionsData[i + convenienceCount] {
+//                let signedTransaction = transactionHelpers.serializeSignedTransaction(signedTransactionData)
+//            }
+//        }
+//        
 //        
 //        let blockNumber = BigUInt(blockNumberData)
 //        let txNumberInBlock = BigUInt(txNumberInBlockData)

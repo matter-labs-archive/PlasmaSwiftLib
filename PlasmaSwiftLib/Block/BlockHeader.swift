@@ -12,6 +12,8 @@ import BigInt
 
 class BlockHeader {
     
+    private let helpers = BlockHelpers()
+    
     public var blockNumber: BigUInt
     public var numberOfTxInBlock: BigUInt
     public var parentHash: BigUInt
@@ -55,35 +57,23 @@ class BlockHeader {
         guard let item = RLP.decode(data) else {return nil}
         guard let dataArray = item[0] else {return nil}
         
-        guard let blockNumberData = dataArray[0]?.data else {return nil}
-        guard let numberOfTxInBlockData = dataArray[1]?.data else {return nil}
-        guard let parentHashData = dataArray[2]?.data else {return nil}
-        guard let merkleRootOfTheTxTreeData = dataArray[3]?.data else {return nil}
-        guard let vData = dataArray[4]?.data else {return nil}
-        guard let rData = dataArray[5]?.data else {return nil}
-        guard let sData = dataArray[6]?.data else {return nil}
+        guard let blockHeader = helpers.serializeBlockHeader(dataArray: dataArray) else {return nil}
         
-        let blockNumber = BigUInt(blockNumberData)
-        let numberOfTxInBlock = BigUInt(numberOfTxInBlockData)
-        let parentHash = BigUInt(parentHashData)
-        let merkleRootOfTheTxTree = BigUInt(merkleRootOfTheTxTreeData)
-        let v = BigUInt(vData)
-        let r = BigUInt(rData)
-        let s = BigUInt(sData)
-        
-        self.data = data
-        self.blockNumber = blockNumber
-        self.numberOfTxInBlock = numberOfTxInBlock
-        self.parentHash = parentHash
-        self.merkleRootOfTheTxTree = merkleRootOfTheTxTree
-        self.v = v
-        self.r = r
-        self.s = s
-        self.blockHeader = [blockNumber,
-                            numberOfTxInBlock,
-                            parentHash,
-                            merkleRootOfTheTxTree,
-                            v, r, s] as [AnyObject]
+        self.data = blockHeader.data
+        self.blockNumber = blockHeader.blockNumber
+        self.numberOfTxInBlock = blockHeader.numberOfTxInBlock
+        self.parentHash = blockHeader.parentHash
+        self.merkleRootOfTheTxTree = blockHeader.merkleRootOfTheTxTree
+        self.v = blockHeader.v
+        self.r = blockHeader.r
+        self.s = blockHeader.s
+        self.blockHeader = [blockHeader.blockNumber,
+                            blockHeader.numberOfTxInBlock,
+                            blockHeader.parentHash,
+                            blockHeader.merkleRootOfTheTxTree,
+                            blockHeader.v,
+                            blockHeader.r,
+                            blockHeader.s] as [AnyObject]
     }
 }
 

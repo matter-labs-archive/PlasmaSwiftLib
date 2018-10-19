@@ -62,6 +62,25 @@ class TransactionHelpers {
         return transaction
     }
     
+    func serializeSignedTransaction(_ dataArray: RLP.RLPItem) -> SignedTransaction? {
+        guard let tranactionData = dataArray[0] else {return nil}
+        guard let vData = dataArray[1]?.data else {return nil}
+        guard let rData = dataArray[2]?.data else {return nil}
+        guard let sData = dataArray[3]?.data else {return nil}
+        
+        guard let transaction = serializeTransaction(tranactionData) else {return nil}
+        let v = BigUInt(vData)
+        let r = BigUInt(rData)
+        let s = BigUInt(sData)
+        
+        guard let signedTransaction = SignedTransaction(transaction: transaction,
+                                                        v: v,
+                                                        r: r,
+                                                        s: s) else {return nil}
+        
+        return signedTransaction
+    }
+    
     func getInputsFromInputsRLP(inputsData: RLP.RLPItem) -> Array<TransactionInput>? {
         guard let inputData1 = inputsData[0] else {return nil}
         let inputData2 = inputsData[1]
@@ -123,5 +142,9 @@ class TransactionHelpers {
             outputsData.append(output.transactionOutput as AnyObject)
         }
         return outputsData
+    }
+    
+    func transactionToAnyObject(transaction: Transaction) -> [AnyObject] {
+        return transaction.transaction
     }
 }

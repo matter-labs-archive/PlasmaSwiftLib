@@ -26,6 +26,7 @@
 		E2E94CA32178DA0D005F54A0 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA22178DA0D005F54A0 /* Block.swift */; };
 		E2E94CA5217A1B60005F54A0 /* TransactionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA4217A1B60005F54A0 /* TransactionHelpers.swift */; };
 		E2E94CA7217A316A005F54A0 /* BlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA6217A316A005F54A0 /* BlockTests.swift */; };
+		E2E94CA9217A3DB9005F54A0 /* BlockHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA8217A3DB9005F54A0 /* BlockHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		E2E94CA22178DA0D005F54A0 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		E2E94CA4217A1B60005F54A0 /* TransactionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHelpers.swift; sourceTree = "<group>"; };
 		E2E94CA6217A316A005F54A0 /* BlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTests.swift; sourceTree = "<group>"; };
+		E2E94CA8217A3DB9005F54A0 /* BlockHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 		E2E94C9F2178D868005F54A0 /* Block */ = {
 			isa = PBXGroup;
 			children = (
+				E2E94CA8217A3DB9005F54A0 /* BlockHelpers.swift */,
 				E2E94CA02178D87F005F54A0 /* BlockHeader.swift */,
 				E2E94CA22178DA0D005F54A0 /* Block.swift */,
 			);
@@ -351,6 +354,7 @@
 				E2E94CA12178D87F005F54A0 /* BlockHeader.swift in Sources */,
 				E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */,
 				E2E94C8A21789BEA005F54A0 /* TransactionInput.swift in Sources */,
+				E2E94CA9217A3DB9005F54A0 /* BlockHelpers.swift in Sources */,
 				E2E94C912178A1D5005F54A0 /* Constants.swift in Sources */,
 				E2E94CA32178DA0D005F54A0 /* Block.swift in Sources */,
 				E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */,
