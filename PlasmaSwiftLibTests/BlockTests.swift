@@ -12,17 +12,24 @@ import BigInt
 @testable import PlasmaSwiftLib
 
 class BlockTests: XCTestCase {
+    
+    let testHelpers = TestHelpers()
+    
     func testBlockHeader() {
-        let blockNumber: BigUInt = 10
-        let numberOfTxInBlock: BigUInt = 2
-        let parentHash: BigUInt = 1241252535353532
-        let merkleRootOfTheTxTree: BigUInt = 500000000
-        let v: BigUInt = 27
-        let r: BigUInt = 2
-        let s: BigUInt = 124124
-        guard let block1 = BlockHeader(blockNumber: blockNumber, numberOfTxInBlock: numberOfTxInBlock, parentHash: parentHash, merkleRootOfTheTxTree: merkleRootOfTheTxTree, v: v, r: r, s: s) else {return}
+        guard let blockHeader1 = testHelpers.formBlockHeaderForBlock() else {return}
+        let data = blockHeader1.data
+        guard let blockHeader2 = BlockHeader(data: data) else {return}
+        print("block header passed")
+        XCTAssert(blockHeader1 == blockHeader2)
+    }
+    
+    func testBlock() {
+        guard let blockHeader = testHelpers.formBlockHeaderForBlock() else {return}
+        guard let signedTransactions = testHelpers.formSignedTransactionsForBlock() else {return}
+        guard let block1 = Block(blockHeader: blockHeader, signedTransactions: signedTransactions) else {return}
         let data = block1.data
-        guard let block2 = BlockHeader(data: data) else {return}
+        guard let block2 = Block(data: data) else {return}
+        print("block passed")
         XCTAssert(block1 == block2)
     }
 }

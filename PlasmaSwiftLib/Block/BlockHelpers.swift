@@ -12,6 +12,8 @@ import BigInt
 
 class BlockHelpers {
     
+    private let transactionHelpers = TransactionHelpers()
+    
     func serializeBlockHeader(dataArray: RLP.RLPItem) -> BlockHeader? {
         guard let blockNumberData = dataArray[0]?.data else {return nil}
         guard let numberOfTxInBlockData = dataArray[1]?.data else {return nil}
@@ -37,5 +39,26 @@ class BlockHelpers {
                                       r: r,
                                       s: s)
         return blockHeader
+    }
+    
+    func serializeBlock(dataArray: RLP.RLPItem) -> Block? {
+        guard let blockHeaderData = dataArray[0] else {return nil}
+        guard let signedTransactionsData = dataArray[1] else {return nil}
+        
+        guard let blockHeader = serializeBlockHeader(dataArray: blockHeaderData) else {return nil}
+        
+        var signedTransactions: [SignedTransaction] = []
+        let transactionsCount = signedTransactionsData.count ?? 0
+        let convenienceCount = Int(transactionsCount/2)
+        for i in -convenienceCount ..< convenienceCount {
+            if let signedTransactionData = signedTransactionsData[i + convenienceCount] {
+                if let signedTransaction = transactionHelpers.serializeSignedTransaction(signedTransactionData) {
+                    signedTransactions.append(signedTransaction)
+                }
+            }
+        }
+        
+        let block = Block(blockHeader: blockHeader, signedTransactions: signedTransactions)
+        return block
     }
 }

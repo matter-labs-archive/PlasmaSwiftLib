@@ -18,45 +18,37 @@ class Block {
     public var blockHeader: BlockHeader
     public var signedTransactions: [SignedTransaction]
     public var data: Data
+    public var block: [AnyObject]
     
     public init?(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]){
         
         self.blockHeader = blockHeader
         self.signedTransactions = signedTransactions
         
-        let dataArray = [blockHeader, signedTransactions] as [AnyObject]
-        guard let data = RLP.encode(dataArray) else {return nil}
+        let block = [blockHeader, signedTransactions] as [AnyObject]
+        self.block = block
+        guard let data = RLP.encode(block) else {return nil}
         self.data = data
     }
     
-//    public init?(data: Data) {
-//        
-//        guard let item = RLP.decode(data) else {return nil}
-//        guard let dataArray = item[0] else {return nil}
-//        
-//        guard let blockHeaderData = dataArray[0] else {return nil}
-//        guard let signedTransactionsData = dataArray[1] else {return nil}
-//        
-//        guard let blockHeader = blockHelpers.serializeBlockHeader(dataArray: blockHeaderData) else {return}
-//        let transactionsCount = blockHeader.numberOfTxInBlock
-//        let convenienceCount = Int(transactionsCount/2)
-//        for i in -convenienceCount ..< convenienceCount {
-//            if let signedTransactionData = signedTransactionsData[i + convenienceCount] {
-//                let signedTransaction = transactionHelpers.serializeSignedTransaction(signedTransactionData)
-//            }
-//        }
-//        
-//        
-//        let blockNumber = BigUInt(blockNumberData)
-//        let txNumberInBlock = BigUInt(txNumberInBlockData)
-//        let outputNumberInTx = BigUInt(outputNumberInTxData)
-//        let amount = BigUInt(amountData)
-//        
-//        self.data = data
-//        self.blockNumber = blockNumber
-//        self.txNumberInBlock = txNumberInBlock
-//        self.outputNumberInTx = outputNumberInTx
-//        self.amount = amount
-//        self.transactionInput = [blockNumber, txNumberInBlock, outputNumberInTx, amount] as [AnyObject]
-//    }
+    public init?(data: Data) {
+        
+        guard let item = RLP.decode(data) else {return nil}
+        guard let dataArray = item[0] else {return nil}
+        
+        guard let block = blockHelpers.serializeBlock(dataArray: dataArray) else {return nil}
+        
+        self.data = data
+        self.blockHeader = block.blockHeader
+        self.signedTransactions = block.signedTransactions
+        self.block = [block.blockHeader, block.signedTransactions] as [AnyObject]
+    }
+}
+
+extension Block: Equatable {
+    public static func ==(lhs: Block, rhs: Block) -> Bool {
+        return lhs.blockHeader == rhs.blockHeader &&
+            lhs.signedTransactions == rhs.signedTransactions
+        
+    }
 }
