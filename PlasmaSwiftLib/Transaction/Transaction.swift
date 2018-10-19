@@ -38,8 +38,6 @@ class Transaction {
         self.data = data
     }
     
-    
-    
     public init?(data: Data) {
         
         guard let item = RLP.decode(data) else {return nil}

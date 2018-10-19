@@ -63,7 +63,6 @@ class SignedTransaction {
         self.s = s
         self.signedTransaction = signedTransaction
     }
-    
 }
 
 extension SignedTransaction: Equatable {

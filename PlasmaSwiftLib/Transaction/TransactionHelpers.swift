@@ -13,18 +13,12 @@ import BigInt
 class TransactionHelpers {
     
     func serialize(_ dataArray: RLP.RLPItem) -> Transaction? {
-        //tx
         guard let txTypeData = dataArray[0]?.data else {return nil}
         guard let inputsData = dataArray[1] else {return nil}
         guard let outputsData = dataArray[2] else {return nil}
         
-        //txType
         let txType = BigUInt(txTypeData)
-        
-        //inputs
         guard let inputs = getInputsFromInputsRLP(inputsData: inputsData) else {return nil}
-        
-        //outputs
         guard let outputs = getOutputsFromOutputsRLP(outputsData: outputsData) else {return nil}
         
         

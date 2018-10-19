@@ -55,7 +55,6 @@ class TransactionOutput {
         self.amount = amount
         self.receiverEthereumAddressInData = receiverEthereumAddressInData
         self.transactionOutput = [outputNumberInTx, receiverEthereumAddressInData, amount] as [AnyObject]
-        
     }
 }
 

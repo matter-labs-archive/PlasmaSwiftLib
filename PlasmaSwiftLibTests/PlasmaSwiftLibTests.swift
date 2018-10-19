@@ -90,4 +90,22 @@ class PlasmaSwiftLibTests: XCTestCase {
         
         XCTAssert(transaction1 == transaction2)
     }
+    
+    func testSignTransaction() {
+        let txType: BigUInt = 1
+        guard let inputs = formInputsForTransaction() else {return}
+        guard let outputs = formOutputsForTransaction() else {return}
+        guard let transaction = Transaction(txType: txType, inputs: inputs, outputs: outputs) else {return}
+        
+        let v: BigUInt = 27
+        let r: BigUInt = 21424
+        let s: BigUInt = 2424124
+        
+        guard let signedTransaction1 = SignedTransaction(transaction: transaction, v: v, r: r, s: s) else {return}
+        
+        let data = signedTransaction1.data
+        guard let signedTransaction2 = SignedTransaction(data: data) else {return}
+        
+        XCTAssert(signedTransaction1 == signedTransaction2)
+    }
 }
