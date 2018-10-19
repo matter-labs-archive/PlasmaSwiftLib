@@ -63,4 +63,11 @@ class SignedTransaction {
         self.s = s
         self.signedTransaction = signedTransaction
     }
+    
+}
+
+extension SignedTransaction: Equatable {
+    public static func ==(lhs: SignedTransaction, rhs: SignedTransaction) -> Bool {
+        return lhs.transaction == rhs.transaction && lhs.v == rhs.v && lhs.r == rhs.r && lhs.s == rhs.s
+    }
 }

@@ -18,25 +18,20 @@ class PlasmaSwiftLibTests: XCTestCase {
         let txNumberInBlock: BigUInt = 1
         let outputNumberInTx: BigUInt = 1
         let amount: BigUInt = 500000000000000
-        let input1 = TransactionInput(blockNumber: blockNumber, txNumberInBlock: txNumberInBlock, outputNumberInTx: outputNumberInTx, amount: amount)
-        guard let data = input1?.data else {return}
-        let input2 = TransactionInput(data: data)
-        XCTAssert(blockNumber == input2?.blockNumber)
-        XCTAssert(txNumberInBlock == input2?.txNumberInBlock)
-        XCTAssert(outputNumberInTx == input2?.outputNumberInTx)
-        XCTAssert(amount == input2?.amount)
+        guard let input1 = TransactionInput(blockNumber: blockNumber, txNumberInBlock: txNumberInBlock, outputNumberInTx: outputNumberInTx, amount: amount) else {return}
+        let data = input1.data
+        guard let input2 = TransactionInput(data: data) else {return}
+        XCTAssert(input1 == input2)
     }
     
     func testOutput() {
         let outputNumberInTx: BigUInt = 10
         let receiverEthereumAddress: EthereumAddress = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!
         let amount: BigUInt = 500000000000000
-        let output1 = TransactionOutput(outputNumberInTx: outputNumberInTx, receiverEthereumAddress: receiverEthereumAddress, amount: amount)
-        guard let data = output1?.data else {return}
-        let output2 = TransactionOutput(data: data)
-        XCTAssert(outputNumberInTx == output2?.outputNumberInTx)
-        XCTAssert(receiverEthereumAddress == output2?.receiverEthereumAddress)
-        XCTAssert(amount == output2?.amount)
+        guard let output1 = TransactionOutput(outputNumberInTx: outputNumberInTx, receiverEthereumAddress: receiverEthereumAddress, amount: amount) else {return}
+        let data = output1.data
+        guard let output2 = TransactionOutput(data: data) else {return}
+        XCTAssert(output1 == output2)
     }
     
     func testTransaction() {
@@ -88,5 +83,4 @@ class PlasmaSwiftLibTests: XCTestCase {
         
         XCTAssert(transaction1 == transaction2)
     }
-
 }

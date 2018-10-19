@@ -150,8 +150,8 @@
 		E2E94C8721789BD0005F54A0 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				E2E94C922178A332005F54A0 /* Transaction.swift */,
 				E2E94CA4217A1B60005F54A0 /* TransactionHelpers.swift */,
+				E2E94C922178A332005F54A0 /* Transaction.swift */,
 				E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */,
 				E2E94C8921789BEA005F54A0 /* Input.swift */,
 				E2E94C8B2178A0CD005F54A0 /* Output.swift */,
