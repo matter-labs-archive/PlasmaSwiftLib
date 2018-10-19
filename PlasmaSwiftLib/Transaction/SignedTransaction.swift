@@ -12,6 +12,8 @@ import BigInt
 
 class SignedTransaction {
     
+    private let helpers = TransactionHelpers()
+    
     public var transaction: Transaction
     public var v: BigUInt
     public var r: BigUInt
@@ -37,18 +39,28 @@ class SignedTransaction {
         self.data = data
     }
     
-//    public init?(data: Data) {
-//        
-//        guard let item = RLP.decode(data) else {return nil}
-//        guard let dataArray = item[0] else {return nil}
-//        
-//        //signed tx
-//        guard let tranactionData = dataArray[0] else {return nil}
-//        guard let v = dataArray[1]?.data else {return nil}
-//        guard let r = dataArray[2]?.data else {return nil}
-//        guard let s = dataArray[3]?.data else {return nil}
-//        
-//        //tx
-//        guard let txTypeData = tranactionData[0]?.data else {return nil}
-//    }
+    public init?(data: Data) {
+        
+        guard let item = RLP.decode(data) else {return nil}
+        guard let dataArray = item[0] else {return nil}
+        
+        //signed tx
+        guard let tranactionData = dataArray[0] else {return nil}
+        guard let vData = dataArray[1]?.data else {return nil}
+        guard let rData = dataArray[2]?.data else {return nil}
+        guard let sData = dataArray[3]?.data else {return nil}
+        
+        guard let transaction = helpers.serialize(tranactionData) else {return nil}
+        let v = BigUInt(vData)
+        let r = BigUInt(rData)
+        let s = BigUInt(sData)
+        let signedTransaction = [transaction, v, r, s] as [AnyObject]
+        
+        self.data = data
+        self.transaction = transaction
+        self.v = v
+        self.r = r
+        self.s = s
+        self.signedTransaction = signedTransaction
+    }
 }
