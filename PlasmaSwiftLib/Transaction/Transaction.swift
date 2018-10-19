@@ -65,11 +65,8 @@ class Transaction {
         for _ in 0..<1024 {
             if let signature = signature(privateKey: privateKey, useExtraEntropy: useExtraEntropy) {
                 let v = BigUInt(signature.v) + BigUInt(26)
-                print(v)
                 let r = BigUInt(Data(signature.r))
-                print(r)
                 let s = BigUInt(Data(signature.s))
-                print(s)
                 if let signedTransaction = SignedTransaction(transaction: self,
                                                           v: v,
                                                           r: r,
