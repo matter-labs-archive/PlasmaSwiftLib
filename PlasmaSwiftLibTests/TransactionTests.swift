@@ -11,7 +11,7 @@ import BigInt
 
 @testable import PlasmaSwiftLib
 
-class PlasmaSwiftLibTests: XCTestCase {
+class TransactionTests: XCTestCase {
     
     func formInputsForTransaction() -> Array<TransactionInput>? {
         let blockNumber1In: BigUInt = 10
