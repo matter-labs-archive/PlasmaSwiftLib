@@ -58,3 +58,9 @@ class TransactionOutput {
         
     }
 }
+
+extension TransactionOutput: Equatable {
+    public static func ==(lhs: TransactionOutput, rhs: TransactionOutput) -> Bool {
+        return lhs.outputNumberInTx == rhs.outputNumberInTx && lhs.receiverEthereumAddress.address == rhs.receiverEthereumAddress.address && lhs.amount == rhs.amount && lhs.data == rhs.data
+    }
+}

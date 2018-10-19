@@ -60,3 +60,9 @@ class TransactionInput {
         self.transactionInput = [blockNumber, txNumberInBlock, outputNumberInTx, amount] as [AnyObject]
     }
 }
+
+extension TransactionInput: Equatable {
+    public static func ==(lhs: TransactionInput, rhs: TransactionInput) -> Bool {
+        return lhs.blockNumber == rhs.blockNumber && lhs.txNumberInBlock == rhs.txNumberInBlock && lhs.outputNumberInTx == rhs.outputNumberInTx && lhs.amount == rhs.amount && lhs.data == rhs.data
+    }
+}

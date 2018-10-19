@@ -82,31 +82,11 @@ class PlasmaSwiftLibTests: XCTestCase {
                                               amount: amount3Out) else {return}
         
         
-        let transaction1 = Transaction(txType: txType, inputs: [input1, input2], outputs: [output1, output2, output3])
-        guard let data = transaction1?.data else {return}
+        guard let transaction1 = Transaction(txType: txType, inputs: [input1, input2], outputs: [output1, output2, output3]) else {return}
+        let data = transaction1.data
         guard let transaction2 = Transaction(data: data) else {return}
-        XCTAssert(txType == transaction2.txType)
-        XCTAssert(input1.amount == transaction2.inputs[0].amount)
-        XCTAssert(input1.blockNumber == transaction2.inputs[0].blockNumber)
-        XCTAssert(input1.outputNumberInTx == transaction2.inputs[0].outputNumberInTx)
-        XCTAssert(input1.txNumberInBlock == transaction2.inputs[0].txNumberInBlock)
         
-        XCTAssert(input2.amount == transaction2.inputs[1].amount)
-        XCTAssert(input2.blockNumber == transaction2.inputs[1].blockNumber)
-        XCTAssert(input2.outputNumberInTx == transaction2.inputs[1].outputNumberInTx)
-        XCTAssert(input2.txNumberInBlock == transaction2.inputs[1].txNumberInBlock)
-        
-        XCTAssert(output1.amount == transaction2.outputs[0].amount)
-        XCTAssert(output1.outputNumberInTx == transaction2.outputs[0].outputNumberInTx)
-        XCTAssert(output1.receiverEthereumAddress == transaction2.outputs[0].receiverEthereumAddress)
-        
-        XCTAssert(output2.amount == transaction2.outputs[1].amount)
-        XCTAssert(output2.outputNumberInTx == transaction2.outputs[1].outputNumberInTx)
-        XCTAssert(output2.receiverEthereumAddress == transaction2.outputs[1].receiverEthereumAddress)
-        
-        XCTAssert(output3.amount == transaction2.outputs[2].amount)
-        XCTAssert(output3.outputNumberInTx == transaction2.outputs[2].outputNumberInTx)
-        XCTAssert(output3.receiverEthereumAddress == transaction2.outputs[2].receiverEthereumAddress)
+        XCTAssert(transaction1 == transaction2)
     }
 
 }

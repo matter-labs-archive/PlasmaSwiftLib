@@ -58,3 +58,9 @@ class Transaction {
         self.transaction = [transaction.txType, inputsData, outputsData] as [AnyObject]
     }
 }
+
+extension Transaction: Equatable {
+    public static func ==(lhs: Transaction, rhs: Transaction) -> Bool {
+        return lhs.txType == rhs.txType && lhs.inputs == rhs.inputs && lhs.outputs == rhs.outputs && lhs.data == rhs.data
+    }
+}

@@ -22,10 +22,10 @@ class TransactionHelpers {
         let txType = BigUInt(txTypeData)
         
         //inputs
-        guard let inputs = getInputsFromInputsData(inputsData: inputsData) else {return nil}
+        guard let inputs = getInputsFromInputsRLP(inputsData: inputsData) else {return nil}
         
         //outputs
-        guard let outputs = getOutputsFromOutputsData(outputsData: outputsData) else {return nil}
+        guard let outputs = getOutputsFromOutputsRLP(outputsData: outputsData) else {return nil}
         
         
         let transaction = Transaction(txType: txType, inputs: inputs, outputs: outputs)
@@ -33,7 +33,7 @@ class TransactionHelpers {
         return transaction
     }
     
-    func getInputsFromInputsData(inputsData: RLP.RLPItem) -> Array<TransactionInput>? {
+    func getInputsFromInputsRLP(inputsData: RLP.RLPItem) -> Array<TransactionInput>? {
         guard let inputCount = inputsData.count else {return nil}
         guard let inputData1 = inputsData[0] else {return nil}
         guard let blockNumberData1In = inputData1[0]?.data else {return nil}
@@ -72,7 +72,7 @@ class TransactionHelpers {
         return inputs
     }
     
-    func getOutputsFromOutputsData(outputsData: RLP.RLPItem) -> Array<TransactionOutput>? {
+    func getOutputsFromOutputsRLP(outputsData: RLP.RLPItem) -> Array<TransactionOutput>? {
         guard let outputCount = outputsData.count else {return nil}
         guard let outputData1 = outputsData[0] else {return nil}
         guard let outputNumberInTxData1Out = outputData1[0]?.data else {return nil}
