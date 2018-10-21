@@ -9,7 +9,7 @@
 import Foundation
 
 class serviceUTXO {
-    public func getListUTXOs(for publicKey: EthereumAddress, completion: @escaping(Result<ListUTXOsModel?>) -> Void) {
+    public func getListUTXOs(for publicKey: EthereumAddress, onTestnet: Bool = false, completion: @escaping(Result<ListUTXOsModel?>) -> Void) {
         let json: [String: Any] = ["for": publicKey.address,
                                    "blockNumber": 1,
                                    "transactionNumber": 0,
@@ -18,7 +18,8 @@ class serviceUTXO {
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
-        guard let request = request(data: jsonData) else {
+        guard let request = request(url: onTestnet ? URLs.listUTXOsTestnet : URLs.listUTXOsMainnet,
+                                    data: jsonData) else {
             completion(Result.Error(MatterErrors.cantCreateRequest))
             return
         }
@@ -42,9 +43,39 @@ class serviceUTXO {
         task.resume()
     }
     
+    public func sendRawTX(transaction: SignedTransaction, onTestnet: Bool = false, completion: @escaping(Result<Bool?>) -> Void) {
+        guard let transactionString = String(data: transaction.data, encoding: String.Encoding.utf8) else {
+            completion(Result.Error(MatterErrors.cantConvertTxData))
+            return
+        }
+        let json: [String: Any] = ["tx": transactionString]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        guard let request = request(url: onTestnet ? URLs.sendRawTXTestnet : URLs.sendRawTXMainnet,
+                                    data: jsonData) else {
+            completion(Result.Error(MatterErrors.cantCreateRequest))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(Result.Error(error!))
+                return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any] {
+                if let accepted = responseJSON["accepted"] as? Bool {
+                    completion(Result.Success(accepted))
+                }
+            }
+            completion(Result.Error(MatterErrors.noData))
+        }
+        
+        task.resume()
+    }
     
-    private func request(data: Data?) -> URLRequest? {
-        let url = URLs.listUTXOsMainnet
+    private func request(url: URL, data: Data?) -> URLRequest? {
         var request = URLRequest(url: url)
         request.httpShouldHandleCookies = true
         request.httpMethod = "POST"
@@ -52,11 +83,6 @@ class serviceUTXO {
         request.httpBody = data
         
         return request
-    }
-    
-    enum Result<T> {
-        case Success(T)
-        case Error(Error)
     }
 }
 

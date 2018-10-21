@@ -10,5 +10,6 @@ import Foundation
 
 enum MatterErrors: Error {
     case cantCreateRequest
+    case cantConvertTxData
     case noData
 }
