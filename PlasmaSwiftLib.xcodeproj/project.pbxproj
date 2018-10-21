@@ -29,6 +29,10 @@
 		E2E94CA9217A3DB9005F54A0 /* BlockHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA8217A3DB9005F54A0 /* BlockHelpers.swift */; };
 		E2E94CAB217A48E5005F54A0 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAA217A48E5005F54A0 /* TestHelpers.swift */; };
 		E2E94CAD217A5791005F54A0 /* BigIntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAC217A5791005F54A0 /* BigIntExtension.swift */; };
+		E2E94CB0217BF2D2005F54A0 /* serviceUTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAF217BF2D2005F54A0 /* serviceUTXO.swift */; };
+		E2E94CB2217BF38F005F54A0 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB1217BF38F005F54A0 /* URLs.swift */; };
+		E2E94CB4217BF7B8005F54A0 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB3217BF7B8005F54A0 /* Errors.swift */; };
+		E2E94CB6217BFAE2005F54A0 /* listUTXOsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB5217BFAE2005F54A0 /* listUTXOsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,10 @@
 		E2E94CA8217A3DB9005F54A0 /* BlockHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockHelpers.swift; sourceTree = "<group>"; };
 		E2E94CAA217A48E5005F54A0 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		E2E94CAC217A5791005F54A0 /* BigIntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigIntExtension.swift; sourceTree = "<group>"; };
+		E2E94CAF217BF2D2005F54A0 /* serviceUTXO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = serviceUTXO.swift; sourceTree = "<group>"; };
+		E2E94CB1217BF38F005F54A0 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
+		E2E94CB3217BF7B8005F54A0 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		E2E94CB5217BFAE2005F54A0 /* listUTXOsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listUTXOsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +145,7 @@
 		E2E94C6F2178919D005F54A0 /* PlasmaSwiftLib */ = {
 			isa = PBXGroup;
 			children = (
+				E2E94CAE217BF25B005F54A0 /* MatterService */,
 				E2E94C8D2178A12D005F54A0 /* Helpers */,
 				E2E94C9F2178D868005F54A0 /* Block */,
 				E2E94C8721789BD0005F54A0 /* Transaction */,
@@ -191,6 +200,17 @@
 				E2E94CA22178DA0D005F54A0 /* Block.swift */,
 			);
 			path = Block;
+			sourceTree = "<group>";
+		};
+		E2E94CAE217BF25B005F54A0 /* MatterService */ = {
+			isa = PBXGroup;
+			children = (
+				E2E94CAF217BF2D2005F54A0 /* serviceUTXO.swift */,
+				E2E94CB5217BFAE2005F54A0 /* listUTXOsModel.swift */,
+				E2E94CB1217BF38F005F54A0 /* URLs.swift */,
+				E2E94CB3217BF7B8005F54A0 /* Errors.swift */,
+			);
+			path = MatterService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,8 +374,11 @@
 				E2E94C8F2178A14A005F54A0 /* EthereumAddress.swift in Sources */,
 				E2E94C972178B24B005F54A0 /* StringExtension.swift in Sources */,
 				E2E94C952178B20F005F54A0 /* DataExtension.swift in Sources */,
+				E2E94CB2217BF38F005F54A0 /* URLs.swift in Sources */,
 				E2E94C992178B27E005F54A0 /* ArrayExtension.swift in Sources */,
+				E2E94CB6217BFAE2005F54A0 /* listUTXOsModel.swift in Sources */,
 				E2E94C8C2178A0CD005F54A0 /* TransactionOutput.swift in Sources */,
+				E2E94CB0217BF2D2005F54A0 /* serviceUTXO.swift in Sources */,
 				E2E94CA5217A1B60005F54A0 /* TransactionHelpers.swift in Sources */,
 				E2E94CA12178D87F005F54A0 /* BlockHeader.swift in Sources */,
 				E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */,
@@ -365,6 +388,7 @@
 				E2E94CA32178DA0D005F54A0 /* Block.swift in Sources */,
 				E2E94CAD217A5791005F54A0 /* BigIntExtension.swift in Sources */,
 				E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */,
+				E2E94CB4217BF7B8005F54A0 /* Errors.swift in Sources */,
 				E2E94C932178A332005F54A0 /* Transaction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
