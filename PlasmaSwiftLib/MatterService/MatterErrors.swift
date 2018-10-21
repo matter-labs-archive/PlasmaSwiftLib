@@ -12,4 +12,7 @@ enum MatterErrors: Error {
     case cantCreateRequest
     case cantConvertTxData
     case noData
+    case errorInListUTXOs
+    case errorInUTXOs
+    case noAcceptedInfo
 }

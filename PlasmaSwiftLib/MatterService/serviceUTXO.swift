@@ -31,20 +31,25 @@ class serviceUTXO {
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
-                if let utxos = responseJSON["utxos"] as? [String : Any] {
-                    if let listUTXOs = ListUTXOsModel(json: utxos) {
+                if let utxos = responseJSON["utxos"] as? [[String : Any]] {
+                    if let listUTXOs = ListUTXOsModel(json: utxos[0]) {
                         completion(Result.Success(listUTXOs))
+                    } else {
+                        completion(Result.Error(MatterErrors.errorInListUTXOs))
                     }
+                } else {
+                    completion(Result.Error(MatterErrors.errorInUTXOs))
                 }
+            } else {
+                completion(Result.Error(MatterErrors.noData))
             }
-            completion(Result.Error(MatterErrors.noData))
         }
         
         task.resume()
     }
     
     public func sendRawTX(transaction: SignedTransaction, onTestnet: Bool = false, completion: @escaping(Result<Bool?>) -> Void) {
-        guard let transactionString = String(data: transaction.data, encoding: String.Encoding.utf8) else {
+        guard let transactionString = String(data: transaction.data, encoding: String.Encoding.ascii) else {
             completion(Result.Error(MatterErrors.cantConvertTxData))
             return
         }
@@ -67,9 +72,14 @@ class serviceUTXO {
             if let responseJSON = responseJSON as? [String: Any] {
                 if let accepted = responseJSON["accepted"] as? Bool {
                     completion(Result.Success(accepted))
+                } else if let reason = responseJSON["reason"] as? String {
+                    print(reason)
+                    completion(Result.Success(false))
                 }
+                
+            } else {
+                completion(Result.Error(MatterErrors.noData))
             }
-            completion(Result.Error(MatterErrors.noData))
         }
         
         task.resume()

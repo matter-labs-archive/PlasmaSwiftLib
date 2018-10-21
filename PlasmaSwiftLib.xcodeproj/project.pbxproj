@@ -34,6 +34,7 @@
 		E2E94CB4217BF7B8005F54A0 /* MatterErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB3217BF7B8005F54A0 /* MatterErrors.swift */; };
 		E2E94CB6217BFAE2005F54A0 /* listUTXOsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB5217BFAE2005F54A0 /* listUTXOsModel.swift */; };
 		E2E94CB8217C05DB005F54A0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB7217C05DB005F54A0 /* Result.swift */; };
+		E2E94CBA217C39E1005F54A0 /* MatterServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB9217C39E1005F54A0 /* MatterServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		E2E94CB3217BF7B8005F54A0 /* MatterErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterErrors.swift; sourceTree = "<group>"; };
 		E2E94CB5217BFAE2005F54A0 /* listUTXOsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listUTXOsModel.swift; sourceTree = "<group>"; };
 		E2E94CB7217C05DB005F54A0 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		E2E94CB9217C39E1005F54A0 /* MatterServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E94C7B2178919E005F54A0 /* TransactionTests.swift */,
+				E2E94CB9217C39E1005F54A0 /* MatterServiceTests.swift */,
 				E2E94CA6217A316A005F54A0 /* BlockTests.swift */,
 				E2E94CAA217A48E5005F54A0 /* TestHelpers.swift */,
 				E2E94C7D2178919E005F54A0 /* Info.plist */,
@@ -401,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2E94CBA217C39E1005F54A0 /* MatterServiceTests.swift in Sources */,
 				E2E94C7C2178919E005F54A0 /* TransactionTests.swift in Sources */,
 				E2E94CA7217A316A005F54A0 /* BlockTests.swift in Sources */,
 				E2E94CAB217A48E5005F54A0 /* TestHelpers.swift in Sources */,
