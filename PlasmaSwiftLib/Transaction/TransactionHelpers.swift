@@ -82,47 +82,28 @@ class TransactionHelpers {
     }
     
     func getInputsFromInputsRLP(inputsData: RLP.RLPItem) -> Array<TransactionInput>? {
-        guard let inputData1 = inputsData[0] else {return nil}
-        let inputData2 = inputsData[1]
-        
-        guard let transactionInput1 = serializeInput(dataArray: inputData1) else {return nil}
-        
-        var transactionInput2: TransactionInput?
-        if let inputData2Confirmed = inputData2 {
-            transactionInput2 = serializeInput(dataArray: inputData2Confirmed)
-        }
-        
-        var inputs: Array<TransactionInput> = [transactionInput1]
-        if transactionInput2 != nil {
-            inputs.append(transactionInput2!)
+        var inputs: Array<TransactionInput> = []
+        guard let inputsCount = inputsData.count else {return nil}
+        for i in 0..<inputsCount {
+            if let transactionInputData = inputsData[i] {
+                if let transactionInput = serializeInput(dataArray: transactionInputData) {
+                    inputs.append(transactionInput)
+                }
+            }
         }
         
         return inputs
     }
     
     func getOutputsFromOutputsRLP(outputsData: RLP.RLPItem) -> Array<TransactionOutput>? {
-        guard let outputData1 = outputsData[0] else {return nil}
-        let outputData2 = outputsData[1]
-        let outputData3 = outputsData[2]
-        
-        guard let transactionOutput1 = serializeOutput(dataArray: outputData1) else {return nil}
-        
-        var transactionOutput2: TransactionOutput?
-        if let outputData2Confirmed = outputData2 {
-            transactionOutput2 = serializeOutput(dataArray: outputData2Confirmed)
-        }
-        
-        var transactionOutput3: TransactionOutput?
-        if let outputData3Confirmed = outputData3 {
-            transactionOutput3 = serializeOutput(dataArray: outputData3Confirmed)
-        }
-        
-        var outputs: Array<TransactionOutput> = [transactionOutput1]
-        if transactionOutput2 != nil {
-            outputs.append(transactionOutput2!)
-        }
-        if transactionOutput3 != nil {
-            outputs.append(transactionOutput3!)
+        var outputs: Array<TransactionOutput> = []
+        guard let outputsCount = outputsData.count else {return nil}
+        for i in 0..<outputsCount {
+            if let transactionOutputData = outputsData[i] {
+                if let transactionOutput = serializeOutput(dataArray: transactionOutputData) {
+                    outputs.append(transactionOutput)
+                }
+            }
         }
         
         return outputs
@@ -146,6 +127,14 @@ class TransactionHelpers {
     
     func transactionToAnyObject(transaction: Transaction) -> [AnyObject] {
         return transaction.transaction
+    }
+    
+    func signedTransactionsToAnyObjectArray(signedTransactions: [SignedTransaction]) -> [AnyObject] {
+        var signedTransactionsData: [AnyObject] = []
+        for tx in signedTransactions {
+            signedTransactionsData.append(tx.signedTransaction as AnyObject)
+        }
+        return signedTransactionsData
     }
     
     func hashForSignature(data: Data) -> Data? {

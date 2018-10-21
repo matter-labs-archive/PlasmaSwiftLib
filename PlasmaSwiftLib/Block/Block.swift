@@ -25,7 +25,10 @@ class Block {
         self.blockHeader = blockHeader
         self.signedTransactions = signedTransactions
         
-        let block = [blockHeader, signedTransactions] as [AnyObject]
+        let blockHeaderData = blockHelpers.blockHeaderToAnyObjectArray(blockHeader: blockHeader)
+        let signedTransactionsData = transactionHelpers.signedTransactionsToAnyObjectArray(signedTransactions: signedTransactions)
+        
+        let block = [blockHeaderData, signedTransactionsData] as [AnyObject]
         self.block = block
         guard let data = RLP.encode(block) else {return nil}
         self.data = data

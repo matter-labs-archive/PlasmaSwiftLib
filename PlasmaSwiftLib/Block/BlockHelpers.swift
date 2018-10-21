@@ -61,4 +61,8 @@ class BlockHelpers {
         let block = Block(blockHeader: blockHeader, signedTransactions: signedTransactions)
         return block
     }
+    
+    func blockHeaderToAnyObjectArray(blockHeader: BlockHeader) -> [AnyObject] {
+        return blockHeader.blockHeader
+    }
 }

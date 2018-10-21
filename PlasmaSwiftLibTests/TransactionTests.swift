@@ -72,6 +72,7 @@ class TransactionTests: XCTestCase {
         
         guard let transaction = Transaction(txType: txType, inputs: inputs, outputs: outputs) else {return}
         let signedTransaction = transaction.sign(privateKey: Data(hex: "1d9d18fc759fb16bd1541d6689e9cefe02917664c56eec83326d18d66e5f7cfd"))
+        print("signature passed")
         XCTAssertNotNil(signedTransaction)
     }
 }
