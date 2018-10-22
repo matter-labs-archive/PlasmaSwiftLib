@@ -1,1 +1,0 @@
-/Users/alexvlasov/MatterInc/PlasmaSwiftLib/PlasmaSwiftLib/Pods/Target Support Files/web3swift/web3swift-umbrella.h
