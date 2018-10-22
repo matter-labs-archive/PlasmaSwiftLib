@@ -9,20 +9,45 @@
 import Foundation
 import BigInt
 
-class Constants {
-    static let bit: UInt = 8
-    static let blockNumberMaxWidth: UInt = 4 * bit
-    static let txNumberInBlockMaxWidth: UInt = 4 * bit
-    static let outputNumberInTxMaxWidth: UInt = 1 * bit
-    static let amountMaxWidth: UInt = 32 * bit
-    static let receiverEthereumAddressMaxWidth: UInt = 20 * bit
-    static let txTypeMaxWidth: UInt = 1 * bit
-    static let inputsArrayMax: UInt = 2
-    static let outputsArrayMax: UInt = 3
-    static let vMaxWidth: UInt = 1 * bit
-    static let rMaxWidth: UInt = 32 * bit
-    static let sMaxWidth: UInt = 32 * bit
-    static let numberOfTxInBlockMaxWidth: UInt = 4 * bit
-    static let parentHashMaxWidth: UInt = 32 * bit
-    static let merkleRootOfTheTxTreeMaxWidth: UInt = 32 * bit
-}
+internal let bit: UInt64 = 8
+
+public let blockNumberByteLength: UInt64 = 4
+public let blockNumberMaxWidth = blockNumberByteLength * bit
+
+public let txNumberInBlockByteLength: UInt64 = 4
+public let txNumberInBlockMaxWidth = txNumberInBlockByteLength * bit
+
+public let outputNumberInTxByteLength: UInt64 = 1
+public let outputNumberInTxMaxWidth = outputNumberInTxByteLength * bit
+
+public let amountByteLength: UInt64 = 32
+public let amountMaxWidth = amountByteLength * bit
+
+public let receiverEthereumAddressByteLength: UInt64 = 20
+public let receiverEthereumAddressMaxWidth = receiverEthereumAddressByteLength * bit
+
+public let txTypeByteLength: UInt64 = 1
+public let txTypeMaxWidth = txTypeByteLength * bit
+
+public let vByteLength: UInt64 = 1
+public let vMaxWidth = vByteLength * bit
+
+public let rByteLength: UInt64 = 32
+public let rMaxWidth = rByteLength * bit
+
+public let sByteLength: UInt64 = 32
+public let sMaxWidth = sByteLength * bit
+
+public let inputsArrayMax = 3
+public let outputsArrayMax = 3
+
+public let numberOfTxInBlockByteLength: UInt64 = 4
+public let numberOfTxInBlockMaxWidth = numberOfTxInBlockByteLength * bit
+
+public let parentHashByteLength: UInt64 = 32
+public let parentHashMaxWidth = parentHashByteLength * bit
+
+public let merkleRootOfTheTxTreeByteLength: UInt64 = 32
+public let merkleRootOfTheTxTreeMaxWidth = merkleRootOfTheTxTreeByteLength * bit
+
+public let blockHeaderByteLength: UInt64 = 137

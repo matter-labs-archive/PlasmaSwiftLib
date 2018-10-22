@@ -8,24 +8,37 @@
 
 import Foundation
 import SwiftRLP
-import BigInt
+import struct BigInt.BigUInt
 import secp256k1_swift
+import web3swift
 
-class SignedTransaction {
+public struct SignedTransaction {
     
     private let helpers = TransactionHelpers()
     
     public var transaction: Transaction
     public var v: BigUInt
-    public var r: BigUInt
-    public var s: BigUInt
-    public var data: Data
-    public var signedTransaction: [AnyObject]
+    public var r: Data
+    public var s: Data
+    public var data: Data {
+        return self.serialize()
+    }
     
-    public init?(transaction: Transaction, v: BigUInt, r: BigUInt, s: BigUInt){
-        guard v.bitWidth <= Constants.vMaxWidth else {return nil}
-        guard r.bitWidth <= Constants.rMaxWidth else {return nil}
-        guard s.bitWidth <= Constants.sMaxWidth else {return nil}
+    public var sender: EthereumAddress? {
+        return self.recoverSender()
+    }
+    
+    public init() {
+        self.transaction = Transaction()
+        self.v = BigUInt(0)
+        self.r = Data(repeating: 0, count: Int(rByteLength))
+        self.s = Data(repeating: 0, count: Int(sByteLength))
+    }
+    
+    public init?(transaction: Transaction, v: BigUInt, r: Data, s: Data){
+        guard v.bitWidth <= vMaxWidth else {return nil}
+        guard r.count == rByteLength else {return nil}
+        guard s.count == sByteLength else {return nil}
         
         guard v == 27 || v == 28 else {return nil}
         
@@ -33,32 +46,57 @@ class SignedTransaction {
         self.v = v
         self.r = r
         self.s = s
-        
-        let transactionData: [AnyObject] = helpers.transactionToAnyObject(transaction: transaction)
-        
-        let signedTransaction = [transactionData, v, r, s] as [AnyObject]
-        self.signedTransaction = signedTransaction
-        guard let data = RLP.encode(signedTransaction) else {return nil}
-        self.data = data
     }
     
     public init?(data: Data) {
         
         guard let item = RLP.decode(data) else {return nil}
         guard let dataArray = item[0] else {return nil}
+        guard dataArray.isList else {return nil}
+        guard dataArray.count == 4 else {return nil}
+        guard let transactionData = dataArray[0]?.data else {return nil}
+        guard let vData = dataArray[1]?.data else {return nil}
+        guard let rData = dataArray[2]?.data else {return nil}
+        guard let sData = dataArray[3]?.data else {return nil}
         
-        guard let signedTransaction = helpers.serializeSignedTransaction(dataArray) else {return nil}
-        let signedTransactionArray = [signedTransaction.transaction,
-                                      signedTransaction.v,
-                                      signedTransaction.r,
-                                      signedTransaction.s] as [AnyObject]
+        let v = BigUInt(vData)
+        guard v.bitWidth <= vMaxWidth else {return nil}
         
-        self.data = data
-        self.transaction = signedTransaction.transaction
-        self.v = signedTransaction.v
-        self.r = signedTransaction.r
-        self.s = signedTransaction.s
-        self.signedTransaction = signedTransactionArray
+        guard rData.count == rByteLength else {return nil}
+        guard sData.count == sByteLength else {return nil}
+        
+        guard let transaction = Transaction.init(data: transactionData) else {return nil}
+        
+        self.v = v
+        self.r = rData
+        self.s = sData
+        self.transaction = transaction
+    }
+    
+    public func prepareForRLP() -> [AnyObject] {
+        let vData = self.v.serialize().setLengthLeft(vByteLength)!
+        let transactionObject = self.transaction.prepareForRLP()
+        let dataArray = [transactionObject, vData, self.r, self.s] as [AnyObject]
+        return dataArray
+    }
+    
+    public func serialize() -> Data {
+        let dataArray = self.prepareForRLP()
+        let encoded = RLP.encode(dataArray)!
+        return encoded
+    }
+    
+    public func recoverSender() -> EthereumAddress? {
+        guard let hash = TransactionHelpers.hashForSignature(data: self.transaction.data) else {return nil}
+        var v = self.v
+        if v > 3 {
+            v = v - BigUInt(27)
+        }
+        let vData = v.serialize().setLengthLeft(vByteLength)!
+        guard let signatureData = SECP256K1.marshalSignature(v: vData, r: self.r, s: self.s) else {return nil}
+        guard let signerPubKey = SECP256K1.recoverPublicKey(hash: hash, signature: signatureData) else {return nil}
+        guard let addressData = TransactionHelpers.publicToAddressData(signerPubKey) else {return nil}
+        return EthereumAddress(addressData)
     }
 }
 

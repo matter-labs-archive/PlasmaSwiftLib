@@ -6,45 +6,54 @@
 //  Copyright © 2018 The Matter. All rights reserved.
 //
 
+// No merkle root checking yet!
+
 import Foundation
 import SwiftRLP
 import BigInt
 
 class Block {
-    
-    private let blockHelpers = BlockHelpers()
-    private let transactionHelpers = TransactionHelpers()
-    
     public var blockHeader: BlockHeader
     public var signedTransactions: [SignedTransaction]
-    public var data: Data
-    public var block: [AnyObject]
+    public var data: Data {
+        return self.serialize()
+    }
     
     public init?(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]){
         
         self.blockHeader = blockHeader
         self.signedTransactions = signedTransactions
-        
-        let blockHeaderData = blockHelpers.blockHeaderToAnyObjectArray(blockHeader: blockHeader)
-        let signedTransactionsData = transactionHelpers.signedTransactionsToAnyObjectArray(signedTransactions: signedTransactions)
-        
-        let block = [blockHeaderData, signedTransactionsData] as [AnyObject]
-        self.block = block
-        guard let data = RLP.encode(block) else {return nil}
-        self.data = data
     }
     
     public init?(data: Data) {
+        guard data.count > blockHeaderByteLength else {return nil}
+        let headerData = Data(data[0 ..< blockHeaderByteLength])
+        guard let blockHeader = BlockHeader(data: headerData) else {return nil}
         
-        guard let item = RLP.decode(data) else {return nil}
+        let transactionsData = Data(data[Int(blockHeaderByteLength) ..< data.count])
+        guard let item = RLP.decode(transactionsData) else {return nil}
         guard let dataArray = item[0] else {return nil}
-        
-        guard let block = blockHelpers.serializeBlock(dataArray: dataArray) else {return nil}
-        
-        self.data = data
-        self.blockHeader = block.blockHeader
-        self.signedTransactions = block.signedTransactions
-        self.block = [block.blockHeader, block.signedTransactions] as [AnyObject]
+        guard dataArray.isList else {return nil}
+        self.blockHeader = blockHeader
+        var transactions = [SignedTransaction]()
+        transactions.reserveCapacity(dataArray.count!)
+        for i in 0 ..< dataArray.count! {
+            guard let txData = dataArray[i]!.data else {return nil}
+            guard let tx = SignedTransaction(data: txData) else {return nil}
+            transactions.append(tx)
+        }
+        self.signedTransactions = transactions
+    }
+    
+    public func serialize() -> Data {
+        let headerData = self.blockHeader.data
+        var txArray = [Data]()
+        txArray.reserveCapacity(self.signedTransactions.count)
+        for tx in self.signedTransactions {
+            txArray.append(tx.data)
+        }
+        let txRLP = RLP.encode(txArray as [AnyObject])!
+        return headerData + txRLP
     }
 }
 

@@ -8,6 +8,7 @@
 
 import XCTest
 import BigInt
+import secp256k1_swift
 
 @testable import PlasmaSwiftLib
 
@@ -19,7 +20,7 @@ class MatterServiceTests: XCTestCase {
             switch result {
             case .Success(let r):
                 DispatchQueue.main.async {
-                    XCTAssertNotNil(r?.value)
+                    print(r)
                     completedGetListExpectation.fulfill()
                 }
             case .Error(let error):
@@ -33,18 +34,31 @@ class MatterServiceTests: XCTestCase {
     }
     
     func testSendTransaction() {
-        let value = BigUInt("10000000000000")!
-        let inputs = [TransactionInput(blockNumber: 1, txNumberInBlock: 0, outputNumberInTx: 0, amount: value)]
-        let outputs = [TransactionOutput(outputNumberInTx: 0, receiverEthereumAddress: EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4")!, amount: value)]
-        let transaction = Transaction(txType: 1, inputs: inputs as! Array<TransactionInput>, outputs: outputs as! Array<TransactionOutput>)
-        let signedTransaction = transaction!.sign(privateKey: Data(hex:"36775b4bafc4d906c9035903785fcdb4f0e9e7b5d6f6f1a4b001bb5a4396c391"))
         let completedSendExpectation = expectation(description: "Completed")
-        serviceUTXO().sendRawTX(transaction: signedTransaction!, onTestnet: true) { (result) in
+        let privKey = Data(hex:"36775b4bafc4d906c9035903785fcdb4f0e9e7b5d6f6f1a4b001bb5a4396c391")
+        serviceUTXO().getListUTXOs(for: EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!, onTestnet: true) { (result) in
             switch result {
             case .Success(let r):
-                DispatchQueue.main.async {
-                    XCTAssert(r == true)
-                    completedSendExpectation.fulfill()
+                XCTAssert(r.count > 0)
+                let input = r[0].toTransactionInput()!
+                let inputs = [input]
+                let outputs = [TransactionOutput(outputNumberInTx: 0, receiverEthereumAddress: EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!, amount: input.amount)!]
+                let transaction = Transaction(txType: .split, inputs: inputs, outputs: outputs)
+                let signedTransaction = transaction!.sign(privateKey: privKey)
+                XCTAssertEqual(EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!, signedTransaction!.sender)
+                serviceUTXO().sendRawTX(transaction: signedTransaction!, onTestnet: true) { (result) in
+                    switch result {
+                    case .Success(let r):
+                        DispatchQueue.main.async {
+                            XCTAssert(r == true)
+                            completedSendExpectation.fulfill()
+                        }
+                    case .Error(let error):
+                        DispatchQueue.main.async {
+                            XCTAssertNil(error)
+                            completedSendExpectation.fulfill()
+                        }
+                    }
                 }
             case .Error(let error):
                 DispatchQueue.main.async {

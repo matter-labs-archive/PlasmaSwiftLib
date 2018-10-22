@@ -10,28 +10,27 @@ import Foundation
 import SwiftRLP
 import BigInt
 
-class BlockHeader {
-    
-    private let helpers = BlockHelpers()
+public struct BlockHeader {
     
     public var blockNumber: BigUInt
     public var numberOfTxInBlock: BigUInt
-    public var parentHash: BigUInt
-    public var merkleRootOfTheTxTree: BigUInt
+    public var parentHash: Data
+    public var merkleRootOfTheTxTree: Data
     public var v: BigUInt
-    public var r: BigUInt
-    public var s: BigUInt
-    public var data: Data
-    public var blockHeader: [AnyObject]
+    public var r: Data
+    public var s: Data
+    public var data: Data {
+        return self.serialize()
+    }
     
-    public init?(blockNumber: BigUInt, numberOfTxInBlock: BigUInt, parentHash: BigUInt, merkleRootOfTheTxTree: BigUInt, v: BigUInt, r: BigUInt, s: BigUInt){
-        guard blockNumber.bitWidth <= Constants.blockNumberMaxWidth else {return nil}
-        guard numberOfTxInBlock.bitWidth <= Constants.numberOfTxInBlockMaxWidth else {return nil}
-        guard parentHash.bitWidth <= Constants.parentHashMaxWidth else {return nil}
-        guard merkleRootOfTheTxTree.bitWidth <= Constants.merkleRootOfTheTxTreeMaxWidth else {return nil}
-        guard v.bitWidth <= Constants.vMaxWidth else {return nil}
-        guard r.bitWidth <= Constants.rMaxWidth else {return nil}
-        guard s.bitWidth <= Constants.sMaxWidth else {return nil}
+    public init?(blockNumber: BigUInt, numberOfTxInBlock: BigUInt, parentHash: Data, merkleRootOfTheTxTree: Data, v: BigUInt, r: Data, s: Data){
+        guard blockNumber.bitWidth <= blockNumberMaxWidth else {return nil}
+        guard numberOfTxInBlock.bitWidth <= numberOfTxInBlockMaxWidth else {return nil}
+        guard parentHash.count == parentHashByteLength else {return nil}
+        guard merkleRootOfTheTxTree.count == merkleRootOfTheTxTreeByteLength else {return nil}
+        guard v.bitWidth <= vMaxWidth else {return nil}
+        guard r.count == rByteLength else {return nil}
+        guard s.count == sByteLength else {return nil}
         
         guard v == 27 || v == 28 else {return nil}
         
@@ -42,38 +41,58 @@ class BlockHeader {
         self.v = v
         self.r = r
         self.s = s
-        
-        let blockHeader = [blockNumber,
-                           numberOfTxInBlock,
-                           parentHash,
-                           merkleRootOfTheTxTree,
-                           v, r, s] as [AnyObject]
-        self.blockHeader = blockHeader
-        guard let data = RLP.encode(blockHeader) else {return nil}
-        self.data = data
     }
     
     public init?(data: Data) {
         guard let item = RLP.decode(data) else {return nil}
         guard let dataArray = item[0] else {return nil}
         
-        guard let blockHeader = helpers.serializeBlockHeader(dataArray: dataArray) else {return nil}
+        guard let blockNumberData = dataArray[0]?.data else {return nil}
+        guard let numberOfTxInBlockData = dataArray[1]?.data else {return nil}
+        guard let parentHash = dataArray[2]?.data else {return nil}
+        guard let merkleRootOfTheTxTree = dataArray[3]?.data else {return nil}
+        guard let vData = dataArray[4]?.data else {return nil}
+        guard let r = dataArray[5]?.data else {return nil}
+        guard let s = dataArray[6]?.data else {return nil}
         
-        self.data = blockHeader.data
-        self.blockNumber = blockHeader.blockNumber
-        self.numberOfTxInBlock = blockHeader.numberOfTxInBlock
-        self.parentHash = blockHeader.parentHash
-        self.merkleRootOfTheTxTree = blockHeader.merkleRootOfTheTxTree
-        self.v = blockHeader.v
-        self.r = blockHeader.r
-        self.s = blockHeader.s
-        self.blockHeader = [blockHeader.blockNumber,
-                            blockHeader.numberOfTxInBlock,
-                            blockHeader.parentHash,
-                            blockHeader.merkleRootOfTheTxTree,
-                            blockHeader.v,
-                            blockHeader.r,
-                            blockHeader.s] as [AnyObject]
+        let blockNumber = BigUInt(blockNumberData)
+        let numberOfTxInBlock = BigUInt(numberOfTxInBlockData)
+        let v = BigUInt(vData)
+        
+        guard blockNumber.bitWidth <= blockNumberMaxWidth else {return nil}
+        guard numberOfTxInBlock.bitWidth <= numberOfTxInBlockMaxWidth else {return nil}
+        guard parentHash.count == parentHashByteLength else {return nil}
+        guard merkleRootOfTheTxTree.count == merkleRootOfTheTxTreeByteLength else {return nil}
+        guard v.bitWidth <= vMaxWidth else {return nil}
+        guard r.count == rByteLength else {return nil}
+        guard s.count == sByteLength else {return nil}
+    
+        self.blockNumber = blockNumber
+        self.numberOfTxInBlock = numberOfTxInBlock
+        self.parentHash = parentHash
+        self.merkleRootOfTheTxTree = merkleRootOfTheTxTree
+        self.v = v
+        self.r = r
+        self.s = s
+    }
+    
+    public func serialize() -> Data {
+        var d = Data()
+        let blockNumberData = self.blockNumber.serialize().setLengthLeft(blockNumberByteLength)!
+        let txNumberData = self.numberOfTxInBlock.serialize().setLengthLeft(txNumberInBlockByteLength)!
+        
+        d.append(blockNumberData)
+        d.append(txNumberData)
+        d.append(self.merkleRootOfTheTxTree)
+        d.append(self.parentHash)
+        
+        let vData = self.v.serialize().setLengthLeft(vByteLength)!
+        d.append(vData)
+        d.append(self.r)
+        d.append(self.s)
+        
+        precondition(d.count == blockHeaderByteLength)
+        return d
     }
 }
 

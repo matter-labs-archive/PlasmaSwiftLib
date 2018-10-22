@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		07829FC54BD3279E543E49F6 /* libPods-PlasmaSwiftLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC21E72BAD6D7701C42EAFA /* libPods-PlasmaSwiftLib.a */; };
+		81B98E73217DD8E300465D0F /* BlockHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA02178D87F005F54A0 /* BlockHeader.swift */; };
+		81B98E74217DDCD700465D0F /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA22178DA0D005F54A0 /* Block.swift */; };
 		D44D81D6593D7933B1B29CBB /* libPods-PlasmaSwiftLibTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B629B2332386158800F3C36 /* libPods-PlasmaSwiftLibTests.a */; };
 		E2E94C772178919E005F54A0 /* PlasmaSwiftLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E94C6D2178919D005F54A0 /* PlasmaSwiftLib.framework */; };
 		E2E94C7C2178919E005F54A0 /* TransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C7B2178919E005F54A0 /* TransactionTests.swift */; };
@@ -22,12 +24,7 @@
 		E2E94C992178B27E005F54A0 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C982178B27E005F54A0 /* ArrayExtension.swift */; };
 		E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C9A2178B402005F54A0 /* NSRegularExpressionExtension.swift */; };
 		E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */; };
-		E2E94CA12178D87F005F54A0 /* BlockHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA02178D87F005F54A0 /* BlockHeader.swift */; };
-		E2E94CA32178DA0D005F54A0 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA22178DA0D005F54A0 /* Block.swift */; };
 		E2E94CA5217A1B60005F54A0 /* TransactionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA4217A1B60005F54A0 /* TransactionHelpers.swift */; };
-		E2E94CA7217A316A005F54A0 /* BlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA6217A316A005F54A0 /* BlockTests.swift */; };
-		E2E94CA9217A3DB9005F54A0 /* BlockHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA8217A3DB9005F54A0 /* BlockHelpers.swift */; };
-		E2E94CAB217A48E5005F54A0 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAA217A48E5005F54A0 /* TestHelpers.swift */; };
 		E2E94CAD217A5791005F54A0 /* BigIntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAC217A5791005F54A0 /* BigIntExtension.swift */; };
 		E2E94CB0217BF2D2005F54A0 /* serviceUTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAF217BF2D2005F54A0 /* serviceUTXO.swift */; };
 		E2E94CB2217BF38F005F54A0 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB1217BF38F005F54A0 /* URLs.swift */; };
@@ -379,6 +376,7 @@
 			files = (
 				E2E94C8F2178A14A005F54A0 /* EthereumAddress.swift in Sources */,
 				E2E94C972178B24B005F54A0 /* StringExtension.swift in Sources */,
+				81B98E74217DDCD700465D0F /* Block.swift in Sources */,
 				E2E94C952178B20F005F54A0 /* DataExtension.swift in Sources */,
 				E2E94CB2217BF38F005F54A0 /* URLs.swift in Sources */,
 				E2E94C992178B27E005F54A0 /* ArrayExtension.swift in Sources */,
@@ -387,13 +385,11 @@
 				E2E94C8C2178A0CD005F54A0 /* TransactionOutput.swift in Sources */,
 				E2E94CB0217BF2D2005F54A0 /* serviceUTXO.swift in Sources */,
 				E2E94CA5217A1B60005F54A0 /* TransactionHelpers.swift in Sources */,
-				E2E94CA12178D87F005F54A0 /* BlockHeader.swift in Sources */,
 				E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */,
 				E2E94C8A21789BEA005F54A0 /* TransactionInput.swift in Sources */,
-				E2E94CA9217A3DB9005F54A0 /* BlockHelpers.swift in Sources */,
 				E2E94C912178A1D5005F54A0 /* Constants.swift in Sources */,
-				E2E94CA32178DA0D005F54A0 /* Block.swift in Sources */,
 				E2E94CAD217A5791005F54A0 /* BigIntExtension.swift in Sources */,
+				81B98E73217DD8E300465D0F /* BlockHeader.swift in Sources */,
 				E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */,
 				E2E94CB4217BF7B8005F54A0 /* MatterErrors.swift in Sources */,
 				E2E94C932178A332005F54A0 /* Transaction.swift in Sources */,
@@ -406,8 +402,6 @@
 			files = (
 				E2E94CBA217C39E1005F54A0 /* MatterServiceTests.swift in Sources */,
 				E2E94C7C2178919E005F54A0 /* TransactionTests.swift in Sources */,
-				E2E94CA7217A316A005F54A0 /* BlockTests.swift in Sources */,
-				E2E94CAB217A48E5005F54A0 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

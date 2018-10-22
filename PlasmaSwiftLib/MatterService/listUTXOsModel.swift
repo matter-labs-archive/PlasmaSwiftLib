@@ -9,7 +9,7 @@
 import Foundation
 import BigInt
 
-class ListUTXOsModel {
+public final class ListUTXOsModel {
     public var blockNumber: BigUInt
     public var transactionNumber: BigUInt
     public var outputNumber: BigUInt
@@ -27,5 +27,9 @@ class ListUTXOsModel {
         self.transactionNumber = BigUInt(transactionNumber)
         self.outputNumber = BigUInt(outputNumber)
         self.value = bigUIntValue
+    }
+    
+    public func toTransactionInput() -> TransactionInput? {
+        return TransactionInput(blockNumber: self.blockNumber, txNumberInBlock: self.transactionNumber, outputNumberInTx: self.outputNumber, amount: self.value)
     }
 }

@@ -12,8 +12,6 @@ import BigInt
 @testable import PlasmaSwiftLib
 
 class TransactionTests: XCTestCase {
-    
-    private let testHelpers = TestHelpers()
 
     func testInput() {
         let blockNumber: BigUInt = 10
@@ -39,9 +37,9 @@ class TransactionTests: XCTestCase {
     }
     
     func testTransaction() {
-        let txType: BigUInt = 1
-        guard let inputs = testHelpers.formInputsForTransaction() else {return}
-        guard let outputs = testHelpers.formOutputsForTransaction() else {return}
+        let txType = Transaction.TransactionType.split
+        let inputs = [TransactionInput]()
+        let outputs = [TransactionOutput]()
         
         guard let transaction1 = Transaction(txType: txType, inputs: inputs, outputs: outputs) else {return}
         let data = transaction1.data
@@ -50,29 +48,9 @@ class TransactionTests: XCTestCase {
         XCTAssert(transaction1 == transaction2)
     }
     
-    func testSignedTransaction() {
-        let txType: BigUInt = 1
-        guard let inputs = testHelpers.formInputsForTransaction() else {return}
-        guard let outputs = testHelpers.formOutputsForTransaction() else {return}
-        guard let transaction = Transaction(txType: txType, inputs: inputs, outputs: outputs) else {return}
-        let v: BigUInt = 27
-        let r: BigUInt = 21424
-        let s: BigUInt = 2424124
-        guard let signedTransaction1 = SignedTransaction(transaction: transaction, v: v, r: r, s: s) else {return}
-        let data = signedTransaction1.data
-        guard let signedTransaction2 = SignedTransaction(data: data) else {return}
-        print("signed transaction passed")
-        XCTAssert(signedTransaction1 == signedTransaction2)
-    }
-    
-    func testSignature() {
-        let txType: BigUInt = 1
-        guard let inputs = testHelpers.formInputsForTransaction() else {return}
-        guard let outputs = testHelpers.formOutputsForTransaction() else {return}
-        
-        guard let transaction = Transaction(txType: txType, inputs: inputs, outputs: outputs) else {return}
-        let signedTransaction = transaction.sign(privateKey: Data(hex: "1d9d18fc759fb16bd1541d6689e9cefe02917664c56eec83326d18d66e5f7cfd"))
-        print("signature passed")
-        XCTAssertNotNil(signedTransaction)
+    func testParseTransaction() {
+        let data = Data(hex: "0xf8aef86901edec840000000184000000c800a0000000000000000000000000000000000000000000000000000000000000000af838f70094c5fdf4076b8f3a5357c5e395ab970b5b54098fefa0000000000000000000000000000000000000000000000000000000000000000a1ba07cb678cb684e53e92578d9982fafa3df9f9bd776b40e8101153a9174bd9c365aa00bb0580a5d5a86d140eebb894fa4deda8887629973f3c4c22347495d1867020f")
+        let signedTX = SignedTransaction(data: data)
+        XCTAssert(signedTX != nil)
     }
 }

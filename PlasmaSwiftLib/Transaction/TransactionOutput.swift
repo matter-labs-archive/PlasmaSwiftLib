@@ -10,50 +10,62 @@ import Foundation
 import SwiftRLP
 import BigInt
 
-class TransactionOutput {
+public struct TransactionOutput {
     
     let helpers = TransactionHelpers()
     
     public var outputNumberInTx: BigUInt
     public var receiverEthereumAddress: EthereumAddress
-    public var receiverEthereumAddressInData: Data
     public var amount: BigUInt
-    public var data: Data
-    public var transactionOutput: [AnyObject]
+    public var data: Data {
+        return self.serialize()
+    }
     
     public init?(outputNumberInTx: BigUInt, receiverEthereumAddress: EthereumAddress, amount: BigUInt){
-        guard outputNumberInTx.bitWidth <= Constants.outputNumberInTxMaxWidth else {return nil}
-        let receiverEthereumAddressInData: Data = receiverEthereumAddress.addressData
-        guard amount.bitWidth <= Constants.amountMaxWidth else {return nil}
+        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {return nil}
+        guard receiverEthereumAddress.addressData.count <= receiverEthereumAddressByteLength else {return nil}
+        guard amount.bitWidth <= amountMaxWidth else {return nil}
     
         self.outputNumberInTx = outputNumberInTx
         self.receiverEthereumAddress = receiverEthereumAddress
         self.amount = amount
-        self.receiverEthereumAddressInData = receiverEthereumAddressInData
-        
-        let transactionOutput = [outputNumberInTx,
-                                 receiverEthereumAddressInData,
-                                 amount] as [AnyObject]
-        self.transactionOutput = transactionOutput
-        guard let data = RLP.encode(transactionOutput) else {return nil}
-        self.data = data
     }
     
     public init?(data: Data) {
         
-        guard let item = RLP.decode(data) else {return nil}
-        guard let dataArray = item[0] else {return nil}
+        guard let dataArray = RLP.decode(data) else {return nil}
+        guard dataArray.isList else {return nil}
+        guard dataArray.count == 3 else {return nil}
         
-        guard let output = helpers.serializeOutput(dataArray: dataArray) else {return nil}
+        guard let outputNumberInTxData = dataArray[0]?.data else {return nil}
+        guard let receiverEthereumAddressData = dataArray[1]?.data else {return nil}
+        guard let amountData = dataArray[2]?.data else {return nil}
         
-        self.data = data
-        self.outputNumberInTx = output.outputNumberInTx
-        self.receiverEthereumAddress = output.receiverEthereumAddress
-        self.amount = output.amount
-        self.receiverEthereumAddressInData = output.receiverEthereumAddress.addressData
-        self.transactionOutput = [output.outputNumberInTx,
-                                  output.receiverEthereumAddress.addressData,
-                                  output.amount] as [AnyObject]
+        let outputNumberInTx = BigUInt(outputNumberInTxData)
+        guard let receiverEthereumAddress = EthereumAddress(receiverEthereumAddressData) else {return nil}
+        let amount = BigUInt(amountData)
+        
+        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {return nil}
+        guard receiverEthereumAddress.addressData.count <= receiverEthereumAddressByteLength else {return nil}
+        guard amount.bitWidth <= amountMaxWidth else {return nil}
+        
+        self.outputNumberInTx = outputNumberInTx
+        self.receiverEthereumAddress = receiverEthereumAddress
+        self.amount = amount
+    }
+    
+    public func serialize() -> Data {
+        let dataArray = self.prepareForRLP()
+        let encoded = RLP.encode(dataArray)!
+        return encoded
+    }
+    
+    public func prepareForRLP() -> [AnyObject] {
+        let outputNumberData = self.outputNumberInTx.serialize().setLengthLeft(outputNumberInTxByteLength)
+        let addressData = self.receiverEthereumAddress.addressData
+        let amountData = self.amount.serialize().setLengthLeft(amountByteLength)
+        let dataArray = [outputNumberData, addressData, amountData] as [AnyObject]
+        return dataArray
     }
 }
 

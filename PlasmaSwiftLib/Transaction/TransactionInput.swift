@@ -10,54 +10,68 @@ import Foundation
 import SwiftRLP
 import BigInt
 
-class TransactionInput {
-    
-    private let helpers = TransactionHelpers()
-    
+public struct TransactionInput {
     public var blockNumber: BigUInt
     public var txNumberInBlock: BigUInt
     public var outputNumberInTx: BigUInt
     public var amount: BigUInt
-    public var data: Data
-    public var transactionInput: [AnyObject]
+    public var data: Data {
+        return self.serialize()
+    }
     
     public init?(blockNumber: BigUInt, txNumberInBlock: BigUInt, outputNumberInTx: BigUInt, amount: BigUInt) {
         
-        guard blockNumber.bitWidth <= Constants.blockNumberMaxWidth else {return nil}
-        guard txNumberInBlock.bitWidth <= Constants.txNumberInBlockMaxWidth else {return nil}
-        guard outputNumberInTx.bitWidth <= Constants.outputNumberInTxMaxWidth else {return nil}
-        guard amount.bitWidth <= Constants.amountMaxWidth else {return nil}
+        guard blockNumber.bitWidth <= blockNumberMaxWidth else {return nil}
+        guard txNumberInBlock.bitWidth <= txNumberInBlockMaxWidth else {return nil}
+        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {return nil}
+        guard amount.bitWidth <= amountMaxWidth else {return nil}
         
         self.blockNumber = blockNumber
         self.txNumberInBlock = txNumberInBlock
         self.outputNumberInTx = outputNumberInTx
         self.amount = amount
-        
-        let transactionInput = [blockNumber,
-                                txNumberInBlock,
-                                outputNumberInTx,
-                                amount] as [AnyObject]
-        self.transactionInput = transactionInput
-        guard let data = RLP.encode(transactionInput) else {return nil}
-        self.data = data
     }
     
     public init?(data: Data) {
         
-        guard let item = RLP.decode(data) else {return nil}
-        guard let dataArray = item[0] else {return nil}
+        guard let dataArray = RLP.decode(data) else {return nil}
+        guard dataArray.isList else {return nil}
+        guard dataArray.count == 4 else {return nil}
+        guard let blockNumberData = dataArray[0]?.data else {return nil}
+        guard let txNumberInBlockData = dataArray[1]?.data else {return nil}
+        guard let outputNumberInTxData = dataArray[2]?.data else {return nil}
+        guard let amountData = dataArray[3]?.data else {return nil}
         
-        guard let input = helpers.serializeInput(dataArray: dataArray) else {return nil}
+        let blockNumber = BigUInt(blockNumberData)
+        let txNumberInBlock = BigUInt(txNumberInBlockData)
+        let outputNumberInTx = BigUInt(outputNumberInTxData)
+        let amount = BigUInt(amountData)
         
-        self.data = input.data
-        self.blockNumber = input.blockNumber
-        self.txNumberInBlock = input.txNumberInBlock
-        self.outputNumberInTx = input.outputNumberInTx
-        self.amount = input.amount
-        self.transactionInput = [input.blockNumber,
-                                 input.txNumberInBlock,
-                                 input.outputNumberInTx,
-                                 input.amount] as [AnyObject]
+        guard blockNumber.bitWidth <= blockNumberMaxWidth else {return nil}
+        guard txNumberInBlock.bitWidth <= txNumberInBlockMaxWidth else {return nil}
+        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {return nil}
+        guard amount.bitWidth <= amountMaxWidth else {return nil}
+        
+        
+        self.blockNumber = blockNumber
+        self.txNumberInBlock = txNumberInBlock
+        self.outputNumberInTx = outputNumberInTx
+        self.amount = amount
+    }
+    
+    public func serialize() -> Data {
+        let dataArray = self.prepareForRLP()
+        let encoded = RLP.encode(dataArray)!
+        return encoded
+    }
+    
+    public func prepareForRLP() -> [AnyObject] {
+        let blockNumberData = self.blockNumber.serialize().setLengthLeft(blockNumberByteLength)!
+        let txNumberData = self.txNumberInBlock.serialize().setLengthLeft(txNumberInBlockByteLength)!
+        let outputNumberData = self.outputNumberInTx.serialize().setLengthLeft(outputNumberInTxByteLength)
+        let amountData = self.amount.serialize().setLengthLeft(amountByteLength)
+        let dataArray = [blockNumberData, txNumberData, outputNumberData, amountData] as [AnyObject]
+        return dataArray
     }
 }
 

@@ -8,9 +8,9 @@
 
 import Foundation
 
-class serviceUTXO {
-    public func getListUTXOs(for publicKey: EthereumAddress, onTestnet: Bool = false, completion: @escaping(Result<ListUTXOsModel?>) -> Void) {
-        let json: [String: Any] = ["for": publicKey.address,
+final class serviceUTXO {
+    public func getListUTXOs(for address: EthereumAddress, onTestnet: Bool = false, completion: @escaping(Result<[ListUTXOsModel]>) -> Void) {
+        let json: [String: Any] = ["for": address.address,
                                    "blockNumber": 1,
                                    "transactionNumber": 0,
                                    "outputNumber": 0,
@@ -32,11 +32,14 @@ class serviceUTXO {
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 if let utxos = responseJSON["utxos"] as? [[String : Any]] {
-                    if let listUTXOs = ListUTXOsModel(json: utxos[0]) {
-                        completion(Result.Success(listUTXOs))
-                    } else {
-                        completion(Result.Error(MatterErrors.errorInListUTXOs))
+                    var allUTXOs = [ListUTXOsModel]()
+                    for utxo in utxos {
+                        guard let model = ListUTXOsModel(json: utxo) else {
+                            return completion(Result.Error(MatterErrors.errorInListUTXOs))
+                        }
+                        allUTXOs.append(model)
                     }
+                    completion(Result.Success(allUTXOs))
                 } else {
                     completion(Result.Error(MatterErrors.errorInUTXOs))
                 }
@@ -49,10 +52,7 @@ class serviceUTXO {
     }
     
     public func sendRawTX(transaction: SignedTransaction, onTestnet: Bool = false, completion: @escaping(Result<Bool?>) -> Void) {
-        guard let transactionString = String(data: transaction.data, encoding: String.Encoding.ascii) else {
-            completion(Result.Error(MatterErrors.cantConvertTxData))
-            return
-        }
+        let transactionString = transaction.data.toHexString().addHexPrefix()
         let json: [String: Any] = ["tx": transactionString]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
