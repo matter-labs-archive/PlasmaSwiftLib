@@ -34,10 +34,9 @@ final class serviceUTXO {
                 if let utxos = responseJSON["utxos"] as? [[String : Any]] {
                     var allUTXOs = [ListUTXOsModel]()
                     for utxo in utxos {
-                        guard let model = ListUTXOsModel(json: utxo) else {
-                            return completion(Result.Error(MatterErrors.errorInListUTXOs))
+                        if let model = ListUTXOsModel(json: utxo) {
+                            allUTXOs.append(model)
                         }
-                        allUTXOs.append(model)
                     }
                     completion(Result.Success(allUTXOs))
                 } else {
