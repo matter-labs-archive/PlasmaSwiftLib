@@ -94,12 +94,25 @@ class TransactionTests: XCTestCase {
     }
     
     func testParseTransaction() {
-        let data = Data(hex: "0xf8aef86901edec840000000184000000c800a0000000000000000000000000000000000000000000000000000000000000000af838f70094c5fdf4076b8f3a5357c5e395ab970b5b54098fefa0000000000000000000000000000000000000000000000000000000000000000a1ba07cb678cb684e53e92578d9982fafa3df9f9bd776b40e8101153a9174bd9c365aa00bb0580a5d5a86d140eebb894fa4deda8887629973f3c4c22347495d1867020f")
-        let signedTX = SignedTransaction(data: data)
-        XCTAssert(signedTX != nil)
+        let data = Data(hex: "0xf8e6f8a101edec8400000036840000000000a000000000000000000000000000000000000000000000000000037b4e07e14000f870f70094832a630b949575b87c0e3c00f624f773d9b160f4a0000000000000000000000000000000000000000000000000000009184e72a000f701946891dc3962e710f0ff711b9c6acc26133fd35cb4a000000000000000000000000000000000000000000000000000037235b96ea0001ba0a809c3eb58884ad870261ef2a82f1c673f9376cc2f7ed533f4e2d60d9b1fb504a07284e0f0926181a59f809940633c410371d704dc8607e8f3c390cee60690756b")
+        guard let signedTX = SignedTransaction(data: data) else {return}
+        for output in signedTX.transaction.outputs {
+            print("output:")
+            print(output.amount)
+            print(output.outputNumberInTx)
+            print(output.receiverEthereumAddress)
+        }
+        for input in signedTX.transaction.inputs {
+            print("input:")
+            print(input.amount)
+            print(input.outputNumberInTx)
+            print(input.blockNumber)
+            print(input.txNumberInBlock)
+        }
+        XCTAssert(signedTX.data == data)
     }
     
-    func testMergeOutputs() {
+    func testMergeOutputsForFixedAMount() {
         guard let inputs = formInputsForTransaction() else {return}
         guard let outputs = formOutputsForTransaction() else {return}
         guard let tx = Transaction(txType: .split, inputs: inputs, outputs: outputs) else {return}
