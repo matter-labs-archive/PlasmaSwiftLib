@@ -1,7 +1,7 @@
 def import_pods
-  pod 'BigInt', '~> 3.1'
-  pod 'CryptoSwift', '~> 0.12'
-  pod 'SwiftRLP', '~> 1.1'
+  pod 'BigInt'
+  pod 'CryptoSwift'
+  pod 'SwiftRLP'
   pod 'secp256k1_swift'
 end
 

@@ -10,7 +10,6 @@ import Foundation
 import SwiftRLP
 import struct BigInt.BigUInt
 import secp256k1_swift
-import web3swift
 
 public struct SignedTransaction {
     
