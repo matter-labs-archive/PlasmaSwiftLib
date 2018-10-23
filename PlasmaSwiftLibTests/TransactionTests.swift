@@ -112,11 +112,20 @@ class TransactionTests: XCTestCase {
         XCTAssert(signedTX.data == data)
     }
     
-    func testMergeOutputsForFixedAMount() {
+    func testMergeOutputsForFixedAmount() {
         guard let inputs = formInputsForTransaction() else {return}
         guard let outputs = formOutputsForTransaction() else {return}
         guard let tx = Transaction(txType: .split, inputs: inputs, outputs: outputs) else {return}
-        guard let newTx = tx.mergeOutputs(until: 6) else {return}
+        guard let newTx = tx.mergeOutputs(untilMaxAmount: 6) else {return}
         XCTAssert(newTx.outputs.last?.amount == 5)
+    }
+    
+    func testMergeOutputsForFixedNumber() {
+        guard let inputs = formInputsForTransaction() else {return}
+        guard let outputs = formOutputsForTransaction() else {return}
+        guard let tx = Transaction(txType: .split, inputs: inputs, outputs: outputs) else {return}
+        guard let newTx = tx.mergeOutputs(forMaxNumber: 5) else {return}
+        print(newTx.outputs.count)
+        XCTAssert(newTx.outputs.count == 5)
     }
 }
