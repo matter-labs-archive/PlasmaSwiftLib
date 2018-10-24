@@ -7,7 +7,7 @@ before_install:
   - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
   - brew install swiftlint
 script:
-  - xcodebuild clean test -project PlasmaSwiftLib.xcworkspace -scheme PlasmaSwiftLib -destination "platform=iOS Simulator,name=iPhone 5s,OS=9.0" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
+  - xcodebuild clean test -project PlasmaSwiftLib.xcodeproj -scheme PlasmaSwiftLib -destination "platform=iOS Simulator,name=iPhone 5s,OS=9.0" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
   - swiftlint
 after_success:
   - bash <(curl -s https://codecov.io/bash)
