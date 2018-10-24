@@ -4,6 +4,7 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/PlasmaSwiftLib.svg)](https://img.shields.io/cocoapods/v/PlasmaSwiftLib.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/PlasmaSwiftLib.svg?style=flat)](https://plasmaswiftlib.github.io/PlasmaSwiftLib)
+[![License](https://img.shields.io/cocoapods/l/PlasmaSwiftLib.svg?style=flat)](http://cocoapods.org/pods/PlasmaSwiftLib)
 
 <img align="left" width="25" height="25" src="https://user-images.githubusercontent.com/28599454/41086111-af4bc3b0-6a41-11e8-9f9f-2d642b12666e.png">[Ask questions](https://stackoverflow.com/questions/tagged/PlasmaSwiftLib)
 
