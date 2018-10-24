@@ -12,7 +12,7 @@ import Foundation
 import SwiftRLP
 import BigInt
 
-class Block {
+public class Block {
     public var blockHeader: BlockHeader
     public var signedTransactions: [SignedTransaction]
     public var data: Data {
