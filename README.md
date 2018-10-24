@@ -101,7 +101,7 @@ $ brew install carthage
 To integrate PlasmaSwiftLib into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "matterinc/PlasmaSwiftLib" "Carthage"
+github "matterinc/PlasmaSwiftLib" "carthage"
 ```
 
 Run `carthage update` to build the framework and drag the built `web3swift.framework` into your Xcode project.
