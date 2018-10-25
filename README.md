@@ -34,7 +34,13 @@
 ---
   - [Usage Doc](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md)
 	- **Transaction** 
-		- [Transaction](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#transaction)
+		- [Form input](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#form-input)
+		- [Form output](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#form-output)
+		- [Form transaction and sign it](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#form-transaction-and-sign-it)
+	- **UTXOs listing** 
+		- [Get UTXOs list for Ethereum address](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#get-utxos-list-for-ethereum-address)
+        - **Send transaction** 
+		- [Send raw transaction](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#send-raw-transaction)
 
 ## Features
 
