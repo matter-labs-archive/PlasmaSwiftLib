@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EthereumAddress
 
 final class ServiceUTXO {
     public func getListUTXOs(for address: EthereumAddress, onTestnet: Bool = false, completion: @escaping(Result<[ListUTXOsModel]>) -> Void) {

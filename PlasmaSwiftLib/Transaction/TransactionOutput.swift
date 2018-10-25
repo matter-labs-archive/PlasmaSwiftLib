@@ -9,6 +9,7 @@
 import Foundation
 import SwiftRLP
 import BigInt
+import EthereumAddress
 
 public struct TransactionOutput {
     
