@@ -32,11 +32,12 @@ let privKey = Data(hex: "<From private key>")
 ServiceUTXO().getListUTXOs(for: fromEthAddress, onTestnet: '<Bool flag for using Ropsten network>') { (result) in
     switch result {
     case .Success(let utxos):
-	let input = utxos[0].toTransactionInput()!
+	guard let input = utxos[0].toTransactionInput() else {return}
 	let inputs = [input]
-	let outputs = [TransactionOutput(outputNumberInTx: 0,
-	                                 receiverEthereumAddress: EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!,
-					 amount: input.amount)!]
+	guard let output = TransactionOutput(outputNumberInTx: 0,
+	                                 receiverEthereumAddress: toEthAddress,
+					 amount: input.amount) else {return}
+	let outputs = [output]
 	guard let transaction = Transaction(txType: .split, inputs: inputs, outputs: outputs) else {return}
 	guard let signedTransaction = transaction.sign(privateKey: privKey) else {return}
 	ServiceUTXO().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
