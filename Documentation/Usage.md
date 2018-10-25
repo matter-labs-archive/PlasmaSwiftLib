@@ -24,7 +24,7 @@ ServiceUTXO().getListUTXOs(for: ethAddress,
 ## Send transaction
 
 #### Send raw transaction
-In this example transaction inputs are formed from first UTXO you get for some Ethereum address. Used 'split' transaction type.
+In this example transaction inputs are formed from first UTXO you get for your Ethereum address. Used 'split' transaction type.
 
 ```swift
 guard let fromEthAddress = EthereumAddress("<From Ethereum address>") else {return}
