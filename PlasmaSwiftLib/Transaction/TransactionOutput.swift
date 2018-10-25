@@ -21,7 +21,7 @@ public struct TransactionOutput {
         return self.serialize()
     }
     
-    public init?(outputNumberInTx: BigUInt, receiverEthereumAddress: EthereumAddress, amount: BigUInt){
+    public init?(outputNumberInTx: BigUInt, receiverEthereumAddress: EthereumAddress, amount: BigUInt) {
         guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {return nil}
         guard receiverEthereumAddress.addressData.count <= receiverEthereumAddressByteLength else {return nil}
         guard amount.bitWidth <= amountMaxWidth else {return nil}
