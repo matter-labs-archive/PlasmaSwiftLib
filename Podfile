@@ -3,6 +3,8 @@ def import_pods
   pod 'CryptoSwift'
   pod 'SwiftRLP'
   pod 'secp256k1_swift'
+  pod 'EthereumABI'
+  pod 'EthereumAddress'
 end
 
 target 'PlasmaSwiftLib' do

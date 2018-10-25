@@ -10,6 +10,7 @@ import Foundation
 import SwiftRLP
 import struct BigInt.BigUInt
 import secp256k1_swift
+import EthereumAddress
 
 public struct SignedTransaction {
     

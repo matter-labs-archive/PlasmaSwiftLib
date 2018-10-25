@@ -8,6 +8,7 @@
 
 import XCTest
 import BigInt
+import EthereumAddress
 
 @testable import PlasmaSwiftLib
 
