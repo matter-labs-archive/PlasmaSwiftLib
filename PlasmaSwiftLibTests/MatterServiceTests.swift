@@ -9,6 +9,7 @@
 import XCTest
 import BigInt
 import secp256k1_swift
+import EthereumAddress
 
 @testable import PlasmaSwiftLib
 
