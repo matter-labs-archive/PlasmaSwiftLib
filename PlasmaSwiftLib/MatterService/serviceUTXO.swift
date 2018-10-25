@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class serviceUTXO {
+final class ServiceUTXO {
     public func getListUTXOs(for address: EthereumAddress, onTestnet: Bool = false, completion: @escaping(Result<[ListUTXOsModel]>) -> Void) {
         let json: [String: Any] = ["for": address.address,
                                    "blockNumber": 1,
@@ -24,14 +24,14 @@ final class serviceUTXO {
             return
         }
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data, error == nil else {
                 completion(Result.Error(error!))
                 return
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
-                if let utxos = responseJSON["utxos"] as? [[String : Any]] {
+                if let utxos = responseJSON["utxos"] as? [[String: Any]] {
                     var allUTXOs = [ListUTXOsModel]()
                     for utxo in utxos {
                         if let model = ListUTXOsModel(json: utxo) {
@@ -62,7 +62,7 @@ final class serviceUTXO {
             return
         }
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data, error == nil else {
                 completion(Result.Error(error!))
                 return
@@ -94,5 +94,3 @@ final class serviceUTXO {
         return request
     }
 }
-
-

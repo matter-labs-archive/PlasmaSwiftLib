@@ -34,7 +34,7 @@ public struct SignedTransaction {
         self.s = Data(repeating: 0, count: Int(sByteLength))
     }
     
-    public init?(transaction: Transaction, v: BigUInt, r: Data, s: Data){
+    public init?(transaction: Transaction, v: BigUInt, r: Data, s: Data) {
         guard v.bitWidth <= vMaxWidth else {return nil}
         guard r.count == rByteLength else {return nil}
         guard s.count == sByteLength else {return nil}
@@ -89,7 +89,7 @@ public struct SignedTransaction {
         guard let hash = TransactionHelpers.hashForSignature(data: self.transaction.data) else {return nil}
         var v = self.v
         if v > 3 {
-            v = v - BigUInt(27)
+            v -= BigUInt(27)
         }
         let vData = v.serialize().setLengthLeft(vByteLength)!
         guard let signatureData = SECP256K1.marshalSignature(v: vData, r: self.r, s: self.s) else {return nil}

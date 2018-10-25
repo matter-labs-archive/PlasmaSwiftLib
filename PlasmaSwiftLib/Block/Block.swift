@@ -19,7 +19,7 @@ public class Block {
         return self.serialize()
     }
     
-    public init?(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]){
+    public init?(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]) {
         
         self.blockHeader = blockHeader
         self.signedTransactions = signedTransactions
