@@ -9,7 +9,7 @@
 import Foundation
 import BigInt
 
-extension Transaction {
+public extension Transaction {
     public func mergeOutputs(untilMaxAmount: BigUInt) -> Transaction? {
         let receiverAddress = self.outputs[0].receiverEthereumAddress
         

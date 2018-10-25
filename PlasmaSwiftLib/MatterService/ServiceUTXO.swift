@@ -9,7 +9,7 @@
 import Foundation
 import EthereumAddress
 
-final class ServiceUTXO {
+public class ServiceUTXO {
     public func getListUTXOs(for address: EthereumAddress, onTestnet: Bool = false, completion: @escaping(Result<[ListUTXOsModel]>) -> Void) {
         let json: [String: Any] = ["for": address.address,
                                    "blockNumber": 1,
