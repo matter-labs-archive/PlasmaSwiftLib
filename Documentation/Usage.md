@@ -2,8 +2,6 @@
 
 ## UTXOs listing
 
-### Using convenient preset methods
-
 #### Get UTXOs list for Ethereum address
 
 ```swift
@@ -21,6 +19,8 @@ ServiceUTXO().getListUTXOs(for: ethAddress, onTestnet: '<Bool flag for using Rop
     }
 }
 ```
+
+## Send transaction
 
 #### Send raw transaction
 In this example transaction inputs are formed from first UTXO you get for some Ethereum address. Used 'split' transaction type.
@@ -59,3 +59,5 @@ ServiceUTXO().getListUTXOs(for: fromEthAddress, onTestnet: '<Bool flag for using
     }
 }
 ```
+
+
