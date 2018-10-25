@@ -26,11 +26,10 @@
 		E2E94C9D2178B472005F54A0 /* SignedTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94C9C2178B472005F54A0 /* SignedTransaction.swift */; };
 		E2E94CA5217A1B60005F54A0 /* TransactionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CA4217A1B60005F54A0 /* TransactionHelpers.swift */; };
 		E2E94CAD217A5791005F54A0 /* BigIntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAC217A5791005F54A0 /* BigIntExtension.swift */; };
-		E2E94CB0217BF2D2005F54A0 /* serviceUTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAF217BF2D2005F54A0 /* serviceUTXO.swift */; };
-		E2E94CB2217BF38F005F54A0 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB1217BF38F005F54A0 /* URLs.swift */; };
+		E2E94CB0217BF2D2005F54A0 /* ServiceUTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CAF217BF2D2005F54A0 /* ServiceUTXO.swift */; };
+		E2E94CB2217BF38F005F54A0 /* MatterURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB1217BF38F005F54A0 /* MatterURLs.swift */; };
 		E2E94CB4217BF7B8005F54A0 /* MatterErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB3217BF7B8005F54A0 /* MatterErrors.swift */; };
-		E2E94CB6217BFAE2005F54A0 /* listUTXOsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB5217BFAE2005F54A0 /* listUTXOsModel.swift */; };
-		E2E94CB8217C05DB005F54A0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB7217C05DB005F54A0 /* Result.swift */; };
+		E2E94CB6217BFAE2005F54A0 /* ListUTXOsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB5217BFAE2005F54A0 /* ListUTXOsModel.swift */; };
 		E2E94CBA217C39E1005F54A0 /* MatterServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94CB9217C39E1005F54A0 /* MatterServiceTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,11 +73,10 @@
 		E2E94CA8217A3DB9005F54A0 /* BlockHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockHelpers.swift; sourceTree = "<group>"; };
 		E2E94CAA217A48E5005F54A0 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		E2E94CAC217A5791005F54A0 /* BigIntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigIntExtension.swift; sourceTree = "<group>"; };
-		E2E94CAF217BF2D2005F54A0 /* serviceUTXO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = serviceUTXO.swift; sourceTree = "<group>"; };
-		E2E94CB1217BF38F005F54A0 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
+		E2E94CAF217BF2D2005F54A0 /* ServiceUTXO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceUTXO.swift; sourceTree = "<group>"; };
+		E2E94CB1217BF38F005F54A0 /* MatterURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterURLs.swift; sourceTree = "<group>"; };
 		E2E94CB3217BF7B8005F54A0 /* MatterErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterErrors.swift; sourceTree = "<group>"; };
-		E2E94CB5217BFAE2005F54A0 /* listUTXOsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listUTXOsModel.swift; sourceTree = "<group>"; };
-		E2E94CB7217C05DB005F54A0 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		E2E94CB5217BFAE2005F54A0 /* ListUTXOsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUTXOsModel.swift; sourceTree = "<group>"; };
 		E2E94CB9217C39E1005F54A0 /* MatterServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatterServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,7 +188,6 @@
 				E2E94C9A2178B402005F54A0 /* NSRegularExpressionExtension.swift */,
 				E2E94C962178B24A005F54A0 /* StringExtension.swift */,
 				E2E94C902178A1D5005F54A0 /* Constants.swift */,
-				E2E94CB7217C05DB005F54A0 /* Result.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -208,9 +205,9 @@
 		E2E94CAE217BF25B005F54A0 /* MatterService */ = {
 			isa = PBXGroup;
 			children = (
-				E2E94CAF217BF2D2005F54A0 /* serviceUTXO.swift */,
-				E2E94CB5217BFAE2005F54A0 /* listUTXOsModel.swift */,
-				E2E94CB1217BF38F005F54A0 /* URLs.swift */,
+				E2E94CAF217BF2D2005F54A0 /* ServiceUTXO.swift */,
+				E2E94CB5217BFAE2005F54A0 /* ListUTXOsModel.swift */,
+				E2E94CB1217BF38F005F54A0 /* MatterURLs.swift */,
 				E2E94CB3217BF7B8005F54A0 /* MatterErrors.swift */,
 			);
 			path = MatterService;
@@ -396,12 +393,11 @@
 				81B98E74217DDCD700465D0F /* Block.swift in Sources */,
 				E221960C217F49FF0066DFE3 /* OutputsManagement.swift in Sources */,
 				E2E94C952178B20F005F54A0 /* DataExtension.swift in Sources */,
-				E2E94CB2217BF38F005F54A0 /* URLs.swift in Sources */,
+				E2E94CB2217BF38F005F54A0 /* MatterURLs.swift in Sources */,
 				E2E94C992178B27E005F54A0 /* ArrayExtension.swift in Sources */,
-				E2E94CB6217BFAE2005F54A0 /* listUTXOsModel.swift in Sources */,
-				E2E94CB8217C05DB005F54A0 /* Result.swift in Sources */,
+				E2E94CB6217BFAE2005F54A0 /* ListUTXOsModel.swift in Sources */,
 				E2E94C8C2178A0CD005F54A0 /* TransactionOutput.swift in Sources */,
-				E2E94CB0217BF2D2005F54A0 /* serviceUTXO.swift in Sources */,
+				E2E94CB0217BF2D2005F54A0 /* ServiceUTXO.swift in Sources */,
 				E2E94CA5217A1B60005F54A0 /* TransactionHelpers.swift in Sources */,
 				E2E94C9B2178B402005F54A0 /* NSRegularExpressionExtension.swift in Sources */,
 				E2E94C8A21789BEA005F54A0 /* TransactionInput.swift in Sources */,

@@ -9,7 +9,10 @@
 import Foundation
 import EthereumAddress
 
-final class ServiceUTXO {
+public final class ServiceUTXO {
+    
+    public init() {}
+    
     public func getListUTXOs(for address: EthereumAddress, onTestnet: Bool = false, completion: @escaping(Result<[ListUTXOsModel]>) -> Void) {
         let json: [String: Any] = ["for": address.address,
                                    "blockNumber": 1,
@@ -19,7 +22,7 @@ final class ServiceUTXO {
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
-        guard let request = request(url: onTestnet ? URLs.listUTXOsTestnet : URLs.listUTXOsMainnet,
+        guard let request = request(url: onTestnet ? MatterURLs.listUTXOsTestnet : MatterURLs.listUTXOsMainnet,
                                     data: jsonData) else {
             completion(Result.Error(MatterErrors.cantCreateRequest))
             return
@@ -57,7 +60,7 @@ final class ServiceUTXO {
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
-        guard let request = request(url: onTestnet ? URLs.sendRawTXTestnet : URLs.sendRawTXMainnet,
+        guard let request = request(url: onTestnet ? MatterURLs.sendRawTXTestnet : MatterURLs.sendRawTXMainnet,
                                     data: jsonData) else {
             completion(Result.Error(MatterErrors.cantCreateRequest))
             return
@@ -94,4 +97,10 @@ final class ServiceUTXO {
         
         return request
     }
+    
+    public enum Result<T> {
+        case Success(T)
+        case Error(Error)
+    }
+
 }
