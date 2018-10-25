@@ -10,7 +10,7 @@ import Foundation
 import EthereumAddress
 
 public class ServiceUTXO {
-    public func getListUTXOs(for address: EthereumAddress, onTestnet: Bool = false, completion: @escaping(Result<[ListUTXOsModel]>) -> Void) {
+    public func getListUTXOs(for address: EthereumAddress, onTestnet: Bool = false, completion: @escaping(UTXTOsResult<[ListUTXOsModel]>) -> Void) {
         let json: [String: Any] = ["for": address.address,
                                    "blockNumber": 1,
                                    "transactionNumber": 0,
@@ -19,15 +19,15 @@ public class ServiceUTXO {
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
-        guard let request = request(url: onTestnet ? URLs.listUTXOsTestnet : URLs.listUTXOsMainnet,
+        guard let request = request(url: onTestnet ? MatterURLs.listUTXOsTestnet : MatterURLs.listUTXOsMainnet,
                                     data: jsonData) else {
-            completion(Result.Error(MatterErrors.cantCreateRequest))
+            completion(UTXTOsResult.Error(MatterErrors.cantCreateRequest))
             return
         }
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data, error == nil else {
-                completion(Result.Error(error!))
+                completion(UTXTOsResult.Error(error!))
                 return
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -39,46 +39,46 @@ public class ServiceUTXO {
                             allUTXOs.append(model)
                         }
                     }
-                    completion(Result.Success(allUTXOs))
+                    completion(UTXTOsResult.Success(allUTXOs))
                 } else {
-                    completion(Result.Error(MatterErrors.errorInUTXOs))
+                    completion(UTXTOsResult.Error(MatterErrors.errorInUTXOs))
                 }
             } else {
-                completion(Result.Error(MatterErrors.noData))
+                completion(UTXTOsResult.Error(MatterErrors.noData))
             }
         }
         
         task.resume()
     }
     
-    public func sendRawTX(transaction: SignedTransaction, onTestnet: Bool = false, completion: @escaping(Result<Bool?>) -> Void) {
+    public func sendRawTX(transaction: SignedTransaction, onTestnet: Bool = false, completion: @escaping(UTXTOsResult<Bool?>) -> Void) {
         let transactionString = transaction.data.toHexString().addHexPrefix()
         let json: [String: Any] = ["tx": transactionString]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
-        guard let request = request(url: onTestnet ? URLs.sendRawTXTestnet : URLs.sendRawTXMainnet,
+        guard let request = request(url: onTestnet ? MatterURLs.sendRawTXTestnet : MatterURLs.sendRawTXMainnet,
                                     data: jsonData) else {
-            completion(Result.Error(MatterErrors.cantCreateRequest))
+            completion(UTXTOsResult.Error(MatterErrors.cantCreateRequest))
             return
         }
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data, error == nil else {
-                completion(Result.Error(error!))
+                completion(UTXTOsResult.Error(error!))
                 return
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 if let accepted = responseJSON["accepted"] as? Bool {
-                    completion(Result.Success(accepted))
+                    completion(UTXTOsResult.Success(accepted))
                 } else if let reason = responseJSON["reason"] as? String {
                     print(reason)
-                    completion(Result.Success(false))
+                    completion(UTXTOsResult.Success(false))
                 }
                 
             } else {
-                completion(Result.Error(MatterErrors.noData))
+                completion(UTXTOsResult.Error(MatterErrors.noData))
             }
         }
         
@@ -94,4 +94,10 @@ public class ServiceUTXO {
         
         return request
     }
+    
+    public enum UTXTOsResult<T> {
+        case Success(T)
+        case Error(Error)
+    }
+
 }
