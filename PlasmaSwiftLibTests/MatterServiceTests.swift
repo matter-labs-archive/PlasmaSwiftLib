@@ -21,7 +21,9 @@ class MatterServiceTests: XCTestCase {
             switch result {
             case .Success(let r):
                 DispatchQueue.main.async {
-                    print(r)
+                    for utxo in r {
+                        print(utxo.value)
+                    }
                     completedGetListExpectation.fulfill()
                 }
             case .Error(let error):
