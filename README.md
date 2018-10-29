@@ -56,7 +56,7 @@
 ## Requirements
 
 - iOS 9.0+ / macOS 10.11+
-- Xcode 9.0+
+- Xcode 10.0+
 - Swift 4.2+
 
 ## Communication
@@ -91,7 +91,7 @@ platform :ios, '9.0'
 
 target '<Your Target Name>' do
     use_frameworks!
-    pod 'PlasmaSwiftLib', '~> 1.0.5'
+    pod 'PlasmaSwiftLib', '~> 1.0.6'
 end
 ```
 
