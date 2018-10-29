@@ -8,7 +8,7 @@
 
 import SipHash
 
-//MARK: BigInt
+// MARK: BigInt
 
 /// An arbitary precision signed integer type, also known as a "big integer".
 ///

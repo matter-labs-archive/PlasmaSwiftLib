@@ -44,7 +44,7 @@ public struct ABITypeParser {
         }
     }
     
-    public static func parseTypeString(_ string:String) throws -> ABI.Element.ParameterType {
+    public static func parseTypeString(_ string: String) throws -> ABI.Element.ParameterType {
         let (type, tail) = recursiveParseType(string)
         guard let t = type, tail == nil else {throw ABI.ParsingError.elementTypeInvalid}
         return t

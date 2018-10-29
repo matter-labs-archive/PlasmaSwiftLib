@@ -47,7 +47,7 @@ extension SipHashable {
 }
 
 extension SipHasher {
-    //MARK: Appending Hashable Values
+    // MARK: Appending Hashable Values
     
     /// Add hashing components in `value` to this hash. This method simply calls `value.addHashes`.
     ///

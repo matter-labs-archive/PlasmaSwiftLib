@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         guard let signedTransaction = transaction.sign(privateKey: privKey) else {return}
         ServiceUTXO().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
             switch result {
-            case .Success(_):
+            case .Success:
                 DispatchQueue.main.async { [weak self] in
                     guard let alert = self?.alert(title: "Successfully sent transaction", message: nil) else {return}
                     self?.present(alert, animated: true, completion: nil)
@@ -92,4 +92,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-

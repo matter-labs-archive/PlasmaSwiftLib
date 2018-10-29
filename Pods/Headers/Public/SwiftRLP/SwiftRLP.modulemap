@@ -1,1 +1,6 @@
-/Users/antongrigorev/Developer/PlasmaSwiftLib/Pods/Target Support Files/SwiftRLP/SwiftRLP.modulemap
+module SwiftRLP {
+  umbrella header "SwiftRLP-umbrella.h"
+
+  export *
+  module * { export * }
+}

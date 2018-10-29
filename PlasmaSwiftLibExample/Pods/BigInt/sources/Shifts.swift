@@ -8,7 +8,7 @@
 
 extension BigUInt {
 
-    //MARK: Shift Operators
+    // MARK: Shift Operators
     
     internal func shiftedLeft(by amount: Word) -> BigUInt {
         guard amount > 0 else { return self }
@@ -27,8 +27,7 @@ extension BigUInt {
                 lowbits = word >> down
                 i += 1
             }
-        }
-        else {
+        } else {
             for i in 0 ..< self.count {
                 result[i + ext] = self[i]
             }
@@ -74,8 +73,7 @@ extension BigUInt {
                 result[i - ext] = highbits | word >> down
                 highbits = word << up
             }
-        }
-        else {
+        } else {
             for i in (ext ..< self.count).reversed() {
                 result[i - ext] = self[i]
             }
@@ -109,11 +107,9 @@ extension BigUInt {
     public static func >>=<Other: BinaryInteger>(lhs: inout BigUInt, rhs: Other) {
         if rhs < (0 as Other) {
             lhs <<= (0 - rhs)
-        }
-        else if rhs >= lhs.bitWidth {
+        } else if rhs >= lhs.bitWidth {
             lhs.clear()
-        }
-        else {
+        } else {
             lhs.shiftRight(by: UInt(rhs))
         }
     }
@@ -189,8 +185,7 @@ extension BigInt {
     public static func <<=<Other: BinaryInteger>(lhs: inout BigInt, rhs: Other) {
         if rhs < (0 as Other) {
             lhs >>= (0 - rhs)
-        }
-        else {
+        } else {
             lhs.shiftLeft(by: Word(rhs))
         }
     }
@@ -203,8 +198,7 @@ extension BigInt {
     public static func >>=<Other: BinaryInteger>(lhs: inout BigInt, rhs: Other) {
         if rhs < (0 as Other) {
             lhs <<= (0 - rhs)
-        }
-        else {
+        } else {
             lhs.shiftRight(by: Word(rhs))
         }
     }

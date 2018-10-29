@@ -109,7 +109,7 @@ extension ABIDecoder {
                     let length = UInt64(BigUInt(dataSlice))
                     guard elementItself.count >= 32 + subType.memoryUsage*length else {break}
                     dataSlice = elementItself[32 ..< 32 + subType.memoryUsage*length]
-                    var subpointer: UInt64 = 32;
+                    var subpointer: UInt64 = 32
                     var toReturn = [AnyObject]()
                     for _ in 0 ..< length {
                         let (v, c) = decodeSignleType(type: subType, data: elementItself, pointer: subpointer)
@@ -125,7 +125,7 @@ extension ABIDecoder {
                     let length = UInt64(BigUInt(dataSlice))
                     guard elementItself.count >= 32 else {break}
                     dataSlice = Data(elementItself[32 ..< elementItself.count])
-                    var subpointer: UInt64 = 0;
+                    var subpointer: UInt64 = 0
                     var toReturn = [AnyObject]()
 //                    print("Dynamic array sub element itself: \n" + dataSlice.toHexString())
                     for _ in 0 ..< length {
@@ -140,7 +140,7 @@ extension ABIDecoder {
 //                print("Static array element itself: \n" + elementItself.toHexString())
                 guard length == staticLength else {break}
                 var toReturn = [AnyObject]()
-                var consumed:UInt64 = 0
+                var consumed: UInt64 = 0
                 for _ in 0 ..< length {
                     let (v, c) = decodeSignleType(type: subType, data: elementItself, pointer: consumed)
                     guard let valueUnwrapped = v, let consumedUnwrapped = c else {return (nil, nil)}
@@ -158,7 +158,7 @@ extension ABIDecoder {
         case .tuple(types: let subTypes):
 //            print("Tuple element itself: \n" + elementItself.toHexString())
             var toReturn = [AnyObject]()
-            var consumed:UInt64 = 0
+            var consumed: UInt64 = 0
             for i in 0 ..< subTypes.count {
                 let (v, c) = decodeSignleType(type: subTypes[i], data: elementItself, pointer: consumed)
                 guard let valueUnwrapped = v, let consumedUnwrapped = c else {return (nil, nil)}
@@ -217,7 +217,7 @@ extension ABIDecoder {
         }
     }
     
-    public static func decodeLog(event: ABI.Element.Event, eventLogTopics: [Data], eventLogData: Data) -> [String:Any]? {
+    public static func decodeLog(event: ABI.Element.Event, eventLogTopics: [Data], eventLogData: Data) -> [String: Any]? {
         if event.topic != eventLogTopics[0] && !event.anonymous {
             return nil
         }

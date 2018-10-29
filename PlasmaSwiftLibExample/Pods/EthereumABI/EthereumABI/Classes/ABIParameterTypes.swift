@@ -61,7 +61,7 @@ extension ABI.Element {
         
         var isTuple: Bool {
             switch self {
-            case .tuple(_):
+            case .tuple:
                 return true
             default:
                 return false
@@ -91,7 +91,7 @@ extension ABI.Element {
                 if !self.isStatic {
                     return 32
                 }
-                var sum: UInt64 = 0;
+                var sum: UInt64 = 0
                 for t in types {
                     sum = sum + t.memoryUsage
                 }
@@ -139,7 +139,6 @@ extension ABI.Element {
             }
         }
     }
-    
     
 }
 
@@ -194,7 +193,6 @@ extension ABI.Element.Event {
         return signature.data(using: .ascii)!.sha3(.keccak256)
     }
 }
-
 
 extension ABI.Element.ParameterType: ABIEncoding {
     public var abiRepresentation: String {

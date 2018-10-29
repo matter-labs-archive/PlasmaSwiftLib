@@ -46,7 +46,7 @@ public struct EthereumAddress: Equatable {
             }
         }
     }
-    public var address:String {
+    public var address: String {
         switch self.type {
         case .normal:
             return EthereumAddress.toChecksumAddress(_address)!
@@ -55,12 +55,12 @@ public struct EthereumAddress: Equatable {
         }
     }
     
-    public static func toChecksumAddress(_ addr:String) -> String? {
+    public static func toChecksumAddress(_ addr: String) -> String? {
         let address = addr.lowercased().stripHexPrefix()
         guard let hash = address.data(using: .ascii)?.sha3(.keccak256).toHexString().stripHexPrefix() else {return nil}
         var ret = "0x"
         
-        for (i,char) in address.enumerated() {
+        for (i, char) in address.enumerated() {
             let startIdx = hash.index(hash.startIndex, offsetBy: i)
             let endIdx = hash.index(hash.startIndex, offsetBy: i+1)
             let hashChar = String(hash[startIdx..<endIdx])
@@ -75,7 +75,7 @@ public struct EthereumAddress: Equatable {
         return ret
     }
     
-    public init?(_ addressString:String, type: AddressType = .normal, ignoreChecksum: Bool = false) {
+    public init?(_ addressString: String, type: AddressType = .normal, ignoreChecksum: Bool = false) {
         switch type {
         case .normal:
             guard let data = Data.fromHex(addressString) else {return nil}
@@ -111,7 +111,7 @@ public struct EthereumAddress: Equatable {
         }
     }
     
-    public init?(_ addressData:Data, type: AddressType = .normal) {
+    public init?(_ addressData: Data, type: AddressType = .normal) {
         guard addressData.count == 20 else {return nil}
         self._address = addressData.toHexString().addHexPrefix()
         self.type = type
@@ -130,7 +130,3 @@ public struct EthereumAddress: Equatable {
 extension EthereumAddress: Hashable {
     
 }
-
-
-
-

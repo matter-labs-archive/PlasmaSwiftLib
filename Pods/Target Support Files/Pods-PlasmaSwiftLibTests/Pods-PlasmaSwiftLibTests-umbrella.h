@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SipHashVersionNumber;
-FOUNDATION_EXPORT const unsigned char SipHashVersionString[];
+FOUNDATION_EXPORT double Pods_PlasmaSwiftLibTestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_PlasmaSwiftLibTestsVersionString[];
 

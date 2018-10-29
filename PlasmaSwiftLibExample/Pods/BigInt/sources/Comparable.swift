@@ -9,7 +9,7 @@
 import Foundation
 
 extension BigUInt: Comparable {
-    //MARK: Comparison
+    // MARK: Comparison
     
     /// Compare `a` to `b` and return an `NSComparisonResult` indicating their order.
     ///
@@ -59,5 +59,3 @@ extension BigInt {
         }
     }
 }
-
-

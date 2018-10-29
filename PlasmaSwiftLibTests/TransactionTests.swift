@@ -82,10 +82,32 @@ class TransactionTests: XCTestCase {
         XCTAssert(output1 == output2)
     }
     
-    func testTransaction() {
+    func testEmptyTransaction() {
         let txType = Transaction.TransactionType.split
         let inputs = [TransactionInput]()
         let outputs = [TransactionOutput]()
+        
+        guard let transaction1 = Transaction(txType: txType, inputs: inputs, outputs: outputs) else {return}
+        let data = transaction1.data
+        guard let transaction2 = Transaction(data: data) else {return}
+        print("transaction empty passed")
+        XCTAssert(transaction1 == transaction2)
+    }
+    
+    func testNonEmptyTransaction() {
+        let txType = Transaction.TransactionType.split
+        
+        let blockNumber: BigUInt = 10
+        let txNumberInBlock: BigUInt = 1
+        let outputNumberInTx: BigUInt = 1
+        let amount: BigUInt = 500000000000000
+        guard let input = TransactionInput(blockNumber: blockNumber, txNumberInBlock: txNumberInBlock, outputNumberInTx: outputNumberInTx, amount: amount) else {return}
+        
+        let receiverEthereumAddress: EthereumAddress = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!
+        guard let output = TransactionOutput(outputNumberInTx: outputNumberInTx, receiverEthereumAddress: receiverEthereumAddress, amount: amount) else {return}
+        
+        let inputs = [input]
+        let outputs = [output]
         
         guard let transaction1 = Transaction(txType: txType, inputs: inputs, outputs: outputs) else {return}
         let data = transaction1.data
@@ -110,6 +132,7 @@ class TransactionTests: XCTestCase {
             print(input.blockNumber)
             print(input.txNumberInBlock)
         }
+        print("parse passed")
         XCTAssert(signedTX.data == data)
     }
     
@@ -118,6 +141,7 @@ class TransactionTests: XCTestCase {
         guard let outputs = formOutputsForTransaction() else {return}
         guard let tx = Transaction(txType: .split, inputs: inputs, outputs: outputs) else {return}
         guard let newTx = tx.mergeOutputs(untilMaxAmount: 6) else {return}
+        print("merge amount passed")
         XCTAssert(newTx.outputs.last?.amount == 5)
     }
     
@@ -125,8 +149,8 @@ class TransactionTests: XCTestCase {
         guard let inputs = formInputsForTransaction() else {return}
         guard let outputs = formOutputsForTransaction() else {return}
         guard let tx = Transaction(txType: .split, inputs: inputs, outputs: outputs) else {return}
-        guard let newTx = tx.mergeOutputs(forMaxNumber: 5) else {return}
-        print(newTx.outputs.count)
-        XCTAssert(newTx.outputs.count == 5)
+        guard let newTx = tx.mergeOutputs(forMaxNumber: 2) else {return}
+        print("merge output passed")
+        XCTAssert(newTx.outputs.count == 2)
     }
 }

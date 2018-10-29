@@ -23,7 +23,7 @@
             close(fd)
         }
 
-        let _ = read(fd, &randomArray, MemoryLayout<UInt8>.size * 8)
+        _ = read(fd, &randomArray, MemoryLayout<UInt8>.size * 8)
 
         var randomInt: UInt64 = 0
         for i in 0..<randomArray.count {

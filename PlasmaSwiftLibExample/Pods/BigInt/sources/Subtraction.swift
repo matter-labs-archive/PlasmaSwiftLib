@@ -7,7 +7,7 @@
 //
 
 extension BigUInt {
-    //MARK: Subtraction
+    // MARK: Subtraction
 
     /// Subtract `word` from this integer in place, returning a flag indicating if the operation
     /// caused an arithmetic overflow. `word` is shifted `shift` words to the left before being subtracted.
@@ -78,8 +78,7 @@ extension BigUInt {
                 let (d2, c2) = d.subtractingReportingOverflow(1)
                 self[ai] = d2
                 carry = c || c2
-            }
-            else {
+            } else {
                 self[ai] = d
                 carry = c
             }

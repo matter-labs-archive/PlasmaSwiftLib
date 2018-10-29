@@ -11,7 +11,7 @@ import Foundation
 import libsecp256k1
 #endif
 public struct SECP256K1 {
-    public struct UnmarshaledSignature{
+    public struct UnmarshaledSignature {
         public var v: UInt8 = 0
         public var r = Data(repeating: 0, count: 32)
         public var s = Data(repeating: 0, count: 32)
@@ -27,7 +27,7 @@ public struct SECP256K1 {
 extension SECP256K1 {
     static let context = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN|SECP256K1_CONTEXT_VERIFY))
     
-    public static func signForRecovery(hash: Data, privateKey: Data, useExtraEntropy: Bool = false) -> (serializedSignature:Data?, rawSignature: Data?) {
+    public static func signForRecovery(hash: Data, privateKey: Data, useExtraEntropy: Bool = false) -> (serializedSignature: Data?, rawSignature: Data?) {
         if (hash.count != 32 || privateKey.count != 32) {return (nil, nil)}
         if !SECP256K1.verifyPrivateKey(privateKey: privateKey) {
             return (nil, nil)
@@ -87,12 +87,11 @@ extension SECP256K1 {
         return serializedKey
     }
     
-    
     internal static func recoverPublicKey(hash: Data, recoverableSignature: inout secp256k1_ecdsa_recoverable_signature) -> secp256k1_pubkey? {
         guard hash.count == 32 else {return nil}
         var publicKey: secp256k1_pubkey = secp256k1_pubkey()
-        let result = hash.withUnsafeBytes { (hashPointer:UnsafePointer<UInt8>) -> Int32 in
-            withUnsafePointer(to: &recoverableSignature, { (signaturePointer:UnsafePointer<secp256k1_ecdsa_recoverable_signature>) -> Int32 in
+        let result = hash.withUnsafeBytes { (hashPointer: UnsafePointer<UInt8>) -> Int32 in
+            withUnsafePointer(to: &recoverableSignature, { (signaturePointer: UnsafePointer<secp256k1_ecdsa_recoverable_signature>) -> Int32 in
                 withUnsafeMutablePointer(to: &publicKey, { (pubKeyPtr: UnsafeMutablePointer<secp256k1_pubkey>) -> Int32 in
                     let res = secp256k1_ecdsa_recover(context!, pubKeyPtr,
                                                       signaturePointer, hashPointer)
@@ -109,7 +108,7 @@ extension SECP256K1 {
     internal static func privateKeyToPublicKey(privateKey: Data) -> secp256k1_pubkey? {
         if (privateKey.count != 32) {return nil}
         var publicKey = secp256k1_pubkey()
-        let result = privateKey.withUnsafeBytes { (privateKeyPointer:UnsafePointer<UInt8>) -> Int32 in
+        let result = privateKey.withUnsafeBytes { (privateKeyPointer: UnsafePointer<UInt8>) -> Int32 in
             let res = secp256k1_ec_pubkey_create(context!, UnsafeMutablePointer<secp256k1_pubkey>(&publicKey), privateKeyPointer)
             return res
         }
@@ -122,9 +121,9 @@ extension SECP256K1 {
     public static func serializePublicKey(publicKey: inout secp256k1_pubkey, compressed: Bool = false) -> Data? {
         var keyLength = compressed ? 33 : 65
         var serializedPubkey = Data(repeating: 0x00, count: keyLength)
-        let result = serializedPubkey.withUnsafeMutableBytes { (serializedPubkeyPointer:UnsafeMutablePointer<UInt8>) -> Int32 in
-            withUnsafeMutablePointer(to: &keyLength, { (keyPtr:UnsafeMutablePointer<Int>) -> Int32 in
-                withUnsafeMutablePointer(to: &publicKey, { (pubKeyPtr:UnsafeMutablePointer<secp256k1_pubkey>) -> Int32 in
+        let result = serializedPubkey.withUnsafeMutableBytes { (serializedPubkeyPointer: UnsafeMutablePointer<UInt8>) -> Int32 in
+            withUnsafeMutablePointer(to: &keyLength, { (keyPtr: UnsafeMutablePointer<Int>) -> Int32 in
+                withUnsafeMutablePointer(to: &publicKey, { (pubKeyPtr: UnsafeMutablePointer<secp256k1_pubkey>) -> Int32 in
                     let res = secp256k1_ec_pubkey_serialize(context!,
                                                             serializedPubkeyPointer,
                                                             keyPtr,
@@ -147,7 +146,7 @@ extension SECP256K1 {
         }
         let keyLen: Int = Int(serializedKey.count)
         var publicKey = secp256k1_pubkey()
-        let result = serializedKey.withUnsafeBytes { (serializedKeyPointer:UnsafePointer<UInt8>) -> Int32 in
+        let result = serializedKey.withUnsafeBytes { (serializedKeyPointer: UnsafePointer<UInt8>) -> Int32 in
             let res = secp256k1_ec_pubkey_parse(context!, UnsafeMutablePointer<secp256k1_pubkey>(&publicKey), serializedKeyPointer, keyLen)
             return res
         }
@@ -162,8 +161,8 @@ extension SECP256K1 {
         var recoverableSignature: secp256k1_ecdsa_recoverable_signature = secp256k1_ecdsa_recoverable_signature()
         let serializedSignature = Data(signature[0..<64])
         let v = Int32(signature[64])
-        let result = serializedSignature.withUnsafeBytes{ (serPtr: UnsafePointer<UInt8>) -> Int32 in
-            withUnsafeMutablePointer(to: &recoverableSignature, { (signaturePointer:UnsafeMutablePointer<secp256k1_ecdsa_recoverable_signature>) -> Int32 in
+        let result = serializedSignature.withUnsafeBytes { (serPtr: UnsafePointer<UInt8>) -> Int32 in
+            withUnsafeMutablePointer(to: &recoverableSignature, { (signaturePointer: UnsafeMutablePointer<secp256k1_ecdsa_recoverable_signature>) -> Int32 in
                 let res = secp256k1_ecdsa_recoverable_signature_parse_compact(context!, signaturePointer, serPtr, v)
                 return res
             })
@@ -177,8 +176,8 @@ extension SECP256K1 {
     internal static func serializeSignature(recoverableSignature: inout secp256k1_ecdsa_recoverable_signature) -> Data? {
         var serializedSignature = Data(repeating: 0x00, count: 64)
         var v: Int32 = 0
-        let result = serializedSignature.withUnsafeMutableBytes { (serSignaturePointer:UnsafeMutablePointer<UInt8>) -> Int32 in
-            withUnsafePointer(to: &recoverableSignature) { (signaturePointer:UnsafePointer<secp256k1_ecdsa_recoverable_signature>) -> Int32 in
+        let result = serializedSignature.withUnsafeMutableBytes { (serSignaturePointer: UnsafeMutablePointer<UInt8>) -> Int32 in
+            withUnsafePointer(to: &recoverableSignature) { (signaturePointer: UnsafePointer<secp256k1_ecdsa_recoverable_signature>) -> Int32 in
                 withUnsafeMutablePointer(to: &v, { (vPtr: UnsafeMutablePointer<Int32>) -> Int32 in
                     let res = secp256k1_ecdsa_recoverable_signature_serialize_compact(context!, serSignaturePointer, vPtr, signaturePointer)
                     return res
@@ -205,11 +204,11 @@ extension SECP256K1 {
         if !SECP256K1.verifyPrivateKey(privateKey: privateKey) {
             return nil
         }
-        var recoverableSignature: secp256k1_ecdsa_recoverable_signature = secp256k1_ecdsa_recoverable_signature();
+        var recoverableSignature: secp256k1_ecdsa_recoverable_signature = secp256k1_ecdsa_recoverable_signature()
         guard let extraEntropy = SECP256K1.randomBytes(length: 32) else {return nil}
-        let result = hash.withUnsafeBytes { (hashPointer:UnsafePointer<UInt8>) -> Int32 in
-            privateKey.withUnsafeBytes { (privateKeyPointer:UnsafePointer<UInt8>) -> Int32 in
-                extraEntropy.withUnsafeBytes { (extraEntropyPointer:UnsafePointer<UInt8>) -> Int32 in
+        let result = hash.withUnsafeBytes { (hashPointer: UnsafePointer<UInt8>) -> Int32 in
+            privateKey.withUnsafeBytes { (privateKeyPointer: UnsafePointer<UInt8>) -> Int32 in
+                extraEntropy.withUnsafeBytes { (extraEntropyPointer: UnsafePointer<UInt8>) -> Int32 in
                     withUnsafeMutablePointer(to: &recoverableSignature, { (recSignaturePtr: UnsafeMutablePointer<secp256k1_ecdsa_recoverable_signature>) -> Int32 in
                         let res = secp256k1_ecdsa_sign_recoverable(context!, recSignaturePtr, hashPointer, privateKeyPointer, nil, useExtraEntropy ? extraEntropyPointer : nil)
                         return res
@@ -232,10 +231,9 @@ extension SECP256K1 {
         return serializedKey
     }
     
-    
     public static func verifyPrivateKey(privateKey: Data) -> Bool {
         if (privateKey.count != 32) {return false}
-        let result = privateKey.withUnsafeBytes { (privateKeyPointer:UnsafePointer<UInt8>) -> Int32 in
+        let result = privateKey.withUnsafeBytes { (privateKeyPointer: UnsafePointer<UInt8>) -> Int32 in
             let res = secp256k1_ec_seckey_verify(context!, privateKeyPointer)
             return res
         }
@@ -255,7 +253,7 @@ extension SECP256K1 {
         return nil
     }
     
-    public static func unmarshalSignature(signatureData:Data) -> UnmarshaledSignature? {
+    public static func unmarshalSignature(signatureData: Data) -> UnmarshaledSignature? {
         if (signatureData.count != 65) {return nil}
         let v = signatureData[64]
         let r = Data(signatureData[0..<32])
@@ -304,7 +302,7 @@ extension SECP256K1 {
         }
     }
     
-    internal static func constantTimeComparison(_ lhs: Data, _ rhs:Data) -> Bool {
+    internal static func constantTimeComparison(_ lhs: Data, _ rhs: Data) -> Bool {
         guard lhs.count == rhs.count else {return false}
         var difference = UInt8(0x00)
         for i in 0..<lhs.count { // compare full length
@@ -313,9 +311,3 @@ extension SECP256K1 {
         return difference == UInt8(0x00)
     }
 }
-
-
-
-
-
-

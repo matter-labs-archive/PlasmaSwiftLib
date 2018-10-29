@@ -7,7 +7,7 @@
 //
 
 extension BigUInt {
-    //MARK: Greatest Common Divisor
+    // MARK: Greatest Common Divisor
     
     /// Returns the greatest common divisor of `self` and `b`.
     ///

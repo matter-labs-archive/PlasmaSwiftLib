@@ -11,9 +11,8 @@ import Foundation
   import Glibc
 #endif
 
-
 extension BigUInt {
-    //MARK: Random Integers
+    // MARK: Random Integers
 
     /// Create a big integer consisting of `width` uniformly distributed random bits.
     ///
@@ -31,7 +30,7 @@ extension BigUInt {
         defer {
             close(fd)
         }
-        let _ = read(fd, buffer, MemoryLayout<UInt8>.size * byteCount)
+        _ = read(fd, buffer, MemoryLayout<UInt8>.size * byteCount)
       #else
         arc4random_buf(buffer, byteCount)
       #endif

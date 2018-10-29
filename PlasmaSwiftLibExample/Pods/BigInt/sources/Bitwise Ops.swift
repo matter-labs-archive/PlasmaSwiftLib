@@ -6,7 +6,7 @@
 //  Copyright © 2016-2017 Károly Lőrentey.
 //
 
-//MARK: Bitwise Operations
+// MARK: Bitwise Operations
 
 extension BigUInt {
     /// Return the ones' complement of `a`.

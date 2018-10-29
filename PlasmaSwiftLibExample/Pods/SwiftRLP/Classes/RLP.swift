@@ -27,11 +27,10 @@ public struct RLP {
             
         } else if let data = element as? Data {
             return encode(data)
-        }
-        else if let biguint = element as? BigUInt {
+        } else if let biguint = element as? BigUInt {
             return encode(biguint)
         }
-        return nil;
+        return nil
     }
     
     internal static func encode(_ string: String) -> Data? {
@@ -72,7 +71,7 @@ public struct RLP {
     
     internal static func encodeLength(_ length: Int, offset: UInt8) -> Data? {
         if (length < 0) {
-            return nil;
+            return nil
         }
         let bigintLength = BigUInt(UInt(length))
         return encodeLength(bigintLength, offset: offset)
@@ -160,7 +159,7 @@ public struct RLP {
                 guard let slice = try? slice(data: bytesToParse, offset: offset, length: dataLength) else {return nil}
                 guard let inside = decode(Data(slice)) else {return nil}
                 switch inside.content {
-                case .data(_):
+                case .data:
                     return nil
                 default:
                     outputArray.append(inside)
@@ -192,9 +191,9 @@ public struct RLP {
             switch self.content {
             case .noItem:
                 return false
-            case .data(_):
+            case .data:
                 return true
-            case .list(_):
+            case .list:
                 return false
             }
         }
@@ -203,9 +202,9 @@ public struct RLP {
             switch self.content {
             case .noItem:
                 return false
-            case .data(_):
+            case .data:
                 return false
-            case .list(_):
+            case .list:
                 return true
             }
         }
@@ -213,7 +212,7 @@ public struct RLP {
             switch self.content {
             case .noItem:
                 return nil
-            case .data(_):
+            case .data:
                 return nil
             case .list(let list, _, _):
                 return list.count
@@ -266,7 +265,7 @@ public struct RLP {
             let prefixByte = input[0]
             if prefixByte <= 0x7f {
                 return (BigUInt(0), BigUInt(1), .data)
-            }else if prefixByte <= 0xb7 && length > BigUInt(prefixByte - 0x80) {
+            } else if prefixByte <= 0xb7 && length > BigUInt(prefixByte - 0x80) {
                 let dataLength = BigUInt(prefixByte - 0x80)
                 return (BigUInt(1), dataLength, .data)
             } else if try prefixByte <= 0xbf && length > BigUInt(prefixByte - 0xb7) && length >  BigUInt(prefixByte - 0xb7) + toBigUInt(slice(data: input, offset: BigUInt(1), length: BigUInt(prefixByte - 0xb7))) {

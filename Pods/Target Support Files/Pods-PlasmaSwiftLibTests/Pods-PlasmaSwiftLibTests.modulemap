@@ -1,0 +1,6 @@
+module Pods_PlasmaSwiftLibTests {
+  umbrella header "Pods-PlasmaSwiftLibTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
