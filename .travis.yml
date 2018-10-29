@@ -1,0 +1,12 @@
+language: objective-c
+osx_image: xcode10
+xcode_project: PlasmaSwiftLib.xcworkspace # path to your xcodeproj folder
+xcode_scheme: PlasmaSwiftLib
+xcode_destination: platform=iOS Simulator, OS=9.0, name=iPhone 5s
+before_install:
+  - sudo gem install cocoapods
+  - brew install swiftlint
+script:
+  - swiftlint
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

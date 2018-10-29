@@ -1,0 +1,1 @@
+/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLibExample/Pods/Target Support Files/secp256k1_swift/secp256k1_swift-umbrella.h

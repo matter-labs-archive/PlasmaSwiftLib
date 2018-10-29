@@ -1,0 +1,681 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		32778184F69F5B6E021AB8DB /* libPods-PlasmaSwiftLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 023C09C95B86266F5A8566D1 /* libPods-PlasmaSwiftLib.a */; };
+		DD0E29D3B5102A4EBC291F1D /* libPods-PlasmaSwiftLibTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72870A1728ACF4704F85150C /* libPods-PlasmaSwiftLibTests.a */; };
+		E20660642187549000701068 /* PlasmaSwiftLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E206605A2187549000701068 /* PlasmaSwiftLib.framework */; };
+		E206606B2187549000701068 /* PlasmaSwiftLib.h in Headers */ = {isa = PBXBuildFile; fileRef = E206605D2187549000701068 /* PlasmaSwiftLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2066078218754CC00701068 /* BlockHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066075218754CC00701068 /* BlockHeader.swift */; };
+		E2066079218754CC00701068 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066076218754CC00701068 /* Block.swift */; };
+		E206607A218754CC00701068 /* BlockHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066077218754CC00701068 /* BlockHelpers.swift */; };
+		E2066082218754D200701068 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206607C218754D200701068 /* Constants.swift */; };
+		E2066083218754D200701068 /* BigIntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206607D218754D200701068 /* BigIntExtension.swift */; };
+		E2066084218754D200701068 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206607E218754D200701068 /* ArrayExtension.swift */; };
+		E2066085218754D200701068 /* NSRegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206607F218754D200701068 /* NSRegularExpressionExtension.swift */; };
+		E2066086218754D200701068 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066080218754D200701068 /* DataExtension.swift */; };
+		E2066087218754D200701068 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066081218754D200701068 /* StringExtension.swift */; };
+		E206608D218754D900701068 /* MatterErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066089218754D900701068 /* MatterErrors.swift */; };
+		E206608E218754D900701068 /* ListUTXOsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608A218754D900701068 /* ListUTXOsModel.swift */; };
+		E206608F218754D900701068 /* MatterURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608B218754D900701068 /* MatterURLs.swift */; };
+		E2066090218754D900701068 /* ServiceUTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608C218754D900701068 /* ServiceUTXO.swift */; };
+		E2066098218754DF00701068 /* SignedTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066092218754DF00701068 /* SignedTransaction.swift */; };
+		E2066099218754DF00701068 /* TransactionOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066093218754DF00701068 /* TransactionOutput.swift */; };
+		E206609A218754DF00701068 /* TransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066094218754DF00701068 /* TransactionInput.swift */; };
+		E206609B218754DF00701068 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066095218754DF00701068 /* Transaction.swift */; };
+		E206609C218754DF00701068 /* OutputsManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066096218754DF00701068 /* OutputsManagement.swift */; };
+		E206609D218754DF00701068 /* TransactionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066097218754DF00701068 /* TransactionHelpers.swift */; };
+		E206609F218754ED00701068 /* BlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206609E218754ED00701068 /* BlockTests.swift */; };
+		E20660A1218754FB00701068 /* MatterServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A0218754FB00701068 /* MatterServiceTests.swift */; };
+		E20660A32187550100701068 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A22187550100701068 /* TestHelpers.swift */; };
+		E20660A52187550600701068 /* TransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A42187550600701068 /* TransactionTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E20660652187549000701068 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E20660512187549000701068 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E20660592187549000701068;
+			remoteInfo = PlasmaSwiftLib;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		023C09C95B86266F5A8566D1 /* libPods-PlasmaSwiftLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlasmaSwiftLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D2D619B2D6249C630F83C30 /* Pods-PlasmaSwiftLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLib.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLib/Pods-PlasmaSwiftLib.release.xcconfig"; sourceTree = "<group>"; };
+		72870A1728ACF4704F85150C /* libPods-PlasmaSwiftLibTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlasmaSwiftLibTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA9D3CE0AF56C0901A94E512 /* Pods-PlasmaSwiftLibTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLibTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLibTests/Pods-PlasmaSwiftLibTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C47D6535AB1AEDDF61AF58E0 /* Pods-PlasmaSwiftLibTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLibTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLibTests/Pods-PlasmaSwiftLibTests.release.xcconfig"; sourceTree = "<group>"; };
+		DF1A99059C9CB080E9D631C6 /* Pods-PlasmaSwiftLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLib/Pods-PlasmaSwiftLib.debug.xcconfig"; sourceTree = "<group>"; };
+		E206605A2187549000701068 /* PlasmaSwiftLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PlasmaSwiftLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E206605D2187549000701068 /* PlasmaSwiftLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlasmaSwiftLib.h; sourceTree = "<group>"; };
+		E206605E2187549000701068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E20660632187549000701068 /* PlasmaSwiftLibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlasmaSwiftLibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E206606A2187549000701068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2066075218754CC00701068 /* BlockHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockHeader.swift; sourceTree = "<group>"; };
+		E2066076218754CC00701068 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		E2066077218754CC00701068 /* BlockHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockHelpers.swift; sourceTree = "<group>"; };
+		E206607C218754D200701068 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E206607D218754D200701068 /* BigIntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigIntExtension.swift; sourceTree = "<group>"; };
+		E206607E218754D200701068 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		E206607F218754D200701068 /* NSRegularExpressionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtension.swift; sourceTree = "<group>"; };
+		E2066080218754D200701068 /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
+		E2066081218754D200701068 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		E2066089218754D900701068 /* MatterErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterErrors.swift; sourceTree = "<group>"; };
+		E206608A218754D900701068 /* ListUTXOsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUTXOsModel.swift; sourceTree = "<group>"; };
+		E206608B218754D900701068 /* MatterURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterURLs.swift; sourceTree = "<group>"; };
+		E206608C218754D900701068 /* ServiceUTXO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceUTXO.swift; sourceTree = "<group>"; };
+		E2066092218754DF00701068 /* SignedTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignedTransaction.swift; sourceTree = "<group>"; };
+		E2066093218754DF00701068 /* TransactionOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionOutput.swift; sourceTree = "<group>"; };
+		E2066094218754DF00701068 /* TransactionInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionInput.swift; sourceTree = "<group>"; };
+		E2066095218754DF00701068 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		E2066096218754DF00701068 /* OutputsManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputsManagement.swift; sourceTree = "<group>"; };
+		E2066097218754DF00701068 /* TransactionHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHelpers.swift; sourceTree = "<group>"; };
+		E206609E218754ED00701068 /* BlockTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTests.swift; sourceTree = "<group>"; };
+		E20660A0218754FB00701068 /* MatterServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterServiceTests.swift; sourceTree = "<group>"; };
+		E20660A22187550100701068 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		E20660A42187550600701068 /* TransactionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E20660572187549000701068 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32778184F69F5B6E021AB8DB /* libPods-PlasmaSwiftLib.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E20660602187549000701068 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E20660642187549000701068 /* PlasmaSwiftLib.framework in Frameworks */,
+				DD0E29D3B5102A4EBC291F1D /* libPods-PlasmaSwiftLibTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AD8054CE43AFEF90EB114A24 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				023C09C95B86266F5A8566D1 /* libPods-PlasmaSwiftLib.a */,
+				72870A1728ACF4704F85150C /* libPods-PlasmaSwiftLibTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E012A20CCF85A8E7123B498A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DF1A99059C9CB080E9D631C6 /* Pods-PlasmaSwiftLib.debug.xcconfig */,
+				0D2D619B2D6249C630F83C30 /* Pods-PlasmaSwiftLib.release.xcconfig */,
+				AA9D3CE0AF56C0901A94E512 /* Pods-PlasmaSwiftLibTests.debug.xcconfig */,
+				C47D6535AB1AEDDF61AF58E0 /* Pods-PlasmaSwiftLibTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E20660502187549000701068 = {
+			isa = PBXGroup;
+			children = (
+				E206605C2187549000701068 /* PlasmaSwiftLib */,
+				E20660672187549000701068 /* PlasmaSwiftLibTests */,
+				E206605B2187549000701068 /* Products */,
+				E012A20CCF85A8E7123B498A /* Pods */,
+				AD8054CE43AFEF90EB114A24 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E206605B2187549000701068 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E206605A2187549000701068 /* PlasmaSwiftLib.framework */,
+				E20660632187549000701068 /* PlasmaSwiftLibTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E206605C2187549000701068 /* PlasmaSwiftLib */ = {
+			isa = PBXGroup;
+			children = (
+				E2066091218754DF00701068 /* Transaction */,
+				E2066088218754D900701068 /* MatterService */,
+				E206607B218754D200701068 /* Helpers */,
+				E2066074218754CC00701068 /* Block */,
+				E206605D2187549000701068 /* PlasmaSwiftLib.h */,
+				E206605E2187549000701068 /* Info.plist */,
+			);
+			path = PlasmaSwiftLib;
+			sourceTree = "<group>";
+		};
+		E20660672187549000701068 /* PlasmaSwiftLibTests */ = {
+			isa = PBXGroup;
+			children = (
+				E20660A0218754FB00701068 /* MatterServiceTests.swift */,
+				E20660A42187550600701068 /* TransactionTests.swift */,
+				E20660A22187550100701068 /* TestHelpers.swift */,
+				E206609E218754ED00701068 /* BlockTests.swift */,
+				E206606A2187549000701068 /* Info.plist */,
+			);
+			path = PlasmaSwiftLibTests;
+			sourceTree = "<group>";
+		};
+		E2066074218754CC00701068 /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				E2066075218754CC00701068 /* BlockHeader.swift */,
+				E2066076218754CC00701068 /* Block.swift */,
+				E2066077218754CC00701068 /* BlockHelpers.swift */,
+			);
+			path = Block;
+			sourceTree = "<group>";
+		};
+		E206607B218754D200701068 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E206607C218754D200701068 /* Constants.swift */,
+				E206607D218754D200701068 /* BigIntExtension.swift */,
+				E206607E218754D200701068 /* ArrayExtension.swift */,
+				E206607F218754D200701068 /* NSRegularExpressionExtension.swift */,
+				E2066080218754D200701068 /* DataExtension.swift */,
+				E2066081218754D200701068 /* StringExtension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E2066088218754D900701068 /* MatterService */ = {
+			isa = PBXGroup;
+			children = (
+				E2066089218754D900701068 /* MatterErrors.swift */,
+				E206608A218754D900701068 /* ListUTXOsModel.swift */,
+				E206608B218754D900701068 /* MatterURLs.swift */,
+				E206608C218754D900701068 /* ServiceUTXO.swift */,
+			);
+			path = MatterService;
+			sourceTree = "<group>";
+		};
+		E2066091218754DF00701068 /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				E2066092218754DF00701068 /* SignedTransaction.swift */,
+				E2066093218754DF00701068 /* TransactionOutput.swift */,
+				E2066094218754DF00701068 /* TransactionInput.swift */,
+				E2066095218754DF00701068 /* Transaction.swift */,
+				E2066096218754DF00701068 /* OutputsManagement.swift */,
+				E2066097218754DF00701068 /* TransactionHelpers.swift */,
+			);
+			path = Transaction;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E20660552187549000701068 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E206606B2187549000701068 /* PlasmaSwiftLib.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E20660592187549000701068 /* PlasmaSwiftLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E206606E2187549000701068 /* Build configuration list for PBXNativeTarget "PlasmaSwiftLib" */;
+			buildPhases = (
+				AF607BF10AE55A02C41FF971 /* [CP] Check Pods Manifest.lock */,
+				E20660552187549000701068 /* Headers */,
+				E20660562187549000701068 /* Sources */,
+				E20660572187549000701068 /* Frameworks */,
+				E20660582187549000701068 /* Resources */,
+				E20660A62187560000701068 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlasmaSwiftLib;
+			productName = PlasmaSwiftLib;
+			productReference = E206605A2187549000701068 /* PlasmaSwiftLib.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E20660622187549000701068 /* PlasmaSwiftLibTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E20660712187549000701068 /* Build configuration list for PBXNativeTarget "PlasmaSwiftLibTests" */;
+			buildPhases = (
+				BC55984DA4DED3788CD46284 /* [CP] Check Pods Manifest.lock */,
+				E206605F2187549000701068 /* Sources */,
+				E20660602187549000701068 /* Frameworks */,
+				E20660612187549000701068 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E20660662187549000701068 /* PBXTargetDependency */,
+			);
+			name = PlasmaSwiftLibTests;
+			productName = PlasmaSwiftLibTests;
+			productReference = E20660632187549000701068 /* PlasmaSwiftLibTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E20660512187549000701068 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "The Matter";
+				TargetAttributes = {
+					E20660592187549000701068 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					E20660622187549000701068 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+				};
+			};
+			buildConfigurationList = E20660542187549000701068 /* Build configuration list for PBXProject "PlasmaSwiftLib" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E20660502187549000701068;
+			productRefGroup = E206605B2187549000701068 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E20660592187549000701068 /* PlasmaSwiftLib */,
+				E20660622187549000701068 /* PlasmaSwiftLibTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E20660582187549000701068 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E20660612187549000701068 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AF607BF10AE55A02C41FF971 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PlasmaSwiftLib-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC55984DA4DED3788CD46284 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PlasmaSwiftLibTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E20660A62187560000701068 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nswiftlint autocorrect\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E20660562187549000701068 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2066078218754CC00701068 /* BlockHeader.swift in Sources */,
+				E206607A218754CC00701068 /* BlockHelpers.swift in Sources */,
+				E2066083218754D200701068 /* BigIntExtension.swift in Sources */,
+				E2066084218754D200701068 /* ArrayExtension.swift in Sources */,
+				E2066098218754DF00701068 /* SignedTransaction.swift in Sources */,
+				E2066079218754CC00701068 /* Block.swift in Sources */,
+				E206609B218754DF00701068 /* Transaction.swift in Sources */,
+				E2066087218754D200701068 /* StringExtension.swift in Sources */,
+				E206609A218754DF00701068 /* TransactionInput.swift in Sources */,
+				E2066099218754DF00701068 /* TransactionOutput.swift in Sources */,
+				E206608F218754D900701068 /* MatterURLs.swift in Sources */,
+				E206608E218754D900701068 /* ListUTXOsModel.swift in Sources */,
+				E2066086218754D200701068 /* DataExtension.swift in Sources */,
+				E206609C218754DF00701068 /* OutputsManagement.swift in Sources */,
+				E206608D218754D900701068 /* MatterErrors.swift in Sources */,
+				E2066085218754D200701068 /* NSRegularExpressionExtension.swift in Sources */,
+				E2066082218754D200701068 /* Constants.swift in Sources */,
+				E2066090218754D900701068 /* ServiceUTXO.swift in Sources */,
+				E206609D218754DF00701068 /* TransactionHelpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E206605F2187549000701068 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E20660A1218754FB00701068 /* MatterServiceTests.swift in Sources */,
+				E206609F218754ED00701068 /* BlockTests.swift in Sources */,
+				E20660A52187550600701068 /* TransactionTests.swift in Sources */,
+				E20660A32187550100701068 /* TestHelpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E20660662187549000701068 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E20660592187549000701068 /* PlasmaSwiftLib */;
+			targetProxy = E20660652187549000701068 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E206606C2187549000701068 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E206606D2187549000701068 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E206606F2187549000701068 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF1A99059C9CB080E9D631C6 /* Pods-PlasmaSwiftLib.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PlasmaSwiftLib/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.thematter.PlasmaSwiftLib;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E20660702187549000701068 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D2D619B2D6249C630F83C30 /* Pods-PlasmaSwiftLib.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PlasmaSwiftLib/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.thematter.PlasmaSwiftLib;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E20660722187549000701068 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA9D3CE0AF56C0901A94E512 /* Pods-PlasmaSwiftLibTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PlasmaSwiftLibTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.thematter.PlasmaSwiftLibTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E20660732187549000701068 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C47D6535AB1AEDDF61AF58E0 /* Pods-PlasmaSwiftLibTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PlasmaSwiftLibTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.thematter.PlasmaSwiftLibTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E20660542187549000701068 /* Build configuration list for PBXProject "PlasmaSwiftLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E206606C2187549000701068 /* Debug */,
+				E206606D2187549000701068 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E206606E2187549000701068 /* Build configuration list for PBXNativeTarget "PlasmaSwiftLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E206606F2187549000701068 /* Debug */,
+				E20660702187549000701068 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E20660712187549000701068 /* Build configuration list for PBXNativeTarget "PlasmaSwiftLibTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E20660722187549000701068 /* Debug */,
+				E20660732187549000701068 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E20660512187549000701068 /* Project object */;
+}
