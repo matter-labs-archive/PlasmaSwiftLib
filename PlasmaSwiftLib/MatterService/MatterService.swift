@@ -9,7 +9,7 @@
 import Foundation
 import EthereumAddress
 
-public final class ServiceUTXO {
+public final class MatterService {
     
     public init() {}
     
