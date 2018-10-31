@@ -33,3 +33,13 @@ public final class ListUTXOsModel {
         return TransactionInput(blockNumber: self.blockNumber, txNumberInBlock: self.transactionNumber, outputNumberInTx: self.outputNumber, amount: self.value)
     }
 }
+
+extension ListUTXOsModel: Equatable {
+    public static func ==(lhs: ListUTXOsModel, rhs: ListUTXOsModel) -> Bool {
+        let equalUTXOs = lhs.blockNumber == rhs.blockNumber &&
+            lhs.outputNumber == rhs.outputNumber &&
+            lhs.transactionNumber == rhs.transactionNumber &&
+            lhs.value == rhs.value
+        return equalUTXOs
+    }
+}
