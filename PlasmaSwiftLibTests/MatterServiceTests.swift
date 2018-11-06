@@ -49,8 +49,8 @@ class MatterServiceTests: XCTestCase {
         MatterService().getListUTXOs(for: address, onTestnet: true) { (result) in
             switch result {
             case .Success(let r):
-                if r.count != 1 {
-                    XCTFail("The inputs count \(r.count) is wrong")
+                guard r.count == 1 else {
+                    print("The inputs count \(r.count) is wrong")
                     completedSendExpectation.fulfill()
                     return
                 }
@@ -100,8 +100,8 @@ class MatterServiceTests: XCTestCase {
         MatterService().getListUTXOs(for: address, onTestnet: true) { (result) in
             switch result {
             case .Success(let r):
-                if r.count < 2 {
-                    XCTFail("The inputs count \(r.count) is wrong")
+                guard r.count == 2 else {
+                    print("The inputs count \(r.count) is wrong")
                     completedSendExpectation.fulfill()
                     return
                 }
