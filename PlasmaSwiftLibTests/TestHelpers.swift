@@ -12,7 +12,7 @@ import BigInt
 @testable import PlasmaSwiftLib
 
 class TestHelpers: XCTestCase {
-    
+
 //    func formBlockHeaderForBlock() -> BlockHeader? {
 //        let blockNumber: BigUInt = 10
 //        let numberOfTxInBlock: BigUInt = 2

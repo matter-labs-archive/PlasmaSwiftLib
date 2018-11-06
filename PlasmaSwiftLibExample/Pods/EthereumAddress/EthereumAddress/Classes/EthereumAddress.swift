@@ -14,7 +14,7 @@ public struct EthereumAddress: Equatable {
         case normal
         case contractDeployment
     }
-    
+
     public var isValid: Bool {
         get {
             switch self.type {
@@ -23,7 +23,7 @@ public struct EthereumAddress: Equatable {
             case .contractDeployment:
                 return true
             }
-            
+
         }
     }
     var _address: String
@@ -32,7 +32,7 @@ public struct EthereumAddress: Equatable {
         return lhs.addressData == rhs.addressData && lhs.type == rhs.type
         //        return lhs.address.lowercased() == rhs.address.lowercased() && lhs.type == rhs.type
     }
-    
+
     public var addressData: Data {
         get {
             switch self.type {
@@ -54,12 +54,12 @@ public struct EthereumAddress: Equatable {
             return "0x"
         }
     }
-    
+
     public static func toChecksumAddress(_ addr: String) -> String? {
         let address = addr.lowercased().stripHexPrefix()
         guard let hash = address.data(using: .ascii)?.sha3(.keccak256).toHexString().stripHexPrefix() else {return nil}
         var ret = "0x"
-        
+
         for (i, char) in address.enumerated() {
             let startIdx = hash.index(hash.startIndex, offsetBy: i)
             let endIdx = hash.index(hash.startIndex, offsetBy: i+1)
@@ -74,7 +74,7 @@ public struct EthereumAddress: Equatable {
         }
         return ret
     }
-    
+
     public init?(_ addressString: String, type: AddressType = .normal, ignoreChecksum: Bool = false) {
         switch type {
         case .normal:
@@ -110,23 +110,23 @@ public struct EthereumAddress: Equatable {
             self.type = .contractDeployment
         }
     }
-    
+
     public init?(_ addressData: Data, type: AddressType = .normal) {
         guard addressData.count == 20 else {return nil}
         self._address = addressData.toHexString().addHexPrefix()
         self.type = type
     }
-    
+
     public static func contractDeploymentAddress() -> EthereumAddress {
         return EthereumAddress("0x", type: .contractDeployment)!
     }
-    
+
     //    public static func fromIBAN(_ iban: String) -> EthereumAddress {
     //
     //    }
-    
+
 }
 
 extension EthereumAddress: Hashable {
-    
+
 }

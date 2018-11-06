@@ -2,15 +2,15 @@ PODS:
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - CryptoSwift (0.13.0)
-  - EthereumABI (1.1.1):
+  - EthereumABI (1.2.0):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.13)
-    - EthereumAddress (~> 1.0.0)
-  - EthereumAddress (1.0.0):
+    - EthereumAddress (~> 1.1.0)
+  - EthereumAddress (1.1.0):
     - CryptoSwift (~> 0.13)
   - secp256k1_swift (1.0.3)
   - SipHash (1.2.2)
-  - SwiftRLP (1.1):
+  - SwiftRLP (1.2):
     - BigInt (~> 3.1)
 
 DEPENDENCIES:
@@ -34,12 +34,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
-  EthereumABI: f040f5429e5a4366d028c88b88d9441e137593af
-  EthereumAddress: f476e1320dca3a0024431e713ede7a09c7eb7796
+  EthereumABI: 3e7b3916d8c516c690e3b661ead56652a937cd79
+  EthereumAddress: 7a948eff69b004daffe719860c772496af4f4fd7
   secp256k1_swift: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
-  SwiftRLP: 5512899925f1a9e1c78c902ed3bf857880e814a0
+  SwiftRLP: 98a02b2210128353ca02e4c2f4d83e2a9796db4f
 
 PODFILE CHECKSUM: 681c99c2cc0cf3a45eef90f1a6687de707fcf6cb
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2

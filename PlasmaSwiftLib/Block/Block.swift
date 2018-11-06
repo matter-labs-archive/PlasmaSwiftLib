@@ -18,18 +18,18 @@ public class Block {
     public var data: Data {
         return self.serialize()
     }
-    
+
     public init?(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]) {
-        
+
         self.blockHeader = blockHeader
         self.signedTransactions = signedTransactions
     }
-    
+
     public init?(data: Data) {
         guard data.count > blockHeaderByteLength else {return nil}
         let headerData = Data(data[0 ..< blockHeaderByteLength])
         guard let blockHeader = BlockHeader(data: headerData) else {return nil}
-        
+
         let transactionsData = Data(data[Int(blockHeaderByteLength) ..< data.count])
         guard let item = RLP.decode(transactionsData) else {return nil}
         guard let dataArray = item[0] else {return nil}
@@ -44,7 +44,7 @@ public class Block {
         }
         self.signedTransactions = transactions
     }
-    
+
     public func serialize() -> Data {
         let headerData = self.blockHeader.data
         var txArray = [Data]()
@@ -61,6 +61,6 @@ extension Block: Equatable {
     public static func ==(lhs: Block, rhs: Block) -> Bool {
         return lhs.blockHeader == rhs.blockHeader &&
             lhs.signedTransactions == rhs.signedTransactions
-        
+
     }
 }

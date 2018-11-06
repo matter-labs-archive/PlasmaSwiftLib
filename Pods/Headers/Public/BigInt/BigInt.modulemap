@@ -1,6 +1,1 @@
-module BigInt {
-  umbrella header "BigInt-umbrella.h"
-
-  export *
-  module * { export * }
-}
+/Users/antongrigorev/Developer/PlasmaSwiftLib/Pods/Target Support Files/BigInt/BigInt.modulemap

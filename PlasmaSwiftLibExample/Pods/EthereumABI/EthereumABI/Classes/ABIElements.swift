@@ -14,7 +14,7 @@ public extension ABI {
         var indexed: Bool?
         var components: [Input]?
     }
-    
+
     public struct Output: Decodable {
         var name: String?
         var type: String
@@ -31,24 +31,24 @@ public extension ABI {
         var outputs: [ABI.Output]?
         var anonymous: Bool?
     }
-    
+
     public enum Element {
         public enum ArraySize { //bytes for convenience
             case staticSize(UInt64)
             case dynamicSize
             case notArray
         }
-        
+
         case function(Function)
         case constructor(Constructor)
         case fallback(Fallback)
         case event(Event)
-        
+
         public struct InOut {
             public let name: String
             public let type: ParameterType
         }
-        
+
         public struct Function {
             public let name: String?
             public let inputs: [InOut]
@@ -56,23 +56,23 @@ public extension ABI {
             public let constant: Bool
             public let payable: Bool
         }
-        
+
         public struct Constructor {
             let inputs: [InOut]
             let constant: Bool
             let payable: Bool
         }
-        
+
         public struct Fallback {
             let constant: Bool
             let payable: Bool
         }
-        
+
         public struct Event {
             let name: String
             let inputs: [Input]
             let anonymous: Bool
-            
+
             struct Input {
                 let name: String
                 let type: ParameterType
@@ -122,7 +122,7 @@ extension ABI.Element {
                 }
                 return returnArray
             }
-            
+
             guard function.outputs.count*32 <= data.count else {return nil}
             var returnArray = [String: Any]()
             var i = 0
@@ -138,7 +138,7 @@ extension ABI.Element {
             return returnArray
         }
     }
-    
+
     public func decodeInputData(_ rawData: Data) -> [String: Any]? {
         var data = rawData
         var sig: Data?
@@ -163,7 +163,7 @@ extension ABI.Element {
                 }
                 return returnArray
             }
-            
+
             guard function.inputs.count*32 <= data.count else {return nil}
             var returnArray = [String: Any]()
             var i = 0
@@ -195,7 +195,7 @@ extension ABI.Element {
                 }
                 return returnArray
             }
-            
+
             guard function.inputs.count*32 <= data.count else {return nil}
             var returnArray = [String: Any]()
             var i = 0

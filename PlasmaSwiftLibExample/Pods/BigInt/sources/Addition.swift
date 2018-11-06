@@ -8,7 +8,7 @@
 
 extension BigUInt {
     // MARK: Addition
-    
+
     /// Add `word` to this integer in place.
     /// `word` is shifted `shift` words to the left before being added.
     ///

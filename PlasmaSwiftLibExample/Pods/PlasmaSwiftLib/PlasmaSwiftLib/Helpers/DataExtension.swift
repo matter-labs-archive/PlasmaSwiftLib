@@ -10,18 +10,18 @@ import Foundation
 import CryptoSwift
 
 public extension Data {
-    
+
     init<T>(fromArray values: [T]) {
         var values = values
         self.init(buffer: UnsafeBufferPointer(start: &values, count: values.count))
     }
-    
+
     func toArray<T>(type: T.Type) -> [T] {
         return self.withUnsafeBytes {
             [T](UnsafeBufferPointer(start: $0, count: self.count/MemoryLayout<T>.stride))
         }
     }
-    
+
     public func constantTimeComparisonTo(_ other: Data?) -> Bool {
         guard let rhs = other else {return false}
         guard self.count == rhs.count else {return false}
@@ -31,7 +31,7 @@ public extension Data {
         }
         return difference == UInt8(0x00)
     }
-    
+
     public static func zero(_ data: inout Data) {
         let count = data.count
         data.withUnsafeMutableBytes { (dataPtr: UnsafeMutablePointer<UInt8>) in
@@ -53,7 +53,7 @@ public extension Data {
         }
         return nil
     }
-    
+
     static func fromHex(_ hex: String) -> Data? {
         let string = hex.lowercased().stripHexPrefix()
         let array = Array<UInt8>(hex: string)
@@ -66,7 +66,7 @@ public extension Data {
         }
         return Data(array)
     }
-    
+
     func bitsInRange(_ startingBit: Int, _ length: Int) -> UInt64? { //return max of 8 bytes for simplicity, non-public
         if startingBit + length / 8 > self.count, length > 64, startingBit > 0, length >= 1 {return nil}
         let bytes = self[(startingBit/8) ..< (startingBit+length+7)/8]
@@ -97,7 +97,7 @@ extension Data {
         data.append(self)
         return data
     }
-    
+
     func setLengthRight(_ toBytes: UInt64, isNegative: Bool = false ) -> Data? {
         let existingLength = UInt64(self.count)
         if (existingLength == toBytes) {

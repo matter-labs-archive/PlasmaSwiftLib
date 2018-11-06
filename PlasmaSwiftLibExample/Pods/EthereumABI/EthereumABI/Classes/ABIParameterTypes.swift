@@ -21,7 +21,7 @@ extension ABI.Element {
         case dynamicBytes
         case string
         indirect case tuple(types: [ParameterType])
-        
+
         var isStatic: Bool {
             switch self {
             case .string:
@@ -49,7 +49,7 @@ extension ABI.Element {
                 return true
             }
         }
-        
+
         var isArray: Bool {
             switch self {
             case .array(type: _, length: _):
@@ -58,7 +58,7 @@ extension ABI.Element {
                 return false
             }
         }
-        
+
         var isTuple: Bool {
             switch self {
             case .tuple:
@@ -67,7 +67,7 @@ extension ABI.Element {
                 return false
             }
         }
-        
+
         var subtype: ABI.Element.ParameterType? {
             switch self {
             case .array(type: let type, length: _):
@@ -76,7 +76,7 @@ extension ABI.Element {
                 return nil
             }
         }
-        
+
         var memoryUsage: UInt64 {
             switch self {
             case .array(_, length: let length):
@@ -100,7 +100,7 @@ extension ABI.Element {
                 return 32
             }
         }
-        
+
         var emptyValue: Any {
             switch self {
             case .uint(bits: _):
@@ -126,7 +126,7 @@ extension ABI.Element {
                 return [Any]()
             }
         }
-        
+
         var arraySize: ABI.Element.ArraySize {
             switch self {
             case .array(type: _, length: let length):
@@ -139,7 +139,7 @@ extension ABI.Element {
             }
         }
     }
-    
+
 }
 
 extension ABI.Element.ParameterType: Equatable {
@@ -173,11 +173,11 @@ extension ABI.Element.Function {
     public var signature: String {
         return "\(name ?? "")(\(inputs.map { $0.type.abiRepresentation }.joined(separator: ",")))"
     }
-    
+
     public var methodString: String {
         return String(signature.sha3(.keccak256).prefix(8))
     }
-    
+
     public var methodEncoding: Data {
         return signature.data(using: .ascii)!.sha3(.keccak256)[0...3]
     }
@@ -188,7 +188,7 @@ extension ABI.Element.Event {
     public var signature: String {
         return "\(name)(\(inputs.map { $0.type.abiRepresentation }.joined(separator: ",")))"
     }
-    
+
     public var topic: Data {
         return signature.data(using: .ascii)!.sha3(.keccak256)
     }

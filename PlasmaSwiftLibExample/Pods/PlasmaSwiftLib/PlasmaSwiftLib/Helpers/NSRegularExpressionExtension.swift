@@ -10,10 +10,10 @@ import Foundation
 
 extension NSRegularExpression {
     typealias GroupNamesSearchResult = (NSTextCheckingResult, NSTextCheckingResult, Int)
-    
+
     private func textCheckingResultsOfNamedCaptureGroups() -> [String: GroupNamesSearchResult] {
         var groupnames = [String: GroupNamesSearchResult]()
-        
+
         guard let greg = try? NSRegularExpression(pattern: "^\\(\\?<([\\w\\a_-]*)>$", options: NSRegularExpression.Options.dotMatchesLineSeparators) else {
             // This never happens but the alternative is to make this method throwing
             return groupnames
@@ -31,11 +31,11 @@ extension NSRegularExpression {
                 let r2 = gstring.range(from: gmatch[0].range(at: 1))!
                 groupnames[String(gstring[r2])] = (g, gmatch[0], n)
             }
-            
+
         }
         return groupnames
     }
-    
+
     func indexOfNamedCaptureGroups() throws -> [String: Int] {
         var groupnames = [String: Int]()
         for (name, (_, _, n)) in self.textCheckingResultsOfNamedCaptureGroups() {
@@ -43,7 +43,7 @@ extension NSRegularExpression {
         }
         return groupnames
     }
-    
+
     func rangesOfNamedCaptureGroups(match: NSTextCheckingResult) throws -> [String: Range<Int>] {
         var ranges = [String: Range<Int>]()
         for (name, (_, _, n)) in self.textCheckingResultsOfNamedCaptureGroups() {
@@ -51,7 +51,7 @@ extension NSRegularExpression {
         }
         return ranges
     }
-    
+
     private func nameForIndex(_ index: Int, from: [String: GroupNamesSearchResult]) -> String? {
         for (name, (_, _, n)) in from {
             if (n + 1) == index {
@@ -60,11 +60,11 @@ extension NSRegularExpression {
         }
         return nil
     }
-    
+
     func captureGroups(string: String, options: NSRegularExpression.MatchingOptions = []) -> [String: String] {
         return captureGroups(string: string, options: options, range: NSRange(location: 0, length: string.utf16.count))
     }
-    
+
     func captureGroups(string: String, options: NSRegularExpression.MatchingOptions = [], range: NSRange) -> [String: String] {
         var dict = [String: String]()
         let matchResult = matches(in: string, options: options, range: range)

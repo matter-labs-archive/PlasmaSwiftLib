@@ -6,7 +6,7 @@
 import Foundation
 
 extension ABI {
-    
+
     public enum ParsingError: Swift.Error {
         case invalidJsonFile
         case elementTypeInvalid
@@ -18,7 +18,7 @@ extension ABI {
         case parameterTypeNotFound
         case abiInvalid
     }
-    
+
     enum TypeParsingExpressions {
         static var typeEatingRegex = "^((u?int|bytes)([1-9][0-9]*)|(address|bool|string|tuple|bytes)|(\\[([1-9][0-9]*)\\]))"
         static var arrayEatingRegex = "^(\\[([1-9][0-9]*)?\\])?.*$"
@@ -137,7 +137,7 @@ extension ABI.Input {
             return nativeInput
         }
     }
-    
+
     func parseForEvent() throws -> ABI.Element.Event.Input {
         let name = self.name != nil ? self.name! : ""
         let parameterType = try ABITypeParser.parseTypeString(self.type)
