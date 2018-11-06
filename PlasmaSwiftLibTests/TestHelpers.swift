@@ -8,11 +8,73 @@
 
 import XCTest
 import BigInt
+import EthereumAddress
 
 @testable import PlasmaSwiftLib
 
 class TestHelpers: XCTestCase {
-
+    func UTXOsToTransaction(utxos: [ListUTXOsModel], address: EthereumAddress, txType: Transaction.TransactionType) -> Transaction? {
+        var mergedAmount: BigUInt = 0
+        var inputs = [TransactionInput]()
+        for i in utxos {
+            guard let input = i.toTransactionInput() else {
+                return nil
+            }
+            inputs.append(input)
+            mergedAmount += input.amount
+        }
+        guard let output = TransactionOutput(outputNumberInTx: 0, receiverEthereumAddress: address, amount: mergedAmount) else {
+            return nil
+        }
+        let outputs = [output]
+        let transaction = Transaction(txType: .merge, inputs: inputs, outputs: outputs)
+        return transaction
+    }
+    
+    func formInputsForTransaction() -> [TransactionInput]? {
+        let blockNumber1In: BigUInt = 10
+        let txNumberInBlock1In: BigUInt = 1
+        let outputNumberInTx1In: BigUInt = 3
+        let amount1In: BigUInt = 5
+        guard let input1 = TransactionInput(blockNumber: blockNumber1In,
+                                            txNumberInBlock: txNumberInBlock1In,
+                                            outputNumberInTx: outputNumberInTx1In,
+                                            amount: amount1In) else {return nil}
+        
+        let blockNumber2In: BigUInt = 10
+        let txNumberInBlock2In: BigUInt = 1
+        let outputNumberInTx2In: BigUInt = 3
+        let amount2In: BigUInt = 4
+        guard let input2 = TransactionInput(blockNumber: blockNumber2In,
+                                            txNumberInBlock: txNumberInBlock2In,
+                                            outputNumberInTx: outputNumberInTx2In,
+                                            amount: amount2In) else {return nil}
+        return [input1, input2]
+    }
+    
+    func formOutputsForTransaction() -> [TransactionOutput]? {
+        let outputNumberInTx1Out: BigUInt = 3
+        let receiverEthereumAddress1Out: EthereumAddress = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!
+        let amount1Out: BigUInt = 3
+        guard let output1 = TransactionOutput(outputNumberInTx: outputNumberInTx1Out,
+                                              receiverEthereumAddress: receiverEthereumAddress1Out,
+                                              amount: amount1Out) else {return nil}
+        
+        let outputNumberInTx2Out: BigUInt = 3
+        let receiverEthereumAddress2Out: EthereumAddress = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb5")!
+        let amount2Out: BigUInt = 2
+        guard let output2 = TransactionOutput(outputNumberInTx: outputNumberInTx2Out,
+                                              receiverEthereumAddress: receiverEthereumAddress2Out,
+                                              amount: amount2Out) else {return nil}
+        
+        let outputNumberInTx3Out: BigUInt = 3
+        let receiverEthereumAddress3Out: EthereumAddress = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35ca5")!
+        let amount3Out: BigUInt = 4
+        guard let output3 = TransactionOutput(outputNumberInTx: outputNumberInTx3Out,
+                                              receiverEthereumAddress: receiverEthereumAddress3Out,
+                                              amount: amount3Out) else {return nil}
+        return [output1, output2, output3]
+    }
 //    func formBlockHeaderForBlock() -> BlockHeader? {
 //        let blockNumber: BigUInt = 10
 //        let numberOfTxInBlock: BigUInt = 2
