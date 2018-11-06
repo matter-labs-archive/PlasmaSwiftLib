@@ -1,1 +1,0 @@
-/Users/antongrigorev/Developer/PlasmaSwiftLib/Pods/Target Support Files/EthereumAddress/EthereumAddress-umbrella.h
