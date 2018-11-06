@@ -8,7 +8,7 @@ import BigInt
 import EthereumAddress
 
 public struct ABIDecoder {
-    
+
 }
 
 extension ABIDecoder {
@@ -18,7 +18,7 @@ extension ABIDecoder {
         }
         return decode(types: params, data: data)
     }
-    
+
     public static func decode(types: [ABI.Element.ParameterType], data: Data) -> [AnyObject]? {
 //        print("Full data: \n" + data.toHexString())
         var toReturn = [AnyObject]()
@@ -32,7 +32,7 @@ extension ABIDecoder {
         guard toReturn.count == types.count else {return nil}
         return toReturn
     }
-    
+
     public static func decodeSignleType(type: ABI.Element.ParameterType, data: Data, pointer: UInt64 = 0) -> (value: AnyObject?, bytesConsumed: UInt64?) {
         let (elData, nextPtr) = followTheData(type: type, data: data, pointer: pointer)
         guard let elementItself = elData, let nextElementPointer = nextPtr else {
@@ -180,7 +180,7 @@ extension ABIDecoder {
         }
         return (nil, nil)
     }
-    
+
     fileprivate static func followTheData(type: ABI.Element.ParameterType, data: Data, pointer: UInt64 = 0) -> (elementEncoding: Data?, nextElementPointer: UInt64?) {
 //        print("Follow the data: \n" + data.toHexString())
 //        print("At pointer: \n" + String(pointer))
@@ -216,7 +216,7 @@ extension ABIDecoder {
             return (Data(elementItself), nextElement)
         }
     }
-    
+
     public static func decodeLog(event: ABI.Element.Event, eventLogTopics: [Data], eventLogData: Data) -> [String: Any]? {
         if event.topic != eventLogTopics[0] && !event.anonymous {
             return nil

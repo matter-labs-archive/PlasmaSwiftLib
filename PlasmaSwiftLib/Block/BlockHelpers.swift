@@ -11,7 +11,7 @@ import SwiftRLP
 import BigInt
 
 public class BlockHelpers {
-    
+
 //    func serializeBlock(dataArray: RLP.RLPItem) -> Block? {
 //        guard let blockHeaderData = dataArray[0] else {return nil}
 //        guard let signedTransactionsData = dataArray[1] else {return nil}

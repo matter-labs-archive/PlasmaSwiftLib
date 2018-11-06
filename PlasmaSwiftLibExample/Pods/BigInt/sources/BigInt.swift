@@ -38,7 +38,7 @@ public struct BigInt: SignedInteger {
 
     /// The type representing a digit in `BigInt`'s underlying number system.
     public typealias Word = BigUInt.Word
-    
+
     public static var isSigned: Bool {
         return true
     }

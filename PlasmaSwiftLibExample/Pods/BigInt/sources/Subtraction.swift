@@ -97,7 +97,7 @@ extension BigUInt {
         let overflow = result.subtractReportingOverflow(other, shiftedBy: shift)
         return (result, overflow)
     }
-    
+
     /// Subtracts `other` from `self`, returning the result and a flag indicating arithmetic overflow.
     ///
     /// - Note: When the operation overflows, then `partialValue` is the twos' complement of the absolute value of the difference.
@@ -105,7 +105,7 @@ extension BigUInt {
     public func subtractingReportingOverflow(_ other: BigUInt) -> (partialValue: BigUInt, overflow: Bool) {
         return self.subtractingReportingOverflow(other, shiftedBy: 0)
     }
-    
+
     /// Subtract `other` from this integer in place.
     /// `other` is shifted `shift` digits to the left before being subtracted.
     ///

@@ -8,14 +8,14 @@
 
 extension SipHasher {
     // MARK: Appending buffer slices
-    
+
     /// Add the contents of `slice` to this hash.
     ///
     /// - Requires: `finalize()` hasn't been called on this instance yet.
     public mutating func append(_ slice: Slice<UnsafeRawBufferPointer>) {
         self.append(UnsafeRawBufferPointer(rebasing: slice))
     }
-    
+
     // MARK: Appending Integers
 
     /// Add `value` to this hash.

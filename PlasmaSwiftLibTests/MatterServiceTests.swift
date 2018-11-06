@@ -14,7 +14,7 @@ import EthereumAddress
 @testable import PlasmaSwiftLib
 
 class MatterServiceTests: XCTestCase {
-    
+
     func testGetListUTXO() {
         let completedGetListExpectation = expectation(description: "Completed")
         MatterService().getListUTXOs(for: EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!, onTestnet: true) { (result) in
@@ -35,7 +35,7 @@ class MatterServiceTests: XCTestCase {
         }
         waitForExpectations(timeout: 30, handler: nil)
     }
-    
+
     func testSendTransaction() {
         let completedSendExpectation = expectation(description: "Completed")
         let privKey = Data(hex: "36775b4bafc4d906c9035903785fcdb4f0e9e7b5d6f6f1a4b001bb5a4396c391")
@@ -72,7 +72,7 @@ class MatterServiceTests: XCTestCase {
         }
         waitForExpectations(timeout: 30, handler: nil)
     }
-    
+
     func testMergeUTXOs() {
         let completedSendExpectation = expectation(description: "Completed")
         let privKey = Data(hex: "BDBA6C3D375A8454993C247E2A11D3E81C9A2CE9911FF05AC7FF0FCCBAC554B5")

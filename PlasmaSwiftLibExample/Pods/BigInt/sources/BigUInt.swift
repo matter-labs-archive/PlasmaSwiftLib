@@ -339,7 +339,7 @@ extension BigUInt {
 
 extension BigUInt {
     // MARK: Low and High
-    
+
     /// Split this integer into a high-order and a low-order part.
     ///
     /// - Requires: count > 1

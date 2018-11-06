@@ -12,12 +12,12 @@ import BigInt
 import secp256k1_swift
 
 public struct TransactionHelpers {
-    
+
     static func hashForSignature(data: Data) -> Data? {
         let hash = TransactionHelpers.hashPersonalMessage(data)
         return hash
     }
-    
+
     static func hashPersonalMessage(_ personalMessage: Data) -> Data? {
         var prefix = "\u{19}Ethereum Signed Message:\n"
         prefix += String(personalMessage.count)
@@ -32,7 +32,7 @@ public struct TransactionHelpers {
         let hash = data.sha3(.keccak256)
         return hash
     }
-    
+
     static func publicToAddressData(_ publicKey: Data) -> Data? {
         if publicKey.count == 33 {
             guard let decompressedKey = SECP256K1.combineSerializedPublicKeys(keys: [publicKey], outputCompressed: false) else {return nil}

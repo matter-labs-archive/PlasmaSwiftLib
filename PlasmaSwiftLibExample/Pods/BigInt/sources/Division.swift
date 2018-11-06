@@ -147,7 +147,7 @@ extension BigUInt {
     internal mutating func divide(byWord y: Word) -> Word {
         precondition(y > 0)
         if y == 1 { return 0 }
-        
+
         var remainder: Word = 0
         for i in (0 ..< count).reversed() {
             let u = self[i]

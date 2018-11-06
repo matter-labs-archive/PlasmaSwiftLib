@@ -10,7 +10,7 @@ import Foundation
 
 extension BigUInt: Comparable {
     // MARK: Comparison
-    
+
     /// Compare `a` to `b` and return an `NSComparisonResult` indicating their order.
     ///
     /// - Complexity: O(count)
