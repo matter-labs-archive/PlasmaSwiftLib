@@ -139,4 +139,24 @@ class PlasmaServiceTests: XCTestCase {
         }
         waitForExpectations(timeout: 30, handler: nil)
     }
+    
+    func testGetBlock() {
+        let completedSendExpectation = expectation(description: "Completed")
+        PlasmaService().getBlock(onTestnet: true,
+                                 number: 1) { (result) in
+            switch result {
+            case .Success(let block):
+                DispatchQueue.main.async {
+                    print(block)
+                    completedSendExpectation.fulfill()
+                }
+            case .Error(let error):
+                DispatchQueue.main.async {
+                    XCTAssertNil(error)
+                    completedSendExpectation.fulfill()
+                }
+            }
+        }
+        waitForExpectations(timeout: 30, handler: nil)
+    }
 }
