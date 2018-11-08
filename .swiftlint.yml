@@ -1,8 +1,6 @@
 disabled_rules: # rule identifiers to exclude from running
   - identifier_name
   - function_parameter_count
-  - colon
-  - comma
   - control_statement
   - trailing_whitespace
   - line_length
@@ -12,6 +10,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
   - Pods
   - PlasmaSwiftLibExample
+  - PlasmaSwiftLib/Web3/PlasmaUtils.swift
 
 cyclomatic_complexity: 20
 

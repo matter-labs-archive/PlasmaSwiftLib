@@ -9,7 +9,7 @@
 import Foundation
 import BigInt
 
-public final class ListUTXOsModel {
+public final class PlasmaUTXOs {
     public var blockNumber: BigUInt
     public var transactionNumber: BigUInt
     public var outputNumber: BigUInt
@@ -34,8 +34,8 @@ public final class ListUTXOsModel {
     }
 }
 
-extension ListUTXOsModel: Equatable {
-    public static func ==(lhs: ListUTXOsModel, rhs: ListUTXOsModel) -> Bool {
+extension PlasmaUTXOs: Equatable {
+    public static func ==(lhs: PlasmaUTXOs, rhs: PlasmaUTXOs) -> Bool {
         let equalUTXOs = lhs.blockNumber == rhs.blockNumber &&
             lhs.outputNumber == rhs.outputNumber &&
             lhs.transactionNumber == rhs.transactionNumber &&

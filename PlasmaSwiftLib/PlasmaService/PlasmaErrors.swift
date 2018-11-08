@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum MatterErrors: Error {
+enum PlasmaErrors: Error {
     case cantCreateRequest
     case cantConvertTxData
     case noData

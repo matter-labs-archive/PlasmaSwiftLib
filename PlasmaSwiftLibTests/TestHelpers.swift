@@ -13,7 +13,7 @@ import EthereumAddress
 @testable import PlasmaSwiftLib
 
 class TestHelpers: XCTestCase {
-    func UTXOsToTransaction(utxos: [ListUTXOsModel], address: EthereumAddress, txType: Transaction.TransactionType) -> Transaction? {
+    func UTXOsToTransaction(utxos: [PlasmaUTXOs], address: EthereumAddress, txType: Transaction.TransactionType) -> Transaction? {
         var mergedAmount: BigUInt = 0
         var inputs = [TransactionInput]()
         for i in utxos {

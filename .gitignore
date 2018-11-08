@@ -123,7 +123,8 @@ xcuserdata
 #You want the exact same versions installed in all workspaces, you don't want the "latest version".
 !*.lock
 !Podfile.lock
-#Pods/
+# BaldyAsh's addition not to commit Pods/
+Pods/
 
 ####
 # UNKNOWN: recommended by others, but I can't discover what these files are

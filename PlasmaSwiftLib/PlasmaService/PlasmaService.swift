@@ -3,17 +3,17 @@
 //  PlasmaSwiftLib
 //
 //  Created by Anton Grigorev on 21.10.2018.
-//  Copyright © 2018 The Matter. All rights reserved.
+//  Copyright © 2018 The Plasma. All rights reserved.
 //
 
 import Foundation
 import EthereumAddress
 
-public final class MatterService {
+public final class PlasmaService {
 
     public init() {}
 
-    public func getListUTXOs(for address: EthereumAddress, onTestnet: Bool = false, completion: @escaping(Result<[ListUTXOsModel]>) -> Void) {
+    public func getUTXOs(for address: EthereumAddress, onTestnet: Bool = false, completion: @escaping(Result<[PlasmaUTXOs]>) -> Void) {
         let json: [String: Any] = ["for": address.address,
                                    "blockNumber": 1,
                                    "transactionNumber": 0,
@@ -22,9 +22,9 @@ public final class MatterService {
 
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
 
-        guard let request = request(url: onTestnet ? MatterURLs.listUTXOsTestnet : MatterURLs.listUTXOsMainnet,
+        guard let request = request(url: onTestnet ? PlasmaURLs.listUTXOsTestnet : PlasmaURLs.listUTXOsMainnet,
                                     data: jsonData) else {
-            completion(Result.Error(MatterErrors.cantCreateRequest))
+            completion(Result.Error(PlasmaErrors.cantCreateRequest))
             return
         }
 
@@ -34,28 +34,28 @@ public final class MatterService {
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.Error(MatterErrors.badResponse))
+                completion(Result.Error(PlasmaErrors.badResponse))
                 return
             }
             guard httpResponse.statusCode == 200 else {
-                completion(Result.Error(MatterErrors.badResponse))
+                completion(Result.Error(PlasmaErrors.badResponse))
                 return
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 if let utxos = responseJSON["utxos"] as? [[String: Any]] {
-                    var allUTXOs = [ListUTXOsModel]()
+                    var allUTXOs = [PlasmaUTXOs]()
                     for utxo in utxos {
-                        if let model = ListUTXOsModel(json: utxo) {
+                        if let model = PlasmaUTXOs(json: utxo) {
                             allUTXOs.append(model)
                         }
                     }
                     completion(Result.Success(allUTXOs))
                 } else {
-                    completion(Result.Error(MatterErrors.errorInUTXOs))
+                    completion(Result.Error(PlasmaErrors.errorInUTXOs))
                 }
             } else {
-                completion(Result.Error(MatterErrors.noData))
+                completion(Result.Error(PlasmaErrors.noData))
             }
         }
 
@@ -68,9 +68,9 @@ public final class MatterService {
 
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
 
-        guard let request = request(url: onTestnet ? MatterURLs.sendRawTXTestnet : MatterURLs.sendRawTXMainnet,
+        guard let request = request(url: onTestnet ? PlasmaURLs.sendRawTXTestnet : PlasmaURLs.sendRawTXMainnet,
                                     data: jsonData) else {
-            completion(Result.Error(MatterErrors.cantCreateRequest))
+            completion(Result.Error(PlasmaErrors.cantCreateRequest))
             return
         }
 
@@ -80,11 +80,11 @@ public final class MatterService {
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.Error(MatterErrors.badResponse))
+                completion(Result.Error(PlasmaErrors.badResponse))
                 return
             }
             guard httpResponse.statusCode == 200 else {
-                completion(Result.Error(MatterErrors.badResponse))
+                completion(Result.Error(PlasmaErrors.badResponse))
                 return
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -97,7 +97,7 @@ public final class MatterService {
                 }
 
             } else {
-                completion(Result.Error(MatterErrors.noData))
+                completion(Result.Error(PlasmaErrors.noData))
             }
         }
 

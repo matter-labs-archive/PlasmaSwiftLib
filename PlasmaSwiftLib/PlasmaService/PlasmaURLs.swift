@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class MatterURLs {
+public class PlasmaURLs {
 
     public init() {}
 

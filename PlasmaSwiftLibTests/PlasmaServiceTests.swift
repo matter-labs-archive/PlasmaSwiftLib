@@ -13,13 +13,13 @@ import EthereumAddress
 
 @testable import PlasmaSwiftLib
 
-class MatterServiceTests: XCTestCase {
+class PlasmaServiceTests: XCTestCase {
     
     let testHelpers = TestHelpers()
 
     func testGetListUTXO() {
         let completedGetListExpectation = expectation(description: "Completed")
-        MatterService().getListUTXOs(for: EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4")!, onTestnet: true) { (result) in
+        PlasmaService().getUTXOs(for: EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4")!, onTestnet: true) { (result) in
             switch result {
             case .Success(let r):
                 DispatchQueue.main.async {
@@ -46,7 +46,7 @@ class MatterServiceTests: XCTestCase {
             completedSendExpectation.fulfill()
             return
         }
-        MatterService().getListUTXOs(for: address, onTestnet: true) { (result) in
+        PlasmaService().getUTXOs(for: address, onTestnet: true) { (result) in
             switch result {
             case .Success(let r):
                 guard r.count == 1 else {
@@ -65,7 +65,7 @@ class MatterServiceTests: XCTestCase {
                     return
                 }
                 XCTAssertEqual(address, signedTransaction.sender)
-                MatterService().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
+                PlasmaService().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
                     switch result {
                     case .Success(let r):
                         DispatchQueue.main.async {
@@ -97,7 +97,7 @@ class MatterServiceTests: XCTestCase {
             completedSendExpectation.fulfill()
             return
         }
-        MatterService().getListUTXOs(for: address, onTestnet: true) { (result) in
+        PlasmaService().getUTXOs(for: address, onTestnet: true) { (result) in
             switch result {
             case .Success(let r):
                 guard r.count == 2 else {
@@ -116,7 +116,7 @@ class MatterServiceTests: XCTestCase {
                     return
                 }
                 XCTAssertEqual(address, signedTransaction.sender)
-                MatterService().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
+                PlasmaService().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
                     switch result {
                     case .Success(let r):
                         DispatchQueue.main.async {

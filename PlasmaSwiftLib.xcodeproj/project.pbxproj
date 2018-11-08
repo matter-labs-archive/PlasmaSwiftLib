@@ -20,10 +20,10 @@
 		E2066085218754D200701068 /* NSRegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206607F218754D200701068 /* NSRegularExpressionExtension.swift */; };
 		E2066086218754D200701068 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066080218754D200701068 /* DataExtension.swift */; };
 		E2066087218754D200701068 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066081218754D200701068 /* StringExtension.swift */; };
-		E206608D218754D900701068 /* MatterErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066089218754D900701068 /* MatterErrors.swift */; };
-		E206608E218754D900701068 /* ListUTXOsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608A218754D900701068 /* ListUTXOsModel.swift */; };
-		E206608F218754D900701068 /* MatterURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608B218754D900701068 /* MatterURLs.swift */; };
-		E2066090218754D900701068 /* MatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608C218754D900701068 /* MatterService.swift */; };
+		E206608D218754D900701068 /* PlasmaErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066089218754D900701068 /* PlasmaErrors.swift */; };
+		E206608E218754D900701068 /* PlasmaUTXOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608A218754D900701068 /* PlasmaUTXOs.swift */; };
+		E206608F218754D900701068 /* PlasmaURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608B218754D900701068 /* PlasmaURLs.swift */; };
+		E2066090218754D900701068 /* PlasmaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608C218754D900701068 /* PlasmaService.swift */; };
 		E2066098218754DF00701068 /* SignedTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066092218754DF00701068 /* SignedTransaction.swift */; };
 		E2066099218754DF00701068 /* TransactionOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066093218754DF00701068 /* TransactionOutput.swift */; };
 		E206609A218754DF00701068 /* TransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066094218754DF00701068 /* TransactionInput.swift */; };
@@ -31,11 +31,11 @@
 		E206609C218754DF00701068 /* OutputsManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066096218754DF00701068 /* OutputsManagement.swift */; };
 		E206609D218754DF00701068 /* TransactionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066097218754DF00701068 /* TransactionHelpers.swift */; };
 		E206609F218754ED00701068 /* BlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206609E218754ED00701068 /* BlockTests.swift */; };
-		E20660A1218754FB00701068 /* MatterServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A0218754FB00701068 /* MatterServiceTests.swift */; };
+		E20660A1218754FB00701068 /* PlasmaServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A0218754FB00701068 /* PlasmaServiceTests.swift */; };
 		E20660A32187550100701068 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A22187550100701068 /* TestHelpers.swift */; };
 		E20660A52187550600701068 /* TransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A42187550600701068 /* TransactionTests.swift */; };
 		E2DCA664219397BA00F94FBA /* Web3TransactionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCA663219397BA00F94FBA /* Web3TransactionsService.swift */; };
-		E2DCA6662193A58300F94FBA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCA6652193A58300F94FBA /* Utils.swift */; };
+		E2DCA6662193A58300F94FBA /* PlasmaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCA6652193A58300F94FBA /* PlasmaUtils.swift */; };
 		E2DCA6682193BF8E00F94FBA /* PlasmaContractMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCA6672193BF8E00F94FBA /* PlasmaContractMethods.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,10 +70,10 @@
 		E206607F218754D200701068 /* NSRegularExpressionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtension.swift; sourceTree = "<group>"; };
 		E2066080218754D200701068 /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		E2066081218754D200701068 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		E2066089218754D900701068 /* MatterErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterErrors.swift; sourceTree = "<group>"; };
-		E206608A218754D900701068 /* ListUTXOsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUTXOsModel.swift; sourceTree = "<group>"; };
-		E206608B218754D900701068 /* MatterURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterURLs.swift; sourceTree = "<group>"; };
-		E206608C218754D900701068 /* MatterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterService.swift; sourceTree = "<group>"; };
+		E2066089218754D900701068 /* PlasmaErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaErrors.swift; sourceTree = "<group>"; };
+		E206608A218754D900701068 /* PlasmaUTXOs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaUTXOs.swift; sourceTree = "<group>"; };
+		E206608B218754D900701068 /* PlasmaURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaURLs.swift; sourceTree = "<group>"; };
+		E206608C218754D900701068 /* PlasmaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaService.swift; sourceTree = "<group>"; };
 		E2066092218754DF00701068 /* SignedTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignedTransaction.swift; sourceTree = "<group>"; };
 		E2066093218754DF00701068 /* TransactionOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionOutput.swift; sourceTree = "<group>"; };
 		E2066094218754DF00701068 /* TransactionInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionInput.swift; sourceTree = "<group>"; };
@@ -81,11 +81,11 @@
 		E2066096218754DF00701068 /* OutputsManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputsManagement.swift; sourceTree = "<group>"; };
 		E2066097218754DF00701068 /* TransactionHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHelpers.swift; sourceTree = "<group>"; };
 		E206609E218754ED00701068 /* BlockTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTests.swift; sourceTree = "<group>"; };
-		E20660A0218754FB00701068 /* MatterServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterServiceTests.swift; sourceTree = "<group>"; };
+		E20660A0218754FB00701068 /* PlasmaServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaServiceTests.swift; sourceTree = "<group>"; };
 		E20660A22187550100701068 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		E20660A42187550600701068 /* TransactionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTests.swift; sourceTree = "<group>"; };
 		E2DCA663219397BA00F94FBA /* Web3TransactionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3TransactionsService.swift; sourceTree = "<group>"; };
-		E2DCA6652193A58300F94FBA /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		E2DCA6652193A58300F94FBA /* PlasmaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaUtils.swift; sourceTree = "<group>"; };
 		E2DCA6672193BF8E00F94FBA /* PlasmaContractMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaContractMethods.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,7 +156,7 @@
 				E2DCA662219397A600F94FBA /* Web3 */,
 				E2066074218754CC00701068 /* Block */,
 				E2066091218754DF00701068 /* Transaction */,
-				E2066088218754D900701068 /* MatterService */,
+				E2066088218754D900701068 /* PlasmaService */,
 				E206607B218754D200701068 /* Helpers */,
 				E206605D2187549000701068 /* PlasmaSwiftLib.h */,
 				E206605E2187549000701068 /* Info.plist */,
@@ -167,7 +167,7 @@
 		E20660672187549000701068 /* PlasmaSwiftLibTests */ = {
 			isa = PBXGroup;
 			children = (
-				E20660A0218754FB00701068 /* MatterServiceTests.swift */,
+				E20660A0218754FB00701068 /* PlasmaServiceTests.swift */,
 				E20660A42187550600701068 /* TransactionTests.swift */,
 				E20660A22187550100701068 /* TestHelpers.swift */,
 				E206609E218754ED00701068 /* BlockTests.swift */,
@@ -199,15 +199,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		E2066088218754D900701068 /* MatterService */ = {
+		E2066088218754D900701068 /* PlasmaService */ = {
 			isa = PBXGroup;
 			children = (
-				E2066089218754D900701068 /* MatterErrors.swift */,
-				E206608A218754D900701068 /* ListUTXOsModel.swift */,
-				E206608B218754D900701068 /* MatterURLs.swift */,
-				E206608C218754D900701068 /* MatterService.swift */,
+				E2066089218754D900701068 /* PlasmaErrors.swift */,
+				E206608A218754D900701068 /* PlasmaUTXOs.swift */,
+				E206608B218754D900701068 /* PlasmaURLs.swift */,
+				E206608C218754D900701068 /* PlasmaService.swift */,
 			);
-			path = MatterService;
+			path = PlasmaService;
 			sourceTree = "<group>";
 		};
 		E2066091218754DF00701068 /* Transaction */ = {
@@ -228,7 +228,7 @@
 			children = (
 				E2DCA663219397BA00F94FBA /* Web3TransactionsService.swift */,
 				E2DCA6672193BF8E00F94FBA /* PlasmaContractMethods.swift */,
-				E2DCA6652193A58300F94FBA /* Utils.swift */,
+				E2DCA6652193A58300F94FBA /* PlasmaUtils.swift */,
 			);
 			path = Web3;
 			sourceTree = "<group>";
@@ -418,16 +418,16 @@
 				E2066087218754D200701068 /* StringExtension.swift in Sources */,
 				E206609A218754DF00701068 /* TransactionInput.swift in Sources */,
 				E2066099218754DF00701068 /* TransactionOutput.swift in Sources */,
-				E206608F218754D900701068 /* MatterURLs.swift in Sources */,
-				E2DCA6662193A58300F94FBA /* Utils.swift in Sources */,
+				E206608F218754D900701068 /* PlasmaURLs.swift in Sources */,
+				E2DCA6662193A58300F94FBA /* PlasmaUtils.swift in Sources */,
 				E2DCA6682193BF8E00F94FBA /* PlasmaContractMethods.swift in Sources */,
-				E206608E218754D900701068 /* ListUTXOsModel.swift in Sources */,
+				E206608E218754D900701068 /* PlasmaUTXOs.swift in Sources */,
 				E2066086218754D200701068 /* DataExtension.swift in Sources */,
 				E206609C218754DF00701068 /* OutputsManagement.swift in Sources */,
-				E206608D218754D900701068 /* MatterErrors.swift in Sources */,
+				E206608D218754D900701068 /* PlasmaErrors.swift in Sources */,
 				E2066085218754D200701068 /* NSRegularExpressionExtension.swift in Sources */,
 				E2066082218754D200701068 /* Constants.swift in Sources */,
-				E2066090218754D900701068 /* MatterService.swift in Sources */,
+				E2066090218754D900701068 /* PlasmaService.swift in Sources */,
 				E2DCA664219397BA00F94FBA /* Web3TransactionsService.swift in Sources */,
 				E206609D218754DF00701068 /* TransactionHelpers.swift in Sources */,
 			);
@@ -437,7 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E20660A1218754FB00701068 /* MatterServiceTests.swift in Sources */,
+				E20660A1218754FB00701068 /* PlasmaServiceTests.swift in Sources */,
 				E206609F218754ED00701068 /* BlockTests.swift in Sources */,
 				E20660A52187550600701068 /* TransactionTests.swift in Sources */,
 				E20660A32187550100701068 /* TestHelpers.swift in Sources */,

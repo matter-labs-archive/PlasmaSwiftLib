@@ -20,7 +20,7 @@ class Web3TransactionsService {
     init(web3: web3, fromAddress: EthereumAddress) {
         self.web3 = web3
         self.fromAddress = fromAddress
-        let address = EthereumAddress(Utils.plasmaAddress)
+        let address = EthereumAddress(PlasmaUtils.plasmaAddress)
         precondition(address != nil)
         self.plasmaAddress = address!
     }
@@ -33,17 +33,17 @@ class Web3TransactionsService {
     }()
     
     private lazy var plasmaContract: web3.web3contract = {
-        let address = EthereumAddress(Utils.plasmaAddress)
+        let address = EthereumAddress(PlasmaUtils.plasmaAddress)
         precondition(address != nil)
-        let contract = self.web3.contract(Utils.plasmaABI, at: address!, abiVersion: 2)
+        let contract = self.web3.contract(PlasmaUtils.plasmaABI, at: address!, abiVersion: 2)
         precondition(contract != nil)
         return contract!
     }()
     
     public func prepareWriteTxPlasma(method: PlasmaContractMethod = .deposit,
-                                value: BigUInt = 0,
-                                parameters: [AnyObject] = [AnyObject](),
-                                extraData: Data = Data()) throws -> WriteTransaction {
+                                     value: BigUInt = 0,
+                                     parameters: [AnyObject] = [AnyObject](),
+                                     extraData: Data = Data()) throws -> WriteTransaction {
         
         let contract = plasmaContract
         var options = defaultOptions
@@ -59,9 +59,9 @@ class Web3TransactionsService {
     }
     
     public func prepareReadTxPlasma(method: PlasmaContractMethod = .withdrawCollateral,
-                                value: BigUInt = 0,
-                                parameters: [AnyObject] = [AnyObject](),
-                                extraData: Data = Data()) throws -> ReadTransaction {
+                                    value: BigUInt = 0,
+                                    parameters: [AnyObject] = [AnyObject](),
+                                    extraData: Data = Data()) throws -> ReadTransaction {
         
         let contract = plasmaContract
         var options = defaultOptions
@@ -80,40 +80,36 @@ class Web3TransactionsService {
                                 proof: Proof,
                                 blockNumber: BigUInt,
                                 outputNumber: BigUInt,
-                                password: String? = nil) -> TransactionSendingResult {
-        guard let txWithdraw = try? prepareReadTxPlasma(method: .withdrawCollateral,
-                                                    value: 0,
-                                                    parameters: [AnyObject](),
-                                                    extraData: Data()) else {return}
-        guard let withdrawCollateral = try? callTxPlasma(transaction: txWithdraw) else {return}
-        guard let withdrawCollateralString = withdrawCollateral.first?.value as? String else {return}
-        guard let withdrawCollateralBigUInt = BigUInt(withdrawCollateralString) else {return}
-        
-        let txSerialized = transaction.serialize()
-        //let transactionHex = txSerialized.hex
-        //let proof = parsedBlock.getProof(txSerialized)
-        //let binaryProof = proof.proof
-        //let proofHex = proof.hex
-        
-        guard let txStartExit = try? prepareWriteTxPlasma(method: .startExit,
-                                                     value: withdrawCollateralBigUInt,
-                                                     parameters: [blockNumber,
-                                                                  outputNumber,
-                                                                  transactionHex,
-                                                                  proofHex],
-                                                     extraData: Data()) else {return}
-        var startExitOptions = txStartExit.transactionOptions
-        startExitOptions.value = withdrawCollateralBigUInt
-    
-        let gas = txStartExit.estimateGas(transactionOptions: startExitOptions)
-        startExitOptions.gasPrice = gas
-        
-        let result = sendTxPlasma(transaction: txStartExit,
-                                  options: startExitOptions,
-                                  password: password)
-        return result
+                                password: String? = nil) throws -> TransactionSendingResult {
+        do {
+            let txWithdraw = try prepareReadTxPlasma(method: .withdrawCollateral,
+                                                      value: 0,
+                                                      parameters: [AnyObject](),
+                                                      extraData: Data())
+            let withdrawCollateral = try callTxPlasma(transaction: txWithdraw)
+            let withdrawCollateralString = withdrawCollateral.first?.value as? String
+            let withdrawCollateralBigUInt = BigUInt(withdrawCollateralString ?? "0.0") ?? BigUInt(0.0)
+            let txHex = transaction.serialize().toHexString()
+            let proofHex = proof.serialize().toHexString()
+            let parameters = [blockNumber,
+                              outputNumber,
+                              txHex,
+                              proofHex] as [AnyObject]
+            let txStartExit = try prepareWriteTxPlasma(method: .startExit,
+                                                       value: withdrawCollateralBigUInt,
+                                                       parameters: parameters,
+                                                       extraData: Data())
+            var startExitOptions = txStartExit.transactionOptions
+            let gas = try txStartExit.estimateGas(transactionOptions: startExitOptions)
+            startExitOptions.gasPrice = .manual(gas)
+            let result = try sendTxPlasma(transaction: txStartExit,
+                                      options: startExitOptions,
+                                      password: password)
+            return result
+        } catch {
+            throw PlasmaErrors.cantCreateRequest
+        }
     }
-    
     
     public func sendTxPlasma(transaction: WriteTransaction,
                              options: TransactionOptions? = nil,
@@ -128,7 +124,7 @@ class Web3TransactionsService {
     }
     
     public func callTxPlasma(transaction: ReadTransaction,
-                             options: TransactionOptions? = nil) throws -> [String : Any] {
+                             options: TransactionOptions? = nil) throws -> [String: Any] {
         let options = options ?? transaction.transactionOptions
         guard let result = try? transaction.call(transactionOptions: options) else {
                 throw Web3Error.processingError(desc: "Can't send transaction")
