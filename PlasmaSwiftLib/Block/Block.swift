@@ -13,7 +13,8 @@ import SwiftRLP
 import BigInt
 
 public class Block {
-    public var blockHeader: BlockHeader
+    //public var blockHeader: BlockHeader
+    public var blockHeader: Data
     public var signedTransactions: [SignedTransaction]
     public var data: Data {
         return self.serialize()
@@ -21,32 +22,33 @@ public class Block {
 
     public init?(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]) {
 
-        self.blockHeader = blockHeader
+        //self.blockHeader = blockHeader
+        self.blockHeader = Data()
         self.signedTransactions = signedTransactions
     }
 
     public init?(data: Data) {
         guard data.count > blockHeaderByteLength else {return nil}
         let headerData = Data(data[0 ..< blockHeaderByteLength])
-        guard let blockHeader = BlockHeader(data: headerData) else {return nil}
+        //guard let blockHeader = BlockHeader(data: headerData) else {return nil}
 
-        let transactionsData = Data(data[Int(blockHeaderByteLength) ..< data.count])
-        guard let item = RLP.decode(transactionsData) else {return nil}
-        guard let dataArray = item[0] else {return nil}
-        guard dataArray.isList else {return nil}
-        self.blockHeader = blockHeader
-        var transactions = [SignedTransaction]()
-        transactions.reserveCapacity(dataArray.count!)
-        for i in 0 ..< dataArray.count! {
-            guard let txData = dataArray[i]!.data else {return nil}
+        let signedTransactionsData = Data(data[Int(blockHeaderByteLength) ..< data.count])
+        guard let item = RLP.decode(signedTransactionsData) else {return nil}
+        guard item.isList else {return nil}
+        self.blockHeader = headerData
+        var signedTransactions = [SignedTransaction]()
+        signedTransactions.reserveCapacity(item.count!)
+        for i in 0 ..< item.count! {
+            guard let txData = item[i]!.data else {return nil}
             guard let tx = SignedTransaction(data: txData) else {return nil}
-            transactions.append(tx)
+            signedTransactions.append(tx)
         }
-        self.signedTransactions = transactions
+        self.signedTransactions = signedTransactions
     }
 
     public func serialize() -> Data {
-        let headerData = self.blockHeader.data
+        //let headerData = self.blockHeader.data
+        let headerData = self.blockHeader
         var txArray = [Data]()
         txArray.reserveCapacity(self.signedTransactions.count)
         for tx in self.signedTransactions {

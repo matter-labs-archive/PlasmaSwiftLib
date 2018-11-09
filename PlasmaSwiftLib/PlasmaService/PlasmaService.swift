@@ -75,7 +75,7 @@ public final class PlasmaService {
     
     public func getBlock(onTestnet: Bool = false,
                          number: BigUInt,
-                         completion: @escaping(Result<String>) -> Void) {
+                         completion: @escaping(Result<Data>) -> Void) {
         var url = onTestnet ? PlasmaURLs.blockStorageTestnet : PlasmaURLs.blockStorageMainnet
         let num = String(number)
         url += num
@@ -86,27 +86,14 @@ public final class PlasmaService {
                                         completion(Result.Error(PlasmaErrors.cantCreateRequest))
                                         return
         }
-        let task = session.downloadTask(with: request) { (tempLocalUrl, _, error) in
-            if let tempLocalUrl = tempLocalUrl, error == nil {
-                guard let block = self.readBlock(from: tempLocalUrl) else {
-                    completion(Result.Error(PlasmaErrors.noData))
-                    return
-                }
-                completion(Result.Success(block))
-            } else {
-                completion(Result.Error(PlasmaErrors.badResponse))
+        let task = session.dataTask(with: request) { (data, _, error) in
+            guard error == nil, let block = data else {
+                completion(Result.Error(PlasmaErrors.noData))
+                return
             }
+            completion(Result.Success(block))
         }
         task.resume()
-    }
-    
-    private func readBlock(from url: URL) -> String? {
-        do {
-            let block = try String(contentsOf: url, encoding: .utf8)
-            return block
-        } catch {
-            return nil
-        }
     }
 
     public func sendRawTX(transaction: SignedTransaction,

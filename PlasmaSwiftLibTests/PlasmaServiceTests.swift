@@ -30,7 +30,6 @@ class PlasmaServiceTests: XCTestCase {
                 }
             case .Error(let error):
                 DispatchQueue.main.async {
-                    XCTAssertNil(error)
                     completedGetListExpectation.fulfill()
                 }
             }
@@ -74,14 +73,12 @@ class PlasmaServiceTests: XCTestCase {
                         }
                     case .Error(let error):
                         DispatchQueue.main.async {
-                            XCTAssertNil(error)
                             completedSendExpectation.fulfill()
                         }
                     }
                 }
             case .Error(let error):
                 DispatchQueue.main.async {
-                    XCTAssertNil(error)
                     completedSendExpectation.fulfill()
                 }
             }
@@ -125,14 +122,12 @@ class PlasmaServiceTests: XCTestCase {
                         }
                     case .Error(let error):
                         DispatchQueue.main.async {
-                            XCTAssertNil(error)
                             completedSendExpectation.fulfill()
                         }
                     }
                 }
             case .Error(let error):
                 DispatchQueue.main.async {
-                    XCTAssertNil(error)
                     completedSendExpectation.fulfill()
                 }
             }
@@ -142,17 +137,19 @@ class PlasmaServiceTests: XCTestCase {
     
     func testGetBlock() {
         let completedSendExpectation = expectation(description: "Completed")
+        let enterBlockNumber = BigUInt(0)
+        let endBlockNumber = BigUInt(1)
         PlasmaService().getBlock(onTestnet: true,
-                                 number: 1) { (result) in
+                                 number: endBlockNumber) { (result) in
             switch result {
             case .Success(let block):
                 DispatchQueue.main.async {
-                    print(block)
+                    let parsedBlock = Block(data: block)
+                    XCTAssertEqual(parsedBlock?.signedTransactions.first?.transaction.inputs.first?.blockNumber, enterBlockNumber)
                     completedSendExpectation.fulfill()
                 }
-            case .Error(let error):
+            case .Error:
                 DispatchQueue.main.async {
-                    XCTAssertNil(error)
                     completedSendExpectation.fulfill()
                 }
             }
