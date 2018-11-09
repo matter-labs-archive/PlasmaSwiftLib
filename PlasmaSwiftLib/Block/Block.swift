@@ -14,7 +14,7 @@ import BigInt
 
 public class Block {
     //public var blockHeader: BlockHeader
-    public var blockHeader: Data
+    public var blockHeader: BlockHeader
     public var signedTransactions: [SignedTransaction]
     public var data: Data {
         return self.serialize()
@@ -23,19 +23,19 @@ public class Block {
     public init?(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]) {
 
         //self.blockHeader = blockHeader
-        self.blockHeader = Data()
+        self.blockHeader = blockHeader
         self.signedTransactions = signedTransactions
     }
 
     public init?(data: Data) {
         guard data.count > blockHeaderByteLength else {return nil}
         let headerData = Data(data[0 ..< blockHeaderByteLength])
-        //guard let blockHeader = BlockHeader(data: headerData) else {return nil}
+        guard let blockHeader = BlockHeader(data: headerData) else {return nil}
+        self.blockHeader = blockHeader
 
         let signedTransactionsData = Data(data[Int(blockHeaderByteLength) ..< data.count])
         guard let item = RLP.decode(signedTransactionsData) else {return nil}
         guard item.isList else {return nil}
-        self.blockHeader = headerData
         var signedTransactions = [SignedTransaction]()
         signedTransactions.reserveCapacity(item.count!)
         for i in 0 ..< item.count! {
@@ -47,8 +47,7 @@ public class Block {
     }
 
     public func serialize() -> Data {
-        //let headerData = self.blockHeader.data
-        let headerData = self.blockHeader
+        let headerData = self.blockHeader.data
         var txArray = [Data]()
         txArray.reserveCapacity(self.signedTransactions.count)
         for tx in self.signedTransactions {

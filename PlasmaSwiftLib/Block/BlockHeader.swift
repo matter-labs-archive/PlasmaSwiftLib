@@ -42,22 +42,89 @@ public struct BlockHeader {
         self.r = r
         self.s = s
     }
-
+    
     public init?(data: Data) {
-        guard let item = RLP.decode(data) else {return nil}
-        guard let dataArray = item[0] else {return nil}
-
-        guard let blockNumberData = dataArray[0]?.data else {return nil}
-        guard let numberOfTxInBlockData = dataArray[1]?.data else {return nil}
-        guard let parentHash = dataArray[2]?.data else {return nil}
-        guard let merkleRootOfTheTxTree = dataArray[3]?.data else {return nil}
-        guard let vData = dataArray[4]?.data else {return nil}
-        guard let r = dataArray[5]?.data else {return nil}
-        guard let s = dataArray[6]?.data else {return nil}
-
-        let blockNumber = BigUInt(blockNumberData)
-        let numberOfTxInBlock = BigUInt(numberOfTxInBlockData)
-        let v = BigUInt(vData)
+        var max = 0
+        var min = 0
+        var elements = [String]()
+        let dataString = data.toHexString()
+        let dataStringArray = dataString.split(intoChunksOf: 2)
+        print(dataString)
+        print(dataStringArray)
+        print(dataStringArray.count)
+        
+//        let array = [UInt8](data)
+//        var elements = [String]()
+//        var max = 0
+//        var min = 0
+//        print(array)
+//        print(array.count)
+        
+        guard dataStringArray.count == Int(blockHeaderByteLength) else {return nil}
+        
+        for i in 0..<7 {
+            var bytes = 0
+            switch i {
+            case 0:
+                bytes = Int(blockNumberByteLength)
+            case 1:
+                bytes = Int(blockNumberByteLength)
+            case 2:
+                bytes = Int(parentHashByteLength)
+            case 3:
+                bytes = Int(merkleRootOfTheTxTreeByteLength)
+            case 4:
+                bytes = Int(vByteLength)
+            case 5:
+                bytes = Int(rByteLength)
+            default:
+                bytes = Int(sByteLength)
+            }
+            min = max
+            max += bytes
+            let elementSlice = dataStringArray[min..<max]
+            let elementArray: [String] = Array(elementSlice)
+            let element = elementArray.joined()
+            elements.append(element)
+        }
+        
+//        let blockNumberStringArray = (elements[0]).map {String($0)}
+//        let blockNumberString = blockNumberStringArray.joined()
+        guard let blockNumberDec = UInt8(elements[0], radix: 16) else {return nil}
+        let blockNumber = BigUInt(blockNumberDec)
+        print(blockNumber)
+        
+//        let numberOfTxInBlockStringArray = (elements[1]).map {String($0)}
+//        let numberOfTxInBlockString = numberOfTxInBlockStringArray.joined()
+        guard let numberOfTxInBlockDec = UInt8(elements[1], radix: 16) else {return nil}
+        let numberOfTxInBlock = BigUInt(numberOfTxInBlockDec)
+        print(numberOfTxInBlock)
+        
+//        let parentHashStringArray = (elements[2]).map {String(format: "%X", $0)}
+//        let parentHashString = parentHashStringArray.joined().lowercased()
+        let parentHash = Data(hex: elements[2])
+        print(elements[2])
+        
+//        let merkleRootOfTheTxTreeStringArray = (elements[3]).map {String(format: "%X", $0)}
+//        let merkleRootOfTheTxTreeString = merkleRootOfTheTxTreeStringArray.joined().lowercased()
+        let merkleRootOfTheTxTree = Data(hex: elements[3])
+        print(elements[3])
+        
+//        let vStringArray = (elements[4]).map {String($0)}
+//        let vString = vStringArray.joined()
+        guard let vDec = UInt8(elements[4], radix: 16) else {return nil}
+        let v = BigUInt(vDec)
+        print(v)
+        
+//        let rStringArray = (elements[5]).map {String(format: "%X", $0)}
+//        let rString = rStringArray.joined().lowercased()
+        let r = Data(hex: elements[5])
+        print(elements[5])
+        
+//        let sStringArray = (elements[6]).map {String(format: "%X", $0)}
+//        let sString = sStringArray.joined().lowercased()
+        let s = Data(hex: elements[6])
+        print(elements[6])
 
         guard blockNumber.bitWidth <= blockNumberMaxWidth else {return nil}
         guard numberOfTxInBlock.bitWidth <= numberOfTxInBlockMaxWidth else {return nil}

@@ -137,15 +137,13 @@ class PlasmaServiceTests: XCTestCase {
     
     func testGetBlock() {
         let completedSendExpectation = expectation(description: "Completed")
-        let enterBlockNumber = BigUInt(0)
-        let endBlockNumber = BigUInt(1)
         PlasmaService().getBlock(onTestnet: true,
-                                 number: endBlockNumber) { (result) in
+                                 number: 9) { (result) in
             switch result {
             case .Success(let block):
                 DispatchQueue.main.async {
                     let parsedBlock = Block(data: block)
-                    XCTAssertEqual(parsedBlock?.signedTransactions.first?.transaction.inputs.first?.blockNumber, enterBlockNumber)
+                    XCTAssertEqual(parsedBlock?.signedTransactions.first?.transaction.inputs.first?.blockNumber, 0)
                     completedSendExpectation.fulfill()
                 }
             case .Error:
