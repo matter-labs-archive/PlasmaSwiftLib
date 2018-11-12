@@ -13,47 +13,48 @@ import SwiftRLP
 import BigInt
 
 public class Block {
-    //public var blockHeader: BlockHeader
     public var blockHeader: BlockHeader
     public var signedTransactions: [SignedTransaction]
     public var data: Data {
-        return self.serialize()
+        do {
+            return try self.serialize()
+        } catch {
+            return Data()
+        }
     }
 
-    public init?(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]) {
-
-        //self.blockHeader = blockHeader
+    public init(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]) {
         self.blockHeader = blockHeader
         self.signedTransactions = signedTransactions
     }
 
-    public init?(data: Data) {
-        guard data.count > blockHeaderByteLength else {return nil}
+    public init(data: Data) throws {
+        guard data.count > blockHeaderByteLength else {throw StructureErrors.wrongDataCount}
         let headerData = Data(data[0 ..< blockHeaderByteLength])
-        guard let blockHeader = BlockHeader(data: headerData) else {return nil}
+        guard let blockHeader = try? BlockHeader(data: headerData) else {throw StructureErrors.wrongData}
         self.blockHeader = blockHeader
 
         let signedTransactionsData = Data(data[Int(blockHeaderByteLength) ..< data.count])
-        guard let item = RLP.decode(signedTransactionsData) else {return nil}
-        guard item.isList else {return nil}
+        guard let item = RLP.decode(signedTransactionsData) else {throw StructureErrors.wrongData}
+        guard item.isList else {throw StructureErrors.isNotList}
         var signedTransactions = [SignedTransaction]()
         signedTransactions.reserveCapacity(item.count!)
         for i in 0 ..< item.count! {
-            guard let txData = item[i]!.data else {return nil}
-            guard let tx = SignedTransaction(data: txData) else {return nil}
+            guard let txData = item[i]!.data else {throw StructureErrors.isNotData}
+            guard let tx = try? SignedTransaction(data: txData) else {throw StructureErrors.wrongData}
             signedTransactions.append(tx)
         }
         self.signedTransactions = signedTransactions
     }
 
-    public func serialize() -> Data {
+    public func serialize() throws -> Data {
         let headerData = self.blockHeader.data
         var txArray = [Data]()
         txArray.reserveCapacity(self.signedTransactions.count)
         for tx in self.signedTransactions {
             txArray.append(tx.data)
         }
-        let txRLP = RLP.encode(txArray as [AnyObject])!
+        guard let txRLP = RLP.encode(txArray as [AnyObject]) else {throw StructureErrors.cantEncodeData}
         return headerData + txRLP
     }
 }
@@ -62,6 +63,5 @@ extension Block: Equatable {
     public static func ==(lhs: Block, rhs: Block) -> Bool {
         return lhs.blockHeader == rhs.blockHeader &&
             lhs.signedTransactions == rhs.signedTransactions
-
     }
 }

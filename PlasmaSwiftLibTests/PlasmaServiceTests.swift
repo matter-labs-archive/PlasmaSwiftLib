@@ -28,7 +28,7 @@ class PlasmaServiceTests: XCTestCase {
                     }
                     completedGetListExpectation.fulfill()
                 }
-            case .Error(let error):
+            case .Error:
                 DispatchQueue.main.async {
                     completedGetListExpectation.fulfill()
                 }
@@ -48,36 +48,33 @@ class PlasmaServiceTests: XCTestCase {
         PlasmaService().getUTXOs(for: address, onTestnet: true) { (result) in
             switch result {
             case .Success(let r):
-                guard r.count == 1 else {
-                    print("The inputs count \(r.count) is wrong")
-                    completedSendExpectation.fulfill()
-                    return
-                }
-                guard let transaction = self.testHelpers.UTXOsToTransaction(utxos: r, address: address, txType: .split) else {
-                    XCTFail("Can't create transaction")
-                    completedSendExpectation.fulfill()
-                    return
-                }
-                guard let signedTransaction = transaction.sign(privateKey: privKey) else {
-                    XCTFail("Can't sign transaction")
-                    completedSendExpectation.fulfill()
-                    return
-                }
-                XCTAssertEqual(address, signedTransaction.sender)
-                PlasmaService().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
-                    switch result {
-                    case .Success(let r):
-                        DispatchQueue.main.async {
-                            XCTAssert(r == true)
-                            completedSendExpectation.fulfill()
-                        }
-                    case .Error(let error):
-                        DispatchQueue.main.async {
-                            completedSendExpectation.fulfill()
+                do {
+                    guard r.count == 1 else {
+                        print("The inputs count \(r.count) is wrong")
+                        completedSendExpectation.fulfill()
+                        return
+                    }
+                    let transaction = try self.testHelpers.UTXOsToTransaction(utxos: r, address: address, txType: .split)
+                    let signedTransaction = try transaction.sign(privateKey: privKey)
+                    XCTAssertEqual(address, signedTransaction.sender)
+                    PlasmaService().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
+                        switch result {
+                        case .Success(let r):
+                            DispatchQueue.main.async {
+                                XCTAssert(r == true)
+                                completedSendExpectation.fulfill()
+                            }
+                        case .Error:
+                            DispatchQueue.main.async {
+                                completedSendExpectation.fulfill()
+                            }
                         }
                     }
+                } catch let error {
+                    XCTFail(error.localizedDescription)
+                    completedSendExpectation.fulfill()
                 }
-            case .Error(let error):
+            case .Error:
                 DispatchQueue.main.async {
                     completedSendExpectation.fulfill()
                 }
@@ -87,6 +84,7 @@ class PlasmaServiceTests: XCTestCase {
     }
 
     func testMergeUTXOs() {
+        
         let completedSendExpectation = expectation(description: "Completed")
         let privKey = Data(hex: "BDBA6C3D375A8454993C247E2A11D3E81C9A2CE9911FF05AC7FF0FCCBAC554B5")
         guard let address = EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4") else {
@@ -97,36 +95,33 @@ class PlasmaServiceTests: XCTestCase {
         PlasmaService().getUTXOs(for: address, onTestnet: true) { (result) in
             switch result {
             case .Success(let r):
-                guard r.count == 2 else {
-                    print("The inputs count \(r.count) is wrong")
-                    completedSendExpectation.fulfill()
-                    return
-                }
-                guard let transaction = self.testHelpers.UTXOsToTransaction(utxos: r, address: address, txType: .merge) else {
-                    XCTFail("Can't create transaction")
-                    completedSendExpectation.fulfill()
-                    return
-                }
-                guard let signedTransaction = transaction.sign(privateKey: privKey) else {
-                    XCTFail("Can't sign transaction")
-                    completedSendExpectation.fulfill()
-                    return
-                }
-                XCTAssertEqual(address, signedTransaction.sender)
-                PlasmaService().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
-                    switch result {
-                    case .Success(let r):
-                        DispatchQueue.main.async {
-                            XCTAssert(r == true)
-                            completedSendExpectation.fulfill()
-                        }
-                    case .Error(let error):
-                        DispatchQueue.main.async {
-                            completedSendExpectation.fulfill()
+                do {
+                    guard r.count == 2 else {
+                        print("The inputs count \(r.count) is wrong")
+                        completedSendExpectation.fulfill()
+                        return
+                    }
+                    let transaction = try self.testHelpers.UTXOsToTransaction(utxos: r, address: address, txType: .merge)
+                    let signedTransaction = try transaction.sign(privateKey: privKey)
+                    XCTAssertEqual(address, signedTransaction.sender)
+                    PlasmaService().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
+                        switch result {
+                        case .Success(let r):
+                            DispatchQueue.main.async {
+                                XCTAssert(r == true)
+                                completedSendExpectation.fulfill()
+                            }
+                        case .Error:
+                            DispatchQueue.main.async {
+                                completedSendExpectation.fulfill()
+                            }
                         }
                     }
+                } catch let error {
+                    XCTFail(error.localizedDescription)
+                    completedSendExpectation.fulfill()
                 }
-            case .Error(let error):
+            case .Error:
                 DispatchQueue.main.async {
                     completedSendExpectation.fulfill()
                 }
@@ -142,9 +137,14 @@ class PlasmaServiceTests: XCTestCase {
             switch result {
             case .Success(let block):
                 DispatchQueue.main.async {
-                    let parsedBlock = Block(data: block)
-                    XCTAssertEqual(parsedBlock?.signedTransactions.first?.transaction.inputs.first?.blockNumber, 0)
-                    completedSendExpectation.fulfill()
+                    do {
+                        let parsedBlock = try Block(data: block)
+                        XCTAssertEqual(parsedBlock.signedTransactions.first?.transaction.inputs.first?.blockNumber, 0)
+                        completedSendExpectation.fulfill()
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                        completedSendExpectation.fulfill()
+                    }
                 }
             case .Error:
                 DispatchQueue.main.async {

@@ -10,7 +10,7 @@ import Foundation
 import BigInt
 
 public extension Transaction {
-    public func mergeOutputs(untilMaxAmount: BigUInt) -> Transaction? {
+    public func mergeOutputs(untilMaxAmount: BigUInt) throws -> Transaction {
         let receiverAddress = self.outputs[0].receiverEthereumAddress
 
         var sortedOutputs: [TransactionOutput] = self.outputs.sorted { $0.amount <= $1.amount }
@@ -28,30 +28,36 @@ public extension Transaction {
             }
         }
 
-        guard mergedCount > 1 else { return nil }
+        guard mergedCount > 1 else {throw StructureErrors.wrongDataCount}
 
         sortedOutputs.removeFirst(Int(mergedCount))
 
         var newOutputsArray: [TransactionOutput] = []
         var index: BigUInt = 0
         for output in sortedOutputs {
-            guard let fixedOutput = TransactionOutput(outputNumberInTx: index, receiverEthereumAddress: receiverAddress, amount: output.amount) else {return nil}
+            guard let fixedOutput = try? TransactionOutput(outputNumberInTx: index,
+                                                      receiverEthereumAddress: receiverAddress,
+                                                      amount: output.amount) else {throw StructureErrors.wrongData}
             newOutputsArray.append(fixedOutput)
             index += 1
         }
-        guard let mergedOutput = TransactionOutput(outputNumberInTx: index, receiverEthereumAddress: receiverAddress, amount: mergedAmount) else {return nil}
+        guard let mergedOutput = try? TransactionOutput(outputNumberInTx: index,
+                                                   receiverEthereumAddress: receiverAddress,
+                                                   amount: mergedAmount) else {throw StructureErrors.wrongData}
         newOutputsArray.append(mergedOutput)
 
-        guard let fixedTx = Transaction(txType: self.txType, inputs: self.inputs, outputs: newOutputsArray) else {return nil}
+        guard let fixedTx = try? Transaction(txType: self.txType,
+                                        inputs: self.inputs,
+                                        outputs: newOutputsArray) else {throw StructureErrors.wrongData}
 
         return fixedTx
     }
 
-    public func mergeOutputs(forMaxNumber: BigUInt) -> Transaction? {
+    public func mergeOutputs(forMaxNumber: BigUInt) throws -> Transaction {
         let outputsCount = BigUInt(self.outputs.count)
         print(forMaxNumber)
         print(outputsCount)
-        guard forMaxNumber < outputsCount && forMaxNumber != 0 else {return nil}
+        guard forMaxNumber < outputsCount && forMaxNumber != 0 else {throw StructureErrors.wrongDataCount}
         let outputsCountToMerge: BigUInt = outputsCount - forMaxNumber + 1
         let receiverAddress = self.outputs[0].receiverEthereumAddress
 
@@ -70,21 +76,27 @@ public extension Transaction {
             }
         }
 
-        guard mergedCount == outputsCountToMerge else { return nil } //just to be sure
+        guard mergedCount == outputsCountToMerge else {throw StructureErrors.wrongDataCount}
 
         sortedOutputs.removeFirst(Int(mergedCount))
 
         var newOutputsArray: [TransactionOutput] = []
         var index: BigUInt = 0
         for output in sortedOutputs {
-            guard let fixedOutput = TransactionOutput(outputNumberInTx: index, receiverEthereumAddress: receiverAddress, amount: output.amount) else {return nil}
+            guard let fixedOutput = try? TransactionOutput(outputNumberInTx: index,
+                                                      receiverEthereumAddress: receiverAddress,
+                                                      amount: output.amount) else {throw StructureErrors.wrongData}
             newOutputsArray.append(fixedOutput)
             index += 1
         }
-        guard let mergedOutput = TransactionOutput(outputNumberInTx: index, receiverEthereumAddress: receiverAddress, amount: mergedAmount) else {return nil}
+        guard let mergedOutput = try? TransactionOutput(outputNumberInTx: index,
+                                                   receiverEthereumAddress: receiverAddress,
+                                                   amount: mergedAmount) else {throw StructureErrors.wrongData}
         newOutputsArray.append(mergedOutput)
 
-        guard let fixedTx = Transaction(txType: self.txType, inputs: self.inputs, outputs: newOutputsArray) else {return nil}
+        guard let fixedTx = try? Transaction(txType: self.txType,
+                                        inputs: self.inputs,
+                                        outputs: newOutputsArray) else {throw StructureErrors.wrongData}
 
         return fixedTx
     }

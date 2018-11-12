@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PlasmaErrors: Error {
+enum NetErrors: Error {
     case cantCreateRequest
     case cantConvertTxData
     case noData
@@ -16,4 +16,16 @@ enum PlasmaErrors: Error {
     case errorInUTXOs
     case noAcceptedInfo
     case badResponse
+}
+
+enum StructureErrors: Error {
+    case cantDecodeData
+    case cantEncodeData
+    case dataIsNotArray
+    case isNotList
+    case wrongDataCount
+    case isNotData
+    case wrongBitWidth
+    case wrongData
+    case wrongKey
 }

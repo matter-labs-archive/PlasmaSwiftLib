@@ -15,13 +15,13 @@ public final class PlasmaUTXOs {
     public var outputNumber: BigUInt
     public var value: BigUInt
 
-    public init?(json: [String: Any]) {
-        guard let blockNumber = json["blockNumber"] as? Int else {return nil}
-        guard let transactionNumber = json["transactionNumber"] as? Int else {return nil}
-        guard let outputNumber = json["outputNumber"] as? Int else {return nil}
-        guard let value = json["value"] as? String else {return nil}
+    public init(json: [String: Any]) throws {
+        guard let blockNumber = json["blockNumber"] as? Int else {throw StructureErrors.wrongData}
+        guard let transactionNumber = json["transactionNumber"] as? Int else {throw StructureErrors.wrongData}
+        guard let outputNumber = json["outputNumber"] as? Int else {throw StructureErrors.wrongData}
+        guard let value = json["value"] as? String else {throw StructureErrors.wrongData}
 
-        guard let bigUIntValue = BigUInt(value) else {return nil}
+        guard let bigUIntValue = BigUInt(value) else {throw StructureErrors.wrongData}
 
         self.blockNumber = BigUInt(blockNumber)
         self.transactionNumber = BigUInt(transactionNumber)
@@ -29,8 +29,8 @@ public final class PlasmaUTXOs {
         self.value = bigUIntValue
     }
 
-    public func toTransactionInput() -> TransactionInput? {
-        return TransactionInput(blockNumber: self.blockNumber, txNumberInBlock: self.transactionNumber, outputNumberInTx: self.outputNumber, amount: self.value)
+    public func toTransactionInput() throws -> TransactionInput {
+        return try TransactionInput(blockNumber: self.blockNumber, txNumberInBlock: self.transactionNumber, outputNumberInTx: self.outputNumber, amount: self.value)
     }
 }
 

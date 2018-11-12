@@ -36,21 +36,21 @@ public final class PlasmaService {
                                     data: jsonData,
                                     method: .post,
                                     contentType: .json) else {
-            completion(Result.Error(PlasmaErrors.cantCreateRequest))
+            completion(Result.Error(NetErrors.cantCreateRequest))
             return
         }
 
-        let task = session.dataTask(with: request) { data, response, error in
+        let task = session.dataTask(with: request) { (data, response, error) in
             guard let data = data, error == nil else {
                 completion(Result.Error(error!))
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.Error(PlasmaErrors.badResponse))
+                completion(Result.Error(NetErrors.badResponse))
                 return
             }
             guard httpResponse.statusCode == 200 else {
-                completion(Result.Error(PlasmaErrors.badResponse))
+                completion(Result.Error(NetErrors.badResponse))
                 return
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -58,16 +58,18 @@ public final class PlasmaService {
                 if let utxos = responseJSON["utxos"] as? [[String: Any]] {
                     var allUTXOs = [PlasmaUTXOs]()
                     for utxo in utxos {
-                        if let model = PlasmaUTXOs(json: utxo) {
-                            allUTXOs.append(model)
+                        do {
+                            if let model = try? PlasmaUTXOs(json: utxo) {
+                                allUTXOs.append(model)
+                            }
                         }
                     }
                     completion(Result.Success(allUTXOs))
                 } else {
-                    completion(Result.Error(PlasmaErrors.errorInUTXOs))
+                    completion(Result.Error(NetErrors.errorInUTXOs))
                 }
             } else {
-                completion(Result.Error(PlasmaErrors.noData))
+                completion(Result.Error(NetErrors.noData))
             }
         }
         task.resume()
@@ -83,12 +85,12 @@ public final class PlasmaService {
                                     data: Data(),
                                     method: .get,
                                     contentType: .octet) else {
-                                        completion(Result.Error(PlasmaErrors.cantCreateRequest))
+                                        completion(Result.Error(NetErrors.cantCreateRequest))
                                         return
         }
         let task = session.dataTask(with: request) { (data, _, error) in
             guard error == nil, let block = data else {
-                completion(Result.Error(PlasmaErrors.noData))
+                completion(Result.Error(NetErrors.noData))
                 return
             }
             completion(Result.Success(block))
@@ -107,7 +109,7 @@ public final class PlasmaService {
                                     data: jsonData,
                                     method: .post,
                                     contentType: .json) else {
-            completion(Result.Error(PlasmaErrors.cantCreateRequest))
+            completion(Result.Error(NetErrors.cantCreateRequest))
             return
         }
 
@@ -117,11 +119,11 @@ public final class PlasmaService {
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.Error(PlasmaErrors.badResponse))
+                completion(Result.Error(NetErrors.badResponse))
                 return
             }
             guard httpResponse.statusCode == 200 else {
-                completion(Result.Error(PlasmaErrors.badResponse))
+                completion(Result.Error(NetErrors.badResponse))
                 return
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -134,7 +136,7 @@ public final class PlasmaService {
                 }
 
             } else {
-                completion(Result.Error(PlasmaErrors.noData))
+                completion(Result.Error(NetErrors.noData))
             }
         }
         task.resume()
