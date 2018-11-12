@@ -133,7 +133,7 @@ class PlasmaServiceTests: XCTestCase {
     func testGetBlock() {
         let completedSendExpectation = expectation(description: "Completed")
         PlasmaService().getBlock(onTestnet: true,
-                                 number: 9) { (result) in
+                                 number: 1) { (result) in
             switch result {
             case .Success(let block):
                 DispatchQueue.main.async {

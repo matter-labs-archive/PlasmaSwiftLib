@@ -57,6 +57,29 @@ public class Block {
         guard let txRLP = RLP.encode(txArray as [AnyObject]) else {throw StructureErrors.cantEncodeData}
         return headerData + txRLP
     }
+    
+    func buildTree(from transactions: [SignedTransaction]) throws -> PaddabbleTree {
+        var contents = [ContentProtocol]()
+        for tx in transactions {
+            let raw = SimpleContent(tx.data)
+            contents.append(raw)
+        }
+        guard let paddingElement = contents.first else {throw StructureErrors.wrongDataCount}
+        let tree = PaddabbleTree(contents, paddingElement)
+        return tree
+    }
+    
+    public func getProof(for transaction: SignedTransaction) throws -> (SignedTransaction, Data) {
+        let merkleTree = try buildTree(from: self.signedTransactions)
+        for (counter, tx) in self.signedTransactions.enumerated() {
+            let serializedTx = tx.data
+            if serializedTx == transaction.data {
+                guard let proof = merkleTree.makeBinaryProof(counter) else {throw StructureErrors.wrongData}
+                return (tx, proof)
+            }
+        }
+        throw StructureErrors.wrongData
+    }
 }
 
 extension Block: Equatable {

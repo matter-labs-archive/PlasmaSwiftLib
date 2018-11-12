@@ -57,9 +57,9 @@ public struct SignedTransaction {
     }
 
     public init(data: Data) throws {
-
         guard let item = RLP.decode(data) else {throw StructureErrors.cantDecodeData}
         guard let dataArray = item[0] else {throw StructureErrors.dataIsNotArray}
+        
         guard dataArray.isList else {throw StructureErrors.isNotList}
         guard dataArray.count == 4 else {throw StructureErrors.wrongDataCount}
         guard let transactionData = dataArray[0]?.data else {throw StructureErrors.isNotData}

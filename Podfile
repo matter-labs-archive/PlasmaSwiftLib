@@ -1,5 +1,5 @@
 def import_pods
-  pod 'web3swift'
+  pod 'web3swift', '~> 2.0.1'
 end
 
 target 'PlasmaSwiftLib' do
