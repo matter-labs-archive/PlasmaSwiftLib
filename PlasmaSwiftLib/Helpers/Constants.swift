@@ -51,3 +51,5 @@ public let merkleRootOfTheTxTreeByteLength: UInt64 = 32
 public let merkleRootOfTheTxTreeMaxWidth = merkleRootOfTheTxTreeByteLength * bit
 
 public let blockHeaderByteLength: UInt64 = 137
+
+public let emptyTx: Data = Data(hex: "0xf847c300c0c000a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000000")

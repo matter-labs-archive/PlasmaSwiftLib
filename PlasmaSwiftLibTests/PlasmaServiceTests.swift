@@ -152,6 +152,6 @@ class PlasmaServiceTests: XCTestCase {
                 }
             }
         }
-        waitForExpectations(timeout: 30, handler: nil)
+        waitForExpectations(timeout: 300, handler: nil)
     }
 }

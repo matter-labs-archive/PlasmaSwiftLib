@@ -134,4 +134,15 @@ class TransactionTests: XCTestCase {
             XCTFail("Failed input test with error: \(error.localizedDescription)")
         }
     }
+    
+    func testEmptyTxForMerkleTree() {
+        do {
+            let tx = Data(hex: "0xf847c300c0c000a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000000")
+            let parsedTx = try SignedTransaction(data: tx)
+            XCTAssert(parsedTx.data == tx)
+            XCTAssert(parsedTx.v == 0)
+        } catch let error {
+            XCTFail("Failed input test with error: \(error.localizedDescription)")
+        }
+    }
 }

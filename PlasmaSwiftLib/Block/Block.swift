@@ -22,7 +22,7 @@ public class Block {
             let raw = SimpleContent(tx.data)
             contents.append(raw)
         }
-        guard let paddingElement = contents.first else {return nil}
+        let paddingElement = SimpleContent(emptyTx)
         let tree = PaddabbleTree(contents, paddingElement)
         return tree
     }
