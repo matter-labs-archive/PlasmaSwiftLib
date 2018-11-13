@@ -11,7 +11,7 @@ import Web3swift
 import EthereumAddress
 import BigInt
 
-class Web3TransactionsService {
+public final class Web3TransactionsService {
     
     private let web3: web3
     private let fromAddress: EthereumAddress
