@@ -15,6 +15,17 @@ import BigInt
 public class Block {
     public var blockHeader: BlockHeader
     public var signedTransactions: [SignedTransaction]
+    public var merkleTree: PaddabbleTree? {
+        let transactions = self.signedTransactions
+        var contents = [ContentProtocol]()
+        for tx in transactions {
+            let raw = SimpleContent(tx.data)
+            contents.append(raw)
+        }
+        guard let paddingElement = contents.first else {return nil}
+        let tree = PaddabbleTree(contents, paddingElement)
+        return tree
+    }
     public var data: Data {
         do {
             return try self.serialize()
@@ -58,23 +69,12 @@ public class Block {
         return headerData + txRLP
     }
     
-    func buildTree(from transactions: [SignedTransaction]) throws -> PaddabbleTree {
-        var contents = [ContentProtocol]()
-        for tx in transactions {
-            let raw = SimpleContent(tx.data)
-            contents.append(raw)
-        }
-        guard let paddingElement = contents.first else {throw StructureErrors.wrongDataCount}
-        let tree = PaddabbleTree(contents, paddingElement)
-        return tree
-    }
-    
     public func getProof(for transaction: SignedTransaction) throws -> (SignedTransaction, Data) {
-        let merkleTree = try buildTree(from: self.signedTransactions)
+        guard let tree = self.merkleTree else {throw StructureErrors.wrongData}
         for (counter, tx) in self.signedTransactions.enumerated() {
             let serializedTx = tx.data
             if serializedTx == transaction.data {
-                guard let proof = merkleTree.makeBinaryProof(counter) else {throw StructureErrors.wrongData}
+                guard let proof =  tree.makeBinaryProof(counter) else {throw StructureErrors.wrongData}
                 return (tx, proof)
             }
         }

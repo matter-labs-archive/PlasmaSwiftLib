@@ -21,7 +21,3 @@ extension BlockHeader {
         print("v: \(self.v.description)")
     }
 }
-
-extension Block {
-    
-}

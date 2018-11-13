@@ -39,4 +39,41 @@ class BlockTests: XCTestCase {
             XCTFail(error.localizedDescription)
         }
     }
+    
+    func testGetProof() {
+        let completedSendExpectation = expectation(description: "Completed")
+        PlasmaService().getBlock(onTestnet: true,
+                                 number: 1) { (result) in
+                switch result {
+                case .Success(let block):
+                    DispatchQueue.main.async {
+                        do {
+                            let parsedBlock = try Block(data: block)
+                            guard let transactionForProof = parsedBlock.signedTransactions.first else {
+                                XCTFail("No tx in block")
+                                return
+                            }
+                            XCTAssertEqual(parsedBlock.signedTransactions.first?.transaction.inputs.first?.blockNumber, 0)
+                            guard let merkleTree = parsedBlock.merkleTree else {
+                                XCTFail("Can't build merkle tree")
+                                return
+                            }
+                            XCTAssertNotNil(merkleTree.merkleRoot)
+                            let proof = try parsedBlock.getProof(for: transactionForProof)
+                            XCTAssertEqual(proof.0, transactionForProof)
+                            XCTAssert(proof.1.count != 0, "proof can't be 0")
+                            completedSendExpectation.fulfill()
+                        } catch {
+                            XCTFail(error.localizedDescription)
+                            completedSendExpectation.fulfill()
+                        }
+                    }
+                case .Error:
+                    DispatchQueue.main.async {
+                        completedSendExpectation.fulfill()
+                    }
+                }
+        }
+        waitForExpectations(timeout: 300, handler: nil)
+    }
 }
