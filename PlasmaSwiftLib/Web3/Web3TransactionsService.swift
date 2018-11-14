@@ -81,14 +81,18 @@ public final class Web3TransactionsService {
                                 blockNumber: BigUInt,
                                 outputNumber: BigUInt,
                                 password: String? = nil) throws -> TransactionSendingResult {
+        print(transaction.data.toHexString())
+        print(proof.toHexString())
+        print(blockNumber)
+        print(outputNumber)
         do {
             let txWithdraw = try prepareReadTxPlasma(method: .withdrawCollateral,
                                                       value: 0,
                                                       parameters: [AnyObject](),
                                                       extraData: Data())
             let withdrawCollateral = try callTxPlasma(transaction: txWithdraw)
-            let withdrawCollateralString = withdrawCollateral.first?.value as? String
-            let withdrawCollateralBigUInt = BigUInt(withdrawCollateralString ?? "0.0") ?? BigUInt(0.0)
+            guard let withdrawCollateralBigUInt = withdrawCollateral.first?.value as? BigUInt else {throw StructureErrors.wrongData}
+            print(withdrawCollateralBigUInt)
             let txHex = try transaction.serialize().toHexString()
             let proofHex = proof.toHexString()
             let parameters = [blockNumber,
@@ -101,7 +105,7 @@ public final class Web3TransactionsService {
                                                        extraData: Data())
             var startExitOptions = txStartExit.transactionOptions
             let gas = try txStartExit.estimateGas(transactionOptions: startExitOptions)
-            startExitOptions.gasPrice = .manual(gas)
+            startExitOptions.gasPrice = .manual(1000000)
             let result = try sendTxPlasma(transaction: txStartExit,
                                       options: startExitOptions,
                                       password: password)
@@ -115,9 +119,7 @@ public final class Web3TransactionsService {
                              options: TransactionOptions? = nil,
                              password: String? = nil) throws -> TransactionSendingResult {
         let options = options ?? transaction.transactionOptions
-        guard let result = password == nil ?
-            try? transaction.send() :
-            try? transaction.send(password: password!, transactionOptions: options) else {
+        guard let result = try? transaction.send(password: password ?? "web3swift", transactionOptions: options) else {
                 throw Web3Error.processingError(desc: "Can't send transaction")
         }
         return result

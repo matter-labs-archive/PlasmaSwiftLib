@@ -155,4 +155,60 @@ class PlasmaServiceTests: XCTestCase {
         }
         waitForExpectations(timeout: 300, handler: nil)
     }
+    
+    func testExit() {
+        let completedExpectation = expectation(description: "Completed")
+        PlasmaService().getUTXOs(for: EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4")!, onTestnet: true) { (result) in
+            switch result {
+            case .Success(let r):
+                DispatchQueue.main.async {
+                    for utxo in r {
+                        print(utxo.value)
+                        print(utxo.blockNumber)
+                    }
+                    PlasmaService().getBlock(onTestnet: true,
+                                             number: (r.first?.blockNumber)!) { (result) in
+                        switch result {
+                        case .Success(let block):
+                            DispatchQueue.main.async {
+                                do {
+                                    let parsedBlock = try Block(data: block)
+                                    print(parsedBlock.signedTransactions.count)
+                                    guard let transactionForProof = parsedBlock.signedTransactions.first else {
+                                        XCTFail("No tx in block")
+                                        return
+                                    }
+                                    guard let merkleTree = parsedBlock.merkleTree else {
+                                        XCTFail("Can't build merkle tree")
+                                        return
+                                    }
+                                    XCTAssertNotNil(merkleTree.merkleRoot)
+                                    let proof = try parsedBlock.getProof(for: transactionForProof)
+                                    XCTAssertEqual(proof.0, transactionForProof)
+                                    let web3 = Web3TransactionsService(web3: Web3.InfuraRinkebyWeb3(), fromAddress: EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4")!)
+                                    let tx = try web3.startExitPlasma(transaction: parsedBlock.signedTransactions.first!,
+                                                                      proof: proof.1,
+                                                                      blockNumber: (r.first?.blockNumber)!,
+                                                                      outputNumber: (parsedBlock.signedTransactions.first?.transaction.outputs.first?.outputNumberInTx)!, password: nil)
+                                    print(tx.hash)
+                                } catch {
+                                    XCTFail(error.localizedDescription)
+                                    completedExpectation.fulfill()
+                                }
+                            }
+                        case .Error:
+                            DispatchQueue.main.async {
+                                completedExpectation.fulfill()
+                            }
+                        }
+                    }
+                }
+            case .Error:
+                DispatchQueue.main.async {
+                    completedExpectation.fulfill()
+                }
+            }
+        }
+        waitForExpectations(timeout: 3000, handler: nil)
+    }
 }
