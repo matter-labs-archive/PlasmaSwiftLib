@@ -93,8 +93,9 @@ public final class Web3TransactionsService {
             let withdrawCollateral = try callTxPlasma(transaction: txWithdraw)
             guard let withdrawCollateralBigUInt = withdrawCollateral.first?.value as? BigUInt else {throw StructureErrors.wrongData}
             print(withdrawCollateralBigUInt)
-            let txHex = try transaction.serialize().toHexString()
-            let proofHex = proof.toHexString()
+            let txData = try transaction.serialize()
+            let txHex = [UInt8](txData)
+            let proofHex = [UInt8](proof)
             let parameters = [blockNumber,
                               outputNumber,
                               txHex,
@@ -104,8 +105,8 @@ public final class Web3TransactionsService {
                                                        parameters: parameters,
                                                        extraData: Data())
             var startExitOptions = txStartExit.transactionOptions
-            let gas = try txStartExit.estimateGas(transactionOptions: startExitOptions)
-            startExitOptions.gasPrice = .manual(1000000)
+//            let gas = try txStartExit.estimateGas(transactionOptions: startExitOptions)
+//            startExitOptions.gasPrice = .manual(1000000)
             let result = try sendTxPlasma(transaction: txStartExit,
                                       options: startExitOptions,
                                       password: password)
