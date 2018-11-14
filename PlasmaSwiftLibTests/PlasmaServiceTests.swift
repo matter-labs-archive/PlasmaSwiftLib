@@ -163,8 +163,8 @@ class PlasmaServiceTests: XCTestCase {
             case .Success(let r):
                 DispatchQueue.main.async {
                     for utxo in r {
-                        print(utxo.value)
-                        print(utxo.blockNumber)
+                        print("utxo: \(utxo.value)")
+                        print("block number: \(utxo.blockNumber)")
                     }
                     PlasmaService().getBlock(onTestnet: true,
                                              number: (r.first?.blockNumber)!) { (result) in
@@ -173,7 +173,6 @@ class PlasmaServiceTests: XCTestCase {
                             DispatchQueue.main.async {
                                 do {
                                     let parsedBlock = try Block(data: block)
-                                    print(parsedBlock.signedTransactions.count)
                                     guard let transactionForProof = parsedBlock.signedTransactions.first else {
                                         XCTFail("No tx in block")
                                         return
@@ -182,7 +181,16 @@ class PlasmaServiceTests: XCTestCase {
                                         XCTFail("Can't build merkle tree")
                                         return
                                     }
+                                    print("block root: \(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString())")
+                                    print("merkle tree root: \(merkleTree.merkleRoot?.toHexString())")
+                                    parsedBlock.blockHeader.printElements()
                                     XCTAssertNotNil(merkleTree.merkleRoot)
+                                    
+                                    let included = PaddabbleTree.verifyBinaryProof(content: SimpleContent((parsedBlock.signedTransactions.first?.data)!), proof: Data(), expectedRoot: merkleTree.merkleRoot!)
+                                    print(included)
+                                    
+                                    XCTAssertTrue(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString() == merkleTree.merkleRoot?.toHexString(), "Merkle roots should be equal")
+                                    
                                     let proof = try parsedBlock.getProof(for: transactionForProof)
                                     XCTAssertEqual(proof.0, transactionForProof)
                                     let web3 = Web3TransactionsService(web3: Web3.InfuraRinkebyWeb3(), fromAddress: EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4")!)

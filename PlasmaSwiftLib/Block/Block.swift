@@ -19,10 +19,10 @@ public class Block {
         let transactions = self.signedTransactions
         var contents = [ContentProtocol]()
         for tx in transactions {
-            let raw = SimpleContent(tx.data)
+            let raw = SimpleContent(tx.data.sha3(.keccak256))
             contents.append(raw)
         }
-        let paddingElement = SimpleContent(emptyTx)
+        let paddingElement = SimpleContent(emptyTx.sha3(.keccak256))
         let tree = PaddabbleTree(contents, paddingElement)
         return tree
     }
@@ -50,8 +50,10 @@ public class Block {
         guard item.isList else {throw StructureErrors.isNotList}
         var signedTransactions = [SignedTransaction]()
         signedTransactions.reserveCapacity(item.count!)
+        print("signed tx count: \(item.count!)")
         for i in 0 ..< item.count! {
             guard let txData = item[i]!.data else {throw StructureErrors.isNotData}
+            
             guard let tx = try? SignedTransaction(data: txData) else {throw StructureErrors.wrongData}
             signedTransactions.append(tx)
         }

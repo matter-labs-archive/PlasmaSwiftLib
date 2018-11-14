@@ -87,17 +87,19 @@ public final class Web3TransactionsService {
         print(outputNumber)
         do {
             let txWithdraw = try prepareReadTxPlasma(method: .withdrawCollateral,
-                                                      value: 0,
-                                                      parameters: [AnyObject](),
-                                                      extraData: Data())
+                                                     value: 0,
+                                                     parameters: [AnyObject](),
+                                                     extraData: Data())
             let withdrawCollateral = try callTxPlasma(transaction: txWithdraw)
             guard let withdrawCollateralBigUInt = withdrawCollateral.first?.value as? BigUInt else {throw StructureErrors.wrongData}
-            print(withdrawCollateralBigUInt)
+            print("collateral: \(withdrawCollateralBigUInt)")
             let txData = try transaction.serialize()
+            let bN = UInt32(blockNumber)
+            let oN = UInt8(outputNumber)
             let txHex = [UInt8](txData)
             let proofHex = [UInt8](proof)
-            let parameters = [blockNumber,
-                              outputNumber,
+            let parameters = [bN,
+                              oN,
                               txHex,
                               proofHex] as [AnyObject]
             let txStartExit = try prepareWriteTxPlasma(method: .startExit,
