@@ -73,38 +73,14 @@ PlasmaService().getUTXOs(for: ethAddress,
 ## Send transaction
 
 #### Send raw transaction
-In this example transaction inputs are formed from first UTXO you get for your Ethereum address. Used 'split' transaction type.
 
 ```swift
-guard let fromEthAddress = EthereumAddress("<From Ethereum address>") else {return}
-guard let toEthAddress = EthereumAddress("<To Ethereum address>") else {return}
-let privKey = Data(hex: "<From private key>")
-PlasmaService().getListUTXOs(for: fromEthAddress,
-                             onTestnet: '<Bool flag for using Rinkeby network>') { (result) in
+ServiceUTXO().sendRawTX(transaction: signedTransaction,
+	                onTestnet: '<Bool flag for using Rinkeby network>') { (result) in
     switch result {
-    case .Success(let utxos):
-	let input = try utxos[0].toTransactionInput()
-	let inputs = [input]
-	let output = try TransactionOutput(outputNumberInTx: 0,
-	                                   receiverEthereumAddress: toEthAddress,
-					   amount: input.amount)
-	let outputs = [output]
-	let transaction = try Transaction(txType: .split,
-	                                  inputs: inputs,
-					  outputs: outputs)
-	let signedTransaction = try transaction.sign(privateKey: privKey)
-	ServiceUTXO().sendRawTX(transaction: signedTransaction,
-	                        onTestnet: '<Bool flag for using Rinkeby network>') { (result) in
-	    switch result {
-	    case .Success(let accepted):
-		DispatchQueue.main.async {
-		    print(accepted)
-		}
-	    case .Error(let error):
-		DispatchQueue.main.async {
-		    print(error.localizedDescription)
-		}
-	    }
+    case .Success(let accepted):
+	DispatchQueue.main.async {
+	    print(accepted)
 	}
     case .Error(let error):
 	DispatchQueue.main.async {
