@@ -40,18 +40,23 @@
 	- **UTXOs listing** 
 		- [Get UTXOs list for Ethereum address](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#get-utxos-list-for-ethereum-address)
 	- **Send transaction** 
-		- [Send raw transaction](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#send-raw-transaction)	
+		- [Send raw transaction](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#send-raw-transaction)
+	- **Outputs management** 
+		- [Merge outputs for fixed amount of one output](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#merge-outputs-for-fixed-amount-of-one-output)
+		- [Merge outputs for fixed number of outputs](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#merge-outputs-for-fixed-number-of-outputs)
 
 ## Features
 
 - [x] Based on [More Viable Plasma Implementation](https://github.com/matterinc/PlasmaContract) by The Matter Team
 - [x] RLP encoding and decoding
 - [x] Comprehensive Unit and Integration Test Coverage
-- [x] [Complete Documentation](https://web3swift.github.io/web3swift)
+- [x] [Complete Documentation](https://matterinc.github.io/PlasmaSwiftLib)
 
 ## Design Decisions
 
-- Functionality was focused on serializing and signing transactions locally on the device to send raw transactions to The Matter Plasma network
+- Functionality was focused on serializing and signing transactions locally on the device
+- Sending raw transactions to The Matter Plasma network using REST API
+- Sending raw transactions to Plasma Contract using [The Matter web3swift](https://github.com/matterinc/web3swift)
 
 ## Requirements
 
