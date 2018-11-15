@@ -119,21 +119,29 @@ PlasmaService().getListUTXOs(for: fromEthAddress,
 #### Merge outputs for fixed amount of one output
 
 ```swift
-let fixedAmount: BigUInt = 10000000000
-let inputs = [TransactionInput]()
-let outputs = [TransactionOutput]()
-guard let tx = Transaction(txType: .split, inputs: inputs, outputs: outputs) else {return}
-guard let newTx = tx.mergeOutputs(untilMaxAmount: fixedAmount) else {return}
+do {
+    let fixedAmount: BigUInt = 10000000000
+    let inputs = [TransactionInput]()
+    let outputs = [TransactionOutput]()
+    let tx = try Transaction(txType: .split, inputs: inputs, outputs: outputs)
+    let newTx = try tx.mergeOutputs(untilMaxAmount: fixedAmount)
+} catch let error {
+    print(error.localizedDescription)
+}
 ```
 
 
 #### Merge outputs for fixed number of outputs
 
 ```swift
-let fixedNumber: BigUInt = 2
-let inputs = [TransactionInput]()
-let outputs = [TransactionOutput]()
-guard let tx = Transaction(txType: .split, inputs: inputs, outputs: outputs) else {return}
-guard let newTx = tx.mergeOutputs(forMaxNumber: fixedNumber) else {return}
+do {
+    let fixedNumber: BigUInt = 2
+    let inputs = [TransactionInput]()
+    let outputs = [TransactionOutput]()
+    let tx = try Transaction(txType: .split, inputs: inputs, outputs: outputs)
+    let newTx = try tx.mergeOutputs(forMaxNumber: fixedNumber)
+} catch let error {
+    print(error.localizedDescription)
+}
 ```
 
