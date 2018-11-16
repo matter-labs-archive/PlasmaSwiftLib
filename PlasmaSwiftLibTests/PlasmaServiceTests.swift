@@ -22,9 +22,9 @@ class PlasmaServiceTests: XCTestCase {
         let completedGetListExpectation = expectation(description: "Completed")
         PlasmaService().getUTXOs(for: EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4")!, onTestnet: true) { (result) in
             switch result {
-            case .Success(let r):
+            case .Success(let utxos):
                 DispatchQueue.main.async {
-                    for utxo in r {
+                    for utxo in utxos {
                         print(utxo.value)
                     }
                     completedGetListExpectation.fulfill()
@@ -48,21 +48,17 @@ class PlasmaServiceTests: XCTestCase {
         }
         PlasmaService().getUTXOs(for: address, onTestnet: true) { (result) in
             switch result {
-            case .Success(let r):
+            case .Success(let utxos):
                 do {
-                    guard r.count == 1 else {
-                        print("The inputs count \(r.count) is wrong")
-                        completedSendExpectation.fulfill()
-                        return
-                    }
-                    let transaction = try self.testHelpers.UTXOsToTransaction(utxos: r, address: address, txType: .split)
+                    print("UTXOs count \(utxos.count)")
+                    let transaction = try self.testHelpers.UTXOsToTransaction(utxos: utxos, address: address, txType: .split)
                     let signedTransaction = try transaction.sign(privateKey: privKey)
                     XCTAssertEqual(address, signedTransaction.sender)
                     PlasmaService().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
                         switch result {
-                        case .Success(let r):
+                        case .Success(let res):
                             DispatchQueue.main.async {
-                                XCTAssert(r == true)
+                                XCTAssert(res == true)
                                 completedSendExpectation.fulfill()
                             }
                         case .Error:
@@ -95,21 +91,17 @@ class PlasmaServiceTests: XCTestCase {
         }
         PlasmaService().getUTXOs(for: address, onTestnet: true) { (result) in
             switch result {
-            case .Success(let r):
+            case .Success(let utxos):
                 do {
-                    guard r.count == 2 else {
-                        print("The inputs count \(r.count) is wrong")
-                        completedSendExpectation.fulfill()
-                        return
-                    }
-                    let transaction = try self.testHelpers.UTXOsToTransaction(utxos: r, address: address, txType: .merge)
+                    print("UTXOs count \(utxos.count)")
+                    let transaction = try self.testHelpers.UTXOsToTransaction(utxos: utxos, address: address, txType: .merge)
                     let signedTransaction = try transaction.sign(privateKey: privKey)
                     XCTAssertEqual(address, signedTransaction.sender)
                     PlasmaService().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
                         switch result {
-                        case .Success(let r):
+                        case .Success(let res):
                             DispatchQueue.main.async {
-                                XCTAssert(r == true)
+                                XCTAssert(res == true)
                                 completedSendExpectation.fulfill()
                             }
                         case .Error:
@@ -141,6 +133,7 @@ class PlasmaServiceTests: XCTestCase {
                     do {
                         let parsedBlock = try Block(data: block)
                         XCTAssertEqual(parsedBlock.signedTransactions.first?.transaction.inputs.first?.blockNumber, 0)
+                        parsedBlock.blockHeader.printElements()
                         completedSendExpectation.fulfill()
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -182,14 +175,14 @@ class PlasmaServiceTests: XCTestCase {
                                         return
                                     }
                                     print("block root: \(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString())")
-                                    print("merkle tree root: \(merkleTree.merkleRoot?.toHexString())")
+                                    print("merkle tree root: \(merkleTree.merkleRoot!.toHexString())")
                                     parsedBlock.blockHeader.printElements()
                                     XCTAssertNotNil(merkleTree.merkleRoot)
                                     
                                     let included = PaddabbleTree.verifyBinaryProof(content: SimpleContent((parsedBlock.signedTransactions.first?.data)!), proof: Data(), expectedRoot: merkleTree.merkleRoot!)
                                     print(included)
                                     
-                                    XCTAssertTrue(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString() == merkleTree.merkleRoot?.toHexString(), "Merkle roots should be equal")
+                                    XCTAssertTrue(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString() == merkleTree.merkleRoot!.toHexString(), "Merkle roots should be equal")
                                     
                                     let proof = try parsedBlock.getProof(for: transactionForProof)
                                     XCTAssertEqual(proof.0, transactionForProof)

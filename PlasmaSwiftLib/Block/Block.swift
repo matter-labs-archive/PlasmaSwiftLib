@@ -19,10 +19,10 @@ public class Block {
         let transactions = self.signedTransactions
         var contents = [ContentProtocol]()
         for tx in transactions {
-            let raw = SimpleContent(tx.data.sha3(.keccak256))
+            let raw = SimpleContent(tx.data.sha3(.sha256))
             contents.append(raw)
         }
-        let paddingElement = SimpleContent(emptyTx.sha3(.keccak256))
+        let paddingElement = SimpleContent(emptyTx.sha3(.sha256))
         let tree = PaddabbleTree(contents, paddingElement)
         return tree
     }

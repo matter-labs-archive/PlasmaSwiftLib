@@ -107,8 +107,8 @@ public final class Web3TransactionsService {
                                                        parameters: parameters,
                                                        extraData: Data())
             var startExitOptions = txStartExit.transactionOptions
-//            let gas = try txStartExit.estimateGas(transactionOptions: startExitOptions)
-//            startExitOptions.gasPrice = .manual(1000000)
+            let gas = try txStartExit.estimateGas(transactionOptions: startExitOptions)
+            startExitOptions.gasPrice = .manual(gas)
             let result = try sendTxPlasma(transaction: txStartExit,
                                       options: startExitOptions,
                                       password: password)

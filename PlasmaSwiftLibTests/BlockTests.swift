@@ -59,9 +59,11 @@ class BlockTests: XCTestCase {
                                 return
                             }
                             XCTAssertNotNil(merkleTree.merkleRoot)
+                            print("merkleTree.merkleRoot: \(merkleTree.merkleRoot!.toHexString())")
+                            print("blockHeader.merkleRoot : \(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString())")
+                            XCTAssertTrue(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString() == merkleTree.merkleRoot!.toHexString(), "Merkle roots should be equal")
                             let proof = try parsedBlock.getProof(for: transactionForProof)
                             XCTAssertEqual(proof.0, transactionForProof)
-                            XCTAssert(proof.1.count != 0, "proof can't be 0")
                             completedSendExpectation.fulfill()
                         } catch {
                             XCTFail(error.localizedDescription)
