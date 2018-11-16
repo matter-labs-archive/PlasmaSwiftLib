@@ -9,7 +9,7 @@ do {
     let blockNumberIn: BigUInt = 10
     let txNumberInBlockIn: BigUInt = 1
     let outputNumberInTxIn: BigUInt = 3
-    let amountIn: BigUInt = 500000000000000
+    let amountIn: BigUInt = 1000000000000000000 // 1 ETH
     let input = try TransactionInput(blockNumber: blockNumberIn,
 				     txNumberInBlock: txNumberInBlockIn,
 				     outputNumberInTx: outputNumberInTxIn,
@@ -25,7 +25,7 @@ do {
 do {
     let outputNumberInTx: BigUInt = 10
     let receiverEthereumAddress: EthereumAddress = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!
-    let amount: BigUInt = 500000000000000
+    let amount: BigUInt = 1000000000000000000 // 1 ETH
     let output = try TransactionOutput(outputNumberInTx: outputNumberInTx,
                                         receiverEthereumAddress: receiverEthereumAddress,
 					amount: amount)
@@ -96,7 +96,7 @@ ServiceUTXO().sendRawTX(transaction: signedTransaction,
 
 ```swift
 do {
-    let fixedAmount: BigUInt = 10000000000
+    let fixedAmount: BigUInt = 1000000000000000000 // 1 ETH
     let inputs = [TransactionInput]()
     let outputs = [TransactionOutput]()
     let tx = try Transaction(txType: .split, inputs: inputs, outputs: outputs)
