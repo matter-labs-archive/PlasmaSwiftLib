@@ -82,6 +82,33 @@ class PlasmaServiceTests: XCTestCase {
         }
     }
     
+    func testDeposit() {
+        let amount: BigUInt = 1000000000000000000
+        guard let address = EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4") else {
+            XCTFail("Wrong address")
+            return
+        }
+        let privKey = "BDBA6C3D375A8454993C247E2A11D3E81C9A2CE9911FF05AC7FF0FCCBAC554B5"
+        do {
+            let text = privKey.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard let data = Data.fromHex(text) else {
+                XCTFail(StructureErrors.wrongData.localizedDescription)
+                return
+            }
+            guard let keystore = try EthereumKeystoreV3(privateKey: data, password: "web3swift") else {
+                XCTFail(StructureErrors.wrongData.localizedDescription)
+                return
+            }
+            let keystoreManager = KeystoreManager([keystore])
+            let web3 = Web3Service(web3: Web3.InfuraRinkebyWeb3(), keystoreManager: keystoreManager, fromAddress: address)
+            let tx = try web3.preparePlasmaContractWriteTx(method: .deposit, value: amount, parameters: [AnyObject](), extraData: Data())
+            let result = try web3.sendPlasmaContractTx(transaction: tx)
+            print(result.hash)
+        } catch  let error {
+            XCTFail(error.localizedDescription)
+        }
+    }
+    
     func testExit() {
         guard let address = EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4") else {
             XCTFail("Wrong address")
