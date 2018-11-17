@@ -11,7 +11,7 @@ import Web3swift
 import EthereumAddress
 import BigInt
 
-public final class Web3TransactionsService {
+public final class Web3Service {
     
     private let web3: web3
     private let fromAddress: EthereumAddress
@@ -21,7 +21,7 @@ public final class Web3TransactionsService {
         self.web3 = web3
         web3.addKeystoreManager(keystoreManager)
         self.fromAddress = fromAddress
-        let address = EthereumAddress(PlasmaUtils.plasmaAddress)
+        let address = EthereumAddress(PlasmaContract.plasmaAddress)
         precondition(address != nil)
         self.plasmaAddress = address!
     }
@@ -34,9 +34,9 @@ public final class Web3TransactionsService {
     }()
     
     private lazy var plasmaContract: web3.web3contract = {
-        let address = EthereumAddress(PlasmaUtils.plasmaAddress)
+        let address = EthereumAddress(PlasmaContract.plasmaAddress)
         precondition(address != nil)
-        let contract = self.web3.contract(PlasmaUtils.plasmaABI, at: address!, abiVersion: 2)
+        let contract = self.web3.contract(PlasmaContract.plasmaABI, at: address!, abiVersion: 2)
         precondition(contract != nil)
         return contract!
     }()

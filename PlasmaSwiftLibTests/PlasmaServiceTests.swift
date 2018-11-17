@@ -109,7 +109,7 @@ class PlasmaServiceTests: XCTestCase {
                 return
             }
             let keystoreManager = KeystoreManager([keystore])
-            let web3 = Web3TransactionsService(web3: Web3.InfuraRinkebyWeb3(), keystoreManager: keystoreManager, fromAddress: address)
+            let web3 = Web3Service(web3: Web3.InfuraRinkebyWeb3(), keystoreManager: keystoreManager, fromAddress: address)
             let result = try web3.withdrawUTXO(utxo: utxo, onTestnet: true, password: "web3swift")
             XCTAssert(result.hash != "")
         } catch let error {

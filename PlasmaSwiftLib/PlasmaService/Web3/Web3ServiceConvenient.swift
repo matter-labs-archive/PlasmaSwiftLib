@@ -11,7 +11,7 @@ import Web3swift
 import EthereumAddress
 import BigInt
 
-extension Web3TransactionsService {
+extension Web3Service {
     
     public func startExitPlasma(transaction: SignedTransaction,
                                 proof: Data,
@@ -61,12 +61,10 @@ extension Web3TransactionsService {
         let block = try PlasmaService().getBlock(onTestnet: true, number: utxo.blockNumber)
         do {
             let parsedBlock = try Block(data: block)
-            guard let transactionForProof = parsedBlock.signedTransactions.first else {throw StructureErrors.wrongData}
+            let proofData = try parsedBlock.getProofForTransactionByNumber(txNumber: utxo.transactionNumber)
             guard let merkleTree = parsedBlock.merkleTree else {throw StructureErrors.wrongData}
             guard let merkleRoot = merkleTree.merkleRoot else {throw StructureErrors.wrongData}
             guard parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString() == merkleRoot.toHexString() else {throw StructureErrors.wrongData}
-            let proofData = try parsedBlock.getProof(for: transactionForProof)
-            guard proofData.tx == transactionForProof else {throw StructureErrors.wrongData}
             let included = PaddabbleTree.verifyBinaryProof(content: SimpleContent(proofData.tx.data),
                                                            proof: proofData.proof,
                                                            expectedRoot: merkleRoot)

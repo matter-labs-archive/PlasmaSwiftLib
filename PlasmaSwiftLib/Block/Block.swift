@@ -82,6 +82,15 @@ public class Block {
         }
         throw StructureErrors.wrongData
     }
+    
+    public func getProofForTransactionByNumber(txNumber: BigUInt) throws -> (tx: SignedTransaction, proof: Data) {
+        let num = Int(txNumber)
+        guard let tree = self.merkleTree else {throw StructureErrors.wrongData}
+        guard num < self.signedTransactions.count else {throw StructureErrors.wrongDataCount}
+        let tx = self.signedTransactions[num]
+        guard let proof = tree.makeBinaryProof(num) else {throw StructureErrors.wrongData}
+        return (tx, proof)
+    }
 }
 
 extension Block: Equatable {
