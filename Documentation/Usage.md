@@ -117,7 +117,7 @@ do {
 }
 ```
 
-#### Withdraw for chosen block number and serialized transaction
+#### Withdraw for chosen utxo
 
 ```swift
 guard let address = EthereumAddress(<Your Ethereum address>) else {return}
