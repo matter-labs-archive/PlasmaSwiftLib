@@ -39,8 +39,13 @@
 		- [Form transaction and sign it](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#form-transaction-and-sign-it)
 	- **UTXOs listing** 
 		- [Get UTXOs list for Ethereum address](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#get-utxos-list-for-ethereum-address)
-	- **Send transaction** 
+	- **Blocks**
+		- [Get last written block, print its headers and check if transactions count is equal in Block header and in Block transactions array](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#get-last-written-block-print-its-headers-and-check-if-transactions-count-is-equal-in-block-header-and-in-block-transactions-array)
+	- **Send transaction in Plasma** 
 		- [Send raw transaction](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#send-raw-transaction)
+	- **Send transaction to Plasma Contract** 
+		- [Put deposit](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#put-deposit)
+		- [Withdraw for chosen utxo](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#withdraw-for-chosen-utxo)
 	- **Outputs management** 
 		- [Merge outputs for fixed amount of one output](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#merge-outputs-for-fixed-amount-of-one-output)
 		- [Merge outputs for fixed number of outputs](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#merge-outputs-for-fixed-number-of-outputs)
