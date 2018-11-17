@@ -80,7 +80,7 @@ do {
 
 ## Send transaction in Plasma
 
-#### Send raw transaction
+#### Send raw transaction (Split example)
 
 ```swift
 let privKey = Data(hex: <Your private key>)
@@ -98,7 +98,7 @@ do {
 
 ## Send transaction to Plasma Contract
 
-#### Put deposit
+#### Send raw transaction (Put deposit example)
 ```swift
 let amount: BigUInt = 1000000000000000000 // 1 ETH
 guard let address = EthereumAddress(<Your Ethereum address>) else {return}
