@@ -42,9 +42,9 @@
 	- **Blocks**
 		- [Get last written block, print its headers and check if transactions count is equal in Block header and in Block transactions array](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#get-last-written-block-print-its-headers-and-check-if-transactions-count-is-equal-in-block-header-and-in-block-transactions-array)
 	- **Send transaction in Plasma** 
-		- [Send raw transaction](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#send-raw-transaction)
+		- [Send raw transaction (Split example)](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#send-raw-transaction-split-example)
 	- **Send transaction to Plasma Contract** 
-		- [Put deposit](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#put-deposit)
+		- [Send raw transaction (Put deposit example)](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#send-raw-transaction-put-deposit-example)
 		- [Withdraw for chosen utxo](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#withdraw-for-chosen-utxo)
 	- **Outputs management** 
 		- [Merge outputs for fixed amount of one output](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#merge-outputs-for-fixed-amount-of-one-output)
