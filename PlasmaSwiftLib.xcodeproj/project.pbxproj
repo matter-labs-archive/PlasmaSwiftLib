@@ -40,6 +40,7 @@
 		E228BD352199D2D00085268C /* SimpleContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD2D2199D2D00085268C /* SimpleContent.swift */; };
 		E228BD362199D2D00085268C /* PaddableTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD2F2199D2D00085268C /* PaddableTree.swift */; };
 		E228BD372199D2D00085268C /* PaddableTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD2F2199D2D00085268C /* PaddableTree.swift */; };
+		E228BD86219FD3310085268C /* Web3TransactionsServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD85219FD3310085268C /* Web3TransactionsServiceExtension.swift */; };
 		E2DCA664219397BA00F94FBA /* Web3TransactionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCA663219397BA00F94FBA /* Web3TransactionsService.swift */; };
 		E2DCA6662193A58300F94FBA /* PlasmaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCA6652193A58300F94FBA /* PlasmaUtils.swift */; };
 		E2DCA6682193BF8E00F94FBA /* PlasmaContractMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCA6672193BF8E00F94FBA /* PlasmaContractMethods.swift */; };
@@ -93,6 +94,7 @@
 		E228BD2C2199D2D00085268C /* Hashing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
 		E228BD2D2199D2D00085268C /* SimpleContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleContent.swift; sourceTree = "<group>"; };
 		E228BD2F2199D2D00085268C /* PaddableTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddableTree.swift; sourceTree = "<group>"; };
+		E228BD85219FD3310085268C /* Web3TransactionsServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3TransactionsServiceExtension.swift; sourceTree = "<group>"; };
 		E2DCA663219397BA00F94FBA /* Web3TransactionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3TransactionsService.swift; sourceTree = "<group>"; };
 		E2DCA6652193A58300F94FBA /* PlasmaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaUtils.swift; sourceTree = "<group>"; };
 		E2DCA6672193BF8E00F94FBA /* PlasmaContractMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaContractMethods.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 		E206605C2187549000701068 /* PlasmaSwiftLib */ = {
 			isa = PBXGroup;
 			children = (
+				E228BD84219FD2E80085268C /* PlasmaConvenient */,
 				E228BD2A2199D2D00085268C /* MerkleTools */,
 				E2DCA662219397A600F94FBA /* Web3 */,
 				E2066074218754CC00701068 /* Block */,
@@ -257,6 +260,14 @@
 				E228BD2F2199D2D00085268C /* PaddableTree.swift */,
 			);
 			path = PaddableTree;
+			sourceTree = "<group>";
+		};
+		E228BD84219FD2E80085268C /* PlasmaConvenient */ = {
+			isa = PBXGroup;
+			children = (
+				E228BD85219FD3310085268C /* Web3TransactionsServiceExtension.swift */,
+			);
+			path = PlasmaConvenient;
 			sourceTree = "<group>";
 		};
 		E2DCA662219397A600F94FBA /* Web3 */ = {
@@ -455,6 +466,7 @@
 				E206609A218754DF00701068 /* TransactionInput.swift in Sources */,
 				E2066099218754DF00701068 /* TransactionOutput.swift in Sources */,
 				E206608F218754D900701068 /* PlasmaURLs.swift in Sources */,
+				E228BD86219FD3310085268C /* Web3TransactionsServiceExtension.swift in Sources */,
 				E2DCA6662193A58300F94FBA /* PlasmaUtils.swift in Sources */,
 				E228BD29219985440085268C /* BlockHelpers.swift in Sources */,
 				E2DCA6682193BF8E00F94FBA /* PlasmaContractMethods.swift in Sources */,

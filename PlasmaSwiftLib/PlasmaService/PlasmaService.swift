@@ -9,6 +9,8 @@
 import Foundation
 import EthereumAddress
 import BigInt
+import PromiseKit
+private typealias PromiseResult = PromiseKit.Result
 
 public final class PlasmaService {
 
@@ -21,125 +23,141 @@ public final class PlasmaService {
                                  delegateQueue: nil)
         return session
     }
-
+    
     public func getUTXOs(for address: EthereumAddress,
-                         onTestnet: Bool = false,
-                         completion: @escaping(Result<[PlasmaUTXOs]>) -> Void) {
-        let json: [String: Any] = ["for": address.address,
-                                   "blockNumber": 1,
-                                   "transactionNumber": 0,
-                                   "outputNumber": 0,
-                                   "limit": 50]
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
-        let url = onTestnet ? PlasmaURLs.listUTXOsTestnet : PlasmaURLs.listUTXOsMainnet
-        guard let request = request(url: url,
-                                    data: jsonData,
-                                    method: .post,
-                                    contentType: .json) else {
-            completion(Result.Error(NetErrors.cantCreateRequest))
-            return
-        }
+                         onTestnet: Bool = false) throws -> [PlasmaUTXOs] {
+        return try self.getUTXOsPromise(for: address, onTestnet: onTestnet).wait()
+    }
 
-        let task = session.dataTask(with: request) { (data, response, error) in
-            guard let data = data, error == nil else {
-                completion(Result.Error(error!))
+    public func getUTXOsPromise(for address: EthereumAddress,
+                                onTestnet: Bool = false) -> Promise<[PlasmaUTXOs]> {
+        let returnPromise = Promise<[PlasmaUTXOs]> { (seal) in
+            var allUTXOs = [PlasmaUTXOs]()
+            let json: [String: Any] = ["for": address.address,
+                                       "blockNumber": 1,
+                                       "transactionNumber": 0,
+                                       "outputNumber": 0,
+                                       "limit": 50]
+            let jsonData = try? JSONSerialization.data(withJSONObject: json)
+            let url = onTestnet ? PlasmaURLs.listUTXOsTestnet : PlasmaURLs.listUTXOsMainnet
+            guard let request = request(url: url,
+                                        data: jsonData,
+                                        method: .post,
+                                        contentType: .json) else {
+                seal.reject(NetErrors.cantCreateRequest)
                 return
             }
-            guard let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.Error(NetErrors.badResponse))
-                return
-            }
-            guard httpResponse.statusCode == 200 else {
-                completion(Result.Error(NetErrors.badResponse))
-                return
-            }
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            if let responseJSON = responseJSON as? [String: Any] {
-                if let utxos = responseJSON["utxos"] as? [[String: Any]] {
-                    var allUTXOs = [PlasmaUTXOs]()
-                    for utxo in utxos {
-                        do {
-                            if let model = try? PlasmaUTXOs(json: utxo) {
-                                allUTXOs.append(model)
+            session.dataTask(with: request, completionHandler: { (data, response, error) in
+                guard let data = data, error == nil else {
+                    seal.reject(NetErrors.noData)
+                    return
+                }
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    seal.reject(NetErrors.badResponse)
+                    return
+                }
+                guard httpResponse.statusCode == 200 else {
+                    seal.reject(NetErrors.badResponse)
+                    return
+                }
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                if let responseJSON = responseJSON as? [String: Any] {
+                    if let utxos = responseJSON["utxos"] as? [[String: Any]] {
+                        for utxo in utxos {
+                            do {
+                                if let model = try? PlasmaUTXOs(json: utxo) {
+                                    allUTXOs.append(model)
+                                }
                             }
                         }
+                        seal.fulfill(allUTXOs)
+                    } else {
+                        seal.reject(StructureErrors.cantDecodeData)
                     }
-                    completion(Result.Success(allUTXOs))
                 } else {
-                    completion(Result.Error(NetErrors.errorInUTXOs))
+                    seal.reject(StructureErrors.cantDecodeData)
                 }
-            } else {
-                completion(Result.Error(NetErrors.noData))
-            }
+            }).resume()
         }
-        task.resume()
+        return returnPromise
     }
     
     public func getBlock(onTestnet: Bool = false,
-                         number: BigUInt,
-                         completion: @escaping(Result<Data>) -> Void) {
-        var url = onTestnet ? PlasmaURLs.blockStorageTestnet : PlasmaURLs.blockStorageMainnet
-        let num = String(number)
-        url += num
-        guard let request = request(url: URL(string: url)!,
-                                    data: Data(),
-                                    method: .get,
-                                    contentType: .octet) else {
-                                        completion(Result.Error(NetErrors.cantCreateRequest))
-                                        return
-        }
-        let task = session.dataTask(with: request) { (data, _, error) in
-            guard error == nil, let block = data else {
-                completion(Result.Error(NetErrors.noData))
+                         number: BigUInt) throws -> Data {
+        return try getBlockPromise(onTestnet: onTestnet, number: number).wait()
+    }
+    
+    public func getBlockPromise(onTestnet: Bool = false,
+                                number: BigUInt) -> Promise<Data> {
+        let returnPromise = Promise<Data> { (seal) in
+            var url = onTestnet ? PlasmaURLs.blockStorageTestnet : PlasmaURLs.blockStorageMainnet
+            let num = String(number)
+            url += num
+            guard let request = request(url: URL(string: url)!,
+                                        data: Data(),
+                                        method: .get,
+                                        contentType: .octet) else {
+                seal.reject(NetErrors.cantCreateRequest)
                 return
             }
-            completion(Result.Success(block))
+            session.dataTask(with: request, completionHandler: { (data, _, error) in
+                guard error == nil, let block = data else {
+                    seal.reject(NetErrors.noData)
+                    return
+                }
+                seal.fulfill(block)
+            }).resume()
         }
-        task.resume()
+        return returnPromise
+    }
+    
+    public func sendRawTXPromise(transaction: SignedTransaction,
+                                 onTestnet: Bool = false) -> Promise<Bool> {
+        let returnPromise = Promise<Bool> { (seal) in
+            let transactionString = transaction.data.toHexString().addHexPrefix()
+            let json: [String: Any] = ["tx": transactionString]
+            let jsonData = try? JSONSerialization.data(withJSONObject: json)
+            let url = onTestnet ? PlasmaURLs.sendRawTXTestnet : PlasmaURLs.sendRawTXMainnet
+            guard let request = request(url: url,
+                                        data: jsonData,
+                                        method: .post,
+                                        contentType: .json) else {
+                                            seal.reject(NetErrors.cantCreateRequest)
+                                            return
+            }
+            
+            session.dataTask(with: request, completionHandler: { data, response, error in
+                guard let data = data, error == nil else {
+                    seal.reject(NetErrors.noData)
+                    return
+                }
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    seal.reject(NetErrors.badResponse)
+                    return
+                }
+                guard httpResponse.statusCode == 200 else {
+                    seal.reject(NetErrors.badResponse)
+                    return
+                }
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                if let responseJSON = responseJSON as? [String: Any] {
+                    if let accepted = responseJSON["accepted"] as? Bool {
+                        seal.fulfill(accepted)
+                    } else if let reason = responseJSON["reason"] as? String {
+                        print(reason)
+                        seal.fulfill(false)
+                    }
+                } else {
+                    seal.reject(StructureErrors.cantDecodeData)
+                }
+            }).resume()
+        }
+        return returnPromise
     }
 
     public func sendRawTX(transaction: SignedTransaction,
-                          onTestnet: Bool = false,
-                          completion: @escaping(Result<Bool?>) -> Void) {
-        let transactionString = transaction.data.toHexString().addHexPrefix()
-        let json: [String: Any] = ["tx": transactionString]
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
-        let url = onTestnet ? PlasmaURLs.sendRawTXTestnet : PlasmaURLs.sendRawTXMainnet
-        guard let request = request(url: url,
-                                    data: jsonData,
-                                    method: .post,
-                                    contentType: .json) else {
-            completion(Result.Error(NetErrors.cantCreateRequest))
-            return
-        }
-
-        let task = session.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                completion(Result.Error(error!))
-                return
-            }
-            guard let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.Error(NetErrors.badResponse))
-                return
-            }
-            guard httpResponse.statusCode == 200 else {
-                completion(Result.Error(NetErrors.badResponse))
-                return
-            }
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            if let responseJSON = responseJSON as? [String: Any] {
-                if let accepted = responseJSON["accepted"] as? Bool {
-                    completion(Result.Success(accepted))
-                } else if let reason = responseJSON["reason"] as? String {
-                    print(reason)
-                    completion(Result.Success(false))
-                }
-
-            } else {
-                completion(Result.Error(NetErrors.noData))
-            }
-        }
-        task.resume()
+                          onTestnet: Bool = false) throws -> Bool {
+        return try sendRawTXPromise(transaction: transaction, onTestnet: onTestnet).wait()
     }
 
     private func request(url: URL,
@@ -155,11 +173,6 @@ public final class PlasmaService {
         return request
     }
 
-}
-
-public enum Result<T> {
-    case Success(T)
-    case Error(Error)
 }
 
 public enum Method: String {

@@ -41,41 +41,26 @@ class BlockTests: XCTestCase {
     }
     
     func testGetProof() {
-        let completedSendExpectation = expectation(description: "Completed")
-        PlasmaService().getBlock(onTestnet: true,
-                                 number: 1) { (result) in
-                switch result {
-                case .Success(let block):
-                    DispatchQueue.main.async {
-                        do {
-                            let parsedBlock = try Block(data: block)
-                            guard let transactionForProof = parsedBlock.signedTransactions.first else {
-                                XCTFail("No tx in block")
-                                return
-                            }
-                            XCTAssertEqual(parsedBlock.signedTransactions.first?.transaction.inputs.first?.blockNumber, 0)
-                            guard let merkleTree = parsedBlock.merkleTree else {
-                                XCTFail("Can't build merkle tree")
-                                return
-                            }
-                            XCTAssertNotNil(merkleTree.merkleRoot)
-                            print("merkleTree.merkleRoot: \(merkleTree.merkleRoot!.toHexString())")
-                            print("blockHeader.merkleRoot : \(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString())")
-                            XCTAssertTrue(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString() == merkleTree.merkleRoot!.toHexString(), "Merkle roots should be equal")
-                            let proof = try parsedBlock.getProof(for: transactionForProof)
-                            XCTAssertEqual(proof.0, transactionForProof)
-                            completedSendExpectation.fulfill()
-                        } catch {
-                            XCTFail(error.localizedDescription)
-                            completedSendExpectation.fulfill()
-                        }
-                    }
-                case .Error:
-                    DispatchQueue.main.async {
-                        completedSendExpectation.fulfill()
-                    }
-                }
+        do {
+            let block = try PlasmaService().getBlock(onTestnet: true, number: 1)
+            let parsedBlock = try Block(data: block)
+            guard let transactionForProof = parsedBlock.signedTransactions.first else {
+                XCTFail("No tx in block")
+                return
+            }
+            XCTAssertEqual(parsedBlock.signedTransactions.first?.transaction.inputs.first?.blockNumber, 0)
+            guard let merkleTree = parsedBlock.merkleTree else {
+                XCTFail("Can't build merkle tree")
+                return
+            }
+            XCTAssertNotNil(merkleTree.merkleRoot)
+            print("merkleTree.merkleRoot: \(merkleTree.merkleRoot!.toHexString())")
+            print("blockHeader.merkleRoot : \(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString())")
+            XCTAssertTrue(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString() == merkleTree.merkleRoot!.toHexString(), "Merkle roots should be equal")
+            let proof = try parsedBlock.getProof(for: transactionForProof)
+            XCTAssertEqual(proof.0, transactionForProof)
+        } catch let error {
+            XCTFail(error.localizedDescription)
         }
-        waitForExpectations(timeout: 300, handler: nil)
     }
 }

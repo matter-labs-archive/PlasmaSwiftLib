@@ -71,7 +71,7 @@ public class Block {
         return headerData + txRLP
     }
     
-    public func getProof(for transaction: SignedTransaction) throws -> (SignedTransaction, Data) {
+    public func getProof(for transaction: SignedTransaction) throws -> (tx: SignedTransaction, proof: Data) {
         guard let tree = self.merkleTree else {throw StructureErrors.wrongData}
         for (counter, tx) in self.signedTransactions.enumerated() {
             let serializedTx = tx.data
