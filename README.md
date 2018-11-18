@@ -32,26 +32,36 @@
   * [License](#license)
 
 ---
-  - [Usage Doc](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md)
+  - [Usage Doc](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md)
 	- **Transaction** 
-		- [Form input](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#form-input)
-		- [Form output](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#form-output)
-		- [Form transaction and sign it](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#form-transaction-and-sign-it)
+		- [Form input](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#form-input)
+		- [Form output](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#form-output)
+		- [Form transaction and sign it](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#form-transaction-and-sign-it)
 	- **UTXOs listing** 
-		- [Get UTXOs list for Ethereum address](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#get-utxos-list-for-ethereum-address)
-	- **Send transaction** 
-		- [Send raw transaction](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#send-raw-transaction)	
+		- [Get UTXOs list for Ethereum address](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#get-utxos-list-for-ethereum-address)
+	- **Blocks**
+		- [Get last written block, print its headers and check if transactions count is equal in Block header and in Block transactions array](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#get-last-written-block-print-its-headers-and-check-if-transactions-count-is-equal-in-block-header-and-in-block-transactions-array)
+	- **Send transaction in Plasma** 
+		- [Send raw transaction (Split example)](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#send-raw-transaction-split-example)
+	- **Send transaction to Plasma Contract** 
+		- [Send raw transaction (Put deposit example)](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#send-raw-transaction-put-deposit-example)
+		- [Withdraw for chosen utxo](https://github.com/matterinc/PlasmaSwiftLib/blob/documentation/Documentation/Usage.md#withdraw-for-chosen-utxo)
+	- **Outputs management** 
+		- [Merge outputs for fixed amount of one output](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#merge-outputs-for-fixed-amount-of-one-output)
+		- [Merge outputs for fixed number of outputs](https://github.com/matterinc/PlasmaSwiftLib/blob/master/Documentation/Usage.md#merge-outputs-for-fixed-number-of-outputs)
 
 ## Features
 
 - [x] Based on [More Viable Plasma Implementation](https://github.com/matterinc/PlasmaContract) by The Matter Team
 - [x] RLP encoding and decoding
 - [x] Comprehensive Unit and Integration Test Coverage
-- [x] [Complete Documentation](https://web3swift.github.io/web3swift)
+- [x] [Complete Documentation](https://matterinc.github.io/PlasmaSwiftLib)
 
 ## Design Decisions
 
-- Functionality was focused on serializing and signing transactions locally on the device to send raw transactions to The Matter Plasma network
+- Functionality was focused on serializing and signing transactions locally on the device
+- Sending raw transactions to The Matter Plasma network using REST API
+- Sending raw transactions to Plasma Contract using [The Matter web3swift](https://github.com/matterinc/web3swift)
 
 ## Requirements
 
@@ -91,7 +101,7 @@ platform :ios, '9.0'
 
 target '<Your Target Name>' do
     use_frameworks!
-    pod 'PlasmaSwiftLib', '~> 1.0.6'
+    pod 'PlasmaSwiftLib', '~> 1.0.7'
 end
 ```
 
