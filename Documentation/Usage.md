@@ -2,6 +2,31 @@
 
 <***> - input object
 
+Plasma is working on Mainnet and Rinkeby testnet. In some methods use *bool flag to set network* you want to use. 
+
+## UTXO
+
+#### UTXO structure
+
+- blockNumber: BigUInt
+- transactionNumber: BigUInt
+- outputNumber: BigUInt
+- value: BigUInt
+
+#### Get UTXOs list for Ethereum address
+
+```swift
+guard let address = EthereumAddress(<Ethereum address>) else {return}
+do {
+    let utxos = try PlasmaService().getUTXOs(for: address, onTestnet: <Bool flag for using Rinkeby network>)
+    for utxo in utxos {
+	print(utxo.value)
+    }
+} catch let error {
+    print(error.localizedDescription)
+}
+```
+
 ## Transaction
 
 #### Form input
@@ -34,6 +59,45 @@ do {
 
 #### Form transaction and sign it
 
+*Transaction types:*
+- split - use to send funds
+- merge - use to merge UTXOs
+- fund
+- null
+
+*When sending funds:*
+- 2 outputs:
+    - TransactionOutput(outputNumberInTx: 0,
+                        receiverEthereumAddress: 'destination address',
+			amount: 'sending amount')
+    - TransactionOutput(outputNumberInTx: 1,
+                        receiverEthereumAddress: 'current address',
+			amount: 'stay amount')
+- 1 input:
+    - form inputs array from 1 UTXO using toTransactionInput():
+    ```swift
+    	let input = try utxo.toTransactionInput()
+    ```
+    
+*When merging UTXOs:*
+- 2 inputs:
+    - form input array from 2 UTXOs using toTransactionInput():
+    ```swift
+    	var inputs = [TransactionInput]()
+        var mergedAmount: BigUInt = 0
+        for utxo in chosenUTXOs {
+            if let input = utxo.utxo.toTransactionInput() {
+                inputs.append(input)
+                mergedAmount += input.amount
+            }
+        }
+    ```
+- 1 output:
+    - TransactionOutput(outputNumberInTx: 0,
+                        receiverEthereumAddress: 'current address',
+			amount: 'merged amount')
+
+*Example:*
 ```swift
 do {
     let txType = Transaction.TransactionType.split //or null/fund/merge
@@ -42,22 +106,6 @@ do {
     let transaction = try Transaction(txType: txType, inputs: inputs, outputs: outputs)
     let privKey = Data(hex: <Private key>)
     let signedTransaction = try transaction.sign(privateKey: privKey)
-} catch let error {
-    print(error.localizedDescription)
-}
-```
-
-## UTXOs listing
-
-#### Get UTXOs list for Ethereum address
-
-```swift
-guard let address = EthereumAddress(<Ethereum address>) else {return}
-do {
-    let utxos = try PlasmaService().getUTXOs(for: address, onTestnet: <Bool flag for using Rinkeby network>)
-    for utxo in utxos {
-	print(utxo.value)
-    }
 } catch let error {
     print(error.localizedDescription)
 }
@@ -97,6 +145,17 @@ do {
 ```
 
 ## Send transaction to Plasma Contract
+
+There are 3 preset Plasma Contract methods you can use in this lib:
+- deposit
+- WithdrawCollateral
+- startExit
+
+`WithdrawCollateral` and `startExit` are used in one action - withdraw funds from Plasma UTXO. We've build the convenient method withdrawUTXO(utxo: `PlasmaUTXOs`,
+                    onTestnet: `Bool`,
+                    password: `String? = nil`) for it.
+
+You can also use any other Plasma Contract method by learning its ABI.
 
 #### Send raw transaction (Put deposit example)
 ```swift
