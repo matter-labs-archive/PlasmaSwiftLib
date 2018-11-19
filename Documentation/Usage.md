@@ -70,7 +70,7 @@ do {
     - TransactionOutput(outputNumberInTx: 0,
                         receiverEthereumAddress: 'destination address',
 			amount: 'sending amount')
-    - TransactionOutput(outputNumberInTx: 0,
+    - TransactionOutput(outputNumberInTx: 1,
                         receiverEthereumAddress: 'current address',
 			amount: 'stay amount')
 - 1 input:
