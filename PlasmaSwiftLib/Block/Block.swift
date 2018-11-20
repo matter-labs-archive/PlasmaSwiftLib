@@ -11,6 +11,23 @@
 import Foundation
 import SwiftRLP
 import BigInt
+import Web3swift
+
+struct TreeContent: ContentProtocol {
+    func getHash(_ hasher: TreeHasher) -> Data {
+        let h = Web3.Utils.hashPersonalMessage(self.data)!
+        return h
+    }
+    
+    func isEqualTo(_ other: ContentProtocol) -> Bool {
+        return self.data == other.data
+    }
+    
+    var data: Data
+    init(_ data: Data) {
+        self.data = data
+    }
+}
 
 public class Block {
     public var blockHeader: BlockHeader
@@ -19,10 +36,10 @@ public class Block {
         let transactions = self.signedTransactions
         var contents = [ContentProtocol]()
         for tx in transactions {
-            let raw = SimpleContent(tx.data.sha3(.sha256))
+            let raw = TreeContent(tx.data)
             contents.append(raw)
         }
-        let paddingElement = SimpleContent(emptyTx.sha3(.sha256))
+        let paddingElement = TreeContent(emptyTx)
         let tree = PaddabbleTree(contents, paddingElement)
         return tree
     }
@@ -58,6 +75,12 @@ public class Block {
             signedTransactions.append(tx)
         }
         self.signedTransactions = signedTransactions
+        guard let tree = self.merkleTree else {
+            throw StructureErrors.wrongData
+        }
+        guard tree.merkleRoot == self.blockHeader.merkleRootOfTheTxTree else {
+            throw StructureErrors.wrongData
+        }
     }
 
     public func serialize() throws -> Data {

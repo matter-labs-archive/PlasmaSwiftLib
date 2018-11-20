@@ -50,7 +50,7 @@ public final class Web3Service {
         var options = defaultOptions
         options.value = value
         
-        guard let transaction = contract.method(method.rawValue,
+        guard let transaction = contract.write(method.rawValue,
                                                 parameters: parameters,
                                                 extraData: extraData,
                                                 transactionOptions: options) else {
@@ -81,9 +81,7 @@ public final class Web3Service {
                                      options: TransactionOptions? = nil,
                                      password: String? = nil) throws -> TransactionSendingResult {
         let options = options ?? transaction.transactionOptions
-        guard let result = try? transaction.send(password: password ?? "web3swift", transactionOptions: options) else {
-                throw Web3Error.processingError(desc: "Can't send transaction")
-        }
+        let result = try transaction.send(password: password ?? "web3swift", transactionOptions: options)
         return result
     }
     

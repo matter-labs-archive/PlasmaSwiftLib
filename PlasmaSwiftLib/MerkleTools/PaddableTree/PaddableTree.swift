@@ -86,14 +86,17 @@ public struct PaddabbleTree {
     public var root: TreeNodeProtocol?
 
     public var merkleRoot: Data? {
-        return self.root?.getHash(self.hasher)
+        return self.root?.data
+//        return self.root?.getHash(self.hasher)
     }
     
     public init(_ content: [ContentProtocol], _ paddingElement: ContentProtocol) {
         self.hasher = TreeHasher()
         self.paddingElement = paddingElement
         self.content = content.map { (c) -> TreeNodeProtocol in
-            return TreeNode(c.data, hasher: self.hasher)
+            let leafData = c.getHash(self.hasher)
+            return TreeNode(leafData, hasher: self.hasher)
+//            return TreeNode(c.data, hasher: self.hasher)
         }
         self.root = self.assembleTree(self.content)
     }
@@ -102,7 +105,9 @@ public struct PaddabbleTree {
         self.hasher = hasher
         self.paddingElement = paddingElement
         self.content = content.map { (c) -> TreeNodeProtocol in
-            return TreeNode(c.data, hasher: self.hasher)
+            let leafData = c.getHash(self.hasher)
+            return TreeNode(leafData, hasher: self.hasher)
+//            return TreeNode(c.data, hasher: self.hasher)
         }
         self.root = self.assembleTree(self.content)
     }
@@ -144,9 +149,12 @@ public struct PaddabbleTree {
         }
         var leaf = self.content[contentIndex]
         if leaf.parent == nil {
-            if leaf.getHash(self.hasher) != self.merkleRoot {
+            if leaf.data != self.merkleRoot {
                 return nil
             }
+//            if leaf.getHash(self.hasher) != self.merkleRoot {
+//                return nil
+//            }
             return Data()
         }
         var proof = Data()

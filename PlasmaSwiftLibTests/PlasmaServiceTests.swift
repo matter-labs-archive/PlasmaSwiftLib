@@ -101,7 +101,7 @@ class PlasmaServiceTests: XCTestCase {
             }
             let keystoreManager = KeystoreManager([keystore])
             let web3 = Web3Service(web3: Web3.InfuraRinkebyWeb3(), keystoreManager: keystoreManager, fromAddress: address)
-            let tx = try web3.preparePlasmaContractWriteTx(method: .deposit, value: amount, parameters: [AnyObject](), extraData: Data())
+            let tx = try web3.preparePlasmaContractWriteTx(method: .deposit, value: amount)
             let result = try web3.sendPlasmaContractTx(transaction: tx)
             print(result.hash)
         } catch  let error {
