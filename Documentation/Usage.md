@@ -20,8 +20,6 @@
 		- [Merge outputs for fixed number of outputs](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#merge-outputs-for-fixed-number-of-outputs)
 
 
-<***> - input object
-
 Plasma is working on Mainnet and Rinkeby testnet. In some methods use *bool flag to set network* you want to use. 
 
 ## UTXO
@@ -67,8 +65,9 @@ do {
 #### Form output
 
 ```swift
+let ethereumAdress = "0x832a630b949575b87c0e3c00f624f773d9b160f4" //Your ethereum address
 do {
-    guard let address = EthereumAddress(<Ethereum address>) else {return}
+    guard let address = EthereumAddress(ethereumAdress) else {return}
     let amount: BigUInt = 1000000000000000000 // 1 ETH
     let output = try TransactionOutput(outputNumberInTx: <outNum>,
                                        receiverEthereumAddress: address,
