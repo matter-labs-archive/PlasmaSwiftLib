@@ -43,9 +43,9 @@ extension Web3Service {
                                                                value: withdrawCollateralBigUInt,
                                                                parameters: parameters,
                                                                extraData: Data())
-            let startExitOptions = txStartExit.transactionOptions
-//            let gas = try txStartExit.estimateGas(transactionOptions: startExitOptions)
-//            startExitOptions.gasPrice = .manual(gas)
+            var startExitOptions = txStartExit.transactionOptions
+            let gas = try txStartExit.estimateGas(transactionOptions: startExitOptions)
+            startExitOptions.gasPrice = .manual(gas)
             let result = try sendPlasmaContractTx(transaction: txStartExit,
                                                   options: startExitOptions,
                                                   password: password)
@@ -62,13 +62,13 @@ extension Web3Service {
         do {
             let parsedBlock = try Block(data: block)
             let proofData = try parsedBlock.getProofForTransactionByNumber(txNumber: utxo.transactionNumber)
-//            guard let merkleTree = parsedBlock.merkleTree else {throw StructureErrors.wrongData}
-//            guard let merkleRoot = merkleTree.merkleRoot else {throw StructureErrors.wrongData}
-//            guard parsedBlock.blockHeader.merkleRootOfTheTxTree == merkleRoot else {throw StructureErrors.wrongData}
-//            let included = PaddabbleTree.verifyBinaryProof(content: TreeContent(proofData.tx.data),
-//                                                           proof: proofData.proof,
-//                                                           expectedRoot: merkleRoot)
-//            guard included == true else {throw StructureErrors.wrongData}
+            guard let merkleTree = parsedBlock.merkleTree else {throw StructureErrors.wrongData}
+            guard let merkleRoot = merkleTree.merkleRoot else {throw StructureErrors.wrongData}
+            guard parsedBlock.blockHeader.merkleRootOfTheTxTree == merkleRoot else {throw StructureErrors.wrongData}
+            let included = PaddabbleTree.verifyBinaryProof(content: TreeContent(proofData.tx.data),
+                                                           proof: proofData.proof,
+                                                           expectedRoot: merkleRoot)
+            guard included == true else {throw StructureErrors.wrongData}
             
             let result = try self.startExitPlasma(transaction: proofData.tx,
                                                   proof: proofData.proof,
