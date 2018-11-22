@@ -11,13 +11,13 @@ import SwiftRLP
 import BigInt
 
 public struct BlockHeader {
-    public var blockNumber: BigUInt
-    public var numberOfTxInBlock: BigUInt
-    public var parentHash: Data
-    public var merkleRootOfTheTxTree: Data
-    public var v: BigUInt
-    public var r: Data
-    public var s: Data
+    public var blockNumber: BigUInt!
+    public var numberOfTxInBlock: BigUInt!
+    public var parentHash: Data!
+    public var merkleRootOfTheTxTree: Data!
+    public var v: BigUInt!
+    public var r: Data!
+    public var s: Data!
     public var data: Data {
         do {
             return try self.serialize()
@@ -46,15 +46,10 @@ public struct BlockHeader {
         self.s = s
     }
     
-    public init(data: Data) throws {
+    func getElements(from dataStringArray: [String]) -> [String] {
         var max = 0
         var min = 0
         var elements = [String]()
-        let dataString = data.toHexString()
-        let dataStringArray = dataString.split(intoChunksOf: 2)
-        
-        guard dataStringArray.count == Int(blockHeaderByteLength) else {throw StructureErrors.wrongDataCount}
-        
         for i in 0..<7 {
             var bytes = 0
             switch i {
@@ -80,6 +75,16 @@ public struct BlockHeader {
             let element = elementArray.joined()
             elements.append(element)
         }
+        return elements
+    }
+    
+    public init(data: Data) throws {
+        let dataString = data.toHexString()
+        let dataStringArray = dataString.split(intoChunksOf: 2)
+        
+        guard dataStringArray.count == Int(blockHeaderByteLength) else {throw StructureErrors.wrongDataCount}
+        
+        let elements = getElements(from: dataStringArray)
         
         guard let blockNumberDec = UInt8(elements[0], radix: 16) else {throw StructureErrors.wrongData}
         let blockNumber = BigUInt(blockNumberDec)

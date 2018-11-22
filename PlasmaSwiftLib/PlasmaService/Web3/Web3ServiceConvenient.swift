@@ -43,7 +43,7 @@ extension Web3Service {
                                                                value: withdrawCollateralBigUInt,
                                                                parameters: parameters,
                                                                extraData: Data())
-//            var startExitOptions = txStartExit.transactionOptions
+            let startExitOptions = txStartExit.transactionOptions
 //            let gas = try txStartExit.estimateGas(transactionOptions: startExitOptions)
 //            startExitOptions.gasPrice = .manual(gas)
             let result = try sendPlasmaContractTx(transaction: txStartExit,
