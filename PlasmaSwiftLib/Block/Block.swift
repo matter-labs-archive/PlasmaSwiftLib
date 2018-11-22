@@ -11,49 +11,108 @@
 import Foundation
 import SwiftRLP
 import BigInt
+import Web3swift
+
+struct TreeContent: ContentProtocol {
+    func getHash(_ hasher: TreeHasher) -> Data {
+        let h = Web3.Utils.hashPersonalMessage(self.data)!
+        return h
+    }
+    
+    func isEqualTo(_ other: ContentProtocol) -> Bool {
+        return self.data == other.data
+    }
+    
+    var data: Data
+    init(_ data: Data) {
+        self.data = data
+    }
+}
 
 public class Block {
     public var blockHeader: BlockHeader
     public var signedTransactions: [SignedTransaction]
+    public var merkleTree: PaddabbleTree? {
+        let transactions = self.signedTransactions
+        var contents = [ContentProtocol]()
+        for tx in transactions {
+            let raw = TreeContent(tx.data)
+            contents.append(raw)
+        }
+        let paddingElement = TreeContent(emptyTx)
+        let tree = PaddabbleTree(contents, paddingElement)
+        return tree
+    }
     public var data: Data {
-        return self.serialize()
+        do {
+            return try self.serialize()
+        } catch {
+            return Data()
+        }
     }
 
-    public init?(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]) {
-
+    public init(blockHeader: BlockHeader, signedTransactions: [SignedTransaction]) {
         self.blockHeader = blockHeader
         self.signedTransactions = signedTransactions
     }
 
-    public init?(data: Data) {
-        guard data.count > blockHeaderByteLength else {return nil}
+    public init(data: Data) throws {
+        guard data.count > blockHeaderByteLength else {throw StructureErrors.wrongDataCount}
         let headerData = Data(data[0 ..< blockHeaderByteLength])
-        guard let blockHeader = BlockHeader(data: headerData) else {return nil}
-
-        let transactionsData = Data(data[Int(blockHeaderByteLength) ..< data.count])
-        guard let item = RLP.decode(transactionsData) else {return nil}
-        guard let dataArray = item[0] else {return nil}
-        guard dataArray.isList else {return nil}
+        guard let blockHeader = try? BlockHeader(data: headerData) else {throw StructureErrors.wrongData}
         self.blockHeader = blockHeader
-        var transactions = [SignedTransaction]()
-        transactions.reserveCapacity(dataArray.count!)
-        for i in 0 ..< dataArray.count! {
-            guard let txData = dataArray[i]!.data else {return nil}
-            guard let tx = SignedTransaction(data: txData) else {return nil}
-            transactions.append(tx)
+
+        let signedTransactionsData = Data(data[Int(blockHeaderByteLength) ..< data.count])
+        guard let item = RLP.decode(signedTransactionsData) else {throw StructureErrors.wrongData}
+        guard item.isList else {throw StructureErrors.isNotList}
+        var signedTransactions = [SignedTransaction]()
+        signedTransactions.reserveCapacity(item.count!)
+        print("signed tx count: \(item.count!)")
+        for i in 0 ..< item.count! {
+            guard let txData = item[i]!.data else {throw StructureErrors.isNotData}
+            
+            guard let tx = try? SignedTransaction(data: txData) else {throw StructureErrors.wrongData}
+            signedTransactions.append(tx)
         }
-        self.signedTransactions = transactions
+        self.signedTransactions = signedTransactions
+//        guard let tree = self.merkleTree else {
+//            throw StructureErrors.wrongData
+//        }
+//        guard tree.merkleRoot == self.blockHeader.merkleRootOfTheTxTree else {
+//            throw StructureErrors.wrongData
+//        }
     }
 
-    public func serialize() -> Data {
+    public func serialize() throws -> Data {
         let headerData = self.blockHeader.data
         var txArray = [Data]()
         txArray.reserveCapacity(self.signedTransactions.count)
         for tx in self.signedTransactions {
             txArray.append(tx.data)
         }
-        let txRLP = RLP.encode(txArray as [AnyObject])!
+        guard let txRLP = RLP.encode(txArray as [AnyObject]) else {throw StructureErrors.cantEncodeData}
         return headerData + txRLP
+    }
+    
+    public func getProof(for transaction: SignedTransaction) throws -> (tx: SignedTransaction, proof: Data) {
+        guard let tree = self.merkleTree else {throw StructureErrors.wrongData}
+        for (counter, tx) in self.signedTransactions.enumerated() {
+            let serializedTx = tx.data
+            if serializedTx == transaction.data {
+                guard let proof =  tree.makeBinaryProof(counter) else {throw StructureErrors.wrongData}
+                return (tx, proof)
+            }
+        }
+        throw StructureErrors.wrongData
+    }
+    
+    public func getProofForTransactionByNumber(txNumber: BigUInt) throws -> (tx: SignedTransaction, proof: Data) {
+        let num = Int(txNumber)
+        guard let tree = self.merkleTree else {throw StructureErrors.wrongData}
+        guard num < self.signedTransactions.count else {throw StructureErrors.wrongDataCount}
+        let tx = self.signedTransactions[num]
+        guard let proof = tree.makeBinaryProof(num) else {throw StructureErrors.wrongData}
+        return (tx, proof)
     }
 }
 
@@ -61,6 +120,5 @@ extension Block: Equatable {
     public static func ==(lhs: Block, rhs: Block) -> Bool {
         return lhs.blockHeader == rhs.blockHeader &&
             lhs.signedTransactions == rhs.signedTransactions
-
     }
 }

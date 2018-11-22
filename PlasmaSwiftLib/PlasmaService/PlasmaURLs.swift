@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class MatterURLs {
+public class PlasmaURLs {
 
     public init() {}
 
@@ -16,4 +16,6 @@ public class MatterURLs {
     static let listUTXOsTestnet: URL = URL(string: "https://plasma-testnet.thematter.io/api/v1/listUTXOs")!
     static let sendRawTXMainnet: URL = URL(string: "https://plasma.thematter.io/api/v1/sendRawTX")!
     static let sendRawTXTestnet: URL = URL(string: "https://plasma-testnet.thematter.io/api/v1/sendRawTX")!
+    static let blockStorageMainnet: String = "https://plasma.ams3.digitaloceanspaces.com/plasma/"
+    static let blockStorageTestnet: String = "https://plasma-testnet.ams3.digitaloceanspaces.com/plasma/"
 }

@@ -13,17 +13,16 @@
 		E206606B2187549000701068 /* PlasmaSwiftLib.h in Headers */ = {isa = PBXBuildFile; fileRef = E206605D2187549000701068 /* PlasmaSwiftLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2066078218754CC00701068 /* BlockHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066075218754CC00701068 /* BlockHeader.swift */; };
 		E2066079218754CC00701068 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066076218754CC00701068 /* Block.swift */; };
-		E206607A218754CC00701068 /* BlockHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066077218754CC00701068 /* BlockHelpers.swift */; };
 		E2066082218754D200701068 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206607C218754D200701068 /* Constants.swift */; };
 		E2066083218754D200701068 /* BigIntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206607D218754D200701068 /* BigIntExtension.swift */; };
 		E2066084218754D200701068 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206607E218754D200701068 /* ArrayExtension.swift */; };
 		E2066085218754D200701068 /* NSRegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206607F218754D200701068 /* NSRegularExpressionExtension.swift */; };
 		E2066086218754D200701068 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066080218754D200701068 /* DataExtension.swift */; };
 		E2066087218754D200701068 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066081218754D200701068 /* StringExtension.swift */; };
-		E206608D218754D900701068 /* MatterErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066089218754D900701068 /* MatterErrors.swift */; };
-		E206608E218754D900701068 /* ListUTXOsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608A218754D900701068 /* ListUTXOsModel.swift */; };
-		E206608F218754D900701068 /* MatterURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608B218754D900701068 /* MatterURLs.swift */; };
-		E2066090218754D900701068 /* MatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608C218754D900701068 /* MatterService.swift */; };
+		E206608D218754D900701068 /* PlasmaErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066089218754D900701068 /* PlasmaErrors.swift */; };
+		E206608E218754D900701068 /* PlasmaUTXOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608A218754D900701068 /* PlasmaUTXOs.swift */; };
+		E206608F218754D900701068 /* PlasmaURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608B218754D900701068 /* PlasmaURLs.swift */; };
+		E2066090218754D900701068 /* PlasmaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206608C218754D900701068 /* PlasmaService.swift */; };
 		E2066098218754DF00701068 /* SignedTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066092218754DF00701068 /* SignedTransaction.swift */; };
 		E2066099218754DF00701068 /* TransactionOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066093218754DF00701068 /* TransactionOutput.swift */; };
 		E206609A218754DF00701068 /* TransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066094218754DF00701068 /* TransactionInput.swift */; };
@@ -31,9 +30,20 @@
 		E206609C218754DF00701068 /* OutputsManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066096218754DF00701068 /* OutputsManagement.swift */; };
 		E206609D218754DF00701068 /* TransactionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066097218754DF00701068 /* TransactionHelpers.swift */; };
 		E206609F218754ED00701068 /* BlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206609E218754ED00701068 /* BlockTests.swift */; };
-		E20660A1218754FB00701068 /* MatterServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A0218754FB00701068 /* MatterServiceTests.swift */; };
+		E20660A1218754FB00701068 /* PlasmaServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A0218754FB00701068 /* PlasmaServiceTests.swift */; };
 		E20660A32187550100701068 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A22187550100701068 /* TestHelpers.swift */; };
 		E20660A52187550600701068 /* TransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20660A42187550600701068 /* TransactionTests.swift */; };
+		E228BD29219985440085268C /* BlockHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD28219985440085268C /* BlockHelpers.swift */; };
+		E228BD322199D2D00085268C /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD2C2199D2D00085268C /* Hashing.swift */; };
+		E228BD332199D2D00085268C /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD2C2199D2D00085268C /* Hashing.swift */; };
+		E228BD342199D2D00085268C /* SimpleContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD2D2199D2D00085268C /* SimpleContent.swift */; };
+		E228BD352199D2D00085268C /* SimpleContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD2D2199D2D00085268C /* SimpleContent.swift */; };
+		E228BD362199D2D00085268C /* PaddableTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD2F2199D2D00085268C /* PaddableTree.swift */; };
+		E228BD372199D2D00085268C /* PaddableTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD2F2199D2D00085268C /* PaddableTree.swift */; };
+		E228BD86219FD3310085268C /* Web3ServiceConvenient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E228BD85219FD3310085268C /* Web3ServiceConvenient.swift */; };
+		E2DCA664219397BA00F94FBA /* Web3Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCA663219397BA00F94FBA /* Web3Service.swift */; };
+		E2DCA6662193A58300F94FBA /* PlasmaContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCA6652193A58300F94FBA /* PlasmaContract.swift */; };
+		E2DCA6682193BF8E00F94FBA /* PlasmaContractMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCA6672193BF8E00F94FBA /* PlasmaContractMethods.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,17 +70,16 @@
 		E206606A2187549000701068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2066075218754CC00701068 /* BlockHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockHeader.swift; sourceTree = "<group>"; };
 		E2066076218754CC00701068 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
-		E2066077218754CC00701068 /* BlockHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockHelpers.swift; sourceTree = "<group>"; };
 		E206607C218754D200701068 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E206607D218754D200701068 /* BigIntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigIntExtension.swift; sourceTree = "<group>"; };
 		E206607E218754D200701068 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		E206607F218754D200701068 /* NSRegularExpressionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtension.swift; sourceTree = "<group>"; };
 		E2066080218754D200701068 /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		E2066081218754D200701068 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		E2066089218754D900701068 /* MatterErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterErrors.swift; sourceTree = "<group>"; };
-		E206608A218754D900701068 /* ListUTXOsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListUTXOsModel.swift; sourceTree = "<group>"; };
-		E206608B218754D900701068 /* MatterURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterURLs.swift; sourceTree = "<group>"; };
-		E206608C218754D900701068 /* MatterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterService.swift; sourceTree = "<group>"; };
+		E2066089218754D900701068 /* PlasmaErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaErrors.swift; sourceTree = "<group>"; };
+		E206608A218754D900701068 /* PlasmaUTXOs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaUTXOs.swift; sourceTree = "<group>"; };
+		E206608B218754D900701068 /* PlasmaURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaURLs.swift; sourceTree = "<group>"; };
+		E206608C218754D900701068 /* PlasmaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaService.swift; sourceTree = "<group>"; };
 		E2066092218754DF00701068 /* SignedTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignedTransaction.swift; sourceTree = "<group>"; };
 		E2066093218754DF00701068 /* TransactionOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionOutput.swift; sourceTree = "<group>"; };
 		E2066094218754DF00701068 /* TransactionInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionInput.swift; sourceTree = "<group>"; };
@@ -78,9 +87,17 @@
 		E2066096218754DF00701068 /* OutputsManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputsManagement.swift; sourceTree = "<group>"; };
 		E2066097218754DF00701068 /* TransactionHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHelpers.swift; sourceTree = "<group>"; };
 		E206609E218754ED00701068 /* BlockTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTests.swift; sourceTree = "<group>"; };
-		E20660A0218754FB00701068 /* MatterServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatterServiceTests.swift; sourceTree = "<group>"; };
+		E20660A0218754FB00701068 /* PlasmaServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaServiceTests.swift; sourceTree = "<group>"; };
 		E20660A22187550100701068 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		E20660A42187550600701068 /* TransactionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTests.swift; sourceTree = "<group>"; };
+		E228BD28219985440085268C /* BlockHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockHelpers.swift; sourceTree = "<group>"; };
+		E228BD2C2199D2D00085268C /* Hashing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
+		E228BD2D2199D2D00085268C /* SimpleContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleContent.swift; sourceTree = "<group>"; };
+		E228BD2F2199D2D00085268C /* PaddableTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddableTree.swift; sourceTree = "<group>"; };
+		E228BD85219FD3310085268C /* Web3ServiceConvenient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3ServiceConvenient.swift; sourceTree = "<group>"; };
+		E2DCA663219397BA00F94FBA /* Web3Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3Service.swift; sourceTree = "<group>"; };
+		E2DCA6652193A58300F94FBA /* PlasmaContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaContract.swift; sourceTree = "<group>"; };
+		E2DCA6672193BF8E00F94FBA /* PlasmaContractMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaContractMethods.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,10 +164,11 @@
 		E206605C2187549000701068 /* PlasmaSwiftLib */ = {
 			isa = PBXGroup;
 			children = (
-				E2066091218754DF00701068 /* Transaction */,
-				E2066088218754D900701068 /* MatterService */,
-				E206607B218754D200701068 /* Helpers */,
+				E228BD2A2199D2D00085268C /* MerkleTools */,
 				E2066074218754CC00701068 /* Block */,
+				E2066091218754DF00701068 /* Transaction */,
+				E2066088218754D900701068 /* PlasmaService */,
+				E206607B218754D200701068 /* Helpers */,
 				E206605D2187549000701068 /* PlasmaSwiftLib.h */,
 				E206605E2187549000701068 /* Info.plist */,
 			);
@@ -160,7 +178,7 @@
 		E20660672187549000701068 /* PlasmaSwiftLibTests */ = {
 			isa = PBXGroup;
 			children = (
-				E20660A0218754FB00701068 /* MatterServiceTests.swift */,
+				E20660A0218754FB00701068 /* PlasmaServiceTests.swift */,
 				E20660A42187550600701068 /* TransactionTests.swift */,
 				E20660A22187550100701068 /* TestHelpers.swift */,
 				E206609E218754ED00701068 /* BlockTests.swift */,
@@ -174,7 +192,7 @@
 			children = (
 				E2066075218754CC00701068 /* BlockHeader.swift */,
 				E2066076218754CC00701068 /* Block.swift */,
-				E2066077218754CC00701068 /* BlockHelpers.swift */,
+				E228BD28219985440085268C /* BlockHelpers.swift */,
 			);
 			path = Block;
 			sourceTree = "<group>";
@@ -192,28 +210,66 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		E2066088218754D900701068 /* MatterService */ = {
+		E2066088218754D900701068 /* PlasmaService */ = {
 			isa = PBXGroup;
 			children = (
-				E2066089218754D900701068 /* MatterErrors.swift */,
-				E206608A218754D900701068 /* ListUTXOsModel.swift */,
-				E206608B218754D900701068 /* MatterURLs.swift */,
-				E206608C218754D900701068 /* MatterService.swift */,
+				E206608C218754D900701068 /* PlasmaService.swift */,
+				E206608A218754D900701068 /* PlasmaUTXOs.swift */,
+				E2DCA662219397A600F94FBA /* Web3 */,
+				E2066089218754D900701068 /* PlasmaErrors.swift */,
+				E206608B218754D900701068 /* PlasmaURLs.swift */,
+				E2DCA6652193A58300F94FBA /* PlasmaContract.swift */,
 			);
-			path = MatterService;
+			path = PlasmaService;
 			sourceTree = "<group>";
 		};
 		E2066091218754DF00701068 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				E2066092218754DF00701068 /* SignedTransaction.swift */,
+				E2066096218754DF00701068 /* OutputsManagement.swift */,
 				E2066093218754DF00701068 /* TransactionOutput.swift */,
 				E2066094218754DF00701068 /* TransactionInput.swift */,
 				E2066095218754DF00701068 /* Transaction.swift */,
-				E2066096218754DF00701068 /* OutputsManagement.swift */,
+				E2066092218754DF00701068 /* SignedTransaction.swift */,
 				E2066097218754DF00701068 /* TransactionHelpers.swift */,
 			);
 			path = Transaction;
+			sourceTree = "<group>";
+		};
+		E228BD2A2199D2D00085268C /* MerkleTools */ = {
+			isa = PBXGroup;
+			children = (
+				E228BD2B2199D2D00085268C /* Utils */,
+				E228BD2D2199D2D00085268C /* SimpleContent.swift */,
+				E228BD2E2199D2D00085268C /* PaddableTree */,
+			);
+			path = MerkleTools;
+			sourceTree = "<group>";
+		};
+		E228BD2B2199D2D00085268C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E228BD2C2199D2D00085268C /* Hashing.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E228BD2E2199D2D00085268C /* PaddableTree */ = {
+			isa = PBXGroup;
+			children = (
+				E228BD2F2199D2D00085268C /* PaddableTree.swift */,
+			);
+			path = PaddableTree;
+			sourceTree = "<group>";
+		};
+		E2DCA662219397A600F94FBA /* Web3 */ = {
+			isa = PBXGroup;
+			children = (
+				E228BD85219FD3310085268C /* Web3ServiceConvenient.swift */,
+				E2DCA663219397BA00F94FBA /* Web3Service.swift */,
+				E2DCA6672193BF8E00F94FBA /* PlasmaContractMethods.swift */,
+			);
+			path = Web3;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,23 +448,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2066078218754CC00701068 /* BlockHeader.swift in Sources */,
-				E206607A218754CC00701068 /* BlockHelpers.swift in Sources */,
 				E2066083218754D200701068 /* BigIntExtension.swift in Sources */,
 				E2066084218754D200701068 /* ArrayExtension.swift in Sources */,
+				E228BD342199D2D00085268C /* SimpleContent.swift in Sources */,
 				E2066098218754DF00701068 /* SignedTransaction.swift in Sources */,
 				E2066079218754CC00701068 /* Block.swift in Sources */,
 				E206609B218754DF00701068 /* Transaction.swift in Sources */,
 				E2066087218754D200701068 /* StringExtension.swift in Sources */,
 				E206609A218754DF00701068 /* TransactionInput.swift in Sources */,
 				E2066099218754DF00701068 /* TransactionOutput.swift in Sources */,
-				E206608F218754D900701068 /* MatterURLs.swift in Sources */,
-				E206608E218754D900701068 /* ListUTXOsModel.swift in Sources */,
+				E206608F218754D900701068 /* PlasmaURLs.swift in Sources */,
+				E228BD86219FD3310085268C /* Web3ServiceConvenient.swift in Sources */,
+				E2DCA6662193A58300F94FBA /* PlasmaContract.swift in Sources */,
+				E228BD29219985440085268C /* BlockHelpers.swift in Sources */,
+				E2DCA6682193BF8E00F94FBA /* PlasmaContractMethods.swift in Sources */,
+				E206608E218754D900701068 /* PlasmaUTXOs.swift in Sources */,
 				E2066086218754D200701068 /* DataExtension.swift in Sources */,
+				E228BD362199D2D00085268C /* PaddableTree.swift in Sources */,
 				E206609C218754DF00701068 /* OutputsManagement.swift in Sources */,
-				E206608D218754D900701068 /* MatterErrors.swift in Sources */,
+				E206608D218754D900701068 /* PlasmaErrors.swift in Sources */,
 				E2066085218754D200701068 /* NSRegularExpressionExtension.swift in Sources */,
 				E2066082218754D200701068 /* Constants.swift in Sources */,
-				E2066090218754D900701068 /* MatterService.swift in Sources */,
+				E2066090218754D900701068 /* PlasmaService.swift in Sources */,
+				E2DCA664219397BA00F94FBA /* Web3Service.swift in Sources */,
+				E228BD322199D2D00085268C /* Hashing.swift in Sources */,
 				E206609D218754DF00701068 /* TransactionHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,8 +480,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E20660A1218754FB00701068 /* MatterServiceTests.swift in Sources */,
+				E228BD332199D2D00085268C /* Hashing.swift in Sources */,
+				E228BD372199D2D00085268C /* PaddableTree.swift in Sources */,
+				E20660A1218754FB00701068 /* PlasmaServiceTests.swift in Sources */,
 				E206609F218754ED00701068 /* BlockTests.swift in Sources */,
+				E228BD352199D2D00085268C /* SimpleContent.swift in Sources */,
 				E20660A52187550600701068 /* TransactionTests.swift in Sources */,
 				E20660A32187550100701068 /* TestHelpers.swift in Sources */,
 			);

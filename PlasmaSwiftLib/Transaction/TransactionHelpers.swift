@@ -13,15 +13,15 @@ import secp256k1_swift
 
 public struct TransactionHelpers {
 
-    static func hashForSignature(data: Data) -> Data? {
-        let hash = TransactionHelpers.hashPersonalMessage(data)
+    static func hashForSignature(data: Data) throws -> Data {
+        let hash = try TransactionHelpers.hashPersonalMessage(data)
         return hash
     }
 
-    static func hashPersonalMessage(_ personalMessage: Data) -> Data? {
+    static func hashPersonalMessage(_ personalMessage: Data) throws -> Data {
         var prefix = "\u{19}Ethereum Signed Message:\n"
         prefix += String(personalMessage.count)
-        guard let prefixData = prefix.data(using: .ascii) else {return nil}
+        guard let prefixData = prefix.data(using: .ascii) else {throw StructureErrors.wrongData}
         var data = Data()
         if personalMessage.count >= prefixData.count && prefixData == personalMessage[0 ..< prefixData.count] {
             data.append(personalMessage)
@@ -33,20 +33,20 @@ public struct TransactionHelpers {
         return hash
     }
 
-    static func publicToAddressData(_ publicKey: Data) -> Data? {
+    static func publicToAddressData(_ publicKey: Data) throws -> Data {
         if publicKey.count == 33 {
-            guard let decompressedKey = SECP256K1.combineSerializedPublicKeys(keys: [publicKey], outputCompressed: false) else {return nil}
-            return publicToAddressData(decompressedKey)
+            guard let decompressedKey = SECP256K1.combineSerializedPublicKeys(keys: [publicKey], outputCompressed: false) else {throw StructureErrors.wrongData}
+            return try publicToAddressData(decompressedKey)
         }
         var stipped = publicKey
         if (stipped.count == 65) {
             if (stipped[0] != 4) {
-                return nil
+                throw StructureErrors.wrongData
             }
             stipped = stipped[1...64]
         }
         if (stipped.count != 64) {
-            return nil
+            throw StructureErrors.wrongDataCount
         }
         let sha3 = stipped.sha3(.keccak256)
         let addressData = sha3[12...31]

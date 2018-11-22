@@ -16,15 +16,19 @@ public struct TransactionInput {
     public var outputNumberInTx: BigUInt
     public var amount: BigUInt
     public var data: Data {
-        return self.serialize()
+        do {
+            return try self.serialize()
+        } catch {
+            return Data()
+        }
     }
 
-    public init?(blockNumber: BigUInt, txNumberInBlock: BigUInt, outputNumberInTx: BigUInt, amount: BigUInt) {
+    public init(blockNumber: BigUInt, txNumberInBlock: BigUInt, outputNumberInTx: BigUInt, amount: BigUInt) throws {
 
-        guard blockNumber.bitWidth <= blockNumberMaxWidth else {return nil}
-        guard txNumberInBlock.bitWidth <= txNumberInBlockMaxWidth else {return nil}
-        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {return nil}
-        guard amount.bitWidth <= amountMaxWidth else {return nil}
+        guard blockNumber.bitWidth <= blockNumberMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard txNumberInBlock.bitWidth <= txNumberInBlockMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard amount.bitWidth <= amountMaxWidth else {throw StructureErrors.wrongBitWidth}
 
         self.blockNumber = blockNumber
         self.txNumberInBlock = txNumberInBlock
@@ -32,36 +36,33 @@ public struct TransactionInput {
         self.amount = amount
     }
 
-    public init?(data: Data) {
+    public init(data: Data) throws {
 
-        guard let dataDecoded = RLP.decode(data) else {return nil}
-        guard dataDecoded.isList else {return nil}
-        guard let count = dataDecoded.count else {return nil}
+        guard let dataDecoded = RLP.decode(data) else {throw StructureErrors.cantDecodeData}
+        guard dataDecoded.isList else {throw StructureErrors.isNotList}
+        guard let count = dataDecoded.count else {throw StructureErrors.wrongDataCount}
         let dataArray: RLP.RLPItem
-        guard let firstItem = dataDecoded[0] else {return nil}
+        guard let firstItem = dataDecoded[0] else {throw StructureErrors.dataIsNotArray}
         if count > 1 {
             dataArray = dataDecoded
         } else {
             dataArray = firstItem
         }
-        guard dataArray.count == 4 else {
-            print("Wrong decoded input")
-            return nil
-        }
-        guard let blockNumberData = dataArray[0]?.data else {return nil}
-        guard let txNumberInBlockData = dataArray[1]?.data else {return nil}
-        guard let outputNumberInTxData = dataArray[2]?.data else {return nil}
-        guard let amountData = dataArray[3]?.data else {return nil}
+        guard dataArray.count == 4 else {throw StructureErrors.wrongDataCount}
+        guard let blockNumberData = dataArray[0]?.data else {throw StructureErrors.isNotData}
+        guard let txNumberInBlockData = dataArray[1]?.data else {throw StructureErrors.isNotData}
+        guard let outputNumberInTxData = dataArray[2]?.data else {throw StructureErrors.isNotData}
+        guard let amountData = dataArray[3]?.data else {throw StructureErrors.isNotData}
 
         let blockNumber = BigUInt(blockNumberData)
         let txNumberInBlock = BigUInt(txNumberInBlockData)
         let outputNumberInTx = BigUInt(outputNumberInTxData)
         let amount = BigUInt(amountData)
 
-        guard blockNumber.bitWidth <= blockNumberMaxWidth else {return nil}
-        guard txNumberInBlock.bitWidth <= txNumberInBlockMaxWidth else {return nil}
-        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {return nil}
-        guard amount.bitWidth <= amountMaxWidth else {return nil}
+        guard blockNumber.bitWidth <= blockNumberMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard txNumberInBlock.bitWidth <= txNumberInBlockMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard amount.bitWidth <= amountMaxWidth else {throw StructureErrors.wrongBitWidth}
 
         self.blockNumber = blockNumber
         self.txNumberInBlock = txNumberInBlock
@@ -69,9 +70,9 @@ public struct TransactionInput {
         self.amount = amount
     }
 
-    public func serialize() -> Data {
+    public func serialize() throws -> Data {
         let dataArray = self.prepareForRLP()
-        let encoded = RLP.encode(dataArray)!
+        guard let encoded = RLP.encode(dataArray) else {throw StructureErrors.cantEncodeData}
         return encoded
     }
 

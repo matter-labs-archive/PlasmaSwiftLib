@@ -12,23 +12,56 @@ import BigInt
 @testable import PlasmaSwiftLib
 
 class BlockTests: XCTestCase {
+    
     let testHelpers = TestHelpers()
     
     func testBlockHeader() {
-//        guard let blockHeader1 = testHelpers.formBlockHeaderForBlock() else {return}
-//        let data = blockHeader1.data
-//        guard let blockHeader2 = BlockHeader(data: data) else {return}
-//        print("block header passed")
-//        XCTAssert(blockHeader1 == blockHeader2)
+        do {
+            let blockHeader = try testHelpers.formBlockHeaderForBlock()
+            let data = try blockHeader.serialize()
+            let parsedBlockHeader = try BlockHeader(data: data)
+            blockHeader.printElements()
+            parsedBlockHeader.printElements()
+            XCTAssert(blockHeader == parsedBlockHeader)
+        } catch let error {
+            XCTFail(error.localizedDescription)
+        }
     }
     
     func testBlock() {
-//        guard let blockHeader = testHelpers.formBlockHeaderForBlock() else {return}
-//        guard let signedTransactions = testHelpers.formSignedTransactionsForBlock() else {return}
-//        guard let block1 = Block(blockHeader: blockHeader, signedTransactions: signedTransactions) else {return}
-//        let data = block1.data
-//        guard let block2 = Block(data: data) else {return}
-//        print("block passed")
-//        XCTAssert(block1 == block2)
+        do {
+            let blockHeader = try testHelpers.formBlockHeaderForBlock()
+            let signedTransactions = try testHelpers.formSignedTransactionsForBlock()
+            let block = Block(blockHeader: blockHeader, signedTransactions: signedTransactions)
+            let data = block.data
+            let parsedBlock = try Block(data: data)
+            XCTAssert(parsedBlock == block)
+        } catch let error {
+            XCTFail(error.localizedDescription)
+        }
+    }
+    
+    func testGetProof() {
+        do {
+            let block = try PlasmaService().getBlock(onTestnet: true, number: 1)
+            let parsedBlock = try Block(data: block)
+            guard let transactionForProof = parsedBlock.signedTransactions.first else {
+                XCTFail("No tx in block")
+                return
+            }
+            XCTAssertEqual(parsedBlock.signedTransactions.first?.transaction.inputs.first?.blockNumber, 0)
+            guard let merkleTree = parsedBlock.merkleTree else {
+                XCTFail("Can't build merkle tree")
+                return
+            }
+            XCTAssertNotNil(merkleTree.merkleRoot)
+            print("merkleTree.merkleRoot: \(merkleTree.merkleRoot!.toHexString())")
+            print("blockHeader.merkleRoot : \(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString())")
+            XCTAssertTrue(parsedBlock.blockHeader.merkleRootOfTheTxTree.toHexString() == merkleTree.merkleRoot!.toHexString(), "Merkle roots should be equal")
+            let proof = try parsedBlock.getProof(for: transactionForProof)
+            XCTAssertEqual(proof.0, transactionForProof)
+        } catch let error {
+            XCTFail(error.localizedDescription)
+        }
     }
 }
