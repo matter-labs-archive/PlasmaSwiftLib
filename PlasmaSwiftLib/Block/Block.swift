@@ -75,9 +75,9 @@ public class Block {
             signedTransactions.append(tx)
         }
         self.signedTransactions = signedTransactions
-        guard let tree = self.merkleTree else {
-            throw StructureErrors.wrongData
-        }
+//        guard let tree = self.merkleTree else {
+//            throw StructureErrors.wrongData
+//        }
 //        guard tree.merkleRoot == self.blockHeader.merkleRootOfTheTxTree else {
 //            throw StructureErrors.wrongData
 //        }
