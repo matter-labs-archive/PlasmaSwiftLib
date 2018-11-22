@@ -13,15 +13,12 @@ import EthereumAddress
 @testable import PlasmaSwiftLib
 
 class TransactionTests: XCTestCase {
+    
     let testHelpers = TestHelpers()
 
     func testInput() {
         do {
-            let blockNumber: BigUInt = 10
-            let txNumberInBlock: BigUInt = 1
-            let outputNumberInTx: BigUInt = 1
-            let amount: BigUInt = 500000000000000
-            let input1 = try TransactionInput(blockNumber: blockNumber, txNumberInBlock: txNumberInBlock, outputNumberInTx: outputNumberInTx, amount: amount)
+            let input1 = try TransactionInput(blockNumber: testHelpers.blockNumber, txNumberInBlock: testHelpers.txNumberInBlock, outputNumberInTx: testHelpers.outputNumberInTx, amount: testHelpers.depositAmount)
             let data = input1.data
             let input2 = try TransactionInput(data: data)
             XCTAssert(input1 == input2)
@@ -32,10 +29,7 @@ class TransactionTests: XCTestCase {
 
     func testOutput() {
         do {
-            let outputNumberInTx: BigUInt = 10
-            let receiverEthereumAddress: EthereumAddress = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!
-            let amount: BigUInt = 500000000000000
-            let output1 = try TransactionOutput(outputNumberInTx: outputNumberInTx, receiverEthereumAddress: receiverEthereumAddress, amount: amount)
+            let output1 = try TransactionOutput(outputNumberInTx: testHelpers.outputNumberInTx, receiverEthereumAddress: testHelpers.toAddress, amount: testHelpers.depositAmount)
             let data = output1.data
             let output2 = try TransactionOutput(data: data)
             print("output passed")
@@ -64,14 +58,8 @@ class TransactionTests: XCTestCase {
         do {
             let txType = Transaction.TransactionType.split
 
-            let blockNumber: BigUInt = 10
-            let txNumberInBlock: BigUInt = 1
-            let outputNumberInTx: BigUInt = 1
-            let amount: BigUInt = 500000000000000
-            let input = try TransactionInput(blockNumber: blockNumber, txNumberInBlock: txNumberInBlock, outputNumberInTx: outputNumberInTx, amount: amount)
-
-            let receiverEthereumAddress: EthereumAddress = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4")!
-            let output = try TransactionOutput(outputNumberInTx: outputNumberInTx, receiverEthereumAddress: receiverEthereumAddress, amount: amount)
+            let input = try TransactionInput(blockNumber: testHelpers.blockNumber, txNumberInBlock: testHelpers.txNumberInBlock, outputNumberInTx: testHelpers.outputNumberInTx, amount: testHelpers.depositAmount)
+            let output = try TransactionOutput(outputNumberInTx: testHelpers.outputNumberInTx, receiverEthereumAddress: testHelpers.toAddress, amount: testHelpers.depositAmount)
 
             let inputs = [input]
             let outputs = [output]
@@ -137,9 +125,8 @@ class TransactionTests: XCTestCase {
     
     func testEmptyTxForMerkleTree() {
         do {
-            let tx = Data(hex: "0xf847c300c0c000a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000000")
-            let parsedTx = try SignedTransaction(data: tx)
-            XCTAssert(parsedTx.data == tx)
+            let parsedTx = try SignedTransaction(data: emptyTx)
+            XCTAssert(parsedTx.data == emptyTx)
             XCTAssert(parsedTx.v == 0)
         } catch let error {
             XCTFail("Failed input test with error: \(error.localizedDescription)")

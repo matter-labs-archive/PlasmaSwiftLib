@@ -7,23 +7,84 @@
 //
 
 import XCTest
-import BigInt
 import EthereumAddress
+import BigInt
+import secp256k1_swift
+import Web3swift
 
 @testable import PlasmaSwiftLib
 
 class TestHelpers {
-    func UTXOsToTransaction(utxos: [PlasmaUTXOs], address: EthereumAddress, txType: Transaction.TransactionType) throws -> Transaction {
+    
+    var fromAddress: EthereumAddress!
+    var toAddress: EthereumAddress!
+    var privateKeyString: String!
+    var privateKeyData: Data!
+    let depositAmount: BigUInt = 1000000000000000000
+    var keystore: EthereumKeystoreV3!
+    var web3: Web3Service!
+    var keystoreManager: KeystoreManager!
+    
+    let blockNumber: BigUInt = 10
+    let txNumberInBlock: BigUInt = 1
+    let outputNumberInTx: BigUInt = 1
+    
+    init() {
+        guard let fromAddress = EthereumAddress("0x832a630b949575b87c0e3c00f624f773d9b160f4") else {
+            return
+        }
+        guard let toAddress = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4") else {
+            return
+        }
+        let privKey = "BDBA6C3D375A8454993C247E2A11D3E81C9A2CE9911FF05AC7FF0FCCBAC554B5"
+        let keyStr = privKey.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let privateKeyData = Data.fromHex(keyStr) else {
+            return
+        }
+        guard let keystore = try? EthereumKeystoreV3(privateKey: privateKeyData, password: "web3swift") else {
+            return
+        }
+        guard let keystoreTrue = keystore else {
+            return
+        }
+        let keystoreManager = KeystoreManager([keystoreTrue])
+        let web3 = Web3Service(web3: Web3.InfuraRinkebyWeb3(), keystoreManager: keystoreManager, fromAddress: fromAddress)
+        self.fromAddress = fromAddress
+        self.toAddress = toAddress
+        self.privateKeyData = privateKeyData
+        self.privateKeyString = keyStr
+        self.keystore = keystoreTrue
+        self.keystoreManager = keystoreManager
+        self.web3 = web3
+    }
+    
+    func MergeTransaction(utxos: [PlasmaUTXOs]) throws -> Transaction {
+        let chosenUTXOs = utxos.prefix(2)
         var mergedAmount: BigUInt = 0
         var inputs = [TransactionInput]()
-        for i in utxos {
+        for i in chosenUTXOs {
             let input = try i.toTransactionInput()
             inputs.append(input)
             mergedAmount += input.amount
         }
-        let output = try TransactionOutput(outputNumberInTx: 0, receiverEthereumAddress: address, amount: mergedAmount)
+        let output = try TransactionOutput(outputNumberInTx: 0, receiverEthereumAddress: self.fromAddress, amount: mergedAmount)
         let outputs = [output]
         let transaction = try Transaction(txType: .merge, inputs: inputs, outputs: outputs)
+        return transaction
+    }
+    
+    func SplitTransaction(utxos: [PlasmaUTXOs]) throws -> Transaction {
+        let chosenUTXOs = utxos.prefix(1)
+        var mergedAmount: BigUInt = 0
+        var inputs = [TransactionInput]()
+        for i in chosenUTXOs {
+            let input = try i.toTransactionInput()
+            inputs.append(input)
+            mergedAmount += input.amount
+        }
+        let output = try TransactionOutput(outputNumberInTx: 0, receiverEthereumAddress: self.toAddress, amount: mergedAmount)
+        let outputs = [output]
+        let transaction = try Transaction(txType: .split, inputs: inputs, outputs: outputs)
         return transaction
     }
     

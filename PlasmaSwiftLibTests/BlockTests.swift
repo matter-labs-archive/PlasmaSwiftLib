@@ -12,6 +12,7 @@ import BigInt
 @testable import PlasmaSwiftLib
 
 class BlockTests: XCTestCase {
+    
     let testHelpers = TestHelpers()
     
     func testBlockHeader() {
