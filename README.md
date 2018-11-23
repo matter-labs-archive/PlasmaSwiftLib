@@ -97,7 +97,7 @@ platform :ios, '9.0'
 
 target '<Your Target Name>' do
     use_frameworks!
-    pod 'PlasmaSwiftLib', '~> 1.0.7'
+    pod 'PlasmaSwiftLib', '~> 1.1.2'
 end
 ```
 
