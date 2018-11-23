@@ -52,7 +52,7 @@
 - [x] Based on [More Viable Plasma Implementation](https://github.com/matterinc/PlasmaContract) by The Matter Team
 - [x] RLP encoding and decoding
 - [x] Comprehensive Unit and Integration Test Coverage
-- [x] [Complete Documentation](https://matterinc.github.io/PlasmaSwiftLib)
+- [x] [Complete Documentation](https://matterinc.github.io/PlasmaSwiftLib/)
 
 ## Design Decisions
 
