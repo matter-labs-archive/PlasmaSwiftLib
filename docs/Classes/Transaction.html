@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Transaction Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Transaction" class="dashAnchor"></a>
+    <a title="Transaction Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">PlasmaSwiftLib Docs</a> (35% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">PlasmaSwiftLib Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Transaction Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Block.html">Block</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PlasmaService.html">PlasmaService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PlasmaURLs.html">PlasmaURLs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PlasmaUTXOs.html">PlasmaUTXOs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Transaction.html">Transaction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Transaction/TransactionType.html">– TransactionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TreeHasher.html">TreeHasher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TreeNode.html">TreeNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Web3Service.html">Web3Service</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib16amountByteLengths6UInt64Vvp">amountByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib14amountMaxWidths6UInt64Vvp">amountMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib21blockHeaderByteLengths6UInt64Vvp">blockHeaderByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib21blockNumberByteLengths6UInt64Vvp">blockNumberByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib19blockNumberMaxWidths6UInt64Vvp">blockNumberMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib7emptyTx10Foundation4DataVvp">emptyTx</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib14inputsArrayMaxSivp">inputsArrayMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib31merkleRootOfTheTxTreeByteLengths6UInt64Vvp">merkleRootOfTheTxTreeByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib29merkleRootOfTheTxTreeMaxWidths6UInt64Vvp">merkleRootOfTheTxTreeMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib27numberOfTxInBlockByteLengths6UInt64Vvp">numberOfTxInBlockByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib25numberOfTxInBlockMaxWidths6UInt64Vvp">numberOfTxInBlockMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib26outputNumberInTxByteLengths6UInt64Vvp">outputNumberInTxByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib24outputNumberInTxMaxWidths6UInt64Vvp">outputNumberInTxMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib15outputsArrayMaxSivp">outputsArrayMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib20parentHashByteLengths6UInt64Vvp">parentHashByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib18parentHashMaxWidths6UInt64Vvp">parentHashMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib11rByteLengths6UInt64Vvp">rByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib9rMaxWidths6UInt64Vvp">rMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib33receiverEthereumAddressByteLengths6UInt64Vvp">receiverEthereumAddressByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib31receiverEthereumAddressMaxWidths6UInt64Vvp">receiverEthereumAddressMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib11sByteLengths6UInt64Vvp">sByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib9sMaxWidths6UInt64Vvp">sMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib25txNumberInBlockByteLengths6UInt64Vvp">txNumberInBlockByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib23txNumberInBlockMaxWidths6UInt64Vvp">txNumberInBlockMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib16txTypeByteLengths6UInt64Vvp">txTypeByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib14txTypeMaxWidths6UInt64Vvp">txTypeMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib11vByteLengths6UInt64Vvp">vByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14PlasmaSwiftLib9vMaxWidths6UInt64Vvp">vMaxWidth</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ContentType.html">ContentType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Method.html">Method</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PlasmaContractMethod.html">PlasmaContractMethod</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ContentProtocol.html">ContentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Hasher.html">Hasher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TreeNodeProtocol.html">TreeNodeProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BlockHeader.html">BlockHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PaddabbleTree.html">PaddabbleTree</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PlasmaContract.html">PlasmaContract</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SignedTransaction.html">SignedTransaction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SimpleContent.html">SimpleContent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:14PlasmaSwiftLib18TransactionHelpersV">TransactionHelpers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TransactionInput.html">TransactionInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TransactionOutput.html">TransactionOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TreeContent.html">TreeContent</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14PlasmaSwiftLib16TreeHashFunctiona">TreeHashFunction</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Transaction</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Transaction</span></code></pre>
+
+                </div>
+              </div>
+            <p>An RLP encoded set that describes unsigned Transaction</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionC0D4TypeO"></a>
+                    <a name="//apple_ref/swift/Enum/TransactionType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionC0D4TypeO">TransactionType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of transaction can be:
+    - null
+    - fund
+    - split - use to send funds
+    - merge - use to merge UTXOs</p>
+
+                        <a href="../Classes/Transaction/TransactionType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TransactionType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionC6txTypeAC0dF0Ovp"></a>
+                    <a name="//apple_ref/swift/Property/txType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionC6txTypeAC0dF0Ovp">txType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">txType</span><span class="p">:</span> <span class="kt"><a href="../Classes/Transaction/TransactionType.html">TransactionType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionC6inputsSayAA0D5InputVGvp"></a>
+                    <a name="//apple_ref/swift/Property/inputs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionC6inputsSayAA0D5InputVGvp">inputs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">inputs</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TransactionInput.html">TransactionInput</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionC7outputsSayAA0D6OutputVGvp"></a>
+                    <a name="//apple_ref/swift/Property/outputs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionC7outputsSayAA0D6OutputVGvp">outputs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">outputs</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TransactionOutput.html">TransactionOutput</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionC4data10Foundation4DataVvp"></a>
+                    <a name="//apple_ref/swift/Property/data" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionC4data10Foundation4DataVvp">data</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionCACycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionCACycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionC6txType6inputs7outputsA2C0dF0O_SayAA0D5InputVGSayAA0D6OutputVGtKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(txType:inputs:outputs:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionC6txType6inputs7outputsA2C0dF0O_SayAA0D5InputVGSayAA0D6OutputVGtKcfc">init(txType:inputs:outputs:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates Transaction object that implement unsigned transaction in Plasma</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>StructureErrors.wrongBitWidth</code> if bytes count in some parameter is wrong
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">txType</span><span class="p">:</span> <span class="kt"><a href="../Classes/Transaction/TransactionType.html">TransactionType</a></span><span class="p">,</span> <span class="nv">inputs</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TransactionInput.html">TransactionInput</a></span><span class="p">],</span> <span class="nv">outputs</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TransactionOutput.html">TransactionOutput</a></span><span class="p">])</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>txType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>describes the purpose of transaction and can be:</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inputs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an array of TransactionInput, maximum 2 items</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>outputs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an array of TransactionOutput, maximum 3 items. One of the outputs is an explicit output to an address of Plasma operator</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionC4dataAC10Foundation4DataV_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(data:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionC4dataAC10Foundation4DataV_tKcfc">init(data:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates Transaction object that implement unsigned transaction in Plasma</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    throws various <code>StructureErrors</code> if decoding is wrong or decoded data is wrong in some way
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>encoded Data of Transaction</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionC4sign10privateKey15useExtraEntropyAA06SignedD0V10Foundation4DataV_SbtKF"></a>
+                    <a name="//apple_ref/swift/Method/sign(privateKey:useExtraEntropy:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionC4sign10privateKey15useExtraEntropyAA06SignedD0V10Foundation4DataV_SbtKF">sign(privateKey:useExtraEntropy:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Performes signing of transaction</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>StructureErrors.wrongData</code> if private key, transaction or something in signing process is wrong
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sign</span><span class="p">(</span><span class="nv">privateKey</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">useExtraEntropy</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/SignedTransaction.html">SignedTransaction</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>privateKey</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>private key used to sign transaction</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>useExtraEntropy</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>setups additional entropy for good quality randomness</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>SignedTransaction object that can be used to send in Plasma</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionC13prepareForRLPSayyXlGyF"></a>
+                    <a name="//apple_ref/swift/Method/prepareForRLP()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionC13prepareForRLPSayyXlGyF">prepareForRLP()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Plases Transaction items in AnyObject array</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">prepareForRLP</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">AnyObject</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>AnyObject array of Transaction items in Data type</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14PlasmaSwiftLib11TransactionC9serialize10Foundation4DataVyKF"></a>
+                    <a name="//apple_ref/swift/Method/serialize()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14PlasmaSwiftLib11TransactionC9serialize10Foundation4DataVyKF">serialize()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Serializes Transaction</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>StructureErrors.cantEncodeData</code> if data can&rsquo;t be encoded
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">serialize</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>encoded AnyObject array consisted of Transaction items</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/mergeOutputs(untilMinAmount:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">mergeOutputs(untilMinAmount:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Merge outputs for minimum amount of one output. All outputs with amount less than min will be merged.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>StructureErrors.wrongData</code> if there is some errors in TransactionOutputs inits
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">mergeOutputs</span><span class="p">(</span><span class="nv">untilMinAmount</span><span class="p">:</span> <span class="kt">BigUInt</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Transaction</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>untilMinAmount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>minimum output amount of one output. In Plasma the minimum amount is preseted in 0.000001 Ether</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>returns Transaction with fixed outputs</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/mergeOutputs(forMaxNumber:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">mergeOutputs(forMaxNumber:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Merge outputs for fixed number of outputs. Maximum is 3. Сombined outputs with a smaller amount.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code>StructureErrors.wrongData</code> if there is some errors in TransactionOutputs inits
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">mergeOutputs</span><span class="p">(</span><span class="nv">forMaxNumber</span><span class="p">:</span> <span class="kt">BigUInt</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Transaction</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forMaxNumber</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>maximum number of outputs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>returns Transaction with fixed outputs</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:SQ2eeoiySbx_xtFZ"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:SQ2eeoiySbx_xtFZ">==(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">Transaction</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Transaction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/matterinc/PlasmaSwiftLib" target="_blank" rel="external">Anton Grigorev</a>. All rights reserved. (Last updated: 2018-11-23)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
