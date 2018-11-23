@@ -1,8 +1,6 @@
 disabled_rules: # rule identifiers to exclude from running
   - identifier_name
   - function_parameter_count
-  - colon
-  - comma
   - control_statement
   - trailing_whitespace
   - line_length
@@ -12,6 +10,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
   - Pods
   - PlasmaSwiftLibExample
+  - PlasmaSwiftLib/PlasmaService/PlasmaContract.swift
 
 cyclomatic_complexity: 20
 
@@ -33,6 +32,9 @@ file_length:
   error: 1200
 # naming rules can set warnings/errors for min_length and max_length
 # additionally they can set excluded names
+function_body_length:
+  warning: 60
+  error: 80
 type_name:
   min_length: 4 # only warning
   max_length: # warning and error

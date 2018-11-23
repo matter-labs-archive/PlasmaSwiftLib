@@ -1,15 +1,11 @@
 def import_pods
-  pod 'BigInt'
-  pod 'CryptoSwift'
-  pod 'SwiftRLP'
-  pod 'secp256k1_swift'
-  pod 'EthereumABI'
-  pod 'EthereumAddress'
+  pod 'web3swift', '~> 2.0.4'
 end
 
 target 'PlasmaSwiftLib' do
   platform :ios, '9.0'
-  use_modular_headers!
+  #use_modular_headers!
+  use_frameworks!
   import_pods
 
   target 'PlasmaSwiftLibTests' do

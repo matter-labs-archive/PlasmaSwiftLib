@@ -11,7 +11,13 @@ import SwiftRLP
 import BigInt
 import secp256k1_swift
 
+/// An RLP encoded set that describes unsigned Transaction
 public class Transaction {
+    /// The type of transaction can be:
+    ///     - null
+    ///     - fund
+    ///     - split - use to send funds
+    ///     - merge - use to merge UTXOs
     public enum TransactionType {
         case null
         case fund
@@ -54,7 +60,11 @@ public class Transaction {
     public var inputs: [TransactionInput]
     public var outputs: [TransactionOutput]
     public var data: Data {
-        return self.serialize()
+        do {
+            return try self.serialize()
+        } catch {
+            return Data()
+        }
     }
 
     public init() {
@@ -63,48 +73,60 @@ public class Transaction {
         self.outputs = [TransactionOutput]()
     }
 
-    public init?(txType: TransactionType, inputs: [TransactionInput], outputs: [TransactionOutput]) {
-        guard inputs.count <= inputsArrayMax else {return nil}
-        guard outputs.count <= outputsArrayMax else {return nil}
+    /// Creates Transaction object that implement unsigned transaction in Plasma
+    ///
+    /// - Parameters:
+    ///   - txType: describes the purpose of transaction and can be:
+    ///     - null
+    ///     - fund
+    ///     - split - use to send funds
+    ///     - merge - use to merge UTXOs
+    ///   - inputs: an array of TransactionInput, maximum 2 items
+    ///   - outputs: an array of TransactionOutput, maximum 3 items. One of the outputs is an explicit output to an address of Plasma operator
+    /// - Throws: `StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
+    public init(txType: TransactionType, inputs: [TransactionInput], outputs: [TransactionOutput]) throws {
+        guard inputs.count <= inputsArrayMax else {throw StructureErrors.wrongBitWidth}
+        guard outputs.count <= outputsArrayMax else {throw StructureErrors.wrongBitWidth}
 
         self.txType = txType
         self.inputs = inputs
         self.outputs = outputs
     }
 
-    public init?(data: Data) {
+    /// Creates Transaction object that implement unsigned transaction in Plasma
+    ///
+    /// - Parameter data: encoded Data of Transaction
+    /// - Throws: throws various `StructureErrors` if decoding is wrong or decoded data is wrong in some way
+    public init(data: Data) throws {
 
-        guard let item = RLP.decode(data) else {return nil}
-        guard item.isList else {return nil}
-        guard let count = item.count else {return nil}
+        guard let item = RLP.decode(data) else {throw StructureErrors.cantDecodeData}
+        guard item.isList else {throw StructureErrors.isNotList}
+        guard let count = item.count else {throw StructureErrors.wrongDataCount}
         let dataArray: RLP.RLPItem
 
-        guard let firstItem = item[0] else {return nil}
+        guard let firstItem = item[0] else {throw StructureErrors.dataIsNotArray}
         if count > 1 {
             dataArray = item
         } else {
             dataArray = firstItem
         }
 
-        guard dataArray.count == 3 else {
-            print("Wrong decoded transaction")
-            return nil
-        }
+        guard dataArray.count == 3 else {throw StructureErrors.wrongDataCount}
 
-        guard let txTypeData = dataArray[0]?.data else {return nil}
-        guard let inputsData = dataArray[1] else {return nil}
-        guard let outputsData = dataArray[2] else {return nil}
+        guard let txTypeData = dataArray[0]?.data else {throw StructureErrors.isNotData}
+        guard let inputsData = dataArray[1] else {throw StructureErrors.wrongDataCount}
+        guard let outputsData = dataArray[2] else {throw StructureErrors.wrongDataCount}
 
-        guard txTypeData.count == txTypeByteLength else {return nil}
-        guard let txType = TransactionType(byte: txTypeData.first!) else {return nil}
+        guard txTypeData.count == txTypeByteLength else {throw StructureErrors.wrongBitWidth}
+        guard let txType = TransactionType(byte: txTypeData.first!) else {throw StructureErrors.wrongData}
         self.txType = txType
 
         var inputs = [TransactionInput]()
         if inputsData.isList {
             inputs.reserveCapacity(inputsData.count!)
             for inputIndex in 0 ..< inputsData.count! {
-                guard let inputData = inputsData[inputIndex]!.data else {return nil}
-                guard let input = TransactionInput(data: inputData) else {return nil}
+                guard let inputData = inputsData[inputIndex]!.data else {throw StructureErrors.isNotData}
+                guard let input = try? TransactionInput(data: inputData) else {throw StructureErrors.wrongData}
                 inputs.append(input)
             }
         }
@@ -113,8 +135,8 @@ public class Transaction {
         if outputsData.isList {
             outputs.reserveCapacity(outputsData.count!)
             for outputIndex in 0 ..< outputsData.count! {
-                guard let outputData = outputsData[outputIndex]!.data else {return nil}
-                guard let output = TransactionOutput(data: outputData) else {return nil}
+                guard let outputData = outputsData[outputIndex]!.data else {throw StructureErrors.isNotData}
+                guard let output = try? TransactionOutput(data: outputData) else {throw StructureErrors.wrongData}
                 outputs.append(output)
             }
         }
@@ -123,34 +145,44 @@ public class Transaction {
         self.outputs = outputs
     }
 
-    public func sign(privateKey: Data, useExtraEntropy: Bool = false) -> SignedTransaction? {
+    /// Performes signing of transaction
+    ///
+    /// - Parameters:
+    ///   - privateKey: private key used to sign transaction
+    ///   - useExtraEntropy: setups additional entropy for good quality randomness
+    /// - Returns: SignedTransaction object that can be used to send in Plasma
+    /// - Throws: `StructureErrors.wrongData` if private key, transaction or something in signing process is wrong
+    public func sign(privateKey: Data, useExtraEntropy: Bool = false) throws -> SignedTransaction {
         for _ in 0..<1024 {
-            if let signature = signature(privateKey: privateKey, useExtraEntropy: useExtraEntropy) {
-                var v = BigUInt(signature.v)
-                if (v < 27) {
-                    v += BigUInt(27)
+            do {
+                if let signature = try? signature(privateKey: privateKey, useExtraEntropy: useExtraEntropy) {
+                    var v = BigUInt(signature.v)
+                    if (v < 27) {
+                        v += BigUInt(27)
+                    }
+                    let r = signature.r
+                    let s = signature.s
+                    if let signedTransaction = try? SignedTransaction(transaction: self,
+                                                                      v: v,
+                                                                      r: r,
+                                                                      s: s) {return signedTransaction}
                 }
-                let r = signature.r
-                let s = signature.s
-                if let signedTransaction = SignedTransaction(transaction: self,
-                                                          v: v,
-                                                          r: r,
-                                                          s: s) {return signedTransaction}
             }
         }
-        return nil
+        throw StructureErrors.wrongData
     }
 
-    private func signature(privateKey: Data, useExtraEntropy: Bool = false) -> SECP256K1.UnmarshaledSignature? {
-        guard let hash = TransactionHelpers.hashForSignature(data: self.data) else {return nil}
+    private func signature(privateKey: Data, useExtraEntropy: Bool = false) throws -> SECP256K1.UnmarshaledSignature {
+        guard let hash = try? TransactionHelpers.hashForSignature(data: self.data) else {throw StructureErrors.wrongData}
         let signature = SECP256K1.signForRecovery(hash: hash, privateKey: privateKey, useExtraEntropy: useExtraEntropy)
-        guard let serializedSignature = signature.serializedSignature else {return nil}
-        guard let unmarshalledSignature = SECP256K1.unmarshalSignature(signatureData: serializedSignature) else {
-            return nil
-        }
+        guard let serializedSignature = signature.serializedSignature else {throw StructureErrors.wrongData}
+        guard let unmarshalledSignature = SECP256K1.unmarshalSignature(signatureData: serializedSignature) else {throw StructureErrors.wrongData}
         return unmarshalledSignature
     }
 
+    /// Plases Transaction items in AnyObject array
+    ///
+    /// - Returns: AnyObject array of Transaction items in Data type
     public func prepareForRLP() -> [AnyObject] {
         let txTypeData = self.txType.data
         var inputsData = [[AnyObject]]()
@@ -167,9 +199,13 @@ public class Transaction {
         return totalData
     }
 
-    public func serialize() -> Data {
+    /// Serializes Transaction
+    ///
+    /// - Returns: encoded AnyObject array consisted of Transaction items
+    /// - Throws: `StructureErrors.cantEncodeData` if data can't be encoded
+    public func serialize() throws -> Data {
         let dataArray = self.prepareForRLP()
-        let encoded = RLP.encode(dataArray)!
+        guard let encoded = RLP.encode(dataArray) else {throw StructureErrors.cantEncodeData}
         return encoded
     }
 }

@@ -10,21 +10,34 @@ import Foundation
 import SwiftRLP
 import BigInt
 
+/// An RLP encoded set that describes input in Transaction
 public struct TransactionInput {
     public var blockNumber: BigUInt
     public var txNumberInBlock: BigUInt
     public var outputNumberInTx: BigUInt
     public var amount: BigUInt
     public var data: Data {
-        return self.serialize()
+        do {
+            return try self.serialize()
+        } catch {
+            return Data()
+        }
     }
 
-    public init?(blockNumber: BigUInt, txNumberInBlock: BigUInt, outputNumberInTx: BigUInt, amount: BigUInt) {
+    /// Creates TransactionInput object
+    ///
+    /// - Parameters:
+    ///   - blockNumber: the number of block that stores transaction
+    ///   - txNumberInBlock: the number of transaction in block
+    ///   - outputNumberInTx: output number in transaction
+    ///   - amount: "Amount" field, that is more a data field, usually used for an amount of the output referenced by previous field, but has special meaning for "Deposit" transactions
+    /// - Throws: `StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
+    public init(blockNumber: BigUInt, txNumberInBlock: BigUInt, outputNumberInTx: BigUInt, amount: BigUInt) throws {
 
-        guard blockNumber.bitWidth <= blockNumberMaxWidth else {return nil}
-        guard txNumberInBlock.bitWidth <= txNumberInBlockMaxWidth else {return nil}
-        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {return nil}
-        guard amount.bitWidth <= amountMaxWidth else {return nil}
+        guard blockNumber.bitWidth <= blockNumberMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard txNumberInBlock.bitWidth <= txNumberInBlockMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard amount.bitWidth <= amountMaxWidth else {throw StructureErrors.wrongBitWidth}
 
         self.blockNumber = blockNumber
         self.txNumberInBlock = txNumberInBlock
@@ -32,36 +45,38 @@ public struct TransactionInput {
         self.amount = amount
     }
 
-    public init?(data: Data) {
+    /// Creates TransactionInput object
+    ///
+    /// - Parameters:
+    ///   - data: encoded Data of TransactionInput
+    /// - Throws: throws various `StructureErrors` if decoding is wrong or decoded data is wrong in some way
+    public init(data: Data) throws {
 
-        guard let dataDecoded = RLP.decode(data) else {return nil}
-        guard dataDecoded.isList else {return nil}
-        guard let count = dataDecoded.count else {return nil}
+        guard let dataDecoded = RLP.decode(data) else {throw StructureErrors.cantDecodeData}
+        guard dataDecoded.isList else {throw StructureErrors.isNotList}
+        guard let count = dataDecoded.count else {throw StructureErrors.wrongDataCount}
         let dataArray: RLP.RLPItem
-        guard let firstItem = dataDecoded[0] else {return nil}
+        guard let firstItem = dataDecoded[0] else {throw StructureErrors.dataIsNotArray}
         if count > 1 {
             dataArray = dataDecoded
         } else {
             dataArray = firstItem
         }
-        guard dataArray.count == 4 else {
-            print("Wrong decoded input")
-            return nil
-        }
-        guard let blockNumberData = dataArray[0]?.data else {return nil}
-        guard let txNumberInBlockData = dataArray[1]?.data else {return nil}
-        guard let outputNumberInTxData = dataArray[2]?.data else {return nil}
-        guard let amountData = dataArray[3]?.data else {return nil}
+        guard dataArray.count == 4 else {throw StructureErrors.wrongDataCount}
+        guard let blockNumberData = dataArray[0]?.data else {throw StructureErrors.isNotData}
+        guard let txNumberInBlockData = dataArray[1]?.data else {throw StructureErrors.isNotData}
+        guard let outputNumberInTxData = dataArray[2]?.data else {throw StructureErrors.isNotData}
+        guard let amountData = dataArray[3]?.data else {throw StructureErrors.isNotData}
 
         let blockNumber = BigUInt(blockNumberData)
         let txNumberInBlock = BigUInt(txNumberInBlockData)
         let outputNumberInTx = BigUInt(outputNumberInTxData)
         let amount = BigUInt(amountData)
 
-        guard blockNumber.bitWidth <= blockNumberMaxWidth else {return nil}
-        guard txNumberInBlock.bitWidth <= txNumberInBlockMaxWidth else {return nil}
-        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {return nil}
-        guard amount.bitWidth <= amountMaxWidth else {return nil}
+        guard blockNumber.bitWidth <= blockNumberMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard txNumberInBlock.bitWidth <= txNumberInBlockMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard amount.bitWidth <= amountMaxWidth else {throw StructureErrors.wrongBitWidth}
 
         self.blockNumber = blockNumber
         self.txNumberInBlock = txNumberInBlock
@@ -69,12 +84,19 @@ public struct TransactionInput {
         self.amount = amount
     }
 
-    public func serialize() -> Data {
+    /// Serializes TransactionInput
+    ///
+    /// - Returns: encoded AnyObject array consisted of TransactionInput items
+    /// - Throws: `StructureErrors.cantEncodeData` if data can't be encoded
+    public func serialize() throws -> Data {
         let dataArray = self.prepareForRLP()
-        let encoded = RLP.encode(dataArray)!
+        guard let encoded = RLP.encode(dataArray) else {throw StructureErrors.cantEncodeData}
         return encoded
     }
 
+    /// Plases TransactionInput items in AnyObject array
+    ///
+    /// - Returns: AnyObject array of TransactionInput items in Data type
     public func prepareForRLP() -> [AnyObject] {
         let blockNumberData = self.blockNumber.serialize().setLengthLeft(blockNumberByteLength)!
         let txNumberData = self.txNumberInBlock.serialize().setLengthLeft(txNumberInBlockByteLength)!

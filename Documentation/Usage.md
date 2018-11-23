@@ -1,105 +1,225 @@
 # Usage
 
+  - [Usage Doc](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md)
+	- **UTXO** 
+		- [UTXO structure](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#utxo-structure)
+		- [Get UTXOs list for Ethereum address](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#get-utxos-list-for-ethereum-address)
+	- **Transaction** 
+		- [Form input](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#form-input)
+		- [Form output](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#form-output)
+		- [Form transaction and sign it](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#form-transaction-and-sign-it)
+	- **Blocks**
+		- [Get last written block, print its headers and check if transactions count is equal in Block header and in Block transactions array](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#get-last-written-block-print-its-headers-and-check-if-transactions-count-is-equal-in-block-header-and-in-block-transactions-array)
+	- **Send transaction in Plasma** 
+		- [Send raw transaction (Split example)](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#send-raw-transaction-split-example)
+	- **Send transaction to Plasma Contract** 
+		- [Send raw transaction (Put deposit example)](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#send-raw-transaction-put-deposit-example)
+		- [Withdraw for chosen utxo](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#withdraw-for-chosen-utxo)
+	- **Outputs management** 
+		- [Merge outputs for fixed amount of one output](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#merge-outputs-for-fixed-amount-of-one-output)
+		- [Merge outputs for fixed number of outputs](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#merge-outputs-for-fixed-number-of-outputs)
+
+
+Plasma is working on Mainnet and Rinkeby testnet. In some methods use *bool flag to set network* you want to use. 
+
+## UTXO
+
+#### UTXO structure
+
+- blockNumber: BigUInt
+- transactionNumber: BigUInt
+- outputNumber: BigUInt
+- value: BigUInt
+
+#### Get UTXOs list for Ethereum address
+
+```swift
+let ethereumAdress = "0x832a630b949575b87c0e3c00f624f773d9b160f4" //Your ethereum address
+
+guard let address = EthereumAddress(ethereumAdress) else {return}
+do {
+// flag: Bool flag, true for Rinkeby network
+    let utxos = try PlasmaService().getUTXOs(for: address, onTestnet: flag)
+    for utxo in utxos {
+	print(utxo.value)
+    }
+} catch let error {
+    print(error.localizedDescription)
+}
+```
+
 ## Transaction
 
 #### Form input
 
 ```swift
-let blockNumberIn: BigUInt = 10
-let txNumberInBlockIn: BigUInt = 1
-let outputNumberInTxIn: BigUInt = 3
-let amountIn: BigUInt = 500000000000000
-guard let input1 = TransactionInput(blockNumber: blockNumberIn,
-				    txNumberInBlock: txNumberInBlockIn,
-				    outputNumberInTx: outputNumberInTxIn,
-				    amount: amountIn) else {return nil}
+do {
+    let amountIn: BigUInt = 1000000000000000000 // 1 ETH
+    let input = try TransactionInput(blockNumber: <blockNum>,
+				     txNumberInBlock: <txNum>,
+				     outputNumberInTx: <outNum>,
+				     amount: amountIn)
+} catch let error {
+    print(error.localizedDescription)
+}
 ```
 
 #### Form output
 
 ```swift
-let outputNumberInTxOut: BigUInt = 3
-guard let receiverEthereumAddressOut: EthereumAddress = EthereumAddress("<Ethereum address>") else {return}
-let amountOut: BigUInt = 300000000000000
-guard let output = TransactionOutput(outputNumberInTx: outputNumberInTxOut,
-				      receiverEthereumAddress: receiverEthereumAddressOut,
-				      amount: amountOut) else {return nil}
+let ethereumAdress = "0x832a630b949575b87c0e3c00f624f773d9b160f4" //Your ethereum address
+do {
+    guard let address = EthereumAddress(ethereumAdress) else {return}
+    let amount: BigUInt = 1000000000000000000 // 1 ETH
+    let output = try TransactionOutput(outputNumberInTx: <outNum>,
+                                       receiverEthereumAddress: address,
+				       amount: amount)
+} catch let error {
+    print(error.localizedDescription)
+}
 ```
 
 #### Form transaction and sign it
 
+*Transaction types:*
+- split - use to send funds
+- merge - use to merge UTXOs
+- fund
+- null
+
+*When sending funds:*
+- 2 outputs:
+    - TransactionOutput(outputNumberInTx: 0,
+                        receiverEthereumAddress: 'destination address',
+			amount: 'sending amount')
+    - TransactionOutput(outputNumberInTx: 1,
+                        receiverEthereumAddress: 'current address',
+			amount: 'stay amount')
+- 1 input:
+    - form inputs array from 1 UTXO using toTransactionInput():
+    ```swift
+    	let input = try utxo.toTransactionInput()
+    ```
+    
+*When merging UTXOs:*
+- 2 inputs:
+    - form input array from 2 UTXOs using toTransactionInput():
+    ```swift
+    	var inputs = [TransactionInput]()
+        var mergedAmount: BigUInt = 0
+        for utxo in chosenUTXOs {
+            if let input = utxo.utxo.toTransactionInput() {
+                inputs.append(input)
+                mergedAmount += input.amount
+            }
+        }
+    ```
+- 1 output:
+    - TransactionOutput(outputNumberInTx: 0,
+                        receiverEthereumAddress: 'current address',
+			amount: 'merged amount')
+
+*Example:*
 ```swift
-let txType = Transaction.TransactionType.split //or null/fund/merge
-let inputs = [TransactionInput]()
-let outputs = [TransactionOutput]()
-guard let transaction = Transaction(txType: txType, inputs: inputs, outputs: outputs) else {return}
-
-let privKey = Data(hex: "<Private key>")
-let signedTransaction = transaction.sign(privateKey: privKey)
-```
-
-## UTXOs listing
-
-#### Get UTXOs list for Ethereum address
-
-```swift
-guard let ethAddress = EthereumAddress("<Ethereum address>") else {return}
-ServiceUTXO().getListUTXOs(for: ethAddress,
-                           onTestnet: '<Bool flag for using Rinkeby network>') { (result) in
-    switch result {
-    case .Success(let utxos):
-	DispatchQueue.main.async {
-	    print(utxos.first?.value)
-	}
-    case .Error(let error):
-	DispatchQueue.main.async {
-	    print(error.localizedDescription)
-	}
-    }
+do {
+    let txType = Transaction.TransactionType.split //or null/fund/merge
+    let inputs = [TransactionInput]()
+    let outputs = [TransactionOutput]()
+    let transaction = try Transaction(txType: txType, inputs: inputs, outputs: outputs)
+    let privKey = Data(hex: <Private key>)
+    let signedTransaction = try transaction.sign(privateKey: privKey)
+} catch let error {
+    print(error.localizedDescription)
 }
 ```
 
-## Send transaction
+## Blocks
 
-#### Send raw transaction
-In this example transaction inputs are formed from first UTXO you get for your Ethereum address. Used 'split' transaction type.
+#### Get last written block, print its headers and check if transactions count is equal in Block header and in Block transactions array
 
 ```swift
-guard let fromEthAddress = EthereumAddress("<From Ethereum address>") else {return}
-guard let toEthAddress = EthereumAddress("<To Ethereum address>") else {return}
-let privKey = Data(hex: "<From private key>")
-ServiceUTXO().getListUTXOs(for: fromEthAddress,
-                           onTestnet: '<Bool flag for using Rinkeby network>') { (result) in
-    switch result {
-    case .Success(let utxos):
-	guard let input = utxos[0].toTransactionInput() else {return}
-	let inputs = [input]
-	guard let output = TransactionOutput(outputNumberInTx: 0,
-	                                     receiverEthereumAddress: toEthAddress,
-					     amount: input.amount) else {return}
-	let outputs = [output]
-	guard let transaction = Transaction(txType: .split,
-	                                    inputs: inputs,
-					    outputs: outputs) else {return}
-	guard let signedTransaction = transaction.sign(privateKey: privKey) else {return}
-	ServiceUTXO().sendRawTX(transaction: signedTransaction,
-	                        onTestnet: true) { (result) in
-	    switch result {
-	    case .Success(let accepted):
-		DispatchQueue.main.async {
-		    print(accepted)
-		}
-	    case .Error(let error):
-		DispatchQueue.main.async {
-		    print(error.localizedDescription)
-		}
-	    }
-	}
-    case .Error(let error):
-	DispatchQueue.main.async {
-	    print(error.localizedDescription)
-	}
+do {
+    let block = try PlasmaService().getBlock(onTestnet: <Bool flag for using Rinkeby network>, number: <blockNum>)
+    let parsedBlock = try Block(data: block)
+    parsedBlock.blockHeader.printElements() // Print all block header data
+    print(parsedBlock.signedTransactions.count == parsedBlock.blockHeader.numberOfTxInBlock) // Should be true
+} catch let error {
+    print(error.localizedDescription)
+}
+```
+
+## Send transaction in Plasma
+
+#### Send raw transaction (Split example)
+
+```swift
+let privKey = Data(hex: <Your private key>)
+guard let address = EthereumAddress(<Your Ethereum address>) else {return}
+do {
+    let utxos = try PlasmaService().getUTXOs(for: address, onTestnet: <Bool flag for using Rinkeby network>)
+    print("UTXOs count \(utxos.count)")
+    let transaction = try self.testHelpers.UTXOsToTransaction(utxos: utxos, address: address, txType: .split) // split is the transaction type. You can also use null/fund/merge
+    let signedTransaction = try transaction.sign(privateKey: privKey)
+    let result = try PlasmaService().sendRawTX(transaction: signedTransaction, onTestnet: <Bool flag for using Rinkeby network>)
+} catch let error {
+    print(error.localizedDescription)
+}
+```
+
+## Send transaction to Plasma Contract
+
+There are 3 preset Plasma Contract methods you can use in this lib:
+- deposit
+- WithdrawCollateral
+- startExit
+
+`WithdrawCollateral` and `startExit` are used in one action - withdraw funds from Plasma UTXO. We've build the convenient method withdrawUTXO(utxo: `PlasmaUTXOs`,
+                    onTestnet: `Bool`,
+                    password: `String? = nil`) for it.
+
+You can also use any other Plasma Contract method by learning its ABI.
+
+#### Send raw transaction (Put deposit example)
+```swift
+let amount: BigUInt = 1000000000000000000 // 1 ETH
+guard let address = EthereumAddress(<Your Ethereum address>) else {return}
+let privKey = <Your private key>
+do {
+    let text = privKey.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard let data = Data.fromHex(text) else {return}
+    guard let keystore = try EthereumKeystoreV3(privateKey: data, password: "web3swift") else {return}
+    let keystoreManager = KeystoreManager([keystore])
+    let web3 = Web3Service(web3: Web3.InfuraRinkebyWeb3(), keystoreManager: keystoreManager, fromAddress: address) // or InfuraMainnetWeb3
+    let tx = try web3.preparePlasmaContractWriteTx(method: .deposit, value: amount, parameters: [AnyObject](), extraData: Data())
+    let result = try web3.sendPlasmaContractTx(transaction: tx)
+    print(result.hash)
+} catch  let error {
+    print(error.localizedDescription)
+}
+```
+
+#### Withdraw for chosen utxo
+
+```swift
+guard let address = EthereumAddress(<Your Ethereum address>) else {return}
+let privKey = <Your private key>
+do {
+    let utxos = try PlasmaService().getUTXOs(for: address, onTestnet: true)
+    for utxo in utxos {
+	print("utxo: \(utxo.value)")
+	print("block number: \(utxo.blockNumber)")
     }
+    guard let utxo = utxos.first else {return} // you should choose utxo by urself
+
+    let text = privKey.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard let data = Data.fromHex(text) else {return}
+    guard let keystore = try EthereumKeystoreV3(privateKey: data, password: "web3swift") else {return}
+    let keystoreManager = KeystoreManager([keystore])
+    let web3 = Web3Service(web3: Web3.InfuraRinkebyWeb3(), keystoreManager: keystoreManager, fromAddress: address) // or InfuraMainnetWeb3
+    let result = try web3.withdrawUTXO(utxo: utxo, onTestnet: true, password: "web3swift")
+    print(result.hash)
+} catch let error {
+    print(error.localizedDescription)
 }
 ```
 
@@ -108,21 +228,29 @@ ServiceUTXO().getListUTXOs(for: fromEthAddress,
 #### Merge outputs for fixed amount of one output
 
 ```swift
-let fixedAmount: BigUInt = 10000000000
-let inputs = [TransactionInput]()
-let outputs = [TransactionOutput]()
-guard let tx = Transaction(txType: .split, inputs: inputs, outputs: outputs) else {return}
-guard let newTx = tx.mergeOutputs(untilMaxAmount: fixedAmount) else {return}
+do {
+    let fixedAmount: BigUInt = 1000000000000000000 // 1 ETH
+    let inputs = [TransactionInput]()
+    let outputs = [TransactionOutput]()
+    let tx = try Transaction(txType: .split, inputs: inputs, outputs: outputs) // split is the transaction type. You can also use null/fund/merge
+    let newTx = try tx.mergeOutputs(untilMaxAmount: fixedAmount)
+} catch let error {
+    print(error.localizedDescription)
+}
 ```
 
 
 #### Merge outputs for fixed number of outputs
 
 ```swift
-let fixedNumber: BigUInt = 2
-let inputs = [TransactionInput]()
-let outputs = [TransactionOutput]()
-guard let tx = Transaction(txType: .split, inputs: inputs, outputs: outputs) else {return}
-guard let newTx = tx.mergeOutputs(forMaxNumber: fixedNumber) else {return}
+do {
+    let fixedNumber: BigUInt = 2
+    let inputs = [TransactionInput]()
+    let outputs = [TransactionOutput]()
+    let tx = try Transaction(txType: .split, inputs: inputs, outputs: outputs) // split is the transaction type. You can also use null/fund/merge
+    let newTx = try tx.mergeOutputs(forMaxNumber: fixedNumber)
+} catch let error {
+    print(error.localizedDescription)
+}
 ```
 
