@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Specifies Plasma Contract address and ABI
 public struct PlasmaContract {
     public static var plasmaAddress = "0x1effBc5DBE9f0daAB73C08e3A00cf105B29C547B"
     public static var plasmaABI = """

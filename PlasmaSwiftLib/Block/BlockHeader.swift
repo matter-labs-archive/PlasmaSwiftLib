@@ -10,6 +10,7 @@ import Foundation
 import SwiftRLP
 import BigInt
 
+/// The header of Block (first 137 bytes)
 public struct BlockHeader {
     public var blockNumber: BigUInt!
     public var numberOfTxInBlock: BigUInt!
@@ -26,6 +27,17 @@ public struct BlockHeader {
         }
     }
 
+    /// Creates BlockHeader object that implement Block header in Block object (first 137 bytes)
+    ///
+    /// - Parameters:
+    ///   - blockNumber: the number of block, used in the main chain to double check proper ordering
+    ///   - numberOfTxInBlock: the number of transactions in block
+    ///   - parentHash: hash of the previous block, hashes the full header
+    ///   - merkleRootOfTheTxTree: Merkle root of the transactions tree
+    ///   - v: the recovery id
+    ///   - r: output of the signature
+    ///   - s: output of the signature
+    /// - Throws: `StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
     public init(blockNumber: BigUInt, numberOfTxInBlock: BigUInt, parentHash: Data, merkleRootOfTheTxTree: Data, v: BigUInt, r: Data, s: Data) throws {
         guard blockNumber.bitWidth <= blockNumberMaxWidth else {throw StructureErrors.wrongBitWidth}
         guard numberOfTxInBlock.bitWidth <= numberOfTxInBlockMaxWidth else {throw StructureErrors.wrongBitWidth}
@@ -46,7 +58,7 @@ public struct BlockHeader {
         self.s = s
     }
     
-    func getElements(from dataStringArray: [String]) -> [String] {
+    private func getElements(from dataStringArray: [String]) -> [String] {
         var max = 0
         var min = 0
         var elements = [String]()
@@ -78,6 +90,10 @@ public struct BlockHeader {
         return elements
     }
     
+    /// Creates BlockHeader object that implement Block header in Block object (first 137 bytes)
+    ///
+    /// - Parameter data: encoded Data of SignedTransaction
+    /// - Throws: throws various `StructureErrors` if decoding is wrong or decoded data is wrong in some way
     public init(data: Data) throws {
         let dataString = data.toHexString()
         let dataStringArray = dataString.split(intoChunksOf: 2)
@@ -114,6 +130,10 @@ public struct BlockHeader {
         self.s = s
     }
 
+    /// Serializes BlockHeader
+    ///
+    /// - Returns: encoded bytes `Data` value that contains the base-256 representation of this header
+    /// - Throws: `StructureErrors.cantEncodeData` if data can't be encoded
     public func serialize() throws -> Data {
         var d = Data()
         guard let blockNumberData = self.blockNumber.serialize().setLengthLeft(blockNumberByteLength) else {throw StructureErrors.cantEncodeData}

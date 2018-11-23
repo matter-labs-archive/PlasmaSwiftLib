@@ -11,6 +11,7 @@ import SwiftRLP
 import BigInt
 import EthereumAddress
 
+/// An RLP encoded set that describes output in Transaction
 public struct TransactionOutput {
 
     let helpers = TransactionHelpers()
@@ -26,6 +27,13 @@ public struct TransactionOutput {
         }
     }
 
+    /// Creates TransactionOutput object that can be spent as an input in a new transaction
+    ///
+    /// - Parameters:
+    ///   - outputNumberInTx: output number in this transaction
+    ///   - receiverEthereumAddress: destionation ethereum address
+    ///   - amount: "amount" field
+    /// - Throws: `StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
     public init(outputNumberInTx: BigUInt, receiverEthereumAddress: EthereumAddress, amount: BigUInt) throws {
         guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {throw StructureErrors.wrongBitWidth}
         guard receiverEthereumAddress.addressData.count <= receiverEthereumAddressByteLength else {throw StructureErrors.wrongBitWidth}
@@ -36,6 +44,10 @@ public struct TransactionOutput {
         self.amount = amount
     }
 
+    /// Creates TransactionOutput object that can be spent as an input in a new transaction
+    ///
+    /// - Parameter data: encoded Data of TransactionOutput
+    /// - Throws: throws various `StructureErrors` if decoding is wrong or decoded data is wrong in some way
     public init(data: Data) throws {
 
         guard let dataDecoded = RLP.decode(data) else {throw StructureErrors.cantDecodeData}
@@ -67,12 +79,19 @@ public struct TransactionOutput {
         self.amount = amount
     }
 
+    /// Serializes TransactionOutput
+    ///
+    /// - Returns: encoded AnyObject array consisted of TransactionOutput items
+    /// - Throws: `StructureErrors.cantEncodeData` if data can't be encoded
     public func serialize() throws -> Data {
         let dataArray = self.prepareForRLP()
         guard let encoded = RLP.encode(dataArray) else {throw StructureErrors.cantEncodeData}
         return encoded
     }
 
+    /// Plases TransactionOutput items in AnyObject array
+    ///
+    /// - Returns: AnyObject array of TransactionOutput items in Data type
     public func prepareForRLP() -> [AnyObject] {
         let outputNumberData = self.outputNumberInTx.serialize().setLengthLeft(outputNumberInTxByteLength)
         let addressData = self.receiverEthereumAddress.addressData

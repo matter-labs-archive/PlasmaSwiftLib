@@ -13,6 +13,11 @@ import secp256k1_swift
 
 public struct TransactionHelpers {
 
+    /// Returns hash of the signature
+    ///
+    /// - Parameter data: signature data
+    /// - Returns: hash of that signature
+    /// - Throws: `StructureErrors.wrongData` if data is wrong
     static func hashForSignature(data: Data) throws -> Data {
         let hash = try TransactionHelpers.hashPersonalMessage(data)
         return hash
@@ -33,6 +38,11 @@ public struct TransactionHelpers {
         return hash
     }
 
+    /// Returns address hash from public key data
+    ///
+    /// - Parameter publicKey: public key data
+    /// - Returns: address data hash
+    /// - Throws: `StructureErrors.wrongDataCount` if data is wrong or `StructureErrors.wrongDataCount` if data count is wrong
     static func publicToAddressData(_ publicKey: Data) throws -> Data {
         if publicKey.count == 33 {
             guard let decompressedKey = SECP256K1.combineSerializedPublicKeys(keys: [publicKey], outputCompressed: false) else {throw StructureErrors.wrongData}

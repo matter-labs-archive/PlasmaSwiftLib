@@ -11,8 +11,21 @@ import Web3swift
 import EthereumAddress
 import BigInt
 
+/// Convinient methods for Plasma Contract interaction
 extension Web3Service {
     
+    /// Method that completes withdraw funds from plasma, calling withdrawCollateral and startExit methods.
+    ///
+    /// - Parameters:
+    ///   - transaction: signed transaction that needs to be withdrawned;
+    ///   - proof: proof shows that the transaction is valid. Merkle proof is established by hashing a hash's corresponding hash together and climbing up the tree until you obtain the root hash which is or can be publicly known;
+    ///   - blockNumber: the number of Block from which transaction will be withdrawn;
+    ///   - outputNumber: output number of transaction;
+    ///   - password: password requered due to using Matter web3swift. You place it in keystore.
+    /// - Returns: Transaction Sending Result: the Ethereum Transaction structure and the hash of that transaction to find it in some Ethereum blockchain scanner
+    /// - Throws:
+    ///     - `StructureErrors.wrongData` if withdraw collateral is wrong.
+    ///     - `NetErrors.cantCreateRequest` if sending transaction caused error
     public func startExitPlasma(transaction: SignedTransaction,
                                 proof: Data,
                                 blockNumber: BigUInt,
@@ -55,6 +68,17 @@ extension Web3Service {
         }
     }
     
+    /// Completed method to withdraw funds from plasma UTXO.
+    ///
+    /// - Parameters:
+    ///   - utxo: the Plasma UTXO structure
+    ///   - onTestnet: Bool flag for possible endpoints:
+    ///    1. True for Rinkeby testnet;
+    ///    2. False for Mainnet.
+    ///   - password: password requered due to using Matter web3swift. You place it in keystore.
+    /// - Returns: Transaction Sending Result: the Ethereum Transaction structure and the hash of that transaction to find it in some Ethereum blockchain scanner
+    /// - Throws:
+    ///    - `StructureErrors.wrongData` if there is some errors in Block parsing, verifying or in contract Plasma calls
     public func withdrawUTXO(utxo: PlasmaUTXOs,
                              onTestnet: Bool,
                              password: String? = nil) throws -> TransactionSendingResult {

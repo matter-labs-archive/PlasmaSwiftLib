@@ -10,6 +10,7 @@ import Foundation
 import SwiftRLP
 import BigInt
 
+/// An RLP encoded set that describes input in Transaction
 public struct TransactionInput {
     public var blockNumber: BigUInt
     public var txNumberInBlock: BigUInt
@@ -23,6 +24,14 @@ public struct TransactionInput {
         }
     }
 
+    /// Creates TransactionInput object
+    ///
+    /// - Parameters:
+    ///   - blockNumber: the number of block that stores transaction
+    ///   - txNumberInBlock: the number of transaction in block
+    ///   - outputNumberInTx: output number in transaction
+    ///   - amount: "Amount" field, that is more a data field, usually used for an amount of the output referenced by previous field, but has special meaning for "Deposit" transactions
+    /// - Throws: `StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
     public init(blockNumber: BigUInt, txNumberInBlock: BigUInt, outputNumberInTx: BigUInt, amount: BigUInt) throws {
 
         guard blockNumber.bitWidth <= blockNumberMaxWidth else {throw StructureErrors.wrongBitWidth}
@@ -36,6 +45,11 @@ public struct TransactionInput {
         self.amount = amount
     }
 
+    /// Creates TransactionInput object
+    ///
+    /// - Parameters:
+    ///   - data: encoded Data of TransactionInput
+    /// - Throws: throws various `StructureErrors` if decoding is wrong or decoded data is wrong in some way
     public init(data: Data) throws {
 
         guard let dataDecoded = RLP.decode(data) else {throw StructureErrors.cantDecodeData}
@@ -70,12 +84,19 @@ public struct TransactionInput {
         self.amount = amount
     }
 
+    /// Serializes TransactionInput
+    ///
+    /// - Returns: encoded AnyObject array consisted of TransactionInput items
+    /// - Throws: `StructureErrors.cantEncodeData` if data can't be encoded
     public func serialize() throws -> Data {
         let dataArray = self.prepareForRLP()
         guard let encoded = RLP.encode(dataArray) else {throw StructureErrors.cantEncodeData}
         return encoded
     }
 
+    /// Plases TransactionInput items in AnyObject array
+    ///
+    /// - Returns: AnyObject array of TransactionInput items in Data type
     public func prepareForRLP() -> [AnyObject] {
         let blockNumberData = self.blockNumber.serialize().setLengthLeft(blockNumberByteLength)!
         let txNumberData = self.txNumberInBlock.serialize().setLengthLeft(txNumberInBlockByteLength)!

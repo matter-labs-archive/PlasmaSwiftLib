@@ -11,7 +11,13 @@ import SwiftRLP
 import BigInt
 import secp256k1_swift
 
+/// An RLP encoded set that describes unsigned Transaction
 public class Transaction {
+    /// The type of transaction can be:
+    ///     - null
+    ///     - fund
+    ///     - split - use to send funds
+    ///     - merge - use to merge UTXOs
     public enum TransactionType {
         case null
         case fund
@@ -67,6 +73,17 @@ public class Transaction {
         self.outputs = [TransactionOutput]()
     }
 
+    /// Creates Transaction object that implement unsigned transaction in Plasma
+    ///
+    /// - Parameters:
+    ///   - txType: describes the purpose of transaction and can be:
+    ///     - null
+    ///     - fund
+    ///     - split - use to send funds
+    ///     - merge - use to merge UTXOs
+    ///   - inputs: an array of TransactionInput, maximum 2 items
+    ///   - outputs: an array of TransactionOutput, maximum 3 items. One of the outputs is an explicit output to an address of Plasma operator
+    /// - Throws: `StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
     public init(txType: TransactionType, inputs: [TransactionInput], outputs: [TransactionOutput]) throws {
         guard inputs.count <= inputsArrayMax else {throw StructureErrors.wrongBitWidth}
         guard outputs.count <= outputsArrayMax else {throw StructureErrors.wrongBitWidth}
@@ -76,6 +93,10 @@ public class Transaction {
         self.outputs = outputs
     }
 
+    /// Creates Transaction object that implement unsigned transaction in Plasma
+    ///
+    /// - Parameter data: encoded Data of Transaction
+    /// - Throws: throws various `StructureErrors` if decoding is wrong or decoded data is wrong in some way
     public init(data: Data) throws {
 
         guard let item = RLP.decode(data) else {throw StructureErrors.cantDecodeData}
@@ -124,6 +145,13 @@ public class Transaction {
         self.outputs = outputs
     }
 
+    /// Performes signing of transaction
+    ///
+    /// - Parameters:
+    ///   - privateKey: private key used to sign transaction
+    ///   - useExtraEntropy: setups additional entropy for good quality randomness
+    /// - Returns: SignedTransaction object that can be used to send in Plasma
+    /// - Throws: `StructureErrors.wrongData` if private key, transaction or something in signing process is wrong
     public func sign(privateKey: Data, useExtraEntropy: Bool = false) throws -> SignedTransaction {
         for _ in 0..<1024 {
             do {
@@ -152,6 +180,9 @@ public class Transaction {
         return unmarshalledSignature
     }
 
+    /// Plases Transaction items in AnyObject array
+    ///
+    /// - Returns: AnyObject array of Transaction items in Data type
     public func prepareForRLP() -> [AnyObject] {
         let txTypeData = self.txType.data
         var inputsData = [[AnyObject]]()
@@ -168,6 +199,10 @@ public class Transaction {
         return totalData
     }
 
+    /// Serializes Transaction
+    ///
+    /// - Returns: encoded AnyObject array consisted of Transaction items
+    /// - Throws: `StructureErrors.cantEncodeData` if data can't be encoded
     public func serialize() throws -> Data {
         let dataArray = self.prepareForRLP()
         guard let encoded = RLP.encode(dataArray) else {throw StructureErrors.cantEncodeData}

@@ -9,6 +9,7 @@
 import Foundation
 
 extension BlockHeader {
+    /// Prinets elements of Block header
     public func printElements() {
         print("---------------------------")
         print("BlockHeader:")

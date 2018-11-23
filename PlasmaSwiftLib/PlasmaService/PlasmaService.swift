@@ -12,6 +12,7 @@ import BigInt
 import PromiseKit
 private typealias PromiseResult = PromiseKit.Result
 
+/// A service that provides in-Plasma operations
 public final class PlasmaService {
 
     public init() {}
@@ -24,6 +25,28 @@ public final class PlasmaService {
         return session
     }
     
+    /**
+     Getting list of available UTXOs for the Ethereum address.
+     
+     - Parameter address: Ethereum address from which UTXOs are collected.
+     - Parameter onTestnet: Bool flag for possible endpoints:
+                             1. True for Rinkeby testnet;
+                             2. False for Mainnet.
+     
+     - Throws: `NetErrors.cantCreateRequest`
+     if request parameters are wrong.
+     
+     - Throws: `NetErrors.badResponse`
+     if response is not HTTPURLResponse type or statusCode is not 200.
+     
+     - Throws: `NetErrors.noData`
+     if there is no data in response its errored.
+     
+     - Throws: `StructureErrors.cantDecodeData`
+     if data in response can't be deserialized correctly.
+     
+     - Returns: PlasmaUTXOs array.
+     */
     public func getUTXOs(for address: EthereumAddress,
                          onTestnet: Bool = false) throws -> [PlasmaUTXOs] {
         return try self.getUTXOsPromise(for: address, onTestnet: onTestnet).wait()
@@ -82,6 +105,22 @@ public final class PlasmaService {
         return returnPromise
     }
     
+    /**
+     Getting Plasma Block by its number.
+     
+     - Parameter onTestnet: Bool flag for possible endpoints:
+                             1. True for Rinkeby testnet;
+                             2. False for Mainnet.
+     - Parameter number: the number of Block.
+     
+     - Throws: `NetErrors.cantCreateRequest`
+     if request parameters are wrong.
+     
+     - Throws: `NetErrors.noData`
+     if there is no data in response its errored.
+     
+     - Returns: the Data of Block.
+     */
     public func getBlock(onTestnet: Bool = false,
                          number: BigUInt) throws -> Data {
         return try getBlockPromise(onTestnet: onTestnet, number: number).wait()
@@ -155,6 +194,28 @@ public final class PlasmaService {
         return returnPromise
     }
 
+    /**
+     Sending transaction in Plasma.
+     
+     - Parameter transaction: signed transaction that needs to be sent.
+     - Parameter onTestnet: Bool flag for possible endpoints:
+                             1. True for Rinkeby testnet;
+                             2. False for Mainnet.
+     
+     - Throws: `NetErrors.cantCreateRequest`
+     if request parameters are wrong.
+     
+     - Throws: `NetErrors.badResponse`
+     if response is not HTTPURLResponse type or statusCode is not 200.
+     
+     - Throws: `NetErrors.noData`
+     if there is no data in response its errored.
+     
+     - Throws: `StructureErrors.cantDecodeData`
+     if data in response can't be deserialized correctly.
+     
+     - Returns: the Bool flag: true if transaction is sent.
+     */
     public func sendRawTX(transaction: SignedTransaction,
                           onTestnet: Bool = false) throws -> Bool {
         return try sendRawTXPromise(transaction: transaction, onTestnet: onTestnet).wait()

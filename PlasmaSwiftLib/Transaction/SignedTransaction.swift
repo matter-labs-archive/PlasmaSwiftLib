@@ -12,6 +12,7 @@ import struct BigInt.BigUInt
 import secp256k1_swift
 import EthereumAddress
 
+/// An RLP encoded set that describes signed Transaction. Signature is based on EthereumPersonalHash(RLPEncode(Transaction))
 public struct SignedTransaction {
 
     private let helpers = TransactionHelpers()
@@ -28,6 +29,7 @@ public struct SignedTransaction {
         }
     }
 
+    /// returns EthereumAddress of transaction sender
     public var sender: EthereumAddress {
         do {
             return try self.recoverSender()
@@ -43,6 +45,14 @@ public struct SignedTransaction {
         self.s = Data(repeating: 0, count: Int(sByteLength))
     }
 
+    /// Creates SignedTransaction object that implement signed transaction in Plasma
+    ///
+    /// - Parameters:
+    ///   - transaction: unsigned transaction RLP encoded set
+    ///   - v: the recovery id
+    ///   - r: output of the signature
+    ///   - s: output of the signature
+    /// - Throws: `StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
     public init(transaction: Transaction, v: BigUInt, r: Data, s: Data) throws {
         guard v.bitWidth <= vMaxWidth else {throw StructureErrors.wrongBitWidth}
         guard r.count <= rByteLength else {throw StructureErrors.wrongBitWidth}
@@ -56,6 +66,10 @@ public struct SignedTransaction {
         self.s = s
     }
 
+    /// Creates SignedTransaction object that implement signed transaction in Plasma
+    ///
+    /// - Parameter data: encoded Data of SignedTransaction
+    /// - Throws: throws various `StructureErrors` if decoding is wrong or decoded data is wrong in some way
     public init(data: Data) throws {
         guard let item = RLP.decode(data) else {throw StructureErrors.cantDecodeData}
         guard let dataArray = item[0] else {throw StructureErrors.dataIsNotArray}
@@ -81,6 +95,9 @@ public struct SignedTransaction {
         self.transaction = transaction
     }
 
+    /// Plases SignedTransaction items in AnyObject array
+    ///
+    /// - Returns: AnyObject array of SignedTransaction items in Data type
     public func prepareForRLP() -> [AnyObject] {
         let vData = self.v.serialize().setLengthLeft(vByteLength)!
         let transactionObject = self.transaction.prepareForRLP()
@@ -88,12 +105,20 @@ public struct SignedTransaction {
         return dataArray
     }
 
+    /// Serializes SignedTransaction
+    ///
+    /// - Returns: encoded AnyObject array consisted of SignedTransaction items
+    /// - Throws: `StructureErrors.cantEncodeData` if data can't be encoded
     public func serialize() throws -> Data {
         let dataArray = self.prepareForRLP()
         guard let encoded = RLP.encode(dataArray) else {throw StructureErrors.cantEncodeData}
         return encoded
     }
 
+    /// Deduces a sender from transaction signature
+    ///
+    /// - Returns: sender EthereumAddress
+    /// - Throws: `StructureErrors.wrongData` if signature is wrong or `StructureErrors.wrongAddress` if address is wrong
     public func recoverSender() throws -> EthereumAddress {
         guard let hash = try? TransactionHelpers.hashForSignature(data: self.transaction.data) else {throw StructureErrors.wrongData}
         var v = self.v
@@ -103,8 +128,8 @@ public struct SignedTransaction {
         let vData = v.serialize().setLengthLeft(vByteLength)!
         guard let signatureData = SECP256K1.marshalSignature(v: vData, r: self.r, s: self.s) else {throw StructureErrors.wrongData}
         guard let signerPubKey = SECP256K1.recoverPublicKey(hash: hash, signature: signatureData) else {throw StructureErrors.wrongData}
-        guard let addressData = try? TransactionHelpers.publicToAddressData(signerPubKey) else {throw StructureErrors.wrongKey}
-        guard let address = EthereumAddress(addressData) else {throw StructureErrors.wrongKey}
+        guard let addressData = try? TransactionHelpers.publicToAddressData(signerPubKey) else {throw StructureErrors.wrongAddress}
+        guard let address = EthereumAddress(addressData) else {throw StructureErrors.wrongAddress}
         return address
     }
 }

@@ -28,4 +28,5 @@ enum StructureErrors: Error {
     case wrongBitWidth
     case wrongData
     case wrongKey
+    case wrongAddress
 }
