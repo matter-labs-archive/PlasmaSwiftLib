@@ -179,28 +179,18 @@ public final class PlasmaService {
         return returnPromise
     }
 
-    /**
-     Sending transaction in Plasma.
-     
-     - Parameter transaction: signed transaction that needs to be sent.
-     - Parameter onTestnet: Bool flag for possible endpoints:
-                             1. True for Rinkeby testnet;
-                             2. False for Mainnet.
-     
-     - Throws: `NetErrors.cantCreateRequest`
-     if request parameters are wrong.
-     
-     - Throws: `NetErrors.badResponse`
-     if response is not HTTPURLResponse type or statusCode is not 200.
-     
-     - Throws: `NetErrors.noData`
-     if there is no data in response its errored.
-     
-     - Throws: `StructureErrors.cantDecodeData`
-     if data in response can't be deserialized correctly.
-     
-     - Returns: the Bool flag: true if transaction is sent.
-     */
+    /// Sending transaction in Plasma.
+    ///
+    /// - Parameters:
+    ///   - transaction: signed transaction that needs to be sent.
+    ///   - onTestnet: Bool flag for possible endpoints:
+    ///     1. True for Rinkeby testnet;
+    ///     2. False for Mainnet.
+    /// - Returns: the Bool flag: true if transaction is sent.
+    /// - Throws:
+    ///     - `NetErrors.badResponse` if response is not HTTPURLResponse type or statusCode is not 200.
+    ///     - `NetErrors.noData` if there is no data in response its errored.
+    ///     - `StructureErrors.cantDecodeData` if data in response can't be deserialized correctly.
     public func sendRawTX(transaction: SignedTransaction,
                           onTestnet: Bool = false) throws -> Bool {
         return try sendRawTXPromise(transaction: transaction, onTestnet: onTestnet).wait()
