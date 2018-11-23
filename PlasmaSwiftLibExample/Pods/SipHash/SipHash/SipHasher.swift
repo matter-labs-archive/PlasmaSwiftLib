@@ -40,7 +40,7 @@ public struct SipHasher {
     /// The number of bytes collected so far, or -1 if the hash value has already been finalized.
     var byteCount = 0
 
-    //MARK: Initializers
+    // MARK: Initializers
 
     /// Initialize a new instance with the default key, generated randomly the first time this initializer is called.
     public init() {
@@ -98,7 +98,7 @@ public struct SipHasher {
         return v0 ^ v1 ^ v2 ^ v3
     }
 
-    //MARK: Appending data
+    // MARK: Appending data
 
     /// Add all bytes in `buffer` to this hash.
     ///
@@ -186,7 +186,7 @@ public struct SipHasher {
         byteCount += buffer.count
     }
 
-    //MARK: Finalization
+    // MARK: Finalization
 
     /// Finalize this hash and return the hash value.
     ///

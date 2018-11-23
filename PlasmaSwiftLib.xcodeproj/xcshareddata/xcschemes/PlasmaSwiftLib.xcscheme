@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E2E94C6C2178919D005F54A0"
+               BlueprintIdentifier = "E20660592187549000701068"
                BuildableName = "PlasmaSwiftLib.framework"
                BlueprintName = "PlasmaSwiftLib"
                ReferencedContainer = "container:PlasmaSwiftLib.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E2E94C752178919E005F54A0"
+               BlueprintIdentifier = "E20660622187549000701068"
                BuildableName = "PlasmaSwiftLibTests.xctest"
                BlueprintName = "PlasmaSwiftLibTests"
                ReferencedContainer = "container:PlasmaSwiftLib.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E2E94C6C2178919D005F54A0"
+            BlueprintIdentifier = "E20660592187549000701068"
             BuildableName = "PlasmaSwiftLib.framework"
             BlueprintName = "PlasmaSwiftLib"
             ReferencedContainer = "container:PlasmaSwiftLib.xcodeproj">
@@ -64,7 +64,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E2E94C6C2178919D005F54A0"
+            BlueprintIdentifier = "E20660592187549000701068"
             BuildableName = "PlasmaSwiftLib.framework"
             BlueprintName = "PlasmaSwiftLib"
             ReferencedContainer = "container:PlasmaSwiftLib.xcodeproj">
@@ -82,7 +82,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E2E94C6C2178919D005F54A0"
+            BlueprintIdentifier = "E20660592187549000701068"
             BuildableName = "PlasmaSwiftLib.framework"
             BlueprintName = "PlasmaSwiftLib"
             ReferencedContainer = "container:PlasmaSwiftLib.xcodeproj">

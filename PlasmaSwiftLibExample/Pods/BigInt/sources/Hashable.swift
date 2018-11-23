@@ -9,7 +9,7 @@
 import SipHash
 
 extension BigUInt: SipHashable {
-    //MARK: Hashing
+    // MARK: Hashing
 
     /// Append this `BigUInt` to the specified hasher.
     public func appendHashes(to hasher: inout SipHasher) {

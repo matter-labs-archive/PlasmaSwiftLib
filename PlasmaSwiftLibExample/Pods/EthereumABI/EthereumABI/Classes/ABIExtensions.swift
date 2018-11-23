@@ -9,14 +9,14 @@ import Foundation
 import BigInt
 
 extension Data {
-    func setLengthLeft(_ toBytes: UInt64, isNegative:Bool = false ) -> Data? {
+    func setLengthLeft(_ toBytes: UInt64, isNegative: Bool = false ) -> Data? {
         let existingLength = UInt64(self.count)
         if (existingLength == toBytes) {
             return Data(self)
         } else if (existingLength > toBytes) {
             return nil
         }
-        var data:Data
+        var data: Data
         if (isNegative) {
             data = Data(repeating: UInt8(255), count: Int(toBytes - existingLength))
         } else {
@@ -25,24 +25,24 @@ extension Data {
         data.append(self)
         return data
     }
-    
-    func setLengthRight(_ toBytes: UInt64, isNegative:Bool = false ) -> Data? {
+
+    func setLengthRight(_ toBytes: UInt64, isNegative: Bool = false ) -> Data? {
         let existingLength = UInt64(self.count)
         if (existingLength == toBytes) {
             return Data(self)
         } else if (existingLength > toBytes) {
             return nil
         }
-        var data:Data = Data()
+        var data: Data = Data()
         data.append(self)
         if (isNegative) {
             data.append(Data(repeating: UInt8(255), count: Int(toBytes - existingLength)))
         } else {
-            data.append(Data(repeating: UInt8(0), count:Int(toBytes - existingLength)))
+            data.append(Data(repeating: UInt8(0), count: Int(toBytes - existingLength)))
         }
         return data
     }
-    
+
     static func fromHex(_ hex: String) -> Data? {
         let string = hex.lowercased().stripHexPrefix()
         let array = Array<UInt8>(hex: string)
@@ -108,18 +108,18 @@ extension String {
     var fullRange: Range<Index> {
         return startIndex..<endIndex
     }
-    
+
     var fullNSRange: NSRange {
         return NSRange(fullRange, in: self)
     }
-    
+
     func index(of char: Character) -> Index? {
         guard let range = range(of: String(char)) else {
             return nil
         }
         return range.lowerBound
     }
-    
+
 //    func split(intoChunksOf chunkSize: Int) -> [String] {
 //        var output = [String]()
 //        let splittedString = self
@@ -130,25 +130,25 @@ extension String {
 //        }
 //        return output
 //    }
-    
+
     subscript (bounds: CountableClosedRange<Int>) -> String {
         let start = index(self.startIndex, offsetBy: bounds.lowerBound)
         let end = index(self.startIndex, offsetBy: bounds.upperBound)
         return String(self[start...end])
     }
-    
+
     subscript (bounds: CountableRange<Int>) -> String {
         let start = index(self.startIndex, offsetBy: bounds.lowerBound)
         let end = index(self.startIndex, offsetBy: bounds.upperBound)
         return String(self[start..<end])
     }
-    
+
     subscript (bounds: CountablePartialRangeFrom<Int>) -> String {
         let start = index(self.startIndex, offsetBy: bounds.lowerBound)
         let end = self.endIndex
         return String(self[start..<end])
     }
-    
+
     func leftPadding(toLength: Int, withPad character: Character) -> String {
         let stringLength = self.count
         if stringLength < toLength {
@@ -157,17 +157,17 @@ extension String {
             return String(self.suffix(toLength))
         }
     }
-    
+
 //    func interpretAsBinaryData() -> Data? {
 //        let padded = self.padding(toLength: ((self.count + 7) / 8) * 8, withPad: "0", startingAt: 0)
 //        let byteArray = padded.split(intoChunksOf: 8).map { UInt8(strtoul($0, nil, 2)) }
 //        return Data(byteArray)
 //    }
-    
+
     func hasHexPrefix() -> Bool {
         return self.hasPrefix("0x")
     }
-    
+
     func stripHexPrefix() -> String {
         if self.hasPrefix("0x") {
             let indexStart = self.index(self.startIndex, offsetBy: 2)
@@ -175,18 +175,18 @@ extension String {
         }
         return self
     }
-    
+
     func addHexPrefix() -> String {
         if !self.hasPrefix("0x") {
             return "0x" + self
         }
         return self
     }
-    
+
     func matchingStrings(regex: String) -> [[String]] {
         guard let regex = try? NSRegularExpression(pattern: regex, options: []) else { return [] }
         let nsString = self as NSString
-        let results  = regex.matches(in: self, options: [], range: NSMakeRange(0, nsString.length))
+        let results  = regex.matches(in: self, options: [], range: NSRange(location: 0, length: nsString.length))
         return results.map { result in
             (0..<result.numberOfRanges).map { result.range(at: $0).location != NSNotFound
                 ? nsString.substring(with: result.range(at: $0))
@@ -194,7 +194,7 @@ extension String {
             }
         }
     }
-    
+
     func range(from nsRange: NSRange) -> Range<String.Index>? {
         guard
             let from16 = utf16.index(utf16.startIndex, offsetBy: nsRange.location, limitedBy: utf16.endIndex),
@@ -204,7 +204,7 @@ extension String {
             else { return nil }
         return from ..< to
     }
-    
+
     var asciiValue: Int {
         get {
             let s = self.unicodeScalars
@@ -260,7 +260,7 @@ extension Array where Element == UInt8 {
             append(b)
         }
     }
-    
+
     func toHexString() -> String {
         return `lazy`.reduce("") {
             var s = String($1, radix: 16)

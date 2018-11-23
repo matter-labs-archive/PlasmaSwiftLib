@@ -16,7 +16,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E2E94C752178919E005F54A0"
+               BlueprintIdentifier = "E20660622187549000701068"
                BuildableName = "PlasmaSwiftLibTests.xctest"
                BlueprintName = "PlasmaSwiftLibTests"
                ReferencedContainer = "container:PlasmaSwiftLib.xcodeproj">

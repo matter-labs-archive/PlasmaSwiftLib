@@ -1,6 +1,24 @@
 # Usage
 
-<***> - input object
+  - [Usage Doc](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md)
+	- **UTXO** 
+		- [UTXO structure](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#utxo-structure)
+		- [Get UTXOs list for Ethereum address](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#get-utxos-list-for-ethereum-address)
+	- **Transaction** 
+		- [Form input](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#form-input)
+		- [Form output](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#form-output)
+		- [Form transaction and sign it](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#form-transaction-and-sign-it)
+	- **Blocks**
+		- [Get last written block, print its headers and check if transactions count is equal in Block header and in Block transactions array](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#get-last-written-block-print-its-headers-and-check-if-transactions-count-is-equal-in-block-header-and-in-block-transactions-array)
+	- **Send transaction in Plasma** 
+		- [Send raw transaction (Split example)](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#send-raw-transaction-split-example)
+	- **Send transaction to Plasma Contract** 
+		- [Send raw transaction (Put deposit example)](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#send-raw-transaction-put-deposit-example)
+		- [Withdraw for chosen utxo](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#withdraw-for-chosen-utxo)
+	- **Outputs management** 
+		- [Merge outputs for fixed amount of one output](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#merge-outputs-for-fixed-amount-of-one-output)
+		- [Merge outputs for fixed number of outputs](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md#merge-outputs-for-fixed-number-of-outputs)
+
 
 Plasma is working on Mainnet and Rinkeby testnet. In some methods use *bool flag to set network* you want to use. 
 
@@ -16,9 +34,12 @@ Plasma is working on Mainnet and Rinkeby testnet. In some methods use *bool flag
 #### Get UTXOs list for Ethereum address
 
 ```swift
-guard let address = EthereumAddress(<Ethereum address>) else {return}
+let ethereumAdress = "0x832a630b949575b87c0e3c00f624f773d9b160f4" //Your ethereum address
+
+guard let address = EthereumAddress(ethereumAdress) else {return}
 do {
-    let utxos = try PlasmaService().getUTXOs(for: address, onTestnet: <Bool flag for using Rinkeby network>)
+// flag: Bool flag, true for Rinkeby network
+    let utxos = try PlasmaService().getUTXOs(for: address, onTestnet: flag)
     for utxo in utxos {
 	print(utxo.value)
     }
@@ -46,8 +67,9 @@ do {
 #### Form output
 
 ```swift
+let ethereumAdress = "0x832a630b949575b87c0e3c00f624f773d9b160f4" //Your ethereum address
 do {
-    guard let address = EthereumAddress(<Ethereum address>) else {return}
+    guard let address = EthereumAddress(ethereumAdress) else {return}
     let amount: BigUInt = 1000000000000000000 // 1 ETH
     let output = try TransactionOutput(outputNumberInTx: <outNum>,
                                        receiverEthereumAddress: address,

@@ -193,7 +193,7 @@ final class GCMModeWorker: BlockModeWorker, FinalizingEncryptModeWorker, Finaliz
         case .combined:
             // overwrite expectedTag property used later for verification
             self.expectedTag = Array(ciphertext.suffix(GCMModeWorker.tagLength))
-            return ciphertext[ciphertext.startIndex..<ciphertext.endIndex.advanced(by: -Swift.min(GCMModeWorker.tagLength,ciphertext.count))]
+            return ciphertext[ciphertext.startIndex..<ciphertext.endIndex.advanced(by: -Swift.min(GCMModeWorker.tagLength, ciphertext.count))]
         case .detached:
             return ciphertext
         }

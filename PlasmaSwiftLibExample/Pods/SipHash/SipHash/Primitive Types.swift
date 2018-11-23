@@ -7,16 +7,16 @@
 //
 
 extension SipHasher {
-    //MARK: Appending buffer slices
-    
+    // MARK: Appending buffer slices
+
     /// Add the contents of `slice` to this hash.
     ///
     /// - Requires: `finalize()` hasn't been called on this instance yet.
     public mutating func append(_ slice: Slice<UnsafeRawBufferPointer>) {
         self.append(UnsafeRawBufferPointer(rebasing: slice))
     }
-    
-    //MARK: Appending Integers
+
+    // MARK: Appending Integers
 
     /// Add `value` to this hash.
     ///
@@ -108,7 +108,7 @@ extension SipHasher {
 }
 
 extension SipHasher {
-    //MARK: Appending Floating Point Types
+    // MARK: Appending Floating Point Types
 
     /// Add `value` to this hash.
     ///
@@ -154,7 +154,7 @@ extension SipHasher {
 #endif
 
 extension SipHasher {
-    //MARK: Appending Optionals
+    // MARK: Appending Optionals
 
     /// Add `value` to this hash.
     ///
@@ -163,8 +163,7 @@ extension SipHasher {
         if let value = value {
             self.append(1 as UInt8)
             self.append(value)
-        }
-        else {
+        } else {
             self.append(0 as UInt8)
         }
     }

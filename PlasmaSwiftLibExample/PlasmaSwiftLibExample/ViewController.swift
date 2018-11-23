@@ -11,11 +11,11 @@ import PlasmaSwiftLib
 import EthereumAddress
 
 class ViewController: UIViewController {
-    
+
     @IBOutlet weak var tableView: UITableView!
-    
+
     var utxos: [ListUTXOsModel] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
             }
         }
     }
-    
+
     func sendToMyself(from utxo: ListUTXOsModel) {
         guard let address = EthereumAddress("0x6891dc3962e710f0ff711b9c6acc26133fd35cb4") else {return}
         let privKey = Data(hex: "36775b4bafc4d906c9035903785fcdb4f0e9e7b5d6f6f1a4b001bb5a4396c391")
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         guard let signedTransaction = transaction.sign(privateKey: privKey) else {return}
         ServiceUTXO().sendRawTX(transaction: signedTransaction, onTestnet: true) { (result) in
             switch result {
-            case .Success(_):
+            case .Success:
                 DispatchQueue.main.async { [weak self] in
                     guard let alert = self?.alert(title: "Successfully sent transaction", message: nil) else {return}
                     self?.present(alert, animated: true, completion: nil)
@@ -65,31 +65,30 @@ class ViewController: UIViewController {
             }
         }
     }
-    
+
     func alert(title: String, message: String?) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(ok)
         return alert
     }
-    
+
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return utxos.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "UTXO")
         cell.textLabel?.text = String(utxos[indexPath.row].value)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         sendToMyself(from: utxos[indexPath.row])
     }
-    
-}
 
+}

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PlasmaSwiftLib'
-  s.version          = '1.0.4'
+  s.version          = '1.1.0'
   s.summary          = 'PlasmaSwiftLib is your toolbelt for any kind interactions with The Matter Plasma Implementations.'
  
   s.description      = <<-DESC

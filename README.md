@@ -10,26 +10,22 @@
 
 **PlasmaSwiftLib** is your toolbelt for any kind of interactions with The Matter Plasma Implementations.
 
-  * [Features](#features)
-  * [Design Decisions](#design-decisions)
-  * [Requirements](#requirements)
-  * [Communication](#communication)
-  * [Installation](#installation)
-    + [CocoaPods](#cocoapods)
-    + [Carthage](#carthage)
-  * [Transaction Structure](#transaction-structure) 
-    + [Input](#input)
-    + [Output](#output)
-    + [Transaction](#transaction)
-    + [Signed Transaction](#signed-transaction)
-  * [Block Structure](#block-structure) 
-    + [Block](#block)
-    + [Block Header](#block-header)
-  * [Example Project](#example-project)
-  * [Credits](#credits)
-    + [Security Disclosure](#security-disclosure)
-  * [Donations](#donations)
-  * [License](#license)
+<!-- toc -->
+
+- [Features](#features)
+- [Design Decisions](#design-decisions)
+- [Requirements](#requirements)
+- [Communication](#communication)
+- [Installation](#installation)
+  * [CocoaPods](#cocoapods)
+  * [Carthage](#carthage)
+- [Example Project](#example-project)
+- [Credits](#credits)
+  * [Security Disclosure](#security-disclosure)
+- [Donations](#donations)
+- [License](#license)
+
+<!-- tocstop -->
 
 ---
   - [Usage Doc](https://github.com/matterinc/PlasmaSwiftLib/blob/develop/Documentation/Usage.md)
@@ -78,7 +74,6 @@ When using this lib, please make references to this repo and give your start! :)
 If you are using PlasmaSwiftLib in your app or know of an app that uses it, please add it to [this list](https://github.com/matterinc/PlasmaSwiftLib/wiki/Apps-using-PlasmaSwiftLib).
 
 - If you **need help**, use [Stack Overflow](https://stackoverflow.com/questions/tagged/PlasmaSwiftLib) and tag `PlasmaSwiftLib`.
-- If you need to **find or understand an API**, check [our documentation](http://web3swift.github.io/PlasmaSwiftLib/).
 - If you'd like to **see PlasmaSwiftLib best practices**, check [Apps using this library](https://github.com/matterinc/PlasmaSwiftLib/wiki/Apps-using-PlasmaSwiftLib).
 - If you **found a bug**, [open an issue](https://github.com/matterinc/PlasmaSwiftLib/issues).
 - If you **have a feature request**, [open an issue](https://github.com/matterinc/PlasmaSwiftLib/issues).
@@ -131,58 +126,6 @@ github "matterinc/PlasmaSwiftLib" "carthage"
 
 Run `carthage update` to build the framework and drag the built `web3swift.framework` into your Xcode project.
 
-## Transaction structure
-
-The transaction structure, that is used in The Matter Plasma Implementation is the UTXO model with explicit enumeration of UTXOs in the inputs.
-
-### Input
-An RLP encoded set with the following items:
-- Block number, 4 bytes
-- Transaction number in block, 4 bytes
-- Output number in transaction, 1 byte
-- "Amount" field, 32 bytes, that is more a data field, usually used for an amount of the output referenced by previous field, but has special meaning for "Deposit" transactions
-
-### Output
-An RLP encoded set with the following items:
-- Output number in transaction, 1 byte
-- Receiver's Ethereum address, 20 bytes
-- "Amount" field, 32 bytes
-
-### Transaction 
-An RLP encoded set with the following items:
-- Transaction type, 1 byte
-- An array (list) of Inputs, maximum 2 items
-- An array (list) of Outputs, maximum 3 items. One of the outputs is an explicit output to an address of Plasma operator.
-
-### Signed transaction 
-An RLP encoded set with the following items:
-- Transaction, as described above
-- Recoverable EC of the transaction sender:
-   1) V value, 1 byte, expected values 27, 28
-   2) R value, 32 bytes
-   3) S value, 32 bytes
-
-From this signature Plasma operator deduces a sender, checks that the sender is an owner of UTXOs referenced by inputs. Signature is based on EthereumPersonalHash(RLPEncode(Transaction)). Transaction should be well-formed, sum of inputs equal to sum of the outputs, etc.
-
-## Block structure
-
-### Block header
-- Block number, 4 bytes, used in the main chain to double check proper ordering
-- Number of transactions in block, 4 bytes, purely informational
-- Parent hash, 32 bytes, hash of the previous block, hashes the full header
-- Merkle root of the transactions tree, 32 bytes
-- V value, 1 byte, expected values 27, 28
-- R value, 32 bytes
-- S value, 32 bytes
-
-Signature is based on EthereumPersonalHash(block number || number of transactions || previous hash || merkle root), where || means concatenation. Values V, R, S are then concatenated to the header.
-
-### Block
-- Block header, as described above, 137 bytes
-- RLP encoded array (list) of signed transactions, as described above
-
-While some fields can be excessive, such block header can be submitted by anyone to the main Ethereum chain when block is available, but for some reason not sent to the smart contract. Transaction numbering is done by the operator, it should be monotonically increasing without spaces and number of transactions in header should (although this is not necessary for the functionality) match the number of transactions in the Merkle tree and the full block.
-
 ## Example Project
 
 You can try lib by running the example project:
@@ -204,7 +147,7 @@ If you believe you have identified a security vulnerability with PlasmaSwiftLib,
 
 ## Donations
 
-[The Matters](https://github.com/orgs/matterinc/people) are charged with open-sorсe and do not require money for using their PlasmaSwiftLib.
+[The Matters](https://github.com/orgs/matterinc/people) are charged with open-sorсe and do not require money for using their `PlasmaSwiftLib`.
 We want to continue to do everything we can to move the needle forward.
 If you use any of our libraries for work, see if your employers would be interested in donating. Any amount you can donate today to help us reach our goal would be greatly appreciated.
 

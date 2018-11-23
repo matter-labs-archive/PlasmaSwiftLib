@@ -8,7 +8,7 @@ import BigInt
 import EthereumAddress
 
 public struct ABIEncoder {
-    
+
 }
 
 extension ABIEncoder {
@@ -58,7 +58,7 @@ extension ABIEncoder {
         }
         return nil
     }
-    
+
     public static func convertToBigInt(_ value: AnyObject) -> BigInt? {
         switch value {
         case let v as BigUInt:
@@ -100,7 +100,7 @@ extension ABIEncoder {
         }
         return nil
     }
-    
+
     public static func convertToData(_ value: AnyObject) -> Data? {
         switch value {
         case let d as Data:
@@ -132,8 +132,7 @@ extension ABIEncoder {
         }
         return nil
     }
-    
-    
+
     public static func encode(types: [ABI.Element.InOut], values: [AnyObject]) -> Data? {
         guard types.count == values.count else {return nil}
         let params = types.compactMap { (el) -> ABI.Element.ParameterType in
@@ -141,7 +140,7 @@ extension ABIEncoder {
         }
         return encode(types: params, values: values)
     }
-    
+
     public static func encode(types: [ABI.Element.ParameterType], values: [AnyObject]) -> Data? {
         guard types.count == values.count else {return nil}
         var tails = [Data]()
@@ -179,17 +178,17 @@ extension ABIEncoder {
         }
         return headsConcatenated + tailsConcatenated
     }
-    
+
     public static func encodeSingleType(type: ABI.Element.ParameterType, value: AnyObject) -> Data? {
         switch type {
-        case .uint(_):
+        case .uint:
             if let biguint = convertToBigUInt(value) {
                 return biguint.abiEncode(bits: 256)
             }
             if let bigint = convertToBigInt(value) {
                 return bigint.abiEncode(bits: 256)
             }
-        case .int(_):
+        case .int:
             if let biguint = convertToBigUInt(value) {
                 return biguint.abiEncode(bits: 256)
             }
@@ -225,8 +224,7 @@ extension ABIEncoder {
                 var dataGuess: Data?
                 if string.hasHexPrefix() {
                     dataGuess = Data.fromHex(string.lowercased().stripHexPrefix())
-                }
-                else {
+                } else {
                     dataGuess = string.data(using: .utf8)
                 }
                 guard let data = dataGuess else {break}

@@ -1,10 +1,5 @@
 def import_pods
-  pod 'BigInt'
-  pod 'CryptoSwift'
-  pod 'SwiftRLP'
-  pod 'secp256k1_swift'
-  pod 'EthereumABI'
-  pod 'EthereumAddress'
+  pod 'web3swift', '~> 2.0.4'
 end
 
 target 'PlasmaSwiftLib' do
