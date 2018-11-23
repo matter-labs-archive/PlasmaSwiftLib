@@ -136,10 +136,8 @@ extension Block: Equatable {
     }
 }
 
-
 /// Merkle Tree content
 public struct TreeContent: ContentProtocol {
-    
     /// Hash of the Merkle tree content
     ///
     /// - Parameter hasher: hash function
