@@ -4,8 +4,7 @@ end
 
 target 'PlasmaSwiftLib' do
   platform :ios, '9.0'
-  #use_modular_headers!
-  use_frameworks!
+  use_modular_headers!
   import_pods
 
   target 'PlasmaSwiftLibTests' do

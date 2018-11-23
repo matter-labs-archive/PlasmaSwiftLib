@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		765B1E0135221A1F7D0727E0 /* Pods_PlasmaSwiftLibTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DF15E6E87048FA8874EC91 /* Pods_PlasmaSwiftLibTests.framework */; };
-		80ED7BBAFEB45C434F6A1D54 /* Pods_PlasmaSwiftLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1ABE823482E61ABE39C8F61 /* Pods_PlasmaSwiftLib.framework */; };
+		4540DA661DC3C305E6D35E20 /* libPods-PlasmaSwiftLibTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 299ABA976DD7E64B43B5A9D6 /* libPods-PlasmaSwiftLibTests.a */; };
+		633284BABD9D4F679A2BCF05 /* libPods-PlasmaSwiftLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D68E6EDF236A8A0FFE42A9B /* libPods-PlasmaSwiftLib.a */; };
 		E20660642187549000701068 /* PlasmaSwiftLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E206605A2187549000701068 /* PlasmaSwiftLib.framework */; };
 		E206606B2187549000701068 /* PlasmaSwiftLib.h in Headers */ = {isa = PBXBuildFile; fileRef = E206605D2187549000701068 /* PlasmaSwiftLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2066078218754CC00701068 /* BlockHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066075218754CC00701068 /* BlockHeader.swift */; };
@@ -58,7 +58,8 @@
 
 /* Begin PBXFileReference section */
 		0D2D619B2D6249C630F83C30 /* Pods-PlasmaSwiftLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLib.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLib/Pods-PlasmaSwiftLib.release.xcconfig"; sourceTree = "<group>"; };
-		52DF15E6E87048FA8874EC91 /* Pods_PlasmaSwiftLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlasmaSwiftLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		299ABA976DD7E64B43B5A9D6 /* libPods-PlasmaSwiftLibTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlasmaSwiftLibTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D68E6EDF236A8A0FFE42A9B /* libPods-PlasmaSwiftLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlasmaSwiftLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9D3CE0AF56C0901A94E512 /* Pods-PlasmaSwiftLibTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLibTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLibTests/Pods-PlasmaSwiftLibTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C47D6535AB1AEDDF61AF58E0 /* Pods-PlasmaSwiftLibTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLibTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLibTests/Pods-PlasmaSwiftLibTests.release.xcconfig"; sourceTree = "<group>"; };
 		DF1A99059C9CB080E9D631C6 /* Pods-PlasmaSwiftLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLib/Pods-PlasmaSwiftLib.debug.xcconfig"; sourceTree = "<group>"; };
@@ -97,7 +98,6 @@
 		E2DCA663219397BA00F94FBA /* Web3Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3Service.swift; sourceTree = "<group>"; };
 		E2DCA6652193A58300F94FBA /* PlasmaContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaContract.swift; sourceTree = "<group>"; };
 		E2DCA6672193BF8E00F94FBA /* PlasmaContractMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaContractMethods.swift; sourceTree = "<group>"; };
-		F1ABE823482E61ABE39C8F61 /* Pods_PlasmaSwiftLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlasmaSwiftLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80ED7BBAFEB45C434F6A1D54 /* Pods_PlasmaSwiftLib.framework in Frameworks */,
+				633284BABD9D4F679A2BCF05 /* libPods-PlasmaSwiftLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +114,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E20660642187549000701068 /* PlasmaSwiftLib.framework in Frameworks */,
-				765B1E0135221A1F7D0727E0 /* Pods_PlasmaSwiftLibTests.framework in Frameworks */,
+				4540DA661DC3C305E6D35E20 /* libPods-PlasmaSwiftLibTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,8 +124,8 @@
 		AD8054CE43AFEF90EB114A24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F1ABE823482E61ABE39C8F61 /* Pods_PlasmaSwiftLib.framework */,
-				52DF15E6E87048FA8874EC91 /* Pods_PlasmaSwiftLibTests.framework */,
+				9D68E6EDF236A8A0FFE42A9B /* libPods-PlasmaSwiftLib.a */,
+				299ABA976DD7E64B43B5A9D6 /* libPods-PlasmaSwiftLibTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
