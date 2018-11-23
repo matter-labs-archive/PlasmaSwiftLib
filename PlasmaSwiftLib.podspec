@@ -15,7 +15,7 @@ Use this library to implement all necessary functionality of THe Matter Plasma I
   s.module_name = 'PlasmaSwiftLib'
  
   s.ios.deployment_target = '9.0'
-  s.source_files = "PlasmaSwiftLib/**/*.{h,swift}", 
+  s.source_files = "PlasmaSwiftLib/**/*.{h,swift}", "PlasmaSwiftLib/**/**/*.{h,swift}"
   s.public_header_files = "PlasmaSwiftLib/**/*.{h}"
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
