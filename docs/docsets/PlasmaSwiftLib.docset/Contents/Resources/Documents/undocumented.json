@@ -303,9 +303,79 @@
     },
     {
       "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 12,
+      "symbol": "ContentProtocol.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 13,
+      "symbol": "ContentProtocol.getHash(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 14,
+      "symbol": "ContentProtocol.isEqualTo(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
       "line": 17,
       "symbol": "TreeNodeProtocol",
       "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 18,
+      "symbol": "TreeNodeProtocol.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 19,
+      "symbol": "TreeNodeProtocol.isLeaf",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 20,
+      "symbol": "TreeNodeProtocol.leftChild",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 21,
+      "symbol": "TreeNodeProtocol.rightChild",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 22,
+      "symbol": "TreeNodeProtocol.parent",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 23,
+      "symbol": "TreeNodeProtocol.isEqualTo(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 24,
+      "symbol": "TreeNodeProtocol.getHash(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -317,9 +387,156 @@
     },
     {
       "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 50,
+      "symbol": "TreeNode.init(_:hasher:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 56,
+      "symbol": "TreeNode.init(_:_:hasher:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 66,
+      "symbol": "TreeNode.isLeaf",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 67,
+      "symbol": "TreeNode.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 68,
+      "symbol": "TreeNode.hasher",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 69,
+      "symbol": "TreeNode.leftChild",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 70,
+      "symbol": "TreeNode.rightChild",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 71,
+      "symbol": "TreeNode.parent",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 73,
+      "symbol": "TreeNode.isEqualTo(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 77,
+      "symbol": "TreeNode.getHash(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
       "line": 82,
       "symbol": "PaddabbleTree",
       "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 83,
+      "symbol": "PaddabbleTree.hasher",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 84,
+      "symbol": "PaddabbleTree.content",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 85,
+      "symbol": "PaddabbleTree.paddingElement",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 86,
+      "symbol": "PaddabbleTree.root",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 88,
+      "symbol": "PaddabbleTree.merkleRoot",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 93,
+      "symbol": "PaddabbleTree.init(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 104,
+      "symbol": "PaddabbleTree.init(_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 115,
+      "symbol": "PaddabbleTree.assembleTree(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 143,
+      "symbol": "PaddabbleTree.makeBinaryProof(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 177,
+      "symbol": "PaddabbleTree.verifyBinaryProof(content:proof:expectedRoot:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/PaddableTree/PaddableTree.swift",
+      "line": 181,
+      "symbol": "PaddabbleTree.verifyBinaryProof(content:proof:expectedRoot:hasher:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
@@ -327,6 +544,34 @@
       "line": 11,
       "symbol": "SimpleContent",
       "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/SimpleContent.swift",
+      "line": 12,
+      "symbol": "SimpleContent.getHash(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/SimpleContent.swift",
+      "line": 16,
+      "symbol": "SimpleContent.isEqualTo(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/SimpleContent.swift",
+      "line": 20,
+      "symbol": "SimpleContent.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/SimpleContent.swift",
+      "line": 21,
+      "symbol": "SimpleContent.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -345,9 +590,44 @@
     },
     {
       "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/Utils/Hashing.swift",
+      "line": 19,
+      "symbol": "Hasher.hash(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/Utils/Hashing.swift",
       "line": 22,
       "symbol": "TreeHasher",
       "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/Utils/Hashing.swift",
+      "line": 23,
+      "symbol": "TreeHasher.hash(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/Utils/Hashing.swift",
+      "line": 27,
+      "symbol": "TreeHasher.hashFunction",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/Utils/Hashing.swift",
+      "line": 29,
+      "symbol": "TreeHasher.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/MerkleTools/Utils/Hashing.swift",
+      "line": 33,
+      "symbol": "TreeHasher.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -401,9 +681,37 @@
     },
     {
       "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/PlasmaService/PlasmaService.swift",
+      "line": 215,
+      "symbol": "Method.post",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/PlasmaService/PlasmaService.swift",
+      "line": 216,
+      "symbol": "Method.get",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/PlasmaService/PlasmaService.swift",
       "line": 219,
       "symbol": "ContentType",
       "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/PlasmaService/PlasmaService.swift",
+      "line": 220,
+      "symbol": "ContentType.json",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLib/PlasmaService/PlasmaService.swift",
+      "line": 221,
+      "symbol": "ContentType.octet",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
