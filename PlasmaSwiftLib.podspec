@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PlasmaSwiftLib'
-  s.version          = '1.1.0'
+  s.version          = '1.1.2'
   s.summary          = 'PlasmaSwiftLib is your toolbelt for any kind interactions with The Matter Plasma Implementations.'
  
   s.description      = <<-DESC
@@ -15,7 +15,7 @@ Use this library to implement all necessary functionality of THe Matter Plasma I
   s.module_name = 'PlasmaSwiftLib'
  
   s.ios.deployment_target = '9.0'
-  s.source_files = "PlasmaSwiftLib/**/*.{h,swift}", 
+  s.source_files = "PlasmaSwiftLib/**/*.{h,swift}", "PlasmaSwiftLib/**/**/*.{h,swift}"
   s.public_header_files = "PlasmaSwiftLib/**/*.{h}"
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
@@ -26,5 +26,6 @@ Use this library to implement all necessary functionality of THe Matter Plasma I
   s.dependency 'secp256k1_swift'
   s.dependency 'SipHash'
   s.dependency 'SwiftRLP'
+  s.dependency 'web3swift'
  
 end
