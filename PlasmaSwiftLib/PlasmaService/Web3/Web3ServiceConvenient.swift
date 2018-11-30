@@ -41,7 +41,7 @@ extension Web3Service {
                                                              parameters: [AnyObject](),
                                                              extraData: Data())
             let withdrawCollateral = try callPlasmaContractTx(transaction: txWithdraw)
-            guard let withdrawCollateralBigUInt = withdrawCollateral.first?.value as? BigUInt else {throw StructureErrors.wrongData}
+            guard let withdrawCollateralBigUInt = withdrawCollateral.first?.value as? BigUInt else {throw PlasmaErrors.StructureErrors.wrongData}
             print("collateral: \(withdrawCollateralBigUInt)")
             let txData = try transaction.serialize()
             let bN = UInt32(blockNumber)
@@ -64,7 +64,7 @@ extension Web3Service {
                                                   password: password)
             return result
         } catch {
-            throw NetErrors.cantCreateRequest
+            throw PlasmaErrors.NetErrors.cantCreateRequest
         }
     }
     
@@ -86,13 +86,13 @@ extension Web3Service {
         do {
             let parsedBlock = try Block(data: block)
             let proofData = try parsedBlock.getProofForTransactionByNumber(txNumber: utxo.transactionNumber)
-            guard let merkleTree = parsedBlock.merkleTree else {throw StructureErrors.wrongData}
-            guard let merkleRoot = merkleTree.merkleRoot else {throw StructureErrors.wrongData}
-            guard parsedBlock.blockHeader.merkleRootOfTheTxTree == merkleRoot else {throw StructureErrors.wrongData}
+            guard let merkleTree = parsedBlock.merkleTree else {throw PlasmaErrors.StructureErrors.wrongData}
+            guard let merkleRoot = merkleTree.merkleRoot else {throw PlasmaErrors.StructureErrors.wrongData}
+            guard parsedBlock.blockHeader.merkleRootOfTheTxTree == merkleRoot else {throw PlasmaErrors.StructureErrors.wrongData}
             let included = PaddabbleTree.verifyBinaryProof(content: TreeContent(proofData.tx.data),
                                                            proof: proofData.proof,
                                                            expectedRoot: merkleRoot)
-            guard included == true else {throw StructureErrors.wrongData}
+            guard included == true else {throw PlasmaErrors.StructureErrors.wrongData}
             
             let result = try self.startExitPlasma(transaction: proofData.tx,
                                                   proof: proofData.proof,
@@ -100,7 +100,7 @@ extension Web3Service {
                                                   outputNumber: utxo.outputNumber, password: password)
             return result
         } catch {
-            throw StructureErrors.wrongData
+            throw PlasmaErrors.StructureErrors.wrongData
         }
     }
 }

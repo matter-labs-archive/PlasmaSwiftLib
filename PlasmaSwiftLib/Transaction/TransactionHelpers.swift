@@ -26,7 +26,7 @@ public struct TransactionHelpers {
     static func hashPersonalMessage(_ personalMessage: Data) throws -> Data {
         var prefix = "\u{19}Ethereum Signed Message:\n"
         prefix += String(personalMessage.count)
-        guard let prefixData = prefix.data(using: .ascii) else {throw StructureErrors.wrongData}
+        guard let prefixData = prefix.data(using: .ascii) else {throw PlasmaErrors.StructureErrors.wrongData}
         var data = Data()
         if personalMessage.count >= prefixData.count && prefixData == personalMessage[0 ..< prefixData.count] {
             data.append(personalMessage)
@@ -45,18 +45,18 @@ public struct TransactionHelpers {
     /// - Throws: `StructureErrors.wrongDataCount` if data is wrong or `StructureErrors.wrongDataCount` if data count is wrong
     static func publicToAddressData(_ publicKey: Data) throws -> Data {
         if publicKey.count == 33 {
-            guard let decompressedKey = SECP256K1.combineSerializedPublicKeys(keys: [publicKey], outputCompressed: false) else {throw StructureErrors.wrongData}
+            guard let decompressedKey = SECP256K1.combineSerializedPublicKeys(keys: [publicKey], outputCompressed: false) else {throw PlasmaErrors.StructureErrors.wrongData}
             return try publicToAddressData(decompressedKey)
         }
         var stipped = publicKey
         if (stipped.count == 65) {
             if (stipped[0] != 4) {
-                throw StructureErrors.wrongData
+                throw PlasmaErrors.StructureErrors.wrongData
             }
             stipped = stipped[1...64]
         }
         if (stipped.count != 64) {
-            throw StructureErrors.wrongDataCount
+            throw PlasmaErrors.StructureErrors.wrongDataCount
         }
         let sha3 = stipped.sha3(.keccak256)
         let addressData = sha3[12...31]

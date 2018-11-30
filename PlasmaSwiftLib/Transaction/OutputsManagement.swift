@@ -46,18 +46,18 @@ public extension Transaction {
         for output in sortedOutputs {
             guard let fixedOutput = try? TransactionOutput(outputNumberInTx: index,
                                                       receiverEthereumAddress: receiverAddress,
-                                                      amount: output.amount) else {throw StructureErrors.wrongData}
+                                                      amount: output.amount) else {throw PlasmaErrors.StructureErrors.wrongData}
             newOutputsArray.append(fixedOutput)
             index += 1
         }
         guard let mergedOutput = try? TransactionOutput(outputNumberInTx: index,
                                                    receiverEthereumAddress: receiverAddress,
-                                                   amount: mergedAmount) else {throw StructureErrors.wrongData}
+                                                   amount: mergedAmount) else {throw PlasmaErrors.StructureErrors.wrongData}
         newOutputsArray.append(mergedOutput)
 
         guard let fixedTx = try? Transaction(txType: self.txType,
                                         inputs: self.inputs,
-                                        outputs: newOutputsArray) else {throw StructureErrors.wrongData}
+                                        outputs: newOutputsArray) else {throw PlasmaErrors.StructureErrors.wrongData}
 
         return fixedTx
     }
@@ -107,18 +107,18 @@ public extension Transaction {
         for output in sortedOutputs {
             guard let fixedOutput = try? TransactionOutput(outputNumberInTx: index,
                                                       receiverEthereumAddress: receiverAddress,
-                                                      amount: output.amount) else {throw StructureErrors.wrongData}
+                                                      amount: output.amount) else {throw PlasmaErrors.StructureErrors.wrongData}
             newOutputsArray.append(fixedOutput)
             index += 1
         }
         guard let mergedOutput = try? TransactionOutput(outputNumberInTx: index,
                                                    receiverEthereumAddress: receiverAddress,
-                                                   amount: mergedAmount) else {throw StructureErrors.wrongData}
+                                                   amount: mergedAmount) else {throw PlasmaErrors.StructureErrors.wrongData}
         newOutputsArray.append(mergedOutput)
 
         guard let fixedTx = try? Transaction(txType: self.txType,
                                         inputs: self.inputs,
-                                        outputs: newOutputsArray) else {throw StructureErrors.wrongData}
+                                        outputs: newOutputsArray) else {throw PlasmaErrors.StructureErrors.wrongData}
 
         return fixedTx
     }

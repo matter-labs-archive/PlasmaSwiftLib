@@ -57,20 +57,20 @@ public final class PlasmaService {
                                         data: jsonData,
                                         method: .post,
                                         contentType: .json) else {
-                seal.reject(NetErrors.cantCreateRequest)
+                seal.reject(PlasmaErrors.NetErrors.cantCreateRequest)
                 return
             }
             session.dataTask(with: request, completionHandler: { (data, response, error) in
                 guard let data = data, error == nil else {
-                    seal.reject(NetErrors.noData)
+                    seal.reject(PlasmaErrors.NetErrors.noData)
                     return
                 }
                 guard let httpResponse = response as? HTTPURLResponse else {
-                    seal.reject(NetErrors.badResponse)
+                    seal.reject(PlasmaErrors.NetErrors.badResponse)
                     return
                 }
                 guard httpResponse.statusCode == 200 else {
-                    seal.reject(NetErrors.badResponse)
+                    seal.reject(PlasmaErrors.NetErrors.badResponse)
                     return
                 }
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -85,10 +85,10 @@ public final class PlasmaService {
                         }
                         seal.fulfill(allUTXOs)
                     } else {
-                        seal.reject(StructureErrors.cantDecodeData)
+                        seal.reject(PlasmaErrors.StructureErrors.cantDecodeData)
                     }
                 } else {
-                    seal.reject(StructureErrors.cantDecodeData)
+                    seal.reject(PlasmaErrors.StructureErrors.cantDecodeData)
                 }
             }).resume()
         }
@@ -121,12 +121,12 @@ public final class PlasmaService {
                                         data: Data(),
                                         method: .get,
                                         contentType: .octet) else {
-                seal.reject(NetErrors.cantCreateRequest)
+                seal.reject(PlasmaErrors.NetErrors.cantCreateRequest)
                 return
             }
             session.dataTask(with: request, completionHandler: { (data, _, error) in
                 guard error == nil, let block = data else {
-                    seal.reject(NetErrors.noData)
+                    seal.reject(PlasmaErrors.NetErrors.noData)
                     return
                 }
                 seal.fulfill(block)
@@ -146,21 +146,21 @@ public final class PlasmaService {
                                         data: jsonData,
                                         method: .post,
                                         contentType: .json) else {
-                                            seal.reject(NetErrors.cantCreateRequest)
+                                            seal.reject(PlasmaErrors.NetErrors.cantCreateRequest)
                                             return
             }
             
             session.dataTask(with: request, completionHandler: { data, response, error in
                 guard let data = data, error == nil else {
-                    seal.reject(NetErrors.noData)
+                    seal.reject(PlasmaErrors.NetErrors.noData)
                     return
                 }
                 guard let httpResponse = response as? HTTPURLResponse else {
-                    seal.reject(NetErrors.badResponse)
+                    seal.reject(PlasmaErrors.NetErrors.badResponse)
                     return
                 }
                 guard httpResponse.statusCode == 200 else {
-                    seal.reject(NetErrors.badResponse)
+                    seal.reject(PlasmaErrors.NetErrors.badResponse)
                     return
                 }
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -172,7 +172,7 @@ public final class PlasmaService {
                         seal.fulfill(false)
                     }
                 } else {
-                    seal.reject(StructureErrors.cantDecodeData)
+                    seal.reject(PlasmaErrors.StructureErrors.cantDecodeData)
                 }
             }).resume()
         }

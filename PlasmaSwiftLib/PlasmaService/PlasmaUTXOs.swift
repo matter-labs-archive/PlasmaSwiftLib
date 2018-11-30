@@ -25,12 +25,12 @@ public final class PlasmaUTXOs {
     ///    4. value - amount of Ether in UTXO.
     /// - Throws: `StructureErrors.wrongData` if json is wrong.
     public init(json: [String: Any]) throws {
-        guard let blockNumber = json["blockNumber"] as? Int else {throw StructureErrors.wrongData}
-        guard let transactionNumber = json["transactionNumber"] as? Int else {throw StructureErrors.wrongData}
-        guard let outputNumber = json["outputNumber"] as? Int else {throw StructureErrors.wrongData}
-        guard let value = json["value"] as? String else {throw StructureErrors.wrongData}
+        guard let blockNumber = json["blockNumber"] as? Int else {throw PlasmaErrors.StructureErrors.wrongData}
+        guard let transactionNumber = json["transactionNumber"] as? Int else {throw PlasmaErrors.StructureErrors.wrongData}
+        guard let outputNumber = json["outputNumber"] as? Int else {throw PlasmaErrors.StructureErrors.wrongData}
+        guard let value = json["value"] as? String else {throw PlasmaErrors.StructureErrors.wrongData}
 
-        guard let bigUIntValue = BigUInt(value) else {throw StructureErrors.wrongData}
+        guard let bigUIntValue = BigUInt(value) else {throw PlasmaErrors.StructureErrors.wrongData}
 
         self.blockNumber = BigUInt(blockNumber)
         self.transactionNumber = BigUInt(transactionNumber)

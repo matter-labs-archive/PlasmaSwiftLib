@@ -50,38 +50,38 @@ public class Block {
     /// Creates Block object that implement Plasma Block in storage
     ///
     /// - Parameter data: encoded Data of Block
-    /// - Throws: throws various `StructureErrors` if decoding is wrong or decoded data is wrong in some way
+    /// - Throws: throws various `PlasmaErrors.StructureErrors` if decoding is wrong or decoded data is wrong in some way
     public init(data: Data) throws {
-        guard data.count > blockHeaderByteLength else {throw StructureErrors.wrongDataCount}
+        guard data.count > blockHeaderByteLength else {throw PlasmaErrors.StructureErrors.wrongDataCount}
         let headerData = Data(data[0 ..< blockHeaderByteLength])
-        guard let blockHeader = try? BlockHeader(data: headerData) else {throw StructureErrors.wrongData}
+        guard let blockHeader = try? BlockHeader(data: headerData) else {throw PlasmaErrors.StructureErrors.wrongData}
         self.blockHeader = blockHeader
 
         let signedTransactionsData = Data(data[Int(blockHeaderByteLength) ..< data.count])
-        guard let item = RLP.decode(signedTransactionsData) else {throw StructureErrors.wrongData}
-        guard item.isList else {throw StructureErrors.isNotList}
+        guard let item = RLP.decode(signedTransactionsData) else {throw PlasmaErrors.StructureErrors.wrongData}
+        guard item.isList else {throw PlasmaErrors.StructureErrors.isNotList}
         var signedTransactions = [SignedTransaction]()
         signedTransactions.reserveCapacity(item.count!)
         print("signed tx count: \(item.count!)")
         for i in 0 ..< item.count! {
-            guard let txData = item[i]!.data else {throw StructureErrors.isNotData}
+            guard let txData = item[i]!.data else {throw PlasmaErrors.StructureErrors.isNotData}
             
-            guard let tx = try? SignedTransaction(data: txData) else {throw StructureErrors.wrongData}
+            guard let tx = try? SignedTransaction(data: txData) else {throw PlasmaErrors.StructureErrors.wrongData}
             signedTransactions.append(tx)
         }
         self.signedTransactions = signedTransactions
         guard let tree = self.merkleTree else {
-            throw StructureErrors.wrongData
+            throw PlasmaErrors.StructureErrors.wrongData
         }
         guard tree.merkleRoot == self.blockHeader.merkleRootOfTheTxTree else {
-            throw StructureErrors.wrongData
+            throw PlasmaErrors.StructureErrors.wrongData
         }
     }
 
     /// Serializes Block
     ///
     /// - Returns: encoded bytes `Data` value that contains merged the base-256 representation of BlockHeader and encoded AnyObject array consisted of SignedTransaction items
-    /// - Throws: `StructureErrors.cantEncodeData` if data can't be encoded
+    /// - Throws: `PlasmaErrors.StructureErrors.cantEncodeData` if data can't be encoded
     public func serialize() throws -> Data {
         let headerData = self.blockHeader.data
         var txArray = [Data]()
@@ -89,7 +89,7 @@ public class Block {
         for tx in self.signedTransactions {
             txArray.append(tx.data)
         }
-        guard let txRLP = RLP.encode(txArray as [AnyObject]) else {throw StructureErrors.cantEncodeData}
+        guard let txRLP = RLP.encode(txArray as [AnyObject]) else {throw PlasmaErrors.StructureErrors.cantEncodeData}
         return headerData + txRLP
     }
     
@@ -99,17 +99,17 @@ public class Block {
     /// - Returns: tuple:
     ///     - tx: signed transaction from parameters
     ///     - proof: Data indicator that signed transaction is in Block transactions set
-    /// - Throws: `StructureErrors.wrongData` if something in proving is wrong
+    /// - Throws: `PlasmaErrors.StructureErrors.wrongData` if something in proving is wrong
     public func getProof(for transaction: SignedTransaction) throws -> (tx: SignedTransaction, proof: Data) {
-        guard let tree = self.merkleTree else {throw StructureErrors.wrongData}
+        guard let tree = self.merkleTree else {throw PlasmaErrors.StructureErrors.wrongData}
         for (counter, tx) in self.signedTransactions.enumerated() {
             let serializedTx = tx.data
             if serializedTx == transaction.data {
-                guard let proof =  tree.makeBinaryProof(counter) else {throw StructureErrors.wrongData}
+                guard let proof =  tree.makeBinaryProof(counter) else {throw PlasmaErrors.StructureErrors.wrongData}
                 return (tx, proof)
             }
         }
-        throw StructureErrors.wrongData
+        throw PlasmaErrors.StructureErrors.wrongData
     }
     
     /// Proves that the transaction is in this Block transactions set
@@ -118,13 +118,13 @@ public class Block {
     /// - Returns: tuple:
     ///     - tx: signed transaction from parameters
     ///     - proof: Data indicator that signed transaction is in Block transactions set
-    /// - Throws: `StructureErrors.wrongData` if something in proving is wrong
+    /// - Throws: `PlasmaErrors.StructureErrors.wrongData` if something in proving is wrong
     public func getProofForTransactionByNumber(txNumber: BigUInt) throws -> (tx: SignedTransaction, proof: Data) {
         let num = Int(txNumber)
-        guard let tree = self.merkleTree else {throw StructureErrors.wrongData}
-        guard num < self.signedTransactions.count else {throw StructureErrors.wrongData}
+        guard let tree = self.merkleTree else {throw PlasmaErrors.StructureErrors.wrongData}
+        guard num < self.signedTransactions.count else {throw PlasmaErrors.StructureErrors.wrongData}
         let tx = self.signedTransactions[num]
-        guard let proof = tree.makeBinaryProof(num) else {throw StructureErrors.wrongData}
+        guard let proof = tree.makeBinaryProof(num) else {throw PlasmaErrors.StructureErrors.wrongData}
         return (tx, proof)
     }
 }
