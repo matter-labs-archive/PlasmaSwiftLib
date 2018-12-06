@@ -1,3 +1,20 @@
+<h3 align="center">
+  <a href="https://thematter.io/">
+    <img src="https://scontent-arn2-1.xx.fbcdn.net/v/t1.0-9/42614873_308414336637874_8225471638720741376_n.png?_nc_cat=106&_nc_ht=scontent-arn2-1.xx&oh=36eec27649e6cb3079108415d8bb77b7&oe=5CB0FBF8" width="100" />
+    <br />
+    The Matter Plasma Implementation
+  </a>
+</h3>
+<p align="center">
+  <a href="https://github.com/matterinc/PlasmaContract">Contract</a> &bull;
+  <a href="https://github.com/matterinc/plasma.js">TX & Block RLP</a> &bull;
+  <a href="https://github.com/matterinc/PlasmaManager">JS Lib</a> &bull;
+  <b>Swift Lib</b> &bull;
+  <a href="https://github.com/matterinc/PlasmaWebExplorer">Block Explorer</a> &bull;
+  <a href="https://github.com/matterinc/PlasmaWebUI">Web App</a> &bull;
+  <a href="https://github.com/matterinc/DiveLane">iOS App</a>
+</p>
+
 # PlasmaSwiftLib
 
 [![Build Status](https://travis-ci.com/matterinc/PlasmaSwiftLib.svg?branch=master)](https://travis-ci.com/matterinc/PlasmaSwiftLib)
@@ -59,6 +76,7 @@
 - Functionality was focused on serializing and signing transactions locally on the device
 - Sending raw transactions to The Matter Plasma network using REST API
 - Sending raw transactions to Plasma Contract using [The Matter web3swift](https://github.com/matterinc/web3swift)
+- RLP structure is similar to the one described in [JS TX & Block RLP NPM module](https://github.com/matterinc/plasma.js)
 
 ## Requirements
 
