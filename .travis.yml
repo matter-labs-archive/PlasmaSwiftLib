@@ -3,11 +3,11 @@ osx_image: xcode10
 xcode_project: PlasmaSwiftLib.xcworkspace # path to your xcodeproj folder
 xcode_scheme: PlasmaSwiftLib
 xcode_destination: platform=iOS Simulator, OS=9.0, name=iPhone 5s
-before_install:
-  - brew update
-  - brew upgrade swiftlint
-  - gem install cocoapods	
-  - pod update
+#before_install:
+#  - brew update
+#  - brew upgrade swiftlint
+#  - gem install cocoapods
+#  - pod update
 script:
   - swiftlint
   - xcodebuild -workspace PlasmaSwiftLib.xcworkspace -scheme PlasmaSwiftLib -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
