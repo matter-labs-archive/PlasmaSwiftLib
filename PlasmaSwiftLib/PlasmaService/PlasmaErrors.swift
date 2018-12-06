@@ -8,25 +8,27 @@
 
 import Foundation
 
-enum NetErrors: Error {
-    case cantCreateRequest
-    case cantConvertTxData
-    case noData
-    case errorInListUTXOs
-    case errorInUTXOs
-    case noAcceptedInfo
-    case badResponse
-}
-
-enum StructureErrors: Error {
-    case cantDecodeData
-    case cantEncodeData
-    case dataIsNotArray
-    case isNotList
-    case wrongDataCount
-    case isNotData
-    case wrongBitWidth
-    case wrongData
-    case wrongKey
-    case wrongAddress
+public struct PlasmaErrors {
+    public enum NetErrors: Error {
+        case cantCreateRequest
+        case cantConvertTxData
+        case noData
+        case errorInListUTXOs
+        case errorInUTXOs
+        case noAcceptedInfo
+        case badResponse
+    }
+    
+    public enum StructureErrors: Error {
+        case cantDecodeData
+        case cantEncodeData
+        case dataIsNotArray
+        case isNotList
+        case wrongDataCount
+        case isNotData
+        case wrongBitWidth
+        case wrongData
+        case wrongKey
+        case wrongAddress
+    }
 }

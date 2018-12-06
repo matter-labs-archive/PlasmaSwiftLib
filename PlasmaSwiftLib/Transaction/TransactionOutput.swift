@@ -33,11 +33,11 @@ public struct TransactionOutput {
     ///   - outputNumberInTx: output number in this transaction
     ///   - receiverEthereumAddress: destionation ethereum address
     ///   - amount: "amount" field
-    /// - Throws: `StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
+    /// - Throws: `PlasmaErrors.StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
     public init(outputNumberInTx: BigUInt, receiverEthereumAddress: EthereumAddress, amount: BigUInt) throws {
-        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {throw StructureErrors.wrongBitWidth}
-        guard receiverEthereumAddress.addressData.count <= receiverEthereumAddressByteLength else {throw StructureErrors.wrongBitWidth}
-        guard amount.bitWidth <= amountMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard receiverEthereumAddress.addressData.count <= receiverEthereumAddressByteLength else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard amount.bitWidth <= amountMaxWidth else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
 
         self.outputNumberInTx = outputNumberInTx
         self.receiverEthereumAddress = receiverEthereumAddress
@@ -47,32 +47,32 @@ public struct TransactionOutput {
     /// Creates TransactionOutput object that can be spent as an input in a new transaction
     ///
     /// - Parameter data: encoded Data of TransactionOutput
-    /// - Throws: throws various `StructureErrors` if decoding is wrong or decoded data is wrong in some way
+    /// - Throws: throws various `PlasmaErrors.StructureErrors` if decoding is wrong or decoded data is wrong in some way
     public init(data: Data) throws {
 
-        guard let dataDecoded = RLP.decode(data) else {throw StructureErrors.cantDecodeData}
-        guard dataDecoded.isList else {throw StructureErrors.isNotList}
-        guard let count = dataDecoded.count else {throw StructureErrors.wrongDataCount}
+        guard let dataDecoded = RLP.decode(data) else {throw PlasmaErrors.StructureErrors.cantDecodeData}
+        guard dataDecoded.isList else {throw PlasmaErrors.StructureErrors.isNotList}
+        guard let count = dataDecoded.count else {throw PlasmaErrors.StructureErrors.wrongDataCount}
         let dataArray: RLP.RLPItem
-        guard let firstItem = dataDecoded[0] else {throw StructureErrors.dataIsNotArray}
+        guard let firstItem = dataDecoded[0] else {throw PlasmaErrors.StructureErrors.dataIsNotArray}
         if count > 1 {
             dataArray = dataDecoded
         } else {
             dataArray = firstItem
         }
-        guard dataArray.count == 3 else {throw StructureErrors.wrongDataCount}
+        guard dataArray.count == 3 else {throw PlasmaErrors.StructureErrors.wrongDataCount}
 
-        guard let outputNumberInTxData = dataArray[0]?.data else {throw StructureErrors.isNotData}
-        guard let receiverEthereumAddressData = dataArray[1]?.data else {throw StructureErrors.isNotData}
-        guard let amountData = dataArray[2]?.data else {throw StructureErrors.isNotData}
+        guard let outputNumberInTxData = dataArray[0]?.data else {throw PlasmaErrors.StructureErrors.isNotData}
+        guard let receiverEthereumAddressData = dataArray[1]?.data else {throw PlasmaErrors.StructureErrors.isNotData}
+        guard let amountData = dataArray[2]?.data else {throw PlasmaErrors.StructureErrors.isNotData}
 
         let outputNumberInTx = BigUInt(outputNumberInTxData)
-        guard let receiverEthereumAddress = EthereumAddress(receiverEthereumAddressData) else {throw StructureErrors.wrongData}
+        guard let receiverEthereumAddress = EthereumAddress(receiverEthereumAddressData) else {throw PlasmaErrors.StructureErrors.wrongData}
         let amount = BigUInt(amountData)
 
-        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {throw StructureErrors.wrongBitWidth}
-        guard receiverEthereumAddress.addressData.count <= receiverEthereumAddressByteLength else {throw StructureErrors.wrongDataCount}
-        guard amount.bitWidth <= amountMaxWidth else {throw StructureErrors.wrongBitWidth}
+        guard outputNumberInTx.bitWidth <= outputNumberInTxMaxWidth else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard receiverEthereumAddress.addressData.count <= receiverEthereumAddressByteLength else {throw PlasmaErrors.StructureErrors.wrongDataCount}
+        guard amount.bitWidth <= amountMaxWidth else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
 
         self.outputNumberInTx = outputNumberInTx
         self.receiverEthereumAddress = receiverEthereumAddress
@@ -82,10 +82,10 @@ public struct TransactionOutput {
     /// Serializes TransactionOutput
     ///
     /// - Returns: encoded AnyObject array consisted of TransactionOutput items
-    /// - Throws: `StructureErrors.cantEncodeData` if data can't be encoded
+    /// - Throws: `PlasmaErrors.StructureErrors.cantEncodeData` if data can't be encoded
     public func serialize() throws -> Data {
         let dataArray = self.prepareForRLP()
-        guard let encoded = RLP.encode(dataArray) else {throw StructureErrors.cantEncodeData}
+        guard let encoded = RLP.encode(dataArray) else {throw PlasmaErrors.StructureErrors.cantEncodeData}
         return encoded
     }
 

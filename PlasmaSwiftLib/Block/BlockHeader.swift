@@ -37,17 +37,17 @@ public struct BlockHeader {
     ///   - v: the recovery id
     ///   - r: output of the signature
     ///   - s: output of the signature
-    /// - Throws: `StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
+    /// - Throws: `PlasmaErrors.StructureErrors.wrongBitWidth` if bytes count in some parameter is wrong
     public init(blockNumber: BigUInt, numberOfTxInBlock: BigUInt, parentHash: Data, merkleRootOfTheTxTree: Data, v: BigUInt, r: Data, s: Data) throws {
-        guard blockNumber.bitWidth <= blockNumberMaxWidth else {throw StructureErrors.wrongBitWidth}
-        guard numberOfTxInBlock.bitWidth <= numberOfTxInBlockMaxWidth else {throw StructureErrors.wrongBitWidth}
-        guard parentHash.count <= parentHashByteLength else {throw StructureErrors.wrongBitWidth}
-        guard merkleRootOfTheTxTree.count <= merkleRootOfTheTxTreeByteLength else {throw StructureErrors.wrongBitWidth}
-        guard v.bitWidth <= vMaxWidth else {throw StructureErrors.wrongBitWidth}
-        guard r.count <= rByteLength else {throw StructureErrors.wrongBitWidth}
-        guard s.count <= sByteLength else {throw StructureErrors.wrongBitWidth}
+        guard blockNumber.bitWidth <= blockNumberMaxWidth else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard numberOfTxInBlock.bitWidth <= numberOfTxInBlockMaxWidth else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard parentHash.count <= parentHashByteLength else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard merkleRootOfTheTxTree.count <= merkleRootOfTheTxTreeByteLength else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard v.bitWidth <= vMaxWidth else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard r.count <= rByteLength else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard s.count <= sByteLength else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
 
-        guard v == 27 || v == 28 else {throw StructureErrors.wrongData}
+        guard v == 27 || v == 28 else {throw PlasmaErrors.StructureErrors.wrongData}
 
         self.blockNumber = blockNumber
         self.numberOfTxInBlock = numberOfTxInBlock
@@ -93,33 +93,33 @@ public struct BlockHeader {
     /// Creates BlockHeader object that implement Block header in Block object (first 137 bytes)
     ///
     /// - Parameter data: encoded Data of SignedTransaction
-    /// - Throws: throws various `StructureErrors` if decoding is wrong or decoded data is wrong in some way
+    /// - Throws: throws various `PlasmaErrors.StructureErrors` if decoding is wrong or decoded data is wrong in some way
     public init(data: Data) throws {
         let dataString = data.toHexString()
         let dataStringArray = dataString.split(intoChunksOf: 2)
         
-        guard dataStringArray.count == Int(blockHeaderByteLength) else {throw StructureErrors.wrongDataCount}
+        guard dataStringArray.count == Int(blockHeaderByteLength) else {throw PlasmaErrors.StructureErrors.wrongDataCount}
         
         let elements = getElements(from: dataStringArray)
         
-        guard let blockNumberDec = UInt8(elements[0], radix: 16) else {throw StructureErrors.wrongData}
+        guard let blockNumberDec = UInt8(elements[0], radix: 16) else {throw PlasmaErrors.StructureErrors.wrongData}
         let blockNumber = BigUInt(blockNumberDec)
-        guard let numberOfTxInBlockDec = UInt8(elements[1], radix: 16) else {throw StructureErrors.wrongData}
+        guard let numberOfTxInBlockDec = UInt8(elements[1], radix: 16) else {throw PlasmaErrors.StructureErrors.wrongData}
         let numberOfTxInBlock = BigUInt(numberOfTxInBlockDec)
         let parentHash = Data(hex: elements[2])
         let merkleRootOfTheTxTree = Data(hex: elements[3])
-        guard let vDec = UInt8(elements[4], radix: 16) else {throw StructureErrors.wrongData}
+        guard let vDec = UInt8(elements[4], radix: 16) else {throw PlasmaErrors.StructureErrors.wrongData}
         let v = BigUInt(vDec)
         let r = Data(hex: elements[5])
         let s = Data(hex: elements[6])
 
-        guard blockNumber.bitWidth <= blockNumberMaxWidth else {throw StructureErrors.wrongBitWidth}
-        guard numberOfTxInBlock.bitWidth <= numberOfTxInBlockMaxWidth else {throw StructureErrors.wrongBitWidth}
-        guard parentHash.count <= parentHashByteLength else {throw StructureErrors.wrongBitWidth}
-        guard merkleRootOfTheTxTree.count <= merkleRootOfTheTxTreeByteLength else {throw StructureErrors.wrongBitWidth}
-        guard v.bitWidth <= vMaxWidth else {throw StructureErrors.wrongBitWidth}
-        guard r.count <= rByteLength else {throw StructureErrors.wrongBitWidth}
-        guard s.count <= sByteLength else {throw StructureErrors.wrongBitWidth}
+        guard blockNumber.bitWidth <= blockNumberMaxWidth else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard numberOfTxInBlock.bitWidth <= numberOfTxInBlockMaxWidth else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard parentHash.count <= parentHashByteLength else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard merkleRootOfTheTxTree.count <= merkleRootOfTheTxTreeByteLength else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard v.bitWidth <= vMaxWidth else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard r.count <= rByteLength else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
+        guard s.count <= sByteLength else {throw PlasmaErrors.StructureErrors.wrongBitWidth}
 
         self.blockNumber = blockNumber
         self.numberOfTxInBlock = numberOfTxInBlock
@@ -133,11 +133,11 @@ public struct BlockHeader {
     /// Serializes BlockHeader
     ///
     /// - Returns: encoded bytes `Data` value that contains the base-256 representation of this header
-    /// - Throws: `StructureErrors.cantEncodeData` if data can't be encoded
+    /// - Throws: `PlasmaErrors.StructureErrors.cantEncodeData` if data can't be encoded
     public func serialize() throws -> Data {
         var d = Data()
-        guard let blockNumberData = self.blockNumber.serialize().setLengthLeft(blockNumberByteLength) else {throw StructureErrors.cantEncodeData}
-        guard let txNumberData = self.numberOfTxInBlock.serialize().setLengthLeft(txNumberInBlockByteLength) else {throw StructureErrors.cantEncodeData}
+        guard let blockNumberData = self.blockNumber.serialize().setLengthLeft(blockNumberByteLength) else {throw PlasmaErrors.StructureErrors.cantEncodeData}
+        guard let txNumberData = self.numberOfTxInBlock.serialize().setLengthLeft(txNumberInBlockByteLength) else {throw PlasmaErrors.StructureErrors.cantEncodeData}
 
         d.append(blockNumberData)
         d.append(txNumberData)

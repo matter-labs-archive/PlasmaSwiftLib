@@ -5,8 +5,8 @@ xcode_scheme: PlasmaSwiftLib
 xcode_destination: platform=iOS Simulator, OS=9.0, name=iPhone 5s
 before_install:
   - brew update
-  - brew install swiftlint
-  - gem install cocoapods
+  - brew upgrade swiftlint
+  - gem install cocoapods	
   - pod update
 script:
   - swiftlint
