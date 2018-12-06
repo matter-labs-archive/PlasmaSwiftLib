@@ -1,1 +1,0 @@
-/Users/antongrigorev/Developer/PlasmaSwiftLib/PlasmaSwiftLibExample/Pods/Target Support Files/CryptoSwift/CryptoSwift-umbrella.h
