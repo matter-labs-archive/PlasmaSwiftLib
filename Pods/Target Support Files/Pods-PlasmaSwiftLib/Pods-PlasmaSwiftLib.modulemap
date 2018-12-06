@@ -1,6 +1,0 @@
-module Pods_PlasmaSwiftLib {
-  umbrella header "Pods-PlasmaSwiftLib-umbrella.h"
-
-  export *
-  module * { export * }
-}

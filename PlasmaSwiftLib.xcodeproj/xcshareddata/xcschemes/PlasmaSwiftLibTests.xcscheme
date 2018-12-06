@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1000"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,7 +16,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E20660622187549000701068"
+               BlueprintIdentifier = "9196A62E21B9DCB000852ED0"
                BuildableName = "PlasmaSwiftLibTests.xctest"
                BlueprintName = "PlasmaSwiftLibTests"
                ReferencedContainer = "container:PlasmaSwiftLib.xcodeproj">

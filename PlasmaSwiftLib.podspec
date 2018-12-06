@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PlasmaSwiftLib'
-  s.version          = '2.0.1'
+  s.version          = '2.1.0'
   s.summary          = 'PlasmaSwiftLib is your toolbelt for any kind interactions with The Matter Plasma Implementations.'
  
   s.description      = <<-DESC
@@ -16,16 +16,18 @@ Use this library to implement all necessary functionality of THe Matter Plasma I
  
   s.ios.deployment_target = '9.0'
   s.source_files = "PlasmaSwiftLib/**/*.{h,swift}", "PlasmaSwiftLib/**/**/*.{h,swift}"
-  s.public_header_files = "PlasmaSwiftLib/**/*.{h}"
+  s.public_header_files = "PlasmaSwiftLib/*.{h}"
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
   s.dependency 'BigInt'
   s.dependency 'CryptoSwift'
   s.dependency 'EthereumABI'
   s.dependency 'EthereumAddress'
-  s.dependency 'secp256k1_swift'
+  s.dependency 'PromiseKit'
   s.dependency 'SipHash'
   s.dependency 'SwiftRLP'
+  s.dependency 'scrypt'
+  s.dependency 'secp256k1_swift'
   s.dependency 'web3swift'
  
 end

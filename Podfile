@@ -1,11 +1,9 @@
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
-
 def import_pods
-  pod 'web3swift', '~> 2.0.4'
+  pod 'web3swift', '~> 2.0.4', :modular_headers => true
 end
 
 target 'PlasmaSwiftLib' do
+  platform :ios, '9.0'
   
   use_modular_headers!
   #use_frameworks!
@@ -16,3 +14,4 @@ target 'PlasmaSwiftLib' do
   end
 
 end
+
