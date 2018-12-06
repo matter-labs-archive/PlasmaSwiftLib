@@ -69,7 +69,7 @@ class PlasmaServiceTests: XCTestCase {
     
     func testDeposit() {
         do {
-            let tx = try testHelpers.web3.preparePlasmaContractWriteTx(method: .deposit, value: testHelpers.depositAmount)
+            let tx = try testHelpers.web3.preparePlasmaContractWriteTx(method: .deposit, value: testHelpers.depositAmountString)
             let result = try testHelpers.web3.sendPlasmaContractTx(transaction: tx)
             print(result.hash)
         } catch  let error {
@@ -85,7 +85,7 @@ class PlasmaServiceTests: XCTestCase {
                 print("block number: \(utxo.blockNumber)")
             }
             guard let utxo = utxos.first else {
-                XCTFail(StructureErrors.wrongData.localizedDescription)
+                XCTFail(PlasmaErrors.StructureErrors.wrongData.localizedDescription)
                 return
             }
             let result = try testHelpers.web3.withdrawUTXO(utxo: utxo, onTestnet: true, password: "web3swift")

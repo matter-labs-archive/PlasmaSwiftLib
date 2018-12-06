@@ -51,6 +51,34 @@ public final class Web3Service {
     ///
     /// - Parameters:
     ///   - method: method of Plasma Contract
+    ///   - value: Ether amount that is sending to Plasma Contract
+    ///   - parameters: an array corresponding to the list of parameters of the Plasma Contract method. Can be other arrays or instances of String, Data, BigInt, BigUInt, Int or EthereumAddress
+    ///   - extraData: additional data specific for used Plasma Contract method - it is appended to encoded parameters
+    /// - Returns: Ethereum transaction object
+    /// - Throws: `Web3Error.transactionSerializationError` if there is some errors in serialization
+    public func preparePlasmaContractWriteTx(method: PlasmaContractMethod = .deposit,
+                                             value: String = "0.0",
+                                             parameters: [AnyObject] = [AnyObject](),
+                                             extraData: Data = Data()) throws -> WriteTransaction {
+        
+        let contract = plasmaContract
+        var options = defaultOptions
+        let amount = Web3.Utils.parseToBigUInt(value, units: .eth)
+        options.value = amount
+        
+        guard let transaction = contract.write(method.rawValue,
+                                                parameters: parameters,
+                                                extraData: extraData,
+                                                transactionOptions: options) else {
+                                            throw Web3Error.transactionSerializationError
+        }
+        return transaction
+    }
+    
+    /// Prepares transaction that writes to some method of Plasma Contract in Ethereum Blockchain. It is broadcasted to the network, processed by miners, and if valid, is published on the blockchain, consuming Ether.
+    ///
+    /// - Parameters:
+    ///   - method: method of Plasma Contract
     ///   - value: Wei amount that is sending to Plasma Contract
     ///   - parameters: an array corresponding to the list of parameters of the Plasma Contract method. Can be other arrays or instances of String, Data, BigInt, BigUInt, Int or EthereumAddress
     ///   - extraData: additional data specific for used Plasma Contract method - it is appended to encoded parameters
@@ -66,10 +94,38 @@ public final class Web3Service {
         options.value = value
         
         guard let transaction = contract.write(method.rawValue,
-                                                parameters: parameters,
-                                                extraData: extraData,
-                                                transactionOptions: options) else {
-                                            throw Web3Error.transactionSerializationError
+                                               parameters: parameters,
+                                               extraData: extraData,
+                                               transactionOptions: options) else {
+                                                throw Web3Error.transactionSerializationError
+        }
+        return transaction
+    }
+    
+    /// Prepares transaction that calls to some method of Plasma Contract in Ethereum Blockchain. A call is a local invocation of a contract method that does not broadcast or publish anything on the blockchain and it will not consume any Ether.
+    ///
+    /// - Parameters:
+    ///   - method: method of Plasma Contract
+    ///   - value: Ether amount that is sending to Plasma Contract
+    ///   - parameters: an array corresponding to the list of parameters of the Plasma Contract method. Can be other arrays or instances of String, Data, BigInt, BigUInt, Int or EthereumAddress
+    ///   - extraData: additional data specific for used Plasma Contract method - it is appended to encoded parameters
+    /// - Returns: Ethereum transaction object
+    /// - Throws: `Web3Error.transactionSerializationError` if there is some errors in serialization
+    public func preparePlasmaContractReadTx(method: PlasmaContractMethod = .withdrawCollateral,
+                                            value: String = "0.0",
+                                            parameters: [AnyObject] = [AnyObject](),
+                                            extraData: Data = Data()) throws -> ReadTransaction {
+        
+        let contract = plasmaContract
+        var options = defaultOptions
+        let amount = Web3.Utils.parseToBigUInt(value, units: .eth)
+        options.value = amount
+        
+        guard let transaction = contract.read(method.rawValue,
+                                              parameters: parameters,
+                                              extraData: extraData,
+                                              transactionOptions: options) else {
+                                                    throw Web3Error.transactionSerializationError
         }
         return transaction
     }
@@ -96,7 +152,7 @@ public final class Web3Service {
                                               parameters: parameters,
                                               extraData: extraData,
                                               transactionOptions: options) else {
-                                                    throw Web3Error.transactionSerializationError
+                                                throw Web3Error.transactionSerializationError
         }
         return transaction
     }

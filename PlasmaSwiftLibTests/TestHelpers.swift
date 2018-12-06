@@ -20,7 +20,8 @@ class TestHelpers {
     var toAddress: EthereumAddress!
     var privateKeyString: String!
     var privateKeyData: Data!
-    let depositAmount: BigUInt = 1000000000000000000
+    let depositAmountBigUInt: BigUInt = 1000000000000000000
+    let depositAmountString: String = "0.01"
     var keystore: EthereumKeystoreV3!
     var web3: Web3Service!
     var keystoreManager: KeystoreManager!
@@ -135,7 +136,7 @@ class TestHelpers {
     
     func formBlockHeaderForBlock() throws -> BlockHeader {
         let blockNumber: BigUInt = 9
-        let numberOfTxInBlock: BigUInt = 1
+        let numberOfTxInBlock: BigUInt = 3
         let parentHash: Data = Data(hex: "a48a6e55763e3904f50c3d51799e5a7fb3acfe14dd7ab0c735ae4d14b41704b5")
         let merkleRootOfTheTxTree: Data = Data(hex: "c49e9e7675e08f77878528a4f807f7bec53253054519d8cef4651736bd6e2fae")
         let v: BigUInt = 27
@@ -180,7 +181,7 @@ class TestHelpers {
                     signedTransaction2,
                     signedTransaction3]
         } catch {
-            throw StructureErrors.wrongData
+            throw PlasmaErrors.StructureErrors.wrongData
         }
         
     }

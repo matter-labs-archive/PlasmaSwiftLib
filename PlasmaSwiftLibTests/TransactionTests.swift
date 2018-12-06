@@ -18,7 +18,7 @@ class TransactionTests: XCTestCase {
 
     func testInput() {
         do {
-            let input1 = try TransactionInput(blockNumber: testHelpers.blockNumber, txNumberInBlock: testHelpers.txNumberInBlock, outputNumberInTx: testHelpers.outputNumberInTx, amount: testHelpers.depositAmount)
+            let input1 = try TransactionInput(blockNumber: testHelpers.blockNumber, txNumberInBlock: testHelpers.txNumberInBlock, outputNumberInTx: testHelpers.outputNumberInTx, amount: testHelpers.depositAmountBigUInt)
             let data = input1.data
             let input2 = try TransactionInput(data: data)
             XCTAssert(input1 == input2)
@@ -29,7 +29,7 @@ class TransactionTests: XCTestCase {
 
     func testOutput() {
         do {
-            let output1 = try TransactionOutput(outputNumberInTx: testHelpers.outputNumberInTx, receiverEthereumAddress: testHelpers.toAddress, amount: testHelpers.depositAmount)
+            let output1 = try TransactionOutput(outputNumberInTx: testHelpers.outputNumberInTx, receiverEthereumAddress: testHelpers.toAddress, amount: testHelpers.depositAmountBigUInt)
             let data = output1.data
             let output2 = try TransactionOutput(data: data)
             print("output passed")
@@ -58,8 +58,8 @@ class TransactionTests: XCTestCase {
         do {
             let txType = Transaction.TransactionType.split
 
-            let input = try TransactionInput(blockNumber: testHelpers.blockNumber, txNumberInBlock: testHelpers.txNumberInBlock, outputNumberInTx: testHelpers.outputNumberInTx, amount: testHelpers.depositAmount)
-            let output = try TransactionOutput(outputNumberInTx: testHelpers.outputNumberInTx, receiverEthereumAddress: testHelpers.toAddress, amount: testHelpers.depositAmount)
+            let input = try TransactionInput(blockNumber: testHelpers.blockNumber, txNumberInBlock: testHelpers.txNumberInBlock, outputNumberInTx: testHelpers.outputNumberInTx, amount: testHelpers.depositAmountBigUInt)
+            let output = try TransactionOutput(outputNumberInTx: testHelpers.outputNumberInTx, receiverEthereumAddress: testHelpers.toAddress, amount: testHelpers.depositAmountBigUInt)
 
             let inputs = [input]
             let outputs = [output]
@@ -103,7 +103,7 @@ class TransactionTests: XCTestCase {
             let inputs = try testHelpers.formInputsForTransaction()
             let outputs = try testHelpers.formOutputsForTransaction()
             let tx = try Transaction(txType: .split, inputs: inputs, outputs: outputs)
-            let newTx = try tx.mergeOutputs(untilMaxAmount: 6)
+            let newTx = try tx.mergeOutputs(untilMinAmount: 6)
             XCTAssert(newTx.outputs.last?.amount == 5)
         } catch let error {
             XCTFail("Failed merge outputs test with error: \(error.localizedDescription)")
