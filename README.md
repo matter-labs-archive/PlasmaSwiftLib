@@ -76,6 +76,7 @@
 - Functionality was focused on serializing and signing transactions locally on the device
 - Sending raw transactions to The Matter Plasma network using REST API
 - Sending raw transactions to Plasma Contract using [The Matter web3swift](https://github.com/matterinc/web3swift)
+- RLP structure is similar to the one described in [JS TX & Block RLP NPM module](https://github.com/matterinc/plasma.js)
 
 ## Requirements
 
