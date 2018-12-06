@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E297277EBE249B95039B310 /* Pods_PlasmaSwiftLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBBD69C0D7CA7D06CF4DBEB /* Pods_PlasmaSwiftLib.framework */; };
-		0EAF03D4713374A46839BCD2 /* Pods_PlasmaSwiftLibTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B25C2E7B5162AF5FBAA966A3 /* Pods_PlasmaSwiftLibTests.framework */; };
+		181EED249214B677A7C134A4 /* libPods-PlasmaSwiftLibTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A05EC2687D0E598EFFAF528 /* libPods-PlasmaSwiftLibTests.a */; };
+		D44BC68B9C47743C8A6422FC /* libPods-PlasmaSwiftLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FBE32A00A0D98513CC759B /* libPods-PlasmaSwiftLib.a */; };
 		E20660642187549000701068 /* PlasmaSwiftLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E206605A2187549000701068 /* PlasmaSwiftLib.framework */; };
 		E206606B2187549000701068 /* PlasmaSwiftLib.h in Headers */ = {isa = PBXBuildFile; fileRef = E206605D2187549000701068 /* PlasmaSwiftLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2066078218754CC00701068 /* BlockHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2066075218754CC00701068 /* BlockHeader.swift */; };
@@ -58,9 +58,9 @@
 
 /* Begin PBXFileReference section */
 		0D2D619B2D6249C630F83C30 /* Pods-PlasmaSwiftLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLib.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLib/Pods-PlasmaSwiftLib.release.xcconfig"; sourceTree = "<group>"; };
+		3A05EC2687D0E598EFFAF528 /* libPods-PlasmaSwiftLibTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlasmaSwiftLibTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76FBE32A00A0D98513CC759B /* libPods-PlasmaSwiftLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlasmaSwiftLib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9D3CE0AF56C0901A94E512 /* Pods-PlasmaSwiftLibTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLibTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLibTests/Pods-PlasmaSwiftLibTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B25C2E7B5162AF5FBAA966A3 /* Pods_PlasmaSwiftLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlasmaSwiftLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BEBBD69C0D7CA7D06CF4DBEB /* Pods_PlasmaSwiftLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlasmaSwiftLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47D6535AB1AEDDF61AF58E0 /* Pods-PlasmaSwiftLibTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLibTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLibTests/Pods-PlasmaSwiftLibTests.release.xcconfig"; sourceTree = "<group>"; };
 		DF1A99059C9CB080E9D631C6 /* Pods-PlasmaSwiftLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlasmaSwiftLib/Pods-PlasmaSwiftLib.debug.xcconfig"; sourceTree = "<group>"; };
 		E206605A2187549000701068 /* PlasmaSwiftLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PlasmaSwiftLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E297277EBE249B95039B310 /* Pods_PlasmaSwiftLib.framework in Frameworks */,
+				D44BC68B9C47743C8A6422FC /* libPods-PlasmaSwiftLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +114,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E20660642187549000701068 /* PlasmaSwiftLib.framework in Frameworks */,
-				0EAF03D4713374A46839BCD2 /* Pods_PlasmaSwiftLibTests.framework in Frameworks */,
+				181EED249214B677A7C134A4 /* libPods-PlasmaSwiftLibTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,8 +124,8 @@
 		AD8054CE43AFEF90EB114A24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BEBBD69C0D7CA7D06CF4DBEB /* Pods_PlasmaSwiftLib.framework */,
-				B25C2E7B5162AF5FBAA966A3 /* Pods_PlasmaSwiftLibTests.framework */,
+				76FBE32A00A0D98513CC759B /* libPods-PlasmaSwiftLib.a */,
+				3A05EC2687D0E598EFFAF528 /* libPods-PlasmaSwiftLibTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -314,7 +314,6 @@
 				E206605F2187549000701068 /* Sources */,
 				E20660602187549000701068 /* Frameworks */,
 				E20660612187549000701068 /* Resources */,
-				75A7D01C8FC39B59C7B15925 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -380,46 +379,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		75A7D01C8FC39B59C7B15925 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PlasmaSwiftLibTests/Pods-PlasmaSwiftLibTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/EthereumABI/EthereumABI.framework",
-				"${BUILT_PRODUCTS_DIR}/EthereumAddress/EthereumAddress.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftRLP/SwiftRLP.framework",
-				"${BUILT_PRODUCTS_DIR}/scrypt/scrypt.framework",
-				"${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework",
-				"${BUILT_PRODUCTS_DIR}/web3swift/Web3swift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EthereumABI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EthereumAddress.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRLP.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/scrypt.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Web3swift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlasmaSwiftLibTests/Pods-PlasmaSwiftLibTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AF607BF10AE55A02C41FF971 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
