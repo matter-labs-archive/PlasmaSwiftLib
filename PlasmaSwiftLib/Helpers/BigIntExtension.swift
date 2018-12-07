@@ -10,7 +10,7 @@ import Foundation
 import BigInt
 
 extension BigInt {
-    func toTwosComplement() -> Data {
+    public func toTwosComplement() -> Data {
         if (self.sign == BigInt.Sign.plus) {
             return self.magnitude.serialize()
         } else {

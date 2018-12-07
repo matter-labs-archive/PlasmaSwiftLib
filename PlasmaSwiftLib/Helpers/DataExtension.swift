@@ -11,18 +11,18 @@ import CryptoSwift
 
 extension Data {
 
-    init<T>(fromArray values: [T]) {
+    public init<T>(fromArray values: [T]) {
         var values = values
         self.init(buffer: UnsafeBufferPointer(start: &values, count: values.count))
     }
 
-    func toArray<T>(type: T.Type) -> [T] {
+    public func toArray<T>(type: T.Type) -> [T] {
         return self.withUnsafeBytes {
             [T](UnsafeBufferPointer(start: $0, count: self.count/MemoryLayout<T>.stride))
         }
     }
 
-    func constantTimeComparisonTo(_ other: Data?) -> Bool {
+    public func constantTimeComparisonTo(_ other: Data?) -> Bool {
         guard let rhs = other else {return false}
         guard self.count == rhs.count else {return false}
         var difference = UInt8(0x00)
@@ -32,7 +32,7 @@ extension Data {
         return difference == UInt8(0x00)
     }
 
-    static func zero(_ data: inout Data) {
+    public static func zero(_ data: inout Data) {
         let count = data.count
         data.withUnsafeMutableBytes { (dataPtr: UnsafeMutablePointer<UInt8>) in
             //            var rawPtr = UnsafeMutableRawPointer(dataPtr)
@@ -40,7 +40,8 @@ extension Data {
             dataPtr.initialize(repeating: 0, count: count)
         }
     }
-    static func randomBytes(length: Int) -> Data? {
+    
+    public static func randomBytes(length: Int) -> Data? {
         for _ in 0...1024 {
             var data = Data(repeating: 0, count: length)
             let result = data.withUnsafeMutableBytes { (mutableBytes: UnsafeMutablePointer<UInt8>) -> Int32 in
@@ -53,7 +54,7 @@ extension Data {
         return nil
     }
 
-    func bitsInRange(_ startingBit: Int, _ length: Int) -> UInt64? { //return max of 8 bytes for simplicity, non-public
+    public func bitsInRange(_ startingBit: Int, _ length: Int) -> UInt64? { //return max of 8 bytes for simplicity, non-public
         if startingBit + length / 8 > self.count, length > 64, startingBit > 0, length >= 1 {return nil}
         let bytes = self[(startingBit/8) ..< (startingBit+length+7)/8]
         let padding = Data(repeating: 0, count: 8 - bytes.count)
@@ -67,7 +68,7 @@ extension Data {
 }
 
 extension Data {
-    func setLengthLeft(_ toBytes: UInt64, isNegative: Bool = false ) -> Data? {
+    public func setLengthLeft(_ toBytes: UInt64, isNegative: Bool = false ) -> Data? {
         let existingLength = UInt64(self.count)
         if (existingLength == toBytes) {
             return Data(self)
@@ -84,7 +85,7 @@ extension Data {
         return data
     }
 
-    func setLengthRight(_ toBytes: UInt64, isNegative: Bool = false ) -> Data? {
+    public func setLengthRight(_ toBytes: UInt64, isNegative: Bool = false ) -> Data? {
         let existingLength = UInt64(self.count)
         if (existingLength == toBytes) {
             return Data(self)
