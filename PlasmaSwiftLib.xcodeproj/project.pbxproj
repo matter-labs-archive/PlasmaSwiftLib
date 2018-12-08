@@ -40,8 +40,8 @@
 		9196A68321B9DFD700852ED0 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196A67F21B9DFD700852ED0 /* TestHelpers.swift */; };
 		9196A68421B9DFD700852ED0 /* BlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196A68021B9DFD700852ED0 /* BlockTests.swift */; };
 		9196A6A321BB398000852ED0 /* PlasmaParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196A6A021BB398000852ED0 /* PlasmaParser.swift */; };
-		9196A6A721BB3A3400852ED0 /* PlasmaCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196A6A621BB3A3400852ED0 /* PlasmaCode.swift */; };
 		9196A6AB21BB3B1000852ED0 /* PlasmaURLschemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196A6AA21BB3B0F00852ED0 /* PlasmaURLschemeTests.swift */; };
+		9196A6AF21BB418F00852ED0 /* PlasmaCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196A6AE21BB418F00852ED0 /* PlasmaCode.swift */; };
 		A2650466D20AB8158DD9D6A8 /* libPods-PlasmaSwiftLibTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 624B64173B5C3C015FF0513F /* libPods-PlasmaSwiftLibTests.a */; };
 		B1CFDFC77C034145304EA775 /* libPods-PlasmaSwiftLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4143ECB402C0F02F904A038E /* libPods-PlasmaSwiftLib.a */; };
 /* End PBXBuildFile section */
@@ -97,8 +97,8 @@
 		9196A67F21B9DFD700852ED0 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		9196A68021B9DFD700852ED0 /* BlockTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTests.swift; sourceTree = "<group>"; };
 		9196A6A021BB398000852ED0 /* PlasmaParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlasmaParser.swift; sourceTree = "<group>"; };
-		9196A6A621BB3A3400852ED0 /* PlasmaCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlasmaCode.swift; path = ../../../divelane/DiveLane/App/Parsers/Plasma/PlasmaCode.swift; sourceTree = "<group>"; };
 		9196A6AA21BB3B0F00852ED0 /* PlasmaURLschemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaURLschemeTests.swift; sourceTree = "<group>"; };
+		9196A6AE21BB418F00852ED0 /* PlasmaCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlasmaCode.swift; sourceTree = "<group>"; };
 		E9752B297F61EAB4F55411D4 /* Pods-PlasmaSwiftLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLib.debug.xcconfig"; path = "Target Support Files/Pods-PlasmaSwiftLib/Pods-PlasmaSwiftLib.debug.xcconfig"; sourceTree = "<group>"; };
 		FAC8A3ACA9DC32CFE7C78419 /* Pods-PlasmaSwiftLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlasmaSwiftLib.release.xcconfig"; path = "Target Support Files/Pods-PlasmaSwiftLib/Pods-PlasmaSwiftLib.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -261,7 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				9196A6A021BB398000852ED0 /* PlasmaParser.swift */,
-				9196A6A621BB3A3400852ED0 /* PlasmaCode.swift */,
+				9196A6AE21BB418F00852ED0 /* PlasmaCode.swift */,
 			);
 			path = PlasmaURLscheme;
 			sourceTree = "<group>";
@@ -469,8 +469,8 @@
 				9196A65D21B9DF9600852ED0 /* Hashing.swift in Sources */,
 				9196A66F21B9DFB500852ED0 /* Web3Service.swift in Sources */,
 				9196A65621B9DF7000852ED0 /* BigIntExtension.swift in Sources */,
-				9196A6A721BB3A3400852ED0 /* PlasmaCode.swift in Sources */,
 				9196A67921B9DFC300852ED0 /* TransactionOutput.swift in Sources */,
+				9196A6AF21BB418F00852ED0 /* PlasmaCode.swift in Sources */,
 				9196A66E21B9DFB500852ED0 /* Web3ServiceConvenient.swift in Sources */,
 				9196A66921B9DFA900852ED0 /* PlasmaURLs.swift in Sources */,
 				9196A66621B9DFA900852ED0 /* PlasmaErrors.swift in Sources */,
