@@ -1,18 +1,17 @@
 //
-//  TransactionSerialization.swift
+//  TransactionHelpers.swift
 //  PlasmaSwiftLib
 //
-//  Created by Anton Grigorev on 19.10.2018.
+//  Created by Anton Grigorev on 13/12/2018.
 //  Copyright © 2018 The Matter. All rights reserved.
 //
 
 import Foundation
-import SwiftRLP
-import BigInt
 import secp256k1_swift
 
+/// Some helpful methods for Transaction
 public struct TransactionHelpers {
-
+    
     /// Returns hash of the signature
     ///
     /// - Parameter data: signature data
@@ -22,7 +21,7 @@ public struct TransactionHelpers {
         let hash = try TransactionHelpers.hashPersonalMessage(data)
         return hash
     }
-
+    
     static func hashPersonalMessage(_ personalMessage: Data) throws -> Data {
         var prefix = "\u{19}Ethereum Signed Message:\n"
         prefix += String(personalMessage.count)
@@ -37,7 +36,7 @@ public struct TransactionHelpers {
         let hash = data.sha3(.keccak256)
         return hash
     }
-
+    
     /// Returns address hash from public key data
     ///
     /// - Parameter publicKey: public key data

@@ -9,6 +9,7 @@
 import Foundation
 import BigInt
 
+/// Convinient methods for merging Outputs
 public extension Transaction {
     /// Merge outputs for minimum amount of one output. All outputs with amount less than min will be merged.
     ///

@@ -8,7 +8,10 @@
 
 import Foundation
 
+/// Specifies typical errors
 public struct PlasmaErrors {
+    
+    /// Errors with network
     public enum NetErrors: Error {
         case cantCreateRequest
         case cantConvertTxData
@@ -19,6 +22,7 @@ public struct PlasmaErrors {
         case badResponse
     }
     
+    /// Errors with object
     public enum StructureErrors: Error {
         case cantDecodeData
         case cantEncodeData

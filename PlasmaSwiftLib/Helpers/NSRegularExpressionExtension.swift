@@ -36,7 +36,7 @@ extension NSRegularExpression {
         return groupnames
     }
 
-    func indexOfNamedCaptureGroups() throws -> [String: Int] {
+    public func indexOfNamedCaptureGroups() throws -> [String: Int] {
         var groupnames = [String: Int]()
         for (name, (_, _, n)) in self.textCheckingResultsOfNamedCaptureGroups() {
             groupnames[name] = n + 1
@@ -44,7 +44,7 @@ extension NSRegularExpression {
         return groupnames
     }
 
-    func rangesOfNamedCaptureGroups(match: NSTextCheckingResult) throws -> [String: Range<Int>] {
+    public func rangesOfNamedCaptureGroups(match: NSTextCheckingResult) throws -> [String: Range<Int>] {
         var ranges = [String: Range<Int>]()
         for (name, (_, _, n)) in self.textCheckingResultsOfNamedCaptureGroups() {
             ranges[name] = Range(match.range(at: n+1))
@@ -59,11 +59,11 @@ extension NSRegularExpression {
         return nil
     }
 
-    func captureGroups(string: String, options: NSRegularExpression.MatchingOptions = []) -> [String: String] {
+    public func captureGroups(string: String, options: NSRegularExpression.MatchingOptions = []) -> [String: String] {
         return captureGroups(string: string, options: options, range: NSRange(location: 0, length: string.utf16.count))
     }
 
-    func captureGroups(string: String, options: NSRegularExpression.MatchingOptions = [], range: NSRange) -> [String: String] {
+    public func captureGroups(string: String, options: NSRegularExpression.MatchingOptions = [], range: NSRange) -> [String: String] {
         var dict = [String: String]()
         let matchResult = matches(in: string, options: options, range: range)
         let names = self.textCheckingResultsOfNamedCaptureGroups()

@@ -19,6 +19,8 @@ public struct BlockHeader {
     public var v: BigUInt!
     public var r: Data!
     public var s: Data!
+    
+    /// Returns serialized Block Header
     public var data: Data {
         do {
             return try self.serialize()
