@@ -16,6 +16,8 @@ public struct TransactionInput {
     public var txNumberInBlock: BigUInt
     public var outputNumberInTx: BigUInt
     public var amount: BigUInt
+    
+    /// Returns serialized TransactionInput
     public var data: Data {
         do {
             return try self.serialize()

@@ -19,6 +19,8 @@ public struct TransactionOutput {
     public var outputNumberInTx: BigUInt
     public var receiverEthereumAddress: EthereumAddress
     public var amount: BigUInt
+    
+    /// Returns serialized TransactionOutput
     public var data: Data {
         do {
             return try self.serialize()

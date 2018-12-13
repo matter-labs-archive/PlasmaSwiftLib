@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Some helpful methods for Block Header
 extension BlockHeader {
     /// Prinets elements of Block header
     public func printElements() {

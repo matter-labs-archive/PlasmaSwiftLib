@@ -24,6 +24,7 @@ public class Transaction {
         case split
         case merge
 
+        /// Data representation of transaction type
         public var data: Data {
             switch self {
             case .null:
@@ -37,6 +38,7 @@ public class Transaction {
             }
         }
 
+        /// Byte representation of transaction type
         public init?(byte: UInt8) {
             if byte == 0 {
                 self = .null
@@ -59,6 +61,8 @@ public class Transaction {
     public var txType: TransactionType
     public var inputs: [TransactionInput]
     public var outputs: [TransactionOutput]
+    
+    /// Returns serialized unsigned Transaction
     public var data: Data {
         do {
             return try self.serialize()
@@ -67,6 +71,7 @@ public class Transaction {
         }
     }
 
+    /// Null type Transaction init
     public init() {
         self.txType = .null
         self.inputs = [TransactionInput]()

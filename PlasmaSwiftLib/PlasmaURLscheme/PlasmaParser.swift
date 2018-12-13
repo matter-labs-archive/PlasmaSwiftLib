@@ -10,21 +10,34 @@ import Foundation
 import BigInt
 import EthereumAddress
 
+/// A Plasma URL Parser
 public struct PlasmaParser {
     
     static let plasmaParser = PlasmaParser()
     
     static var addressRegex = "^(pay-)?([0-9a-zA-Z.]+)(@[0-9]+)?\\/?(.*)?$"
     
+    /// Parse data to PlasmaCode
+    ///
+    /// - Parameter data: Data to parse
+    /// - Returns: PlasmaCode optional
     public static func parse(_ data: Data) -> PlasmaCode? {
         guard let string = String(data: data, encoding: .utf8) else {return nil}
         return parse(string)
     }
     
+    /// Sets target address
+    ///
+    /// - Parameter address: target address in String
+    /// - Returns: EthereumAddress representation for target address
     public func setTargetAddress(address: String) -> EthereumAddress {
         return EthereumAddress(address)!
     }
     
+    /// Parse data to PlasmaCode
+    ///
+    /// - Parameter string: String to parse
+    /// - Returns: PlasmaCode optional
     public static func parse(_ string: String) -> PlasmaCode? {
         guard string.hasPrefix("plasma:") else {return nil}
         let striped = string.components(separatedBy: "plasma:")

@@ -11,6 +11,7 @@ import Web3swift
 import EthereumAddress
 import BigInt
 
+/// Methods for Plasma Contract interaction
 public final class Web3Service {
     
     private let web3: web3

@@ -211,12 +211,12 @@ public final class PlasmaService {
 
 }
 
-public enum Method: String {
+private enum Method: String {
     case post = "POST"
     case get = "GET"
 }
 
-public enum ContentType: String {
+private enum ContentType: String {
     case json = "application/json"
     case octet = "application/octet-stream"
 }

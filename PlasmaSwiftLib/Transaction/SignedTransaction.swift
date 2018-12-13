@@ -21,6 +21,8 @@ public struct SignedTransaction {
     public var v: BigUInt
     public var r: Data
     public var s: Data
+    
+    /// Returns serialized SignedTransaction
     public var data: Data {
         do {
             return try self.serialize()
@@ -29,7 +31,7 @@ public struct SignedTransaction {
         }
     }
 
-    /// returns EthereumAddress of transaction sender
+    /// Returns EthereumAddress of SignedTransaction sender
     public var sender: EthereumAddress {
         do {
             return try self.recoverSender()
@@ -38,6 +40,7 @@ public struct SignedTransaction {
         }
     }
 
+    /// SignedTransaction with null type Transaction init
     public init() {
         self.transaction = Transaction()
         self.v = BigUInt(0)

@@ -29,6 +29,7 @@ public class Block {
         return tree
     }
     
+    /// Returns serialized Block
     public var data: Data {
         do {
             return try self.serialize()
@@ -147,6 +148,9 @@ public struct TreeContent: ContentProtocol {
         return h
     }
     
+    /// Checks if some Merkle tree content equal to another
+    /// - Parameter other: other Content
+    /// - Returns: bool value
     public func isEqualTo(_ other: ContentProtocol) -> Bool {
         return self.data == other.data
     }
