@@ -12,7 +12,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - PlasmaSwiftLibExample
   - PlasmaSwiftLib/PlasmaService/PlasmaContract.swift
 
-cyclomatic_complexity: 20
+cyclomatic_complexity: 25
 
 # configurable rules can be customized from this configuration file
 # binary rules can set their severity level

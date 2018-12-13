@@ -1,1 +1,17 @@
-/Users/baldyash/Developer/PlasmaSwiftLib/Pods/Target Support Files/scrypt/scrypt-umbrella.h
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#else
+#ifndef FOUNDATION_EXPORT
+#if defined(__cplusplus)
+#define FOUNDATION_EXPORT extern "C"
+#else
+#define FOUNDATION_EXPORT extern
+#endif
+#endif
+#endif
+
+#import "scrypt.h"
+
+FOUNDATION_EXPORT double scryptVersionNumber;
+FOUNDATION_EXPORT const unsigned char scryptVersionString[];
+

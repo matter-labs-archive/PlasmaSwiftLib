@@ -1,1 +1,6 @@
-/Users/baldyash/Developer/PlasmaSwiftLib/Pods/Target Support Files/EthereumABI/EthereumABI.modulemap
+module EthereumABI {
+  umbrella header "EthereumABI-umbrella.h"
+
+  export *
+  module * { export * }
+}

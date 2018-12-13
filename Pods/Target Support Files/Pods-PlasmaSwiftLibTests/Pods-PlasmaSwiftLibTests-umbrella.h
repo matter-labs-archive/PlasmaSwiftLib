@@ -10,8 +10,7 @@
 #endif
 #endif
 
-#import "scrypt.h"
 
-FOUNDATION_EXPORT double scryptVersionNumber;
-FOUNDATION_EXPORT const unsigned char scryptVersionString[];
+FOUNDATION_EXPORT double Pods_PlasmaSwiftLibTestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_PlasmaSwiftLibTestsVersionString[];
 
