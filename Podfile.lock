@@ -1,21 +1,21 @@
 PODS:
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
-  - CryptoSwift (0.13.0)
+  - CryptoSwift (0.13.1)
   - EthereumABI (1.1.1):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.13)
     - EthereumAddress (~> 1.0.0)
   - EthereumAddress (1.0.0):
     - CryptoSwift (~> 0.13)
-  - PromiseKit (6.5.3):
-    - PromiseKit/CorePromise (= 6.5.3)
-    - PromiseKit/Foundation (= 6.5.3)
-    - PromiseKit/UIKit (= 6.5.3)
-  - PromiseKit/CorePromise (6.5.3)
-  - PromiseKit/Foundation (6.5.3):
+  - PromiseKit (6.7.0):
+    - PromiseKit/CorePromise (= 6.7.0)
+    - PromiseKit/Foundation (= 6.7.0)
+    - PromiseKit/UIKit (= 6.7.0)
+  - PromiseKit/CorePromise (6.7.0)
+  - PromiseKit/Foundation (6.7.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.5.3):
+  - PromiseKit/UIKit (6.7.0):
     - PromiseKit/CorePromise
   - scrypt (2.0):
     - CryptoSwift (~> 0.11)
@@ -51,10 +51,10 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
-  CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
+  CryptoSwift: ff68c35a53e03177d31aaa2c1e8b3e010aeed6cb
   EthereumABI: f040f5429e5a4366d028c88b88d9441e137593af
   EthereumAddress: f476e1320dca3a0024431e713ede7a09c7eb7796
-  PromiseKit: c609029bdd801f792551a504c695c7d3098b42cd
+  PromiseKit: 453ddcc947fe7b302f3ef41882b81d31c554df7f
   scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
   secp256k1_swift: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
@@ -63,4 +63,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fcf77651d9b393716f895e64b18a2f6f7648c9f2
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.5.3
