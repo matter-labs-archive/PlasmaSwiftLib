@@ -4,91 +4,308 @@
     <title>PlasmaSwiftLib  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
+
+
     <a title="PlasmaSwiftLib  Reference"></a>
-    <header>
-      <div class="content-wrapper">
-        <p><a href="index.html">PlasmaSwiftLib Docs</a> (42% documented)</p>
-      </div>
-    </header>
-    <div class="content-wrapper">
-      <p id="breadcrumbs">
-        <a href="index.html">PlasmaSwiftLib Reference</a>
-        <img id="carat" src="img/carat.png" />
-        PlasmaSwiftLib  Reference
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          PlasmaSwiftLib Docs
+        </a>
+        
       </p>
-    </div>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/matterinc/PlasmaSwiftLib">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">PlasmaSwiftLib Reference</a>
+      <img class="carat" src="img/carat.png" />
+      PlasmaSwiftLib  Reference
+    </p>
+
     <div class="content-wrapper">
-      <nav class="sidebar">
+      <nav class="navigation">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a href="Classes.html">Classes</a>
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Classes/Block.html">Block</a>
+                <a class="nav-group-task-link" href="Classes/Block.html">Block</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/PlasmaService.html">PlasmaService</a>
+                <a class="nav-group-task-link" href="Classes/PlasmaService.html">PlasmaService</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes.html#/s:14PlasmaSwiftLib0A4URLsC">PlasmaURLs</a>
+                <a class="nav-group-task-link" href="Classes/PlasmaURLs.html">PlasmaURLs</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/PlasmaUTXOs.html">PlasmaUTXOs</a>
+                <a class="nav-group-task-link" href="Classes/PlasmaUTXOs.html">PlasmaUTXOs</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/Transaction.html">Transaction</a>
+                <a class="nav-group-task-link" href="Classes/Transaction.html">Transaction</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/Transaction.html#/s:14PlasmaSwiftLib11TransactionC0D4TypeO">– TransactionType</a>
+                <a class="nav-group-task-link" href="Classes/Transaction/TransactionType.html">– TransactionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/TreeHasher.html">TreeHasher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/TreeNode.html">TreeNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/Web3Service.html">Web3Service</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Enums.html">Enumerations</a>
+            <a class="nav-group-name-link" href="Global Variables.html">Global Variables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Enums.html#/s:14PlasmaSwiftLib0A14ContractMethodO">PlasmaContractMethod</a>
+                <a class="nav-group-task-link" href="Global Variables.html#/amountByteLength">amountByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/amountMaxWidth">amountMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/blockHeaderByteLength">blockHeaderByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/blockNumberByteLength">blockNumberByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/blockNumberMaxWidth">blockNumberMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/emptyTx">emptyTx</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/inputsArrayMax">inputsArrayMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/merkleRootOfTheTxTreeByteLength">merkleRootOfTheTxTreeByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/merkleRootOfTheTxTreeMaxWidth">merkleRootOfTheTxTreeMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/numberOfTxInBlockByteLength">numberOfTxInBlockByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/numberOfTxInBlockMaxWidth">numberOfTxInBlockMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/outputNumberInTxByteLength">outputNumberInTxByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/outputNumberInTxMaxWidth">outputNumberInTxMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/outputsArrayMax">outputsArrayMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/parentHashByteLength">parentHashByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/parentHashMaxWidth">parentHashMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/rByteLength">rByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/rMaxWidth">rMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/receiverEthereumAddressByteLength">receiverEthereumAddressByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/receiverEthereumAddressMaxWidth">receiverEthereumAddressMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/sByteLength">sByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/sMaxWidth">sMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/txNumberInBlockByteLength">txNumberInBlockByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/txNumberInBlockMaxWidth">txNumberInBlockMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/txTypeByteLength">txTypeByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/txTypeMaxWidth">txTypeMaxWidth</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/vByteLength">vByteLength</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Global Variables.html#/vMaxWidth">vMaxWidth</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Structs.html">Structures</a>
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/BlockHeader.html">BlockHeader</a>
+                <a class="nav-group-task-link" href="Enums/PlasmaContractMethod.html">PlasmaContractMethod</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Array.html">Array</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs.html#/s:14PlasmaSwiftLib0A8ContractV">PlasmaContract</a>
+                <a class="nav-group-task-link" href="Extensions/BigInt.html">BigInt</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/SignedTransaction.html">SignedTransaction</a>
+                <a class="nav-group-task-link" href="Extensions/Data.html">Data</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TransactionInput.html">TransactionInput</a>
+                <a class="nav-group-task-link" href="Extensions/NSRegularExpression.html">NSRegularExpression</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TransactionOutput.html">TransactionOutput</a>
+                <a class="nav-group-task-link" href="Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Functions.html#/keccak256(_:)">keccak256(_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ContentProtocol.html">ContentProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TreeContent.html">TreeContent</a>
+                <a class="nav-group-task-link" href="Protocols/Hasher.html">Hasher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/TreeNodeProtocol.html">TreeNodeProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/BlockHeader.html">BlockHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PaddabbleTree.html">PaddabbleTree</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PlasmaCode.html">PlasmaCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PlasmaCode/PlasmaParameter.html">– PlasmaParameter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PlasmaContract.html">PlasmaContract</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PlasmaErrors.html">PlasmaErrors</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PlasmaErrors/NetErrors.html">– NetErrors</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PlasmaErrors/StructureErrors.html">– StructureErrors</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PlasmaParser.html">PlasmaParser</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/SignedTransaction.html">SignedTransaction</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/SimpleContent.html">SimpleContent</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs.html#/TransactionHelpers">TransactionHelpers</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TransactionInput.html">TransactionInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TransactionOutput.html">TransactionOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/TreeContent.html">TreeContent</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/TreeHashFunction">TreeHashFunction</a>
               </li>
             </ul>
           </li>
         </ul>
       </nav>
       <article class="main-content">
-        <section>
-          <section class="section">
+
+        <section class="section">
+          <div class="section-content">
             
-            <h1 id='plasmaswiftlib' class='heading'>PlasmaSwiftLib</h1>
+            <h3 align="center">
+  <a href="https://thematter.io/">
+    <img src="https://scontent-arn2-1.xx.fbcdn.net/v/t1.0-9/42614873_308414336637874_8225471638720741376_n.png?_nc_cat=106&_nc_ht=scontent-arn2-1.xx&oh=36eec27649e6cb3079108415d8bb77b7&oe=5CB0FBF8" width="100" />
+    <br />
+    The Matter Plasma Implementation
+  </a>
+</h3>
+
+<p align="center">
+  <a href="https://github.com/matterinc/PlasmaContract">Contract</a> &bull;
+  <a href="https://github.com/matterinc/plasma.js">TX & Block RLP</a> &bull;
+  <a href="https://github.com/matterinc/PlasmaManager">JS Lib</a> &bull;
+  <b>Swift Lib</b> &bull;
+  <a href="https://github.com/matterinc/PlasmaWebExplorer">Block Explorer</a> &bull;
+  <a href="https://github.com/matterinc/PlasmaWebUI">Web App</a> &bull;
+  <a href="https://github.com/matterinc/DiveLane">iOS App</a>
+</p>
+<h1 id='plasmaswiftlib' class='heading'>PlasmaSwiftLib</h1>
 
 <p><a href="https://travis-ci.com/matterinc/PlasmaSwiftLib"><img src="https://travis-ci.com/matterinc/PlasmaSwiftLib.svg?branch=master" alt="Build Status"></a>
+<a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat" alt="Swift"></a>
 <a href="https://img.shields.io/cocoapods/v/PlasmaSwiftLib.svg"><img src="https://img.shields.io/cocoapods/v/PlasmaSwiftLib.svg" alt="CocoaPods Compatible"></a>
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
 <a href="https://plasmaswiftlib.github.io/PlasmaSwiftLib"><img src="https://img.shields.io/cocoapods/p/PlasmaSwiftLib.svg?style=flat" alt="Platform"></a>
@@ -172,7 +389,7 @@
 <li>[x] Based on <a href="https://github.com/matterinc/PlasmaContract">More Viable Plasma Implementation</a> by The Matter Team</li>
 <li>[x] RLP encoding and decoding</li>
 <li>[x] Comprehensive Unit and Integration Test Coverage</li>
-<li>[x] <a href="https://matterinc.github.io/PlasmaSwiftLib">Complete Documentation</a></li>
+<li>[x] <a href="https://matterinc.github.io/PlasmaSwiftLib/">Complete Documentation</a></li>
 </ul>
 <h2 id='design-decisions' class='heading'>Design Decisions</h2>
 
@@ -180,6 +397,7 @@
 <li>Functionality was focused on serializing and signing transactions locally on the device</li>
 <li>Sending raw transactions to The Matter Plasma network using REST API</li>
 <li>Sending raw transactions to Plasma Contract using <a href="https://github.com/matterinc/web3swift">The Matter web3swift</a></li>
+<li>RLP structure is similar to the one described in <a href="https://github.com/matterinc/plasma.js">JS TX &amp; Block RLP NPM module</a></li>
 </ul>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
@@ -267,14 +485,16 @@ If you use any of our libraries for work, see if your employers would be interes
 
 <p>PlasmaSwiftLib is available under the Apache License 2.0 license. See the <a href="https://github.com/matterinc/PlasmaSwiftLib/blob/master/LICENSE">LICENSE</a> for details.</p>
 
-          </section>
+          </div>
         </section>
-        <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/matterinc/PlasmaSwiftLib" target="_blank" rel="external">Anton Grigorev</a>. All rights reserved. (Last updated: 2018-11-23)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-        </section>
+
+
       </article>
     </div>
+    <section class="footer">
+      <p>&copy; 2018 <a class="link" href="https://thematter.io/" target="_blank" rel="external">Matter</a>. All rights reserved. (Last updated: 2018-12-13)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
   </body>
 </div>
 </html>
