@@ -4,297 +4,271 @@
     <title>TransactionOutput Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
-    <script src="../js/lunr.min.js" defer></script>
-    <script src="../js/typeahead.jquery.js" defer></script>
-    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-
     <a name="//apple_ref/swift/Struct/TransactionOutput" class="dashAnchor"></a>
-
     <a title="TransactionOutput Structure Reference"></a>
-
-    <header class="header">
-      <p class="header-col header-col--primary">
-        <a class="header-link" href="../index.html">
-          PlasmaSwiftLib Docs
-        </a>
-        
-      </p>
-    
-      <p class="header-col--secondary">
-        <form role="search" action="../search.json">
-          <input type="text" placeholder="Search documentation" data-typeahead>
-        </form>
-      </p>
-    
-        <p class="header-col header-col--secondary">
-          <a class="header-link" href="https://github.com/matterinc/PlasmaSwiftLib">
-            <img class="header-icon" src="../img/gh.png"/>
-            View on GitHub
-          </a>
-        </p>
-    
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">PlasmaSwiftLib Docs</a></p>
+        <p class="header-right"><a href="https://github.com/matterinc/PlasmaSwiftLib"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
     </header>
-
-    <p class="breadcrumbs">
-      <a class="breadcrumb" href="../index.html">PlasmaSwiftLib Reference</a>
-      <img class="carat" src="../img/carat.png" />
-      TransactionOutput Structure Reference
-    </p>
-
     <div class="content-wrapper">
-      <nav class="navigation">
+      <p id="breadcrumbs">
+        <a href="../index.html">PlasmaSwiftLib Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        TransactionOutput Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/Block.html">Block</a>
+                <a href="../Classes/Block.html">Block</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/PlasmaService.html">PlasmaService</a>
+                <a href="../Classes/PlasmaService.html">PlasmaService</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/PlasmaURLs.html">PlasmaURLs</a>
+                <a href="../Classes/PlasmaURLs.html">PlasmaURLs</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/PlasmaUTXOs.html">PlasmaUTXOs</a>
+                <a href="../Classes/PlasmaUTXOs.html">PlasmaUTXOs</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/Transaction.html">Transaction</a>
+                <a href="../Classes/Transaction.html">Transaction</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/Transaction/TransactionType.html">– TransactionType</a>
+                <a href="../Classes/Transaction/TransactionType.html">– TransactionType</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TreeHasher.html">TreeHasher</a>
+                <a href="../Classes/TreeHasher.html">TreeHasher</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/TreeNode.html">TreeNode</a>
+                <a href="../Classes/TreeNode.html">TreeNode</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/Web3Service.html">Web3Service</a>
+                <a href="../Classes/Web3Service.html">Web3Service</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Global Variables.html">Global Variables</a>
+            <a href="../Global Variables.html">Global Variables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/amountByteLength">amountByteLength</a>
+                <a href="../Global Variables.html#/amountByteLength">amountByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/amountMaxWidth">amountMaxWidth</a>
+                <a href="../Global Variables.html#/amountMaxWidth">amountMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/blockHeaderByteLength">blockHeaderByteLength</a>
+                <a href="../Global Variables.html#/blockHeaderByteLength">blockHeaderByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/blockNumberByteLength">blockNumberByteLength</a>
+                <a href="../Global Variables.html#/blockNumberByteLength">blockNumberByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/blockNumberMaxWidth">blockNumberMaxWidth</a>
+                <a href="../Global Variables.html#/blockNumberMaxWidth">blockNumberMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/emptyTx">emptyTx</a>
+                <a href="../Global Variables.html#/emptyTx">emptyTx</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/inputsArrayMax">inputsArrayMax</a>
+                <a href="../Global Variables.html#/inputsArrayMax">inputsArrayMax</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/merkleRootOfTheTxTreeByteLength">merkleRootOfTheTxTreeByteLength</a>
+                <a href="../Global Variables.html#/merkleRootOfTheTxTreeByteLength">merkleRootOfTheTxTreeByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/merkleRootOfTheTxTreeMaxWidth">merkleRootOfTheTxTreeMaxWidth</a>
+                <a href="../Global Variables.html#/merkleRootOfTheTxTreeMaxWidth">merkleRootOfTheTxTreeMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/numberOfTxInBlockByteLength">numberOfTxInBlockByteLength</a>
+                <a href="../Global Variables.html#/numberOfTxInBlockByteLength">numberOfTxInBlockByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/numberOfTxInBlockMaxWidth">numberOfTxInBlockMaxWidth</a>
+                <a href="../Global Variables.html#/numberOfTxInBlockMaxWidth">numberOfTxInBlockMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/outputNumberInTxByteLength">outputNumberInTxByteLength</a>
+                <a href="../Global Variables.html#/outputNumberInTxByteLength">outputNumberInTxByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/outputNumberInTxMaxWidth">outputNumberInTxMaxWidth</a>
+                <a href="../Global Variables.html#/outputNumberInTxMaxWidth">outputNumberInTxMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/outputsArrayMax">outputsArrayMax</a>
+                <a href="../Global Variables.html#/outputsArrayMax">outputsArrayMax</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/parentHashByteLength">parentHashByteLength</a>
+                <a href="../Global Variables.html#/parentHashByteLength">parentHashByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/parentHashMaxWidth">parentHashMaxWidth</a>
+                <a href="../Global Variables.html#/parentHashMaxWidth">parentHashMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/rByteLength">rByteLength</a>
+                <a href="../Global Variables.html#/rByteLength">rByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/rMaxWidth">rMaxWidth</a>
+                <a href="../Global Variables.html#/rMaxWidth">rMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/receiverEthereumAddressByteLength">receiverEthereumAddressByteLength</a>
+                <a href="../Global Variables.html#/receiverEthereumAddressByteLength">receiverEthereumAddressByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/receiverEthereumAddressMaxWidth">receiverEthereumAddressMaxWidth</a>
+                <a href="../Global Variables.html#/receiverEthereumAddressMaxWidth">receiverEthereumAddressMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/sByteLength">sByteLength</a>
+                <a href="../Global Variables.html#/sByteLength">sByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/sMaxWidth">sMaxWidth</a>
+                <a href="../Global Variables.html#/sMaxWidth">sMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/txNumberInBlockByteLength">txNumberInBlockByteLength</a>
+                <a href="../Global Variables.html#/txNumberInBlockByteLength">txNumberInBlockByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/txNumberInBlockMaxWidth">txNumberInBlockMaxWidth</a>
+                <a href="../Global Variables.html#/txNumberInBlockMaxWidth">txNumberInBlockMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/txTypeByteLength">txTypeByteLength</a>
+                <a href="../Global Variables.html#/txTypeByteLength">txTypeByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/txTypeMaxWidth">txTypeMaxWidth</a>
+                <a href="../Global Variables.html#/txTypeMaxWidth">txTypeMaxWidth</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/vByteLength">vByteLength</a>
+                <a href="../Global Variables.html#/vByteLength">vByteLength</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Global Variables.html#/vMaxWidth">vMaxWidth</a>
+                <a href="../Global Variables.html#/vMaxWidth">vMaxWidth</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums/PlasmaContractMethod.html">PlasmaContractMethod</a>
+                <a href="../Enums/PlasmaContractMethod.html">PlasmaContractMethod</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+                <a href="../Extensions/Array.html">Array</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/BigInt.html">BigInt</a>
+                <a href="../Extensions/BigInt.html">BigInt</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Data.html">Data</a>
+                <a href="../Extensions/Data.html">Data</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/NSRegularExpression.html">NSRegularExpression</a>
+                <a href="../Extensions/NSRegularExpression.html">NSRegularExpression</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/String.html">String</a>
+                <a href="../Extensions/String.html">String</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Functions.html">Functions</a>
+            <a href="../Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Functions.html#/keccak256(_:)">keccak256(_:)</a>
+                <a href="../Functions.html#/keccak256(_:)">keccak256(_:)</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/ContentProtocol.html">ContentProtocol</a>
+                <a href="../Protocols/ContentProtocol.html">ContentProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/Hasher.html">Hasher</a>
+                <a href="../Protocols/Hasher.html">Hasher</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/TreeNodeProtocol.html">TreeNodeProtocol</a>
+                <a href="../Protocols/TreeNodeProtocol.html">TreeNodeProtocol</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/BlockHeader.html">BlockHeader</a>
+                <a href="../Structs/BlockHeader.html">BlockHeader</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/PaddabbleTree.html">PaddabbleTree</a>
+                <a href="../Structs/PaddabbleTree.html">PaddabbleTree</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/PlasmaCode.html">PlasmaCode</a>
+                <a href="../Structs/PlasmaCode.html">PlasmaCode</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/PlasmaCode/PlasmaParameter.html">– PlasmaParameter</a>
+                <a href="../Structs/PlasmaCode/PlasmaParameter.html">– PlasmaParameter</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/PlasmaContract.html">PlasmaContract</a>
+                <a href="../Structs/PlasmaContract.html">PlasmaContract</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/PlasmaErrors.html">PlasmaErrors</a>
+                <a href="../Structs/PlasmaErrors.html">PlasmaErrors</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/PlasmaErrors/NetErrors.html">– NetErrors</a>
+                <a href="../Structs/PlasmaErrors/NetErrors.html">– NetErrors</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/PlasmaErrors/StructureErrors.html">– StructureErrors</a>
+                <a href="../Structs/PlasmaErrors/StructureErrors.html">– StructureErrors</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/PlasmaParser.html">PlasmaParser</a>
+                <a href="../Structs/PlasmaParser.html">PlasmaParser</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/SignedTransaction.html">SignedTransaction</a>
+                <a href="../Structs/SignedTransaction.html">SignedTransaction</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/SimpleContent.html">SimpleContent</a>
+                <a href="../Structs/SimpleContent.html">SimpleContent</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs.html#/TransactionHelpers">TransactionHelpers</a>
+                <a href="../Structs.html#/TransactionHelpers">TransactionHelpers</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/TransactionInput.html">TransactionInput</a>
+                <a href="../Structs/TransactionInput.html">TransactionInput</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/TransactionOutput.html">TransactionOutput</a>
+                <a href="../Structs/TransactionOutput.html">TransactionOutput</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Structs/TreeContent.html">TreeContent</a>
+                <a href="../Structs/TreeContent.html">TreeContent</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <a href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/TreeHashFunction">TreeHashFunction</a>
+                <a href="../Typealiases.html#/TreeHashFunction">TreeHashFunction</a>
               </li>
             </ul>
           </li>
         </ul>
       </nav>
       <article class="main-content">
-
-        <section class="section">
-          <div class="section-content">
+        <section>
+          <section class="section">
             <h1>TransactionOutput</h1>
             <p>An RLP encoded set that describes output in Transaction</p>
 
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-content">
+          </section>
+          <section class="section task-group-section">
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -462,7 +436,7 @@
               </ul>
             </div>
             <div class="task-group">
-              <ul class="item-container">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -483,15 +457,14 @@
                 </li>
               </ul>
             </div>
-          </div>
+          </section>
         </section>
-
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://thematter.io/" target="_blank" rel="external">Matter</a>. All rights reserved. (Last updated: 2018-12-13)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
       </article>
     </div>
-    <section class="footer">
-      <p>&copy; 2018 <a class="link" href="https://thematter.io/" target="_blank" rel="external">Matter</a>. All rights reserved. (Last updated: 2018-12-13)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-    </section>
   </body>
 </div>
 </html>
